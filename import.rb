@@ -44,7 +44,6 @@ end
 # Horrible method to expand tweet entities (urls, hashtags, mentions, etc.) in tweets
 def expand_tweet(tweet)
   text = tweet["text"]
-  expanded_text = []
   # Put all the entities into an array and sort them by starting index
   entities = []
   entities += tweet["entities"]["urls"] unless tweet["entities"]["urls"].nil?
@@ -52,33 +51,37 @@ def expand_tweet(tweet)
   entities += tweet["entities"]["media"] unless tweet["entities"]["media"].nil?
   entities += tweet["entities"]["hashtags"] unless tweet["entities"]["hashtags"].nil?
   entities.sort!{ |a,b| a["indices"].first <=> b["indices"].first } if entities.size > 1
-  entities.each_with_index do |e, i|
-    # If it's the first entity, start by putting the text from the beginning of the tweet
-    # to the start of the entity in the placeholder array
-    if i == 0
-      end_index = e["indices"].first - 1
-      expanded_text << text[0..end_index]
-    end
+  if entities.empty?
+    tweet["expanded_text"] = text
+  else
+    expanded_text = []
+    entities.each_with_index do |e, i|
+      # If it's the first entity, start by putting the text from the beginning of the tweet
+      # to the start of the entity in the placeholder array
+      if i == 0
+        end_index = e["indices"].first - 1
+        expanded_text << text[0..end_index]
+      end
 
-    # Now expand the entity link and place it in the array
-    expanded_text << expand_tweet_entity(e)
+      # Now expand the entity link and place it in the array
+      expanded_text << expand_tweet_entity(e)
 
-    # If I'm at the last entity, place the rest of the tweet text in the placeholder array
-    if i == entities.size - 1
-      start_index = e["indices"].last
-      end_index = text.size - 1
-      expanded_text << text[start_index..end_index]
-    # If not, place the text between the end of the current entity and the start of the next one
-    else
-      start_index = e["indices"].last
-      end_index = entities[i + 1]["indices"].first - 1
-      expanded_text << text[start_index..end_index]
+      # If I'm at the last entity, place the rest of the tweet text in the placeholder array
+      if i == entities.size - 1
+        start_index = e["indices"].last
+        end_index = text.size - 1
+        expanded_text << text[start_index..end_index]
+      # If not, place the text between the end of the current entity and the start of the next one
+      else
+        start_index = e["indices"].last
+        end_index = entities[i + 1]["indices"].first - 1
+        expanded_text << text[start_index..end_index]
+      end
     end
+    
+    # Now join the placeholder array into a string and put it in the tweet object
+    tweet["expanded_text"] = expanded_text.join
   end
-  
-  # Now join the placeholder array into a string and put it in the tweet object
-  tweet["expanded_text"] = expanded_text.join
-
   # Return the tweet with the new expanded text. Phew.
   tweet
 end
