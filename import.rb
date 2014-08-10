@@ -1,11 +1,22 @@
 require "oauth"
 require "httparty"
 
-def get_tweets(username, count = 5)
+def get_config
+  YAML.load_file("config.yml")
+end
+
+def get_tweets
   begin
-    consumer = OAuth::Consumer.new(ENV["TWITTER_CONSUMER_KEY"], ENV["TWITTER_CONSUMER_SECRET"], { site: "http://api.twitter.com" })
-    access_token = OAuth::AccessToken.new(consumer, ENV["TWITTER_ACCESS_TOKEN"], ENV["TWITTER_ACCESS_TOKEN_SECRET"])
-    response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{username}&exclude_replies=true&include_rts=false")
+    config = get_config["twitter"]
+    consumer_key        = config["consumer_key"]
+    consumer_secret     = config["consumer_secret"]
+    access_token        = config["access_token"]
+    access_token_secret = config["access_token_secret"]
+    user                = config["user"]
+    count               = config["count"]
+    consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
+    access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
+    response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false")
     tweets = JSON.parse(response.body).slice(0, count).to_json
     File.open("data/twitter.json","w"){ |f| f << tweets } unless tweets.nil?
   rescue OAuth::Error
@@ -13,9 +24,13 @@ def get_tweets(username, count = 5)
   end
 end
 
-def get_instagram_photos(account_id, client_id, count = 10)
+def get_instagram_photos
   begin
-    response = HTTParty.get("https://api.instagram.com/v1/users/#{account_id}/media/recent/?client_id=#{client_id}&count=#{count}")
+    config = get_config["instagram"]
+    user_id      = config["user_id"]
+    consumer_key = config["consumer_key"]
+    count        = config["count"]
+    response = HTTParty.get("https://api.instagram.com/v1/users/#{user_id}/media/recent/?client_id=#{consumer_key}&count=#{count}")
     photos = JSON.parse(response.body)["data"]
     save_instagram_photos(photos) unless photos.nil?
     File.open("data/instagram.json","w"){ |f| f << photos.to_json } unless photos.nil?
@@ -33,9 +48,13 @@ def save_instagram_photos(data)
   end
 end
 
-def get_tumblr_photos(url, key, count = 1)
+def get_tumblr_photos
   begin
-    response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{key}&limit=#{count}&filter=text")
+    config = get_config["tumblr"]
+    url          = config["url"]
+    consumer_key = config["consumer_key"]
+    count        = config["count"]
+    response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&limit=#{count}&filter=text")
     data = JSON.parse(response.body)
     save_tumblr_photos(data) unless data.nil?
     File.open("data/tumblr.json","w"){ |f| f << data.to_json } unless data.nil?

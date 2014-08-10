@@ -1,0 +1,19 @@
+twitter:
+  user: gesteves
+  consumer_key: abc123
+  consumer_secret: abc123
+  access_token: abc123
+  access_token_secret: abc123
+  count: 5
+instagram:
+  user_id: 666
+  consumer_key: abc123
+  count: 9
+tumblr:
+  url: yourdomain.com
+  consumer_key: abc123
+  count: 1
+github:
+  access_token: abc123
+  repos: 
+    - gesteves/farragut
