@@ -14,6 +14,7 @@ namespace :import do
     puts "Importing tweets"
     start_time = Time.now
     get_tweets
+    get_twitter_user
     puts "Completed in #{Time.now - start_time} seconds"
   end
 

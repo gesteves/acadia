@@ -16,9 +16,26 @@ def get_tweets
     count               = config["count"]
     consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
     access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
-    response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false")
+    response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false&trim_user=true")
     tweets = JSON.parse(response.body).slice(0, count).map!{ |t| expand_tweet(t) }.to_json
-    File.open("data/twitter.json","w"){ |f| f << tweets }
+    File.open("data/tweets.json","w"){ |f| f << tweets }
+  rescue OAuth::Error => e
+    puts e
+  end
+end
+
+def get_twitter_user
+  begin
+    config = get_config["twitter"]
+    consumer_key        = config["consumer_key"]
+    consumer_secret     = config["consumer_secret"]
+    access_token        = config["access_token"]
+    access_token_secret = config["access_token_secret"]
+    user                = config["user"]
+    consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
+    access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
+    response = access_token.get("https://api.twitter.com/1.1/users/show.json?screen_name=#{user}")
+    File.open("data/twitter.json","w"){ |f| f << response.body }
   rescue OAuth::Error => e
     puts e
   end
