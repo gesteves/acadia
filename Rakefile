@@ -32,6 +32,14 @@ namespace :import do
     get_tumblr_photos
     puts "Completed in #{Time.now - start_time} seconds"
   end
+
+  desc "Import featured repos from Github"
+  task :github => [:set_up_directories] do
+    puts "Importing repos from Github"
+    start_time = Time.now
+    get_github_repos
+    puts "Completed in #{Time.now - start_time} seconds"
+  end
 end
 
-task :import => ["clobber", "import:twitter", "import:instagram", "import:tumblr"]
+task :import => ["clobber", "import:twitter", "import:instagram", "import:tumblr", "import:github"]

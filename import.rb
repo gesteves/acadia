@@ -18,9 +18,9 @@ def get_tweets
     access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
     response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false")
     tweets = JSON.parse(response.body).slice(0, count).to_json
-    File.open("data/twitter.json","w"){ |f| f << tweets } unless tweets.nil?
-  rescue OAuth::Error
-    nil
+    File.open("data/twitter.json","w"){ |f| f << tweets }
+  rescue OAuth::Error => e
+    puts e
   end
 end
 
@@ -33,9 +33,9 @@ def get_instagram_photos
     response = HTTParty.get("https://api.instagram.com/v1/users/#{user_id}/media/recent/?client_id=#{consumer_key}&count=#{count}")
     photos = JSON.parse(response.body)["data"]
     save_instagram_photos(photos) unless photos.nil?
-    File.open("data/instagram.json","w"){ |f| f << photos.to_json } unless photos.nil?
-  rescue HTTParty::Error
-    nil
+    File.open("data/instagram.json","w"){ |f| f << photos.to_json }
+  rescue HTTParty::Error => e
+    puts e
   end
 end
 
@@ -57,9 +57,9 @@ def get_tumblr_photos
     response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&limit=#{count}&filter=text")
     data = JSON.parse(response.body)
     save_tumblr_photos(data) unless data.nil?
-    File.open("data/tumblr.json","w"){ |f| f << data.to_json } unless data.nil?
-  rescue HTTParty::Error
-    nil
+    File.open("data/tumblr.json","w"){ |f| f << data.to_json }
+  rescue HTTParty::Error => e
+    puts e
   end
 end
 
@@ -73,5 +73,24 @@ def save_tumblr_photos(data)
       url = size["url"]
       File.open("source/images/tumblr/#{post_id}_#{width}.jpg","wb"){ |f| f << HTTParty.get(url).body }
     end
+  end
+end
+
+def get_github_repos
+  begin
+    config = get_config["github"]
+    access_token = config["access_token"]
+    repos = config["repos"]
+    repo_array = []
+    repos.each do |r|
+      owner = r.split('/').first
+      name = r.split('/').last
+      response = HTTParty.get("https://api.github.com/repos/#{owner}/#{name}?access_token=#{access_token}",
+                              headers: { "User-Agent" => "gesteves/farragut" })
+      repo_array << JSON.parse(response.body)
+    end
+    File.open("data/repos.json","w"){ |f| f << repo_array.to_json }
+  rescue HTTParty::Error => e
+    puts e
   end
 end
