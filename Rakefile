@@ -40,6 +40,14 @@ namespace :import do
     get_github_repos
     puts "Completed in #{Time.now - start_time} seconds"
   end
+
+  desc "Import content from Google Drive"
+  task :google_drive => [:set_up_directories] do
+    puts "Importing content from Google Drive"
+    start_time = Time.now
+    get_google_drive_content
+    puts "Completed in #{Time.now - start_time} seconds"
+  end
 end
 
-task :import => ["clobber", "import:twitter", "import:instagram", "import:tumblr", "import:github"]
+task :import => ["clobber", "import:twitter", "import:instagram", "import:tumblr", "import:github", "import:google_drive"]

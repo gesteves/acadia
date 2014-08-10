@@ -153,3 +153,20 @@ def get_github_repos
     puts e
   end
 end
+
+def get_google_drive_content
+  begin
+    config = get_config["google"]
+    key = config["key"]
+    response = HTTParty.get("https://spreadsheets.google.com/feeds/list/#{key}/od6/public/values?alt=json")
+    json = JSON.parse(response.body)["feed"]["entry"].first
+    content = {
+      headline: json["gsx$headline"]["$t"],
+      subheadline: json["gsx$subheadline"]["$t"],
+      intro: json["gsx$intro"]["$t"]
+    }
+    File.open("data/content.json","w"){ |f| f << content.to_json }
+  rescue HTTParty::Error => e
+    puts e
+  end
+end
