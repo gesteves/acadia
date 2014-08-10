@@ -32,6 +32,9 @@ GEM
     hooks (0.4.0)
       uber (~> 0.0.4)
     http_parser.rb (0.6.0)
+    httparty (0.13.1)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.11)
     json (1.8.1)
     kramdown (1.4.1)
@@ -74,6 +77,8 @@ GEM
       sprockets-sass (~> 1.2.0)
     minitest (5.4.0)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
+    oauth (0.4.7)
     padrino-helpers (0.12.2)
       i18n (~> 0.6, >= 0.6.7)
       padrino-support (= 0.12.2)
@@ -115,5 +120,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  httparty
   middleman (~> 3.3.3)
   middleman-livereload (~> 3.1.0)
+  oauth

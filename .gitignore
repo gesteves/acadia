@@ -19,3 +19,8 @@
 
 # Ignore .env
 .env
+
+# Ignore imported files
+/data
+/source/images/instagram
+/source/images/tumblr
