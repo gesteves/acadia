@@ -1,0 +1,9 @@
+<section>
+  <ol>
+    <% data.tweets.each do |t| %>
+      <li>
+        <p><%= t.expanded_text %></p>
+      </li>
+    <% end %>
+  </ol>
+</section>

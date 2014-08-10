@@ -1,0 +1,12 @@
+<section>
+  <ol>
+    <% data.repos.each do |r| %>
+      <li>
+        <p><%= link_to r.full_name, r.html_url %> <%= r.watchers %> <%= r.forks %></p>
+        <% unless r.description == "" %>
+          <p><%= r.description %></p>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+</section>
