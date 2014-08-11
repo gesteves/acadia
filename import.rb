@@ -173,3 +173,15 @@ def get_github_repos
     puts e
   end
 end
+
+def get_lastfm_data
+  begin
+    config = get_config["lastfm"]
+    api_key  = config["api_key"]
+    username = config["username"]
+    response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=#{username}&api_key=#{api_key}&format=json")
+    File.open("data/lastfm.json","w"){ |f| f << response.body }
+  rescue HTTParty::Error => e
+    puts e
+  end
+end

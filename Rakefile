@@ -41,9 +41,22 @@ namespace :import do
     get_github_repos
     puts "Completed in #{Time.now - start_time} seconds"
   end
+
+  desc "Import data from Last.fm"
+  task :lastfm => [:set_up_directories] do
+    puts "== Importing data from Last.fm"
+    start_time = Time.now
+    get_lastfm_data
+    puts "Completed in #{Time.now - start_time} seconds"
+  end
 end
 
-task :import => ["clobber", "import:twitter", "import:instagram", "import:tumblr", "import:github"]
+task :import => [ "clobber",
+                  "import:twitter",
+                  "import:instagram",
+                  "import:tumblr",
+                  "import:github",
+                  "import:lastfm" ]
 
 desc "Import data and build the website"
 task :build => ["import"] do

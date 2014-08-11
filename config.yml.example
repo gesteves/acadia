@@ -17,3 +17,6 @@ github:
   access_token: abc123
   repos: 
     - gesteves/farragut
+lastfm:
+  api_key: 123
+  username: gesteves

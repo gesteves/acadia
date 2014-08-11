@@ -1,0 +1,9 @@
+<% unless data.lastfm.weeklyartistchart.artist.nil? %>
+  <section>
+    <ol>
+      <% data.lastfm.weeklyartistchart.artist.each do |artist| %>
+        <li><%= link_to artist.name, artist.url %></li>
+      <% end %>
+    </ol>
+  </section>
+<% end %>
