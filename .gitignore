@@ -25,3 +25,4 @@ config.yml
 /data/*.json
 /source/images/instagram
 /source/images/tumblr
+/source/images/goodreads
