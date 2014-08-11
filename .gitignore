@@ -22,6 +22,6 @@ config.yml
 .env
 
 # Ignore imported files
-/data
+/data/*.json
 /source/images/instagram
 /source/images/tumblr
