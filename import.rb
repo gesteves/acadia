@@ -1,5 +1,6 @@
 require "oauth"
 require "httparty"
+require "nokogiri"
 
 def get_config
   YAML.load_file("config.yml")
@@ -19,7 +20,7 @@ def get_tweets
     response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false&trim_user=true")
     tweets = JSON.parse(response.body).slice(0, count).map!{ |t| expand_tweet(t) }.to_json
     File.open("data/tweets.json","w"){ |f| f << tweets }
-  rescue OAuth::Error => e
+  rescue => e
     puts e
   end
 end
@@ -36,7 +37,7 @@ def get_twitter_user
     access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
     response = access_token.get("https://api.twitter.com/1.1/users/show.json?screen_name=#{user}")
     File.open("data/twitter.json","w"){ |f| f << response.body }
-  rescue OAuth::Error => e
+  rescue => e
     puts e
   end
 end
@@ -112,7 +113,7 @@ def get_instagram_photos
     photos = JSON.parse(response.body)["data"]
     save_instagram_photos(photos) unless photos.nil?
     File.open("data/instagram.json","w"){ |f| f << photos.to_json }
-  rescue HTTParty::Error => e
+  rescue => e
     puts e
   end
 end
@@ -136,7 +137,7 @@ def get_tumblr_photos
     data = JSON.parse(response.body)
     save_tumblr_photos(data) unless data.nil?
     File.open("data/tumblr.json","w"){ |f| f << data.to_json }
-  rescue HTTParty::Error => e
+  rescue => e
     puts e
   end
 end
@@ -169,7 +170,7 @@ def get_github_repos
     end
     repo_array.sort!{ |a,b| b["watchers"] <=> a["watchers"] }
     File.open("data/repos.json","w"){ |f| f << repo_array.to_json }
-  rescue HTTParty::Error => e
+  rescue => e
     puts e
   end
 end
@@ -181,7 +182,29 @@ def get_lastfm_data
     username = config["username"]
     response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=#{username}&api_key=#{api_key}&format=json")
     File.open("data/lastfm.json","w"){ |f| f << response.body }
-  rescue HTTParty::Error => e
+  rescue => e
+    puts e
+  end
+end
+
+def get_goodreads_data
+  begin
+    config = get_config["goodreads"]
+    rss_feed = config["rss_feed"]
+    books = []
+    Nokogiri::XML(HTTParty.get(rss_feed).body).xpath("//channel/item").each do |item|
+      book = {
+        id: item.xpath('book_id').first.content,
+        title: item.xpath('title').first.content,
+        author: item.xpath('author_name').first.content,
+        image: item.xpath('book_large_image_url').first.content,
+        url: item.xpath('link').first.content
+      }
+      File.open("source/images/goodreads/#{book[:id]}.jpg","wb"){ |f| f << HTTParty.get(book[:image]).body }
+      books << book
+    end
+    File.open("data/goodreads.json","w"){ |f| f << books.to_json }
+  rescue => e
     puts e
   end
 end

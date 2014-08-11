@@ -1,0 +1,12 @@
+<% unless data.goodreads.empty? %>
+  <section>
+    <ul>
+      <% data.goodreads.each do |book| %>
+        <li>
+          <img src="<%= image_path "goodreads/#{book.id}.jpg" %>" alt="<%= book.title %>" />
+          <%= link_to book.title, book.url %>, by <%= book.author %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

@@ -75,9 +75,12 @@ GEM
       sprockets (~> 2.12.1)
       sprockets-helpers (~> 1.1.0)
       sprockets-sass (~> 1.2.0)
+    mini_portile (0.6.0)
     minitest (5.4.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
+    nokogiri (1.6.3.1)
+      mini_portile (= 0.6.0)
     oauth (0.4.7)
     padrino-helpers (0.12.2)
       i18n (~> 0.6, >= 0.6.7)
@@ -124,5 +127,6 @@ DEPENDENCIES
   httparty
   middleman (~> 3.3.3)
   middleman-livereload (~> 3.1.0)
+  nokogiri
   oauth
   rake
