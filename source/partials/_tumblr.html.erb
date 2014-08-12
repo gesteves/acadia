@@ -2,9 +2,9 @@
 <% data.tumblr.response.posts.each do |photo| %>
   <a href="<%= photo.post_url %>">
     <% if photo.caption.nil? %>
-      <img src="<%= image_path "tumblr/#{photo.id}_1280.jpg" %>" alt="Latest from my photoblog" />
+      <img src="<%= image_path "tumblr/#{photo.id}_original.jpg" %>" alt="Latest from my photoblog" />
     <% else %>
-      <img src="<%= image_path "tumblr/#{photo.id}_1280.jpg" %>" alt="<%= photo.caption %>" />
+      <img src="<%= image_path "tumblr/#{photo.id}_original.jpg" %>" alt="<%= photo.caption %>" />
     <% end %>
   </a>
 <% end %>

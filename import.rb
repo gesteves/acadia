@@ -152,6 +152,9 @@ def save_tumblr_photos(data)
       url = size["url"]
       File.open("source/images/tumblr/#{post_id}_#{width}.jpg","wb"){ |f| f << HTTParty.get(url).body }
     end
+    # Also save the original size
+    url = post["photos"][0]["original_size"]["url"]
+    File.open("source/images/tumblr/#{post_id}_original.jpg","wb"){ |f| f << HTTParty.get(url).body }
   end
 end
 
