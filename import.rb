@@ -194,8 +194,9 @@ def get_goodreads_data
   begin
     config = get_config["goodreads"]
     rss_feed = config["rss_feed"]
+    count    = config["count"]
     books = []
-    Nokogiri::XML(HTTParty.get(rss_feed).body).xpath("//channel/item").each do |item|
+    Nokogiri::XML(HTTParty.get(rss_feed).body).xpath("//channel/item").slice(0, count).each do |item|
       book = {
         id: item.xpath('book_id').first.content,
         title: item.xpath('title').first.content,
