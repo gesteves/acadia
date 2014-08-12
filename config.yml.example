@@ -22,3 +22,6 @@ lastfm:
   username: gesteves
 goodreads:
   rss_feed: "https://www.goodreads.com/review/list_rss/123?key=123abc&shelf=currently-reading"
+untappd:
+  json_feed: "http://example.com"
+  count: 5

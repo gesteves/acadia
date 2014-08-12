@@ -1,14 +1,15 @@
 require "rake/clean"
 require "./import"
 
-CLOBBER.include("data/*.json", "source/images/instagram/*", "source/images/tumblr/*", "source/images/goodreads/*")
+CLOBBER.include("data/*.json", "source/images/instagram/*", "source/images/tumblr/*", "source/images/goodreads/*", "source/images/untappd/*")
 
 namespace :import do
   directory "data"
   directory "source/images/instagram"
   directory "source/images/tumblr"
   directory "source/images/goodreads"
-  task :set_up_directories => ["data", "source/images/goodreads", "source/images/instagram", "source/images/tumblr"]
+  directory "source/images/untappd"
+  task :set_up_directories => ["data", "source/images/goodreads", "source/images/instagram", "source/images/tumblr", "source/images/untappd"]
 
   desc "Import latest tweets from a twitter account"
   task :twitter => [:set_up_directories] do
@@ -58,6 +59,14 @@ namespace :import do
     get_goodreads_data
     puts "Completed in #{Time.now - start_time} seconds"
   end
+
+  desc "Import data from Untappd"
+  task :untappd => [:set_up_directories] do
+    puts "== Importing data from Untappd"
+    start_time = Time.now
+    get_untappd_data
+    puts "Completed in #{Time.now - start_time} seconds"
+  end
 end
 
 task :import => [ "clobber",
@@ -66,7 +75,8 @@ task :import => [ "clobber",
                   "import:tumblr",
                   "import:github",
                   "import:lastfm",
-                  "import:goodreads" ]
+                  "import:goodreads",
+                  "import:untappd" ]
 
 desc "Import data and build the website"
 task :build => ["import"] do

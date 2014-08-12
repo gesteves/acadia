@@ -208,3 +208,18 @@ def get_goodreads_data
     puts e
   end
 end
+
+def get_untappd_data
+  begin
+    config = get_config["untappd"]
+    feed  = config["json_feed"]
+    count = config["count"]
+    beers = JSON.parse(HTTParty.get(feed).body)["results"]["beers"].slice(0, count)
+    beers.each_with_index do |b,i|
+      File.open("source/images/untappd/#{i}.jpg","wb"){ |f| f << HTTParty.get(b["image"]["src"]).body }
+    end
+    File.open("data/untappd.json","w"){ |f| f << beers.to_json }
+  rescue => e
+    puts e
+  end
+end

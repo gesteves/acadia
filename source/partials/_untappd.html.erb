@@ -1,0 +1,12 @@
+<% unless data.untappd.empty? %>
+  <section>
+    <ol>
+      <% data.untappd.each_with_index do |b, i| %>
+        <li>
+          <img src="<%= image_path "untappd/#{i}.jpg" %>" alt="<%= b.name.text %>" />
+          <%= link_to b.name.text, b.name.href %>, by <%= link_to b.brewery.text, b.brewery.href %>
+        </li>
+      <% end %>
+    </ol>
+  </section>
+<% end %>
