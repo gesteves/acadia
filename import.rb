@@ -89,8 +89,8 @@ end
 
 # Spit out the correct link tag for each type of entity
 def expand_tweet_entity(e)
-  if !e["display_url"].nil? && !e["expanded_url"].nil?
-    link_to(e["display_url"], e["expanded_url"])
+  if !e["display_url"].nil? && !e["url"].nil?
+    link_to(e["display_url"], e["url"])
   elsif !e["screen_name"].nil?
     link_to("@#{e["screen_name"]}", "https://twitter.com/#{e["screen_name"]}")
   elsif !e["text"].nil?
