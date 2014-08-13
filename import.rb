@@ -220,7 +220,7 @@ def get_untappd_data
     count = config["count"]
     beers = JSON.parse(HTTParty.get(feed).body)["results"]["beers"].slice(0, count)
     beers.each_with_index do |b,i|
-      File.open("source/images/untappd/#{i}.jpg","wb"){ |f| f << HTTParty.get(b["image"]["src"]).body }
+      File.open("source/images/untappd/#{i}.jpg","wb"){ |f| f << HTTParty.get(b["image"]).body }
     end
     File.open("data/untappd.json","w"){ |f| f << beers.to_json }
   rescue => e
