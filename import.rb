@@ -127,7 +127,7 @@ def save_instagram_photos(data)
   end
 end
 
-def get_tumblr_photos
+def get_photoblog_photos
   begin
     config = get_config["tumblr"]
     url          = config["url"]
@@ -135,14 +135,14 @@ def get_tumblr_photos
     count        = config["count"]
     response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&limit=#{count}&filter=text")
     data = JSON.parse(response.body)
-    save_tumblr_photos(data) unless data.nil?
-    File.open("data/tumblr.json","w"){ |f| f << data.to_json }
+    save_photoblog_photos(data) unless data.nil?
+    File.open("data/photoblog.json","w"){ |f| f << data.to_json }
   rescue => e
     puts e
   end
 end
 
-def save_tumblr_photos(data)
+def save_photoblog_photos(data)
   data["response"]["posts"].each do |post|
     post_id = post["id"]
     # Tumblr posts can have more than one photo (photosets),
@@ -150,11 +150,11 @@ def save_tumblr_photos(data)
     post["photos"][0]["alt_sizes"].each do |size|
       width = size["width"]
       url = size["url"]
-      File.open("source/images/tumblr/#{post_id}_#{width}.jpg","wb"){ |f| f << HTTParty.get(url).body }
+      File.open("source/images/photoblog/#{post_id}_#{width}.jpg","wb"){ |f| f << HTTParty.get(url).body }
     end
     # Also save the original size
     url = post["photos"][0]["original_size"]["url"]
-    File.open("source/images/tumblr/#{post_id}_original.jpg","wb"){ |f| f << HTTParty.get(url).body }
+    File.open("source/images/photoblog/#{post_id}_original.jpg","wb"){ |f| f << HTTParty.get(url).body }
   end
 end
 

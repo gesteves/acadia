@@ -24,6 +24,6 @@ config.yml
 # Ignore imported files
 /data/*.json
 /source/images/instagram
-/source/images/tumblr
+/source/images/photoblog
 /source/images/goodreads
 /source/images/untappd

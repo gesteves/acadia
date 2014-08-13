@@ -1,15 +1,15 @@
 require "rake/clean"
 require "./import"
 
-CLOBBER.include("data/*.json", "source/images/instagram/*", "source/images/tumblr/*", "source/images/goodreads/*", "source/images/untappd/*")
+CLOBBER.include("data/*.json", "source/images/instagram/*", "source/images/photoblog/*", "source/images/goodreads/*", "source/images/untappd/*")
 
 namespace :import do
   directory "data"
   directory "source/images/instagram"
-  directory "source/images/tumblr"
+  directory "source/images/photoblog"
   directory "source/images/goodreads"
   directory "source/images/untappd"
-  task :set_up_directories => ["data", "source/images/goodreads", "source/images/instagram", "source/images/tumblr", "source/images/untappd"]
+  task :set_up_directories => ["data", "source/images/goodreads", "source/images/instagram", "source/images/photoblog", "source/images/untappd"]
 
   desc "Import latest tweets from a twitter account"
   task :twitter => [:set_up_directories] do
@@ -28,11 +28,11 @@ namespace :import do
     puts "Completed in #{Time.now - start_time} seconds"
   end
 
-  desc "Import latest photos from Tumblr"
-  task :tumblr => [:set_up_directories] do
-    puts "== Importing Tumblr photos"
+  desc "Import latest photoblog photos from Tumblr"
+  task :photoblog => [:set_up_directories] do
+    puts "== Importing photoblog photos"
     start_time = Time.now
-    get_tumblr_photos
+    get_photoblog_photos
     puts "Completed in #{Time.now - start_time} seconds"
   end
 
@@ -72,7 +72,7 @@ end
 task :import => [ "clobber",
                   "import:twitter",
                   "import:instagram",
-                  "import:tumblr",
+                  "import:photoblog",
                   "import:github",
                   "import:lastfm",
                   "import:goodreads",
