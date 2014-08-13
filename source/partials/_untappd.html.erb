@@ -1,9 +1,9 @@
 <% unless data.untappd.empty? %>
   <section class="b-card">
     <ol>
-      <% data.untappd.each_with_index do |b, i| %>
+      <% data.untappd.each do |b| %>
         <li>
-          <img src="<%= image_path "untappd/#{i}.jpg" %>" alt="<%= b.name.text %>" />
+          <img src="<%= image_path "untappd/#{b.checkin}.jpg" %>" alt="<%= b.name.text %>" />
           <%= link_to b.name.text, b.name.href %>, by <%= link_to b.brewery.text, b.brewery.href %>
         </li>
       <% end %>
