@@ -1,6 +1,9 @@
 $b : '.b-card';
 
 #{$b} {
-  width: 100%;
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
   padding: 1rem;
+  page-break-inside:avoid;
+  width: 100%;
 }

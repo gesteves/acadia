@@ -1,0 +1,33 @@
+$b : '.b-instagram';
+
+#{$b}__photo-list {
+  @include clearfix;
+  width: 100%;
+}
+
+#{$b}__photo-item {
+  display: block;
+  float: left;
+  font-size: 0;
+  margin: 0 5% 1rem 0;
+  width: 30%;
+
+  &:nth-of-type(3n) {
+    margin-right: 0;
+  }
+  &:nth-of-type(7),
+  &:nth-of-type(8),
+  &:nth-of-type(9), {
+    margin-bottom: 0;
+  }
+
+  a {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+#{$b}__photo {
+  width: 100%;
+}
