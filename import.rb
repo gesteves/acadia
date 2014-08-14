@@ -193,24 +193,37 @@ end
 def get_goodreads_data
   begin
     config = get_config["goodreads"]
-    rss_feed = config["rss_feed"]
-    count    = config["count"]
+    shelves = config["shelves"]
+    count   = config["count"]
     books = []
-    Nokogiri::XML(HTTParty.get(rss_feed).body).xpath("//channel/item").slice(0, count).each do |item|
-      book = {
-        id: item.xpath('book_id').first.content,
-        title: item.xpath('title').first.content,
-        author: item.xpath('author_name').first.content,
-        image: item.xpath('book_large_image_url').first.content,
-        url: item.xpath('link').first.content
-      }
+    shelves.each do |shelf|
+      books << import_goodreads_shelf(shelf)
+    end
+    books = books.flatten.slice(0, count)
+    books.each do |book|
       File.open("source/images/goodreads/#{book[:id]}.jpg","wb"){ |f| f << HTTParty.get(book[:image]).body }
-      books << book
     end
     File.open("data/goodreads.json","w"){ |f| f << books.to_json }
   rescue => e
     puts e
   end
+end
+
+def import_goodreads_shelf(shelf)
+  config = get_config["goodreads"]
+  rss_feed = config["rss_feed"] + "&shelf=#{shelf}"
+  books = []
+  Nokogiri::XML(HTTParty.get(rss_feed).body).xpath("//channel/item").each do |item|
+    book = {
+      id: item.xpath('book_id').first.content,
+      title: item.xpath('title').first.content,
+      author: item.xpath('author_name').first.content,
+      image: item.xpath('book_large_image_url').first.content,
+      url: item.xpath('link').first.content
+    }
+    books << book
+  end
+  books
 end
 
 def get_untappd_data
