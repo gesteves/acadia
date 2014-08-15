@@ -1,4 +1,5 @@
 <section class="b-card b-photoblog">
+<h3>Photoblog</h3>
 <% data.photoblog.response.posts.each do |photo| %>
   <a href="<%= photo.post_url %>">
     <% if photo.caption.nil? %>
