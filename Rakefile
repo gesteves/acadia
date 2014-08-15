@@ -1,7 +1,7 @@
 require "rake/clean"
 require "./import"
 
-CLOBBER.include("data/*.json", "source/images/instagram/*", "source/images/photoblog/*", "source/images/goodreads/*", "source/images/untappd/*")
+CLOBBER.include("data/*.json", "source/images/instagram/*", "source/images/photoblog/*", "source/images/goodreads/*", "source/images/untappd/*", "source/images/twitter/*")
 
 namespace :import do
   directory "data"
@@ -9,7 +9,9 @@ namespace :import do
   directory "source/images/photoblog"
   directory "source/images/goodreads"
   directory "source/images/untappd"
-  task :set_up_directories => ["data", "source/images/goodreads", "source/images/instagram", "source/images/photoblog", "source/images/untappd"]
+  directory "source/images/twitter"
+  
+  task :set_up_directories => ["data", "source/images/goodreads", "source/images/instagram", "source/images/photoblog", "source/images/untappd", "source/images/twitter"]
 
   desc "Import latest tweets from a twitter account"
   task :twitter => [:set_up_directories] do

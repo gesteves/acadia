@@ -36,7 +36,9 @@ def get_twitter_user
     consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
     access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
     response = access_token.get("https://api.twitter.com/1.1/users/show.json?screen_name=#{user}")
+    twitter_user = JSON.parse(response.body)
     File.open("data/twitter.json","w"){ |f| f << response.body }
+    File.open("source/images/twitter/#{twitter_user["screen_name"]}.jpg","wb"){ |f| f << HTTParty.get(twitter_user["profile_image_url"].sub("_normal", "")).body }
   rescue => e
     puts e
   end
