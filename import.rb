@@ -121,8 +121,6 @@ end
 def save_instagram_photos(data)
   data.each do |photo|
     id = photo["id"]
-    File.open("source/images/instagram/#{id}_150.jpg","wb"){ |f| f << HTTParty.get(photo["images"]["thumbnail"]["url"]).body }
-    File.open("source/images/instagram/#{id}_306.jpg","wb"){ |f| f << HTTParty.get(photo["images"]["low_resolution"]["url"]).body }
     File.open("source/images/instagram/#{id}_640.jpg","wb"){ |f| f << HTTParty.get(photo["images"]["standard_resolution"]["url"]).body }
   end
 end
@@ -147,12 +145,6 @@ def save_photoblog_photos(data)
     post_id = post["id"]
     # Tumblr posts can have more than one photo (photosets),
     # but I'm only interested in showing the first one.
-    post["photos"][0]["alt_sizes"].each do |size|
-      width = size["width"]
-      url = size["url"]
-      File.open("source/images/photoblog/#{post_id}_#{width}.jpg","wb"){ |f| f << HTTParty.get(url).body }
-    end
-    # Also save the original size
     url = post["photos"][0]["original_size"]["url"]
     File.open("source/images/photoblog/#{post_id}_original.jpg","wb"){ |f| f << HTTParty.get(url).body }
   end
