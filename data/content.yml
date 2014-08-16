@@ -2,7 +2,10 @@ copy:
   hed: "Guillermo Esteves"
   dek: "Web design <abbr title=\"and\">&amp;</abbr> stuff."
   intro: |
-          Hello
+          <h3>Hello</h3>
+          <p>My name is Guillermo Esteves. I design &amp; build websites.</p>
+          <p>I live in Washington, DC and I’m a front-end engineer at <a href="http://www.voxmedia.com">Vox Media</a>’s <a href="http://product.voxmedia.com">Product&nbsp;Team</a>.</p>
+          <p>Need to get in touch? <a href="mailto:contact@gesteves.com">Contact me</a>.</p>
 meta:
   title: "Guillermo Esteves &middot; Web design &amp; Stuff."
   description: "Guillermo Esteves is a systems engineer & web developer in Washington, DC."
