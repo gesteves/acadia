@@ -4,7 +4,7 @@ $b : '.b-header';
   -webkit-column-span: all;
      -moz-column-span: all;
           column-span: all;
-  margin: 1rem 0 2rem 0;
+  margin: 1rem 0 0 0;
   text-align:center;
   h1 {
     @include kerning;
