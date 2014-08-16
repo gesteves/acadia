@@ -1,7 +1,7 @@
 $b : '.b-container';
 
 #{$b} {
-  @include columns($width: 21rem, $gap: 1rem);
+  @include columns($width: 21rem, $gap: 2rem);
   max-width: 90rem;
   margin: 0 auto;
 }
