@@ -27,11 +27,19 @@ $b : '.b-card';
     @include kerning;
     color: $color-heading;
     font-family: $proxima-nova;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: bold;
     line-height: 1;
     margin: 0 0 1rem 0;
     text-transform: uppercase;
+  }
+
+  h4 {
+    @include kerning;
+    font-family: $calluna;
+    font-size: 1.25rem;
+    font-weight: normal;
+    line-height: 1;
   }
 
   p {

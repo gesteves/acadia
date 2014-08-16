@@ -1,0 +1,52 @@
+$b : '.b-github';
+
+#{$b}__repo {
+  @include clearfix;
+  margin: 1rem 0 0 0;
+  position: relative;
+}
+
+#{$b}__name {
+  display: block;
+  float: left;
+}
+
+#{$b}__meta {
+  color: $color-alt-text;
+  display: block;
+  float: right;
+  position: absolute;
+  right: 0;
+
+  span,
+  a {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-left: 0.5rem;
+  }
+
+  a:before {
+    color: $color-very-light-gray;
+    position: relative;
+    top: 0.1rem;
+  }
+  a:link, a:visited {
+    color: $color-alt-text;
+  }
+  a:hover, a:active {
+    color: $color-links;
+    text-decoration: none;
+    &:before {
+      color: $color-links;
+    }
+  }
+
+}
+
+#{$b} #{$b}__description {
+  clear: both;
+  color: $color-alt-text;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0;
+}
