@@ -23,8 +23,10 @@ $b : '.b-card';
   }
 
   h3 {
-    font-family: $proxima-nova-condensed;
-    font-size: 2rem;
+    @include kerning;
+    color: $color-heading;
+    font-family: $proxima-nova;
+    font-size: 1.2rem;
     font-weight: bold;
     line-height: 1;
     margin: 0 0 1rem 0;

@@ -1,10 +1,10 @@
 copy:
   hed: "Guillermo Esteves"
-  dek: "Web Design &amp; Stuff."
+  dek: "Web design <abbr title=\"and\">&amp;</abbr> stuff."
   intro: |
           Hello
 meta:
-  title: "Guillermo Esteves &middot; Web Design &amp; Stuff."
+  title: "Guillermo Esteves &middot; Web design &amp; Stuff."
   description: "Guillermo Esteves is a systems engineer & web developer in Washington, DC."
   google_validation: "bn/hLVvBk1E6hM+onSl9YuslrcbuHRPcrYfProwgfr0="
   fb_admin: "514455047"

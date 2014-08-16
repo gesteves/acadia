@@ -1,10 +1,12 @@
 // Colors
-$color-text: #333;
+$color-text: #666;
+$color-heading: #333;
 $color-links: #bf0222;
+$color-header-text: #000;
 
 // Fonts
-$proxima-nova: "proxima-nova", "Helvetica Neue", sans-serif;
-$proxima-nova-condensed: "proxima-nova-sc-osf-ext-cond", "Helvetica Neue", sans-serif;
+$proxima-nova: "proxima-nova", sans-serif;
+$ff-meta: "ff-meta-serif-web-pro", serif;
 
 // Misc.
-$border: 2px solid $color-text;
+$border: 2px solid $color-heading;

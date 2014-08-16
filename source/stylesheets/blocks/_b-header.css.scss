@@ -1,0 +1,43 @@
+$b : '.b-header';
+
+#{$b} {
+  -webkit-column-span: all;
+     -moz-column-span: all;
+          column-span: all;
+  margin: 1rem 0 2rem 0;
+  text-align:center;
+  h1 {
+    @include kerning;
+    color: $color-header-text;
+    font-family: $proxima-nova;
+    font-weight: bold;
+    font-size: 3rem;
+    line-height: 1;
+  }
+  h2 {
+    @include kerning;
+    color: $color-header-text;
+    font-family: $proxima-nova;
+    font-weight: 100;
+    font-size: 2rem;
+    line-height: 1;
+  }
+  abbr[title="and"] {
+    border-bottom:none;
+    cursor: auto;
+    font-family: Baskerville, $proxima-nova;
+    font-size:150%;
+    font-style:italic;
+    font-weight:normal;
+    margin:0 -3px 0 -6px;
+    vertical-align:middle;
+  }
+  a:link, a:visited {
+    color: $color-header-text;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    color: $color-links;
+    text-decoration: none;
+  }
+}

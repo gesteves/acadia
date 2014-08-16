@@ -6,3 +6,12 @@
           column-gap: $gap;
           column-width: $width;
 }
+
+@mixin kerning {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  -webkit-font-feature-settings: "kern";
+     -moz-font-feature-settings: "kern";
+     -moz-font-feature-settings: "kern=1";
+}
