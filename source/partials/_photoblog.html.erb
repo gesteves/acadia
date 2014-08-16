@@ -8,5 +8,9 @@
       <img src="<%= image_path "photoblog/#{photo.id}_original.jpg" %>" alt="<%= photo.caption %>" />
     <% end %>
   </a>
+  <% unless photo.caption.nil? %>
+    <%= photo.caption %>
+  <% end %>
+  <p class="timestamp"><a href="<%= photo.post_url %>">Published on <%= formatted_date_in_eastern(photo.date, "%d %B %Y") %></a></p>
 <% end %>
 </section>

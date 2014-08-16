@@ -133,7 +133,7 @@ def get_photoblog_photos
     url          = config["url"]
     consumer_key = config["consumer_key"]
     count        = config["count"]
-    response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&limit=#{count}&filter=text")
+    response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&limit=#{count}")
     data = JSON.parse(response.body)
     save_photoblog_photos(data) unless data.nil?
     File.open("data/photoblog.json","w"){ |f| f << data.to_json }
