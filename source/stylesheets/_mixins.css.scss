@@ -15,3 +15,9 @@
      -moz-font-feature-settings: "kern";
      -moz-font-feature-settings: "kern=1";
 }
+
+@mixin vertical-center($top: 50%) {
+  @include translateY(-50%);
+  position: relative;
+  top: $top;
+}

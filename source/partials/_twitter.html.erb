@@ -1,20 +1,29 @@
-<section class="b-card">
+<section class="b-card b-twitter">
   <h3>Tweets</h3>
-  <a href="https://twitter.com/<%= data.twitter.screen_name %>">
-    <img src="<%= image_path "twitter/#{data.twitter.screen_name}.jpg" %>" alt="<%= data.twitter.name %>" />
-    <%= data.twitter.name %> @<%= data.twitter.screen_name %>
-  </a>
-  <a href="https://twitter.com/intent/user?screen_name=<%= data.twitter.screen_name %>">Follow</a>
+
+  <div class="b-twitter__user">
+    <a href="https://twitter.com/<%= data.twitter.screen_name %>" class="b-twitter__avatar">
+      <img src="<%= image_path "twitter/#{data.twitter.screen_name}.jpg" %>" alt="<%= data.twitter.name %>" />
+    </a>
+    <div class="b-twitter__username">
+      <a href="https://twitter.com/<%= data.twitter.screen_name %>">
+        <%= data.twitter.name %><br/><span class="b-twitter__screenname">@<%= data.twitter.screen_name %></span>
+      </a>
+    </div>
+    <div class="b-twitter__follow">
+      <a href="https://twitter.com/intent/user?screen_name=<%= data.twitter.screen_name %>">Follow</a>
+    </div>
+  </div>
   <ol>
     <% data.tweets.each do |t| %>
-      <li>
+      <li class="b-twitter__tweet">
         <p><%= t.expanded_text %></p>
-        <p>
-          <span><a href="https://twitter.com/statuses/<%= t.id_str %>"><%= formatted_date_in_eastern(t.created_at, "%d %B %Y %-l:%M %P") %></a></span>
-          <span>
-            <a href="https://twitter.com/intent/tweet?in_reply_to=<%= t.id_str %>">Reply</a>
-            <a href="https://twitter.com/intent/retweet?tweet_id=<%= t.id_str %>">Retweet</a>
-            <a href="https://twitter.com/intent/favorite?tweet_id=<%= t.id_str %>">Favorite</a>
+        <p class="b-twitter__meta">
+          <span class="timestamp"><a href="https://twitter.com/statuses/<%= t.id_str %>"><%= formatted_date_in_eastern(t.created_at, "%d %B %Y %-l:%M %P") %></a></span>
+          <span class="actions">
+            <a href="https://twitter.com/intent/tweet?in_reply_to=<%= t.id_str %>" title="Reply">&#xe802;</a>
+            <a href="https://twitter.com/intent/retweet?tweet_id=<%= t.id_str %>" title="Retweet">&#xe800;</a> <%= t.retweet_count if t.retweet_count > 0 %>
+            <a href="https://twitter.com/intent/favorite?tweet_id=<%= t.id_str %>" title="Favorite">&#xe801;</a> <%= t.favorite_count if t.favorite_count > 0 %>
           </span>
         </p>
       </li>

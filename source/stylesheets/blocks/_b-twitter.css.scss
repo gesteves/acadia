@@ -1,0 +1,119 @@
+$b : '.b-twitter';
+
+$avatar_size: 50px;
+
+#{$b}__user {
+  @include clearfix;
+  width: 100%;
+}
+
+#{$b}__avatar {
+  display: block;
+  float: left;
+  width: $avatar_size;
+  height: $avatar_size;
+
+  img {
+    @include border-radius($avatar_size/2);
+    max-width: 100%;
+  }
+}
+
+#{$b}__username {
+  @include vertical-center($top: $avatar_size/2);
+  display: block;
+  float: left;
+  padding: 0 1rem;
+
+  #{$b}__screenname {
+    color: $color-alt-text;
+    font-size: 0.85rem;
+  }
+
+  & a:hover #{$b}__screenname {
+    color: $color-links;
+  }
+}
+
+#{$b}__follow {
+  @include vertical-center($top: $avatar_size/2);
+  display: block;
+  font-size: 0.85rem;
+  float: right;
+
+  a:link, a:visited {
+    color: $color-alt-text;
+    text-decoration: none;
+
+    &:before {
+      color: $color-very-light-gray;
+    }
+  }
+  a:hover, a:active {
+    color: $color-links;
+    text-decoration: none;
+
+    &:before {
+      color: $color-links;
+    }
+  }
+  a:before {
+    content: '\e804';
+    font-family: fontello;
+    margin-right: 0.25rem;
+  }
+}
+
+#{$b}__tweet {
+  padding-bottom: 1rem;
+  border-top: 1px solid $color-very-light-gray;
+
+  &:first-child {
+    border: none;
+  }
+}
+
+#{$b} #{$b}__meta {
+  @include clearfix;
+  color: $color-alt-text;
+  font-size: 0.85rem;
+  margin: 0;
+
+  a:link, a:visited {
+    color: $color-alt-text;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    color: $color-links;
+    text-decoration: none;
+  }
+
+  .timestamp {
+    display: inline-block;
+    float: left;
+    font-style: italic;
+    width: 50%;
+  }
+  .actions {
+    display: none;
+    float: right;
+    text-align: right;
+    width: 50%;
+
+    a {
+      font-family: 'fontello';
+      margin-left: 0.5rem;
+    }
+
+    a:link, a:visited {
+      color: $color-very-light-gray;
+    }
+    a:hover, a:active {
+      color: $color-links;
+    }
+  }
+}
+
+#{$b}__tweet:hover #{$b}__meta .actions {
+    display: inline-block;
+}
