@@ -4,10 +4,8 @@ $b : '.b-card';
   -webkit-column-break-inside: avoid-column;
   break-inside: avoid-column;
   page-break-inside: avoid-column;
-  border-bottom: $border;
   display: inline-block;
   margin: 0 0 2rem 0;
-  padding: 0 0 2rem 0;
   width: 100%;
 
   img {
