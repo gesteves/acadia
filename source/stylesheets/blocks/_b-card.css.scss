@@ -4,11 +4,36 @@ $b : '.b-card';
   -webkit-column-break-inside: avoid-column;
   break-inside: avoid-column;
   page-break-inside: avoid-column;
+  border-bottom: $border;
   display: inline-block;
-  padding: 1rem;
+  padding: 1rem 0;
   width: 100%;
 
   img {
     max-width: 100%;
+  }
+
+  a:link, a:visited {
+    color: $color-links;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    color: $color-links;
+    text-decoration: underline;
+  }
+
+  h3 {
+    font-family: $proxima-nova-condensed;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 1rem 0;
   }
 }
