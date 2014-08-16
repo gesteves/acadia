@@ -3,7 +3,7 @@
   <ol>
     <% data.repos.each do |r| %>
       <li>
-        <p><%= link_to r.full_name, r.html_url %> <%= r.watchers %> <%= r.forks %></p>
+        <p><%= link_to r.name, r.html_url %> <%= link_to r.stargazers_count, "#{r.html_url}/stargazers" %> <%= link_to r.forks, "#{r.html_url}/network" %></p>
         <% unless r.description == "" %>
           <p><%= r.description %></p>
         <% end %>
