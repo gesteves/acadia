@@ -1,14 +1,27 @@
 // Colors
-$color-text: #666;
-$color-heading: #333;
-$color-links: #bf0222;
-$color-header-text: #000;
-$color-alt-text: #999;
-$color-very-light-gray: #ddd;
+$color-text            : #666;
+$color-heading         : #333;
+$color-links           : #bf0222;
+$color-header-text     : #000;
+$color-alt-text        : #999;
+$color-very-light-gray : #ddd;
+
+// Heat colors
+$color-heat-10 : #ff2a00;
+$color-heat-9  : #ff5400;
+$color-heat-8  : #ff8700;
+$color-heat-7  : #ffb200;
+$color-heat-6  : #ffe800;
+$color-heat-5  : #e9e81b;
+$color-heat-4  : #b3b165;
+$color-heat-3  : #84889b;
+$color-heat-2  : #415bcf;
+$color-heat-1  : #0936fb;
+$color-heat-0  : #333;
 
 // Fonts
-$proxima-nova: "proxima-nova", sans-serif;
-$calluna: "calluna", serif;
+$proxima-nova : "proxima-nova", sans-serif;
+$calluna      : "calluna", serif;
 
 // Misc.
 $border: 2px solid $color-heading;

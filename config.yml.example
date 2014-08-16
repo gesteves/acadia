@@ -20,6 +20,7 @@ github:
 lastfm:
   api_key: 123
   username: gesteves
+  count: 10
 goodreads:
   rss_feed: "https://www.goodreads.com/review/list_rss/123?key=123abc"
   shelves:

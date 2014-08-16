@@ -64,15 +64,6 @@ $avatar_size: 50px;
   }
 }
 
-#{$b}__tweet {
-  padding-bottom: 1rem;
-  border-top: 1px solid $color-very-light-gray;
-
-  &:first-child {
-    border: none;
-  }
-}
-
 #{$b} #{$b}__meta {
   @include clearfix;
   color: $color-alt-text;

@@ -1,9 +1,17 @@
-<% unless data.lastfm.weeklyartistchart.artist.nil? %>
-  <section class="b-card">
-    <h3>Recently listened</h3>
+<% unless data.lastfm.nil? %>
+  <section class="b-card b-music">
+    <h3>Listening</h3>
     <ol>
-      <% data.lastfm.weeklyartistchart.artist.each do |artist| %>
-        <li><%= link_to artist.name, artist.url %></li>
+      <% data.lastfm.each do |artist| %>
+        <li class="b-music__artist">
+          <a href="<%= artist.url %>" class="b-music__link">
+            <span class="b-music__artist-name"><%= artist.name %></span>
+            <span class="b-music__plays"><%= pluralize(artist.playcount, "play") %></span>
+            <div class="b-music__bar">
+              <div class="b-music__bar-plays b-music__heat-<%= ((artist.playcount.to_f / data.lastfm.first.playcount.to_f) * 10).round %>" style="width:<%= (artist.playcount.to_f / data.lastfm.first.playcount.to_f) * 100 %>%;"></div>
+            </div>
+          </a>
+        </li>
       <% end %>
     </ol>
   </section>

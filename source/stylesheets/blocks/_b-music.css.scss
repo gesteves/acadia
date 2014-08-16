@@ -1,0 +1,80 @@
+$b : '.b-music';
+
+#{$b}__artist {
+  margin-top: 1rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+#{$b}__link {
+  @include clearfix;
+  display: block;
+}
+
+#{$b}__artist-name {
+  float: left;
+  line-height: 1.5;
+}
+
+#{$b}__plays {
+  color: $color-alt-text;
+  float: right;
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+#{$b}__bar {
+  background-color: $color-very-light-gray;
+  clear: both;
+  height: 4px;
+  width: 100%;
+}
+
+#{$b}__bar-plays {
+  border-bottom: 1px solid;
+  height: 100%;
+}
+
+#{$b}__link:link,
+#{$b}__link:visited {
+  #{$b}__artist-name {
+    color: $color-text;
+    text-decoration: none;
+  }
+}
+
+#{$b}__link:hover,
+#{$b}__link:active {
+  #{$b}__artist-name {
+    color: $color-links;
+    text-decoration: none;
+  }
+  #{$b}__bar-plays {
+    background-color: $color-links;
+    border-color: darken($color-links, 25%);
+  }
+}
+
+$heats: 11;
+$heat-colors: $color-heat-0,
+              $color-heat-1,
+              $color-heat-2,
+              $color-heat-3,
+              $color-heat-4,
+              $color-heat-5,
+              $color-heat-6,
+              $color-heat-7,
+              $color-heat-8,
+              $color-heat-9,
+              $color-heat-10;
+
+@while $heats > 0 {
+  #{$b}__heat-#{$heats - 1} {
+    background-color: nth($heat-colors, $heats);
+    border-color: darken(nth($heat-colors, $heats), 25%);
+  }
+  $heats: $heats - 1;
+}
