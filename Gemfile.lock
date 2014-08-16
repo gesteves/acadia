@@ -131,3 +131,4 @@ DEPENDENCIES
   nokogiri
   oauth
   rake
+  tzinfo

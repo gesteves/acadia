@@ -1,9 +1,22 @@
 <section class="b-card">
   <h3>Tweets</h3>
+  <a href="https://twitter.com/<%= data.twitter.screen_name %>">
+    <img src="<%= image_path "twitter/#{data.twitter.screen_name}.jpg" %>" alt="<%= data.twitter.name %>" />
+    <%= data.twitter.name %> @<%= data.twitter.screen_name %>
+  </a>
+  <a href="https://twitter.com/intent/user?screen_name=<%= data.twitter.screen_name %>">Follow</a>
   <ol>
     <% data.tweets.each do |t| %>
       <li>
         <p><%= t.expanded_text %></p>
+        <p>
+          <span><a href="https://twitter.com/statuses/<%= t.id_str %>"><%= formatted_date_in_eastern(t.created_at, "%d %B %Y %-l:%M %P") %></a></span>
+          <span>
+            <a href="https://twitter.com/intent/tweet?in_reply_to=<%= t.id_str %>">Reply</a>
+            <a href="https://twitter.com/intent/retweet?tweet_id=<%= t.id_str %>">Retweet</a>
+            <a href="https://twitter.com/intent/favorite?tweet_id=<%= t.id_str %>">Favorite</a>
+          </span>
+        </p>
       </li>
     <% end %>
   </ol>
