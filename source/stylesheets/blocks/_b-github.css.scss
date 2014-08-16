@@ -18,6 +18,11 @@ $b : '.b-github';
   position: absolute;
   right: 0;
 
+  span {
+    position: relative;
+    top: 0.1rem;
+  }
+
   span,
   a {
     font-size: 0.85rem;
