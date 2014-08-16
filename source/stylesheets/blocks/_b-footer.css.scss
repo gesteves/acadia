@@ -1,0 +1,22 @@
+$b : '.b-footer';
+
+#{$b} {
+  -webkit-column-span: all;
+     -moz-column-span: all;
+          column-span: all;
+  margin: 2rem 0 1rem 0;
+  text-align:center;
+
+  p {
+    font-size: 0.85rem;
+  }
+
+  a:link, a:visited {
+    color: $color-links;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    color: $color-links;
+    text-decoration: underline;
+  }
+}
