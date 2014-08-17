@@ -14,6 +14,9 @@ $b : '.b-header';
     font-size: 1.75rem;
     line-height: 1;
     @media (min-width: $bp-small) {
+      font-size: 2rem;
+    }
+    @media (min-width: $bp-medium) {
       font-size: 3rem;
     }
   }
@@ -25,6 +28,9 @@ $b : '.b-header';
     font-size: 1.5rem;
     line-height: 1;
     @media (min-width: $bp-small) {
+      font-size: 1.75rem;
+    }
+    @media (min-width: $bp-medium) {
       font-size: 3rem;
     }
   }
