@@ -225,12 +225,27 @@ end
 
 def get_untappd_data
   begin
+    beers = []
     config = get_config["untappd"]
-    feed  = config["json_feed"]
-    count = config["count"]
-    beers = JSON.parse(HTTParty.get(feed).body)["results"]["beers"].slice(0, count)
-    beers.each do |b|
-      File.open("source/images/untappd/#{b["checkin"]}.jpg","wb"){ |f| f << HTTParty.get(b["image"]).body }
+    checkins_endpoint = config["checkins"]
+    count             = config["count"]
+    checkins = JSON.parse(HTTParty.get(checkins_endpoint).body)["results"]["beers"].slice(0, count)
+    checkins.each do |c|
+      beer_html = Nokogiri::HTML(HTTParty.get(c["name"]["href"]).body)
+      beer = {
+        checkin: c["checkin"],
+        checkin_url: c["date"]["href"],
+        date: c["date"]["data-gregtime"],
+        name: c["name"]["text"],
+        url: c["name"]["href"],
+        brewery: c["brewery"]["text"],
+        brewery_url: c["brewery"]["href"],
+        type: beer_html.css("p.style").first.content.strip,
+        abv: beer_html.css("p.abv").first.content.strip,
+        ibu: beer_html.css("p.ibu").first.content.strip
+      }
+      beers << beer
+      File.open("source/images/untappd/#{c["checkin"]}.jpg","wb"){ |f| f << HTTParty.get(c["image"]).body }
     end
     File.open("data/untappd.json","w"){ |f| f << beers.to_json }
   rescue => e

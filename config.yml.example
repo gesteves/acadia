@@ -28,5 +28,5 @@ goodreads:
     - read
   count: 5
 untappd:
-  json_feed: "http://example.com"
+  checkins: "http://example.com"
   count: 5
