@@ -215,7 +215,7 @@ def import_goodreads_shelf(shelf)
       title: item.xpath('title').first.content,
       author: item.xpath('author_name').first.content,
       image: item.xpath('book_large_image_url').first.content,
-      url: item.xpath('link').first.content,
+      url: Nokogiri.HTML(item.xpath('description').first.content).css("a").first["href"],
       shelf: shelf
     }
     books << book
