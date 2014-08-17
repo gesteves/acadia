@@ -45,7 +45,7 @@ $avatar_size: 50px;
 
 #{$b}__follow {
   @include vertical-center($top: $avatar_size/2);
-  display: block;
+  display: none;
   font-size: 0.85rem;
   float: right;
 
@@ -77,6 +77,10 @@ $avatar_size: 50px;
     content: '\e804';
     font-family: fontello;
     margin-right: 0.25rem;
+  }
+
+  @media (min-width: $bp-small) {
+    display: inline-block;
   }
 }
 
