@@ -8,39 +8,28 @@ $b : '.b-books';
   display: table-row;
 
   #{$b}__status {
+    color: $color-alt-text;
     font-size: 0.65rem;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
 
   #{$b}__author {
+    color: $color-alt-text;
     font-size: 0.85rem;
     font-style: italic;
-  }
-
-  &:link, &:visited, &:hover, &:active {
-    text-decoration: none;
-    #{$b}__status,
-    #{$b}__author {
-      color: $color-alt-text;
-    }
-  }
-  &:hover, &:active {
-    #{$b}__title {
-      text-decoration: underline;
-    }
   }
 }
 
 #{$b}__image {
   display: table-cell;
   vertical-align: middle;
-  width: 50px;
+  width: 60px;
 }
 
 #{$b}__meta {
   display: table-cell;
-  line-height: 1.5;
+  line-height: 1.25;
   padding-left: 1rem;
   vertical-align: middle;
   span {

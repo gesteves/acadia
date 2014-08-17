@@ -1,5 +1,45 @@
 $b : '.b-beers';
 
 #{$b} {
-  img { max-width: 50px; }
+  li { margin-bottom: 1rem; }
+}
+
+
+#{$b} #{$b}__brew {
+  display: table-row;
+
+  #{$b}__info {
+    color: $color-alt-text;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  #{$b}__brewery {
+    font-size: 0.85rem;
+    font-style: italic;
+
+    &:link, &:visited {
+      color: $color-alt-text;
+    }
+    &:hover, &:active {
+      color: $color-links;
+    }
+  }
+}
+
+#{$b}__image {
+  display: table-cell;
+  vertical-align: middle;
+  width: 60px;
+}
+
+#{$b}__meta {
+  display: table-cell;
+  line-height: 1.25;
+  padding-left: 1rem;
+  vertical-align: middle;
+  span, a {
+    display: block;
+  }
 }

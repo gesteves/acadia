@@ -2,10 +2,18 @@
   <section class="b-card b-beers">
     <h3>Responsibly drinking</h3>
     <ol>
-      <% data.untappd.each do |b| %>
+      <% data.untappd.each do |beer| %>
         <li>
-          <img src="<%= image_path "untappd/#{b.checkin}.jpg" %>" alt="<%= b.name.text %>" />
-          <%= link_to b.name.text, b.name.href %>, by <%= link_to b.brewery.text, b.brewery.href %>
+          <div class="b-beers__brew">
+            <a href="<%= beer.url %>" class="b-beers__image">
+              <img src="<%= image_path "untappd/#{beer.checkin}.jpg" %>" alt="<%= beer.name %>"  />
+            </a>
+            <div class="b-beers__meta">
+              <span class="b-beers__info"><%= beer.type %> &middot; <%= beer.abv %> &middot; <%= beer.ibu %></span>
+              <a href="<%= beer.url %>" class="b-beers__name"><%= beer.name %></a>
+              <a href="<%= beer.brewery_url %>" class="b-beers__brewery"><%= beer.brewery %></a>
+            </div>
+          </a>
         </li>
       <% end %>
     </ol>
