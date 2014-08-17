@@ -103,3 +103,11 @@ task :preview => [:import] do
   puts "== Starting Middleman"
   system("middleman server")
 end
+
+desc "Publish the site"
+task :publish => [:import] do
+  puts "== Building the site"
+  system("middleman build")
+  puts "== Syncing with S3"
+  system("middleman s3_sync")
+end
