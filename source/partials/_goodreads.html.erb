@@ -4,8 +4,16 @@
     <ul>
       <% data.goodreads.each do |book| %>
         <li>
-          <img src="<%= image_path "goodreads/#{book.id}.jpg" %>" alt="<%= book.title %>" />
-          <%= link_to book.title, book.url %>, by <%= book.author %>
+          <a href="<%= book.url %>" class="b-books__book">
+            <img src="<%= image_path "goodreads/#{book.id}.jpg" %>" alt="<%= book.title %>" class="b-books__image" />
+            <div class="b-books__meta">
+              <span class="b-books__status">
+                <%= book.shelf.gsub("-", " ") %>
+              </span>
+              <span class="b-books__title"><%= book.title %></span>
+              <span class="b-books__author">By <%= book.author %></span>
+            </div>
+          </a>
         </li>
       <% end %>
     </ul>
