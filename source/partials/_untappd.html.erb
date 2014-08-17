@@ -5,7 +5,7 @@
       <% data.untappd.each do |beer| %>
         <li>
           <div class="b-beers__brew">
-            <a href="<%= beer.url %>" class="b-beers__image">
+            <a href="<%= beer.checkin_url %>" class="b-beers__image">
               <img src="<%= image_path "untappd/#{beer.checkin}.jpg" %>" alt="<%= beer.name %>"  />
             </a>
             <div class="b-beers__meta">
