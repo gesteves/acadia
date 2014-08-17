@@ -45,4 +45,8 @@ $b : '.b-card';
     line-height: 1.5;
     margin: 1rem 0 0 0;
   }
+  p + p {
+    margin: 0;
+    text-indent: 1rem;
+  }
 }
