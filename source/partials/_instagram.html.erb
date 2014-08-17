@@ -4,11 +4,7 @@
     <% data.instagram.each do |photo| %>
       <li class="b-instagram__photo-item">
         <a href="<%= photo.link %>">
-          <% if photo.caption.nil? %>
-            <img src="<%= image_path "instagram/#{photo.id}_640.jpg" %>" alt="Instagram photo" class="b-instagram__photo" />
-          <% else %>
-            <img src="<%= image_path "instagram/#{photo.id}_640.jpg" %>" alt="<%= photo.caption.text %>" class="b-instagram__photo" />
-          <% end %>
+          <%= instagram_image_tag(photo) %>
         </a>
       </li>
     <% end %>

@@ -2,11 +2,7 @@
 <h3>Photoblog</h3>
 <% data.photoblog.response.posts.each do |photo| %>
   <a href="<%= photo.post_url %>">
-    <% if photo.caption.nil? %>
-      <img src="<%= image_path "photoblog/#{photo.id}_original.jpg" %>" alt="Latest from my photoblog" />
-    <% else %>
-      <img src="<%= image_path "photoblog/#{photo.id}_original.jpg" %>" alt="<%= photo.caption %>" />
-    <% end %>
+    <%= photoblog_image_tag(photo) %>
   </a>
   <% unless photo.caption.nil? %>
     <%= photo.caption %>
