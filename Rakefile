@@ -38,6 +38,14 @@ namespace :import do
     puts "Completed in #{Time.now - start_time} seconds"
   end
 
+  desc "Import latest links from Tumblr"
+  task :links => [:set_up_directories] do
+    puts "== Importing links"
+    start_time = Time.now
+    get_tumblr_links
+    puts "Completed in #{Time.now - start_time} seconds"
+  end
+
   desc "Import featured repos from Github"
   task :github => [:set_up_directories] do
     puts "== Importing Github repos"
@@ -75,6 +83,7 @@ task :import => [ "clobber",
                   "import:twitter",
                   "import:instagram",
                   "import:photoblog",
+                  "import:links",
                   "import:github",
                   "import:lastfm",
                   "import:goodreads",

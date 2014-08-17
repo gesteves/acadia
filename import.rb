@@ -130,9 +130,9 @@ end
 def get_photoblog_photos
   begin
     config = get_config["tumblr"]
-    url          = config["url"]
+    url          = config["photoblog"]
     consumer_key = config["consumer_key"]
-    count        = config["count"]
+    count        = config["photos_count"]
     response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&limit=#{count}")
     data = JSON.parse(response.body)
     save_photoblog_photos(data) unless data.nil?
@@ -149,6 +149,21 @@ def save_photoblog_photos(data)
     # but I'm only interested in showing the first one.
     url = post["photos"][0]["original_size"]["url"]
     File.open("source/images/photoblog/#{post_id}_original.jpg","wb"){ |f| f << HTTParty.get(url).body }
+  end
+end
+
+def get_tumblr_links
+  begin
+    config = get_config["tumblr"]
+    url          = config["links"]
+    consumer_key = config["consumer_key"]
+    count        = config["links_count"]
+    tag          = config["link_tag"]
+    response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/link?api_key=#{consumer_key}&limit=#{count}&tag=#{tag}")
+    data = JSON.parse(response.body)
+    File.open("data/links.json","w"){ |f| f << data.to_json }
+  rescue => e
+    puts e
   end
 end
 

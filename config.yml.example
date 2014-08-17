@@ -10,9 +10,12 @@ instagram:
   consumer_key: abc123
   count: 9
 tumblr:
-  url: yourdomain.com
+  photoblog: yourdomain.com
+  links: yourdomain.com
   consumer_key: abc123
-  count: 1
+  photos_count: 1
+  links_count: 5
+  link_tag: writing
 github:
   access_token: abc123
   repos: 
