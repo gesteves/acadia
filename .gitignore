@@ -20,6 +20,7 @@
 # Ignore .env & config
 config.yml
 .env
+.s3_sync
 
 # Ignore imported files
 /data/*.json
