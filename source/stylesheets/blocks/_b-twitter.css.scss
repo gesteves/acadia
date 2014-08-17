@@ -83,19 +83,20 @@ $avatar_size: 50px;
     display: inline-block;
     float: left;
     font-style: italic;
-    width: 50%;
+    width: 100%;
+    @media (min-width: $bp-small) {
+      width: 50%;
+    }
   }
   .actions {
     display: none;
     float: right;
     text-align: right;
     width: 50%;
-
     a {
       font-family: 'fontello';
       margin-left: 0.5rem;
     }
-
     a:link, a:visited {
       color: $color-very-light-gray;
     }
@@ -106,5 +107,7 @@ $avatar_size: 50px;
 }
 
 #{$b}__tweet:hover #{$b}__meta .actions {
+  @media (min-width: $bp-small) {
     display: inline-block;
+  }
 }

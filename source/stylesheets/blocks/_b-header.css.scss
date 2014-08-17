@@ -11,16 +11,22 @@ $b : '.b-header';
     color: $color-header-text;
     font-family: $proxima-nova;
     font-weight: bold;
-    font-size: 3rem;
+    font-size: 1.75rem;
     line-height: 1;
+    @media (min-width: $bp-small) {
+      font-size: 3rem;
+    }
   }
   h2 {
     @include kerning;
     color: $color-header-text;
     font-family: $proxima-nova;
     font-weight: 100;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1;
+    @media (min-width: $bp-small) {
+      font-size: 3rem;
+    }
   }
   abbr[title="and"] {
     border-bottom:none;

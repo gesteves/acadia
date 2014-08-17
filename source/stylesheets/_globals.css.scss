@@ -8,5 +8,9 @@ body {
   color: $color-text;
   font-family: $calluna;
   font-weight: 300;
-  padding: 2rem 4rem;
+  padding: 2rem;
+
+  @media (min-width: $bp-small) {
+    padding: 2rem 4rem;
+  }
 }
