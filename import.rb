@@ -1,6 +1,7 @@
 require "oauth"
 require "httparty"
 require "nokogiri"
+require "rmagick"
 
 def get_config
   YAML.load_file("config.yml")
@@ -38,7 +39,9 @@ def get_twitter_user
     response = access_token.get("https://api.twitter.com/1.1/users/show.json?screen_name=#{user}")
     twitter_user = JSON.parse(response.body)
     File.open("data/twitter.json","w"){ |f| f << response.body }
-    File.open("source/images/twitter/#{twitter_user["screen_name"]}.jpg","wb"){ |f| f << HTTParty.get(twitter_user["profile_image_url"].sub("_normal", "")).body }
+    avatar = Magick::Image::from_blob(HTTParty.get(twitter_user["profile_image_url"].sub("_normal", "")).body).first
+    avatar = avatar.resize_to_fit(100)
+    avatar.write("source/images/twitter/#{twitter_user["screen_name"]}.jpg")
   rescue => e
     puts e
   end
@@ -123,7 +126,12 @@ end
 def save_instagram_photos(data)
   data.each do |photo|
     id = photo["id"]
-    File.open("source/images/instagram/#{id}_640.jpg","wb"){ |f| f << HTTParty.get(photo["images"]["standard_resolution"]["url"]).body }
+    original = Magick::Image::from_blob(HTTParty.get(photo["images"]["standard_resolution"]["url"]).body).first
+    sizes = [640, 384, 280, 242, 192, 188, 154, 141, 121, 94, 77]
+    sizes.each do |size|
+      image = original.resize_to_fit(size)
+      image.write("source/images/instagram/#{id}_#{size}.jpg")
+    end
   end
 end
 
@@ -148,7 +156,12 @@ def save_photoblog_photos(data)
     # Tumblr posts can have more than one photo (photosets),
     # but I'm only interested in showing the first one.
     url = post["photos"][0]["original_size"]["url"]
-    File.open("source/images/photoblog/#{post_id}_original.jpg","wb"){ |f| f << HTTParty.get(url).body }
+    original = Magick::Image::from_blob(HTTParty.get(url).body).first
+    sizes = [1280, 930, 810, 640, 624, 512, 465, 405, 312, 256]
+    sizes.each do |size|
+      image = original.resize_to_fit(size)
+      image.write("source/images/photoblog/#{post_id}_#{size}.jpg")
+    end
   end
 end
 
@@ -212,7 +225,9 @@ def get_goodreads_data
     end
     books = books.flatten.slice(0, count)
     books.each do |book|
-      File.open("source/images/goodreads/#{book[:id]}.jpg","wb"){ |f| f << HTTParty.get(book[:image]).body }
+      cover = Magick::Image::from_blob(HTTParty.get(book[:image]).body).first
+      cover = cover.resize_to_fit(100)
+      cover.write("source/images/goodreads/#{book[:id]}.jpg")
     end
     File.open("data/goodreads.json","w"){ |f| f << books.to_json }
   rescue => e
@@ -260,7 +275,9 @@ def get_untappd_data
         ibu: beer_html.css("p.ibu").first.content.strip
       }
       beers << beer
-      File.open("source/images/untappd/#{c["checkin"]}.jpg","wb"){ |f| f << HTTParty.get(c["image"]).body }
+      label = Magick::Image::from_blob(HTTParty.get(c["image"]).body).first
+      label = label.resize_to_fit(100)
+      label.write("source/images/untappd/#{c["checkin"]}.jpg")
     end
     File.open("data/untappd.json","w"){ |f| f << beers.to_json }
   rescue => e
