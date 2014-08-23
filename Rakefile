@@ -115,7 +115,7 @@ namespace :publish do
   end
 
   desc "Just publish the site"
-  task :no_import do
+  task :build_only do
     puts "== Building the site"
     system("middleman build")
     puts "== Syncing with S3"
