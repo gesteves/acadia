@@ -18,7 +18,7 @@ def get_tweets
     count               = config["count"]
     consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
     access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
-    response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false&trim_user=true")
+    response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false&trim_user=true&count=200")
     tweets = JSON.parse(response.body).slice(0, count).map!{ |t| expand_tweet(t) }.to_json
     File.open("data/tweets.json","w"){ |f| f << tweets }
   rescue => e
