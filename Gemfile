@@ -15,3 +15,4 @@ gem "nokogiri"
 gem "compass"
 gem "tzinfo"
 gem "rmagick"
+gem "whenever", :require => false
