@@ -23,7 +23,7 @@ config.yml
 .s3_sync
 
 # Ignore logs
-*.log
+/log
 
 # Ignore imported files
 /data/*.json

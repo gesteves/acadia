@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, { :error => "cron_error_log.log", :standard => "cron_log.log" }
+set :output, { :error => "log/cron_error_log.log", :standard => "log/cron_log.log" }
 
 every 6.hours do
   rake "publish:full"
