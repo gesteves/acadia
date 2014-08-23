@@ -107,7 +107,7 @@ end
 
 namespace :publish do
   desc "Import content and publish the site"
-  task :import => [:import] do
+  task :full => [:import] do
     puts "== Building the site"
     system("middleman build")
     puts "== Syncing with S3"
