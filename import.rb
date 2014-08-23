@@ -1,7 +1,7 @@
 require "oauth"
 require "httparty"
 require "nokogiri"
-require "rmagick"
+require "RMagick"
 
 def get_config
   YAML.load_file("config.yml")
