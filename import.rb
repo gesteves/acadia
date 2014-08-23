@@ -193,7 +193,7 @@ def get_github_repos
                               headers: { "User-Agent" => "gesteves/farragut" })
       repo_array << JSON.parse(response.body)
     end
-    repo_array.sort!{ |a,b| b["watchers"] <=> a["watchers"] }
+    repo_array.sort!{ |a,b| a["name"] <=> b["name"] }
     File.open("data/repos.json","w"){ |f| f << repo_array.to_json }
   rescue => e
     puts e
