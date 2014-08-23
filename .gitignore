@@ -22,6 +22,9 @@ config.yml
 .env
 .s3_sync
 
+# Ignore logs
+*.log
+
 # Ignore imported files
 /data/*.json
 /source/images/instagram
