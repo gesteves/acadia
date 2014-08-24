@@ -201,20 +201,6 @@ def get_github_repos
   end
 end
 
-def get_lastfm_data
-  begin
-    config = get_config["lastfm"]
-    api_key  = config["api_key"]
-    username = config["username"]
-    count    = config["count"]
-    response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=#{username}&api_key=#{api_key}&format=json")
-    artists = JSON.parse(response.body)["weeklyartistchart"]["artist"].slice(0, count)
-    File.open("data/lastfm.json","w"){ |f| f << artists.to_json }
-  rescue => e
-    puts e
-  end
-end
-
 def get_goodreads_data
   begin
     config = get_config["goodreads"]

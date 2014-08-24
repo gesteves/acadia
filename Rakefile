@@ -55,14 +55,6 @@ namespace :import do
     puts "Completed in #{Time.now - start_time} seconds"
   end
 
-  desc "Import data from Last.fm"
-  task :lastfm => [:set_up_directories] do
-    puts "== Importing data from Last.fm"
-    start_time = Time.now
-    get_lastfm_data
-    puts "Completed in #{Time.now - start_time} seconds"
-  end
-
   desc "Import data from Goodreads"
   task :goodreads => [:set_up_directories] do
     puts "== Importing data from Goodreads"
@@ -94,7 +86,6 @@ task :import => [ "clobber",
                   "import:photoblog",
                   "import:links",
                   "import:github",
-                  "import:lastfm",
                   "import:goodreads",
                   "import:untappd",
                   "import:rdio" ]
