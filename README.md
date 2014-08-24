@@ -1,6 +1,6 @@
 # About
 
-_Acadia_ is a static Middleman-based website I’m using as my personal site at [gesteves.com](http://gesteves.com). It pulls data from several social networks and services I use and puts it in the `data/` folder to populate the site. A cron job running on a cheap [Digital Ocean](https://www.digitalocean.com/?refcode=1805b0874bd3) VPS periodically re-generates the site using [Middleman](http://middlemanapp.com/) and pushes it to an Amazon S3 bucket, where it gets served from Amazon CloudFront for extra speediness.
+This is a static Middleman-based website I’m using as my personal site at [gesteves.com](http://gesteves.com). An import script pulls data from several social networks and services I use and puts it in the `data/` and `source/images` folders to populate the site. A cron job running on a cheap [Digital Ocean](https://www.digitalocean.com/?refcode=1805b0874bd3) VPS periodically re-generates the site using [Middleman](http://middlemanapp.com/) to keep it up to date and pushes it to an Amazon S3 bucket, where it gets served from Amazon CloudFront for extra speediness.
 
 ## Useful tasks
 
@@ -9,3 +9,5 @@ _Acadia_ is a static Middleman-based website I’m using as my personal site at 
 * `$ bundle exec rake preview`: Runs the import tasks and starts the Middleman preview server.
 * `$ bundle exec rake publish:full`: Runs the import tasks, builds the site, and syncs it to S3.
 * `$ bundle exec rake publish:build_only`: Builds the site and syncs it to S3 without running the import tasks.
+
+&copy; 2014 Guillermo Esteves. Feel free to take a look and use this for your own projects, but please don’t straight up republish my website verbatim.
