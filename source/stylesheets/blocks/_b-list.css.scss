@@ -45,3 +45,9 @@ $b : '.b-list';
     display: block;
   }
 }
+
+#{$b}.untappd {
+  #{$b}__image {
+    width: 50px;
+  }
+}

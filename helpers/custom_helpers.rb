@@ -44,6 +44,18 @@ module CustomHelpers
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
+  def untappd_image_tag(beer)
+    alt = beer.name
+    src = image_path "untappd/#{beer.checkin}_100.jpg"
+    srcset = []
+    sizes = [100, 50]
+    sizes.each do |size|
+      srcset << "#{image_path("untappd/#{beer.checkin}_#{size}.jpg")} #{size}w"
+    end
+    sizes = "50px"
+    "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+  end
+
   def host_with_port
     [host, optional_port].compact.join(':')
   end

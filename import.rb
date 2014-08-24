@@ -262,13 +262,20 @@ def get_untappd_data
         ibu: beer_html.css("p.ibu").first.content.strip
       }
       beers << beer
-      label = Magick::Image::from_blob(HTTParty.get(c["image"]).body).first
-      label = label.resize_to_fit(100)
-      label.write("source/images/untappd/#{c["checkin"]}.jpg")
+      save_beer_label(c)
     end
     File.open("data/untappd.json","w"){ |f| f << beers.to_json }
   rescue => e
     puts e
+  end
+end
+
+def save_beer_label(checkin)
+  label = Magick::Image::from_blob(HTTParty.get(checkin["image"]).body).first
+  sizes = [100, 50]
+  sizes.each do |size|
+    image = label.resize_to_fit(size)
+    image.write("source/images/untappd/#{checkin["checkin"]}_#{size}.jpg")
   end
 end
 

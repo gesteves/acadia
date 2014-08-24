@@ -1,12 +1,12 @@
 <% unless data.untappd.empty? %>
-  <section class="b-card b-list">
+  <section class="b-card b-list untappd">
     <h3>Responsibly drinking</h3>
     <ol>
       <% data.untappd.each do |beer| %>
         <li>
           <div class="b-list__item">
             <a href="<%= beer.checkin_url %>" class="b-list__image">
-              <img src="<%= image_path "untappd/#{beer.checkin}.jpg" %>" alt="<%= beer.name %>"  />
+              <%= untappd_image_tag(beer) %>
             </a>
             <div class="b-list__meta">
               <span class="b-list__eyebrow"><%= beer.type %> &middot; <%= beer.abv %></span>
