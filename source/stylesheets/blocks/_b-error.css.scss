@@ -1,0 +1,28 @@
+$b : '.b-error';
+
+#{$b} {
+  margin: 6rem 0;
+  text-align:center;
+  width: 100%;
+
+  h3 {
+    @include kerning;
+    font-family: $proxima-nova;
+    font-weight: 100;
+    font-size: 10rem;
+    line-height: 1;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+
+  a:link, a:visited {
+    color: $color-links;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    color: $color-links;
+    text-decoration: underline;
+  }
+}
