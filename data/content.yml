@@ -19,3 +19,34 @@ meta:
   google_plus_url: "https://plus.google.com/114617182643828033131"
   google_analytics_id: "UA-250261-28"
   canonical_url: "http://www.gesteves.com"
+links:
+  - name: github
+    title: Github
+    url: https://github.com/gesteves
+  - name: twitter
+    title: Twitter
+    url: https://twitter.com/gesteves
+  - name: photoblog
+    title: Photoblog
+    url: http://allencompassingtrip.com
+  - name: untappd
+    title: Untappd
+    url: https://untappd.com/user/gesteves
+  - name: goodreads
+    title: Goodreads
+    url: https://www.goodreads.com/user/show/1963610-guillermo-esteves
+  - name: blog
+    title: Blog
+    url: http://blog.gesteves.com
+  - name: rdio
+    title: Rdio
+    url: http://www.rdio.com/people/gesteves
+  - name: instagram
+    title: Instagram
+    url: http://instagram.com/gesteves
+  - name: linkedin
+    title: LinkedIn
+    url: https://www.linkedin.com/in/gesteves
+  - name: dribbble
+    title: Dribbble
+    url: https://dribbble.com/gesteves
