@@ -6,7 +6,7 @@
         <li>
           <div class="b-list__item">
             <a href="<%= book.url %>" class="b-list__image">
-              <img src="<%= image_path "goodreads/#{book.id}.jpg" %>" alt="<%= book.title %>" />
+              <%= goodreads_image_tag(book) %>
             </a>
             <div class="b-list__meta">
               <span class="b-list__eyebrow">

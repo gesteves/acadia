@@ -56,6 +56,18 @@ module CustomHelpers
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
+  def goodreads_image_tag(book)
+    alt = book.title
+    src = image_path "goodreads/#{book.id}_120.jpg"
+    srcset = []
+    sizes = [120, 60]
+    sizes.each do |size|
+      srcset << "#{image_path("goodreads/#{book.id}_#{size}.jpg")} #{size}w"
+    end
+    sizes = "60px"
+    "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+  end
+
   def host_with_port
     [host, optional_port].compact.join(':')
   end

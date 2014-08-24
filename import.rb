@@ -211,14 +211,21 @@ def get_goodreads_data
       books << import_goodreads_shelf(shelf)
     end
     books = books.flatten.slice(0, count)
-    books.each do |book|
-      cover = Magick::Image::from_blob(HTTParty.get(book[:image]).body).first
-      cover = cover.resize_to_fit(100)
-      cover.write("source/images/goodreads/#{book[:id]}.jpg")
-    end
+    save_book_covers(books)
     File.open("data/goodreads.json","w"){ |f| f << books.to_json }
   rescue => e
     puts e
+  end
+end
+
+def save_book_covers(books)
+  books.each do |book|
+    cover = Magick::Image::from_blob(HTTParty.get(book[:image]).body).first
+    sizes = [120, 60]
+    sizes.each do |size|
+      image = cover.resize_to_fill(size, (size * cover.rows)/cover.columns)
+      image.write("source/images/goodreads/#{book[:id]}_#{size}.jpg")
+    end
   end
 end
 
