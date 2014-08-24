@@ -308,7 +308,7 @@ end
 def save_rdio_images(albums)
   albums.each do |a|
     album = Magick::Image::from_blob(HTTParty.get(a["icon"]).body).first
-    sizes = [200, 150, 100, 50]
+    sizes = [200, 180, 120, 60]
     sizes.each do |size|
       image = album.resize_to_fit(size)
       image.write("source/images/rdio/#{a["key"]}_#{size}.jpg")

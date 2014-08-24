@@ -6,7 +6,7 @@
         <li>
           <div class="b-list__item">
             <a href="<%= album.shortUrl %>" class="b-list__image">
-              <img src="<%= image_path "rdio/#{album["key"]}_100.jpg" %>" alt="<%= album.name %>"  />
+              <%= rdio_image_tag(album) %>
             </a>
             <div class="b-list__meta">
               <a href="<%= album.shortUrl %>" class="b-list__title"><%= album.name %></a>

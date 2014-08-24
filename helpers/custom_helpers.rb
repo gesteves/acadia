@@ -32,6 +32,18 @@ module CustomHelpers
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
+  def rdio_image_tag(album)
+    alt = album.name
+    src = image_path "rdio/#{album["key"]}_120.jpg"
+    srcset = []
+    sizes = [200, 180, 120, 60]
+    sizes.each do |size|
+      srcset << "#{image_path("rdio/#{album["key"]}_#{size}.jpg")} #{size}w"
+    end
+    sizes = "60px"
+    "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+  end
+
   def host_with_port
     [host, optional_port].compact.join(':')
   end
