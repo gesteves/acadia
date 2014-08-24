@@ -33,7 +33,7 @@ $b : '.b-list';
 #{$b}__image {
   display: table-cell;
   vertical-align: middle;
-  width: 60px;
+  width: 50px;
 }
 
 #{$b}__meta {
@@ -43,11 +43,5 @@ $b : '.b-list';
   vertical-align: middle;
   span, a {
     display: block;
-  }
-}
-
-#{$b}.untappd {
-  #{$b}__image {
-    width: 50px;
   }
 }

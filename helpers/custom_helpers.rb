@@ -34,13 +34,13 @@ module CustomHelpers
 
   def rdio_image_tag(album)
     alt = album.name
-    src = image_path "rdio/#{album["key"]}_120.jpg"
+    src = image_path "rdio/#{album["key"]}_100.jpg"
     srcset = []
-    sizes = [200, 180, 120, 60]
+    sizes = [200, 150, 100, 50]
     sizes.each do |size|
       srcset << "#{image_path("rdio/#{album["key"]}_#{size}.jpg")} #{size}w"
     end
-    sizes = "60px"
+    sizes = "50px"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
@@ -58,13 +58,13 @@ module CustomHelpers
 
   def goodreads_image_tag(book)
     alt = book.title
-    src = image_path "goodreads/#{book.id}_120.jpg"
+    src = image_path "goodreads/#{book.id}_100.jpg"
     srcset = []
-    sizes = [120, 60]
+    sizes = [150, 100, 50]
     sizes.each do |size|
       srcset << "#{image_path("goodreads/#{book.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "60px"
+    sizes = "50px"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
