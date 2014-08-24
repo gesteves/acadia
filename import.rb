@@ -2,6 +2,7 @@ require "oauth"
 require "httparty"
 require "nokogiri"
 require "RMagick"
+require "oauth"
 
 def get_config
   YAML.load_file("config.yml")
@@ -282,5 +283,35 @@ def get_untappd_data
     File.open("data/untappd.json","w"){ |f| f << beers.to_json }
   rescue => e
     puts e
+  end
+end
+
+def get_rdio_data
+  begin
+    config = get_config["rdio"]
+    user_id  = config["user_id"]
+    count    = config["count"]
+    key      = config["key"]
+    secret   = config["secret"]
+    params = { method: "getHeavyRotation", user: user_id, type: "albums", friends: false, count: count }
+    query_string = params.map{ |k,v| "#{URI::escape(k.to_s)}=#{URI::escape(v.to_s)}" }.join("&")
+    consumer = OAuth::Consumer.new(key, secret, { site: "http://api.rdio.com", scheme: "header" })
+    response = consumer.request(:post, "/1/", nil, {}, query_string, { "Content-Type" => "application/x-www-form-urlencoded" })
+    albums = JSON.parse(response.body)["result"]
+    save_rdio_images(albums) unless albums.nil?
+    File.open("data/rdio.json","w"){ |f| f << albums.to_json }
+  rescue => e
+    puts e
+  end
+end
+
+def save_rdio_images(albums)
+  albums.each do |a|
+    album = Magick::Image::from_blob(HTTParty.get(a["icon"]).body).first
+    sizes = [200, 150, 100, 50]
+    sizes.each do |size|
+      image = album.resize_to_fit(size)
+      image.write("source/images/rdio/#{a["key"]}_#{size}.jpg")
+    end
   end
 end

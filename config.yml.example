@@ -33,3 +33,8 @@ goodreads:
 untappd:
   checkins: "http://example.com"
   count: 5
+rdio:
+  key: 123
+  secret: 123
+  user_id: s342091
+  count: 5

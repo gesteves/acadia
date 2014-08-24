@@ -1,7 +1,7 @@
 require "rake/clean"
 require "./import"
 
-CLOBBER.include("data/*.json", "source/images/instagram/*", "source/images/photoblog/*", "source/images/goodreads/*", "source/images/untappd/*", "source/images/twitter/*")
+CLOBBER.include("data/*.json", "source/images/instagram/*", "source/images/photoblog/*", "source/images/goodreads/*", "source/images/untappd/*", "source/images/twitter/*", "source/images/rdio/*")
 
 namespace :import do
   directory "data"
@@ -10,8 +10,9 @@ namespace :import do
   directory "source/images/goodreads"
   directory "source/images/untappd"
   directory "source/images/twitter"
+  directory "source/images/rdio"
   
-  task :set_up_directories => ["data", "source/images/goodreads", "source/images/instagram", "source/images/photoblog", "source/images/untappd", "source/images/twitter"]
+  task :set_up_directories => ["data", "source/images/goodreads", "source/images/instagram", "source/images/photoblog", "source/images/untappd", "source/images/twitter", "source/images/rdio"]
 
   desc "Import latest tweets from a twitter account"
   task :twitter => [:set_up_directories] do
@@ -77,6 +78,14 @@ namespace :import do
     get_untappd_data
     puts "Completed in #{Time.now - start_time} seconds"
   end
+
+  desc "Import data from Rdio"
+  task :rdio => [:set_up_directories] do
+    puts "== Importing data from Rdio"
+    start_time = Time.now
+    get_rdio_data
+    puts "Completed in #{Time.now - start_time} seconds"
+  end
 end
 
 task :import => [ "clobber",
@@ -87,7 +96,8 @@ task :import => [ "clobber",
                   "import:github",
                   "import:lastfm",
                   "import:goodreads",
-                  "import:untappd" ]
+                  "import:untappd",
+                  "import:rdio" ]
 
 desc "Import data and build the website"
 task :build => ["import"] do

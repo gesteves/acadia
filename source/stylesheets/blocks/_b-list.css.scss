@@ -1,24 +1,26 @@
-$b : '.b-beers';
+$b : '.b-list';
 
 #{$b} {
   li { margin-bottom: 1rem; }
 }
 
 
-#{$b} #{$b}__brew {
+#{$b} #{$b}__item {
   display: table-row;
 
-  #{$b}__info {
+  #{$b}__eyebrow {
     color: $color-alt-text;
     font-size: 0.65rem;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
 
-  #{$b}__brewery {
+  #{$b}__author {
+    color: $color-alt-text;
     font-size: 0.85rem;
     font-style: italic;
-
+  }
+  a#{$b}__author {
     &:link, &:visited {
       color: $color-alt-text;
     }
