@@ -1,8 +1,10 @@
-set :css_dir, 'stylesheets'
+set :css_dir, "stylesheets"
+set :js_dir, "javascripts"
+set :images_dir, "images"
 
-set :js_dir, 'javascripts'
-
-set :images_dir, 'images'
+set :protocol, "http://"
+set :host, "0.0.0.0"
+set :port, 4567
 
 activate :gzip
 activate :s3_sync do |s3|
@@ -15,6 +17,9 @@ configure :build do
   activate :minify_javascript
   activate :asset_hash
   activate :relative_assets
+  set :protocol, "http://"
+  set :host, "www.gesteves.com"
+  set :port, 80
 end
 
 after_configuration do

@@ -31,4 +31,16 @@ module CustomHelpers
     sizes = "(min-width: 1470px) 94px, (min-width: 1120px) 121px, (min-width: 765px) 140px, (min-width: 400px) 192px, 77px"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
+
+  def host_with_port
+    [host, optional_port].compact.join(':')
+  end
+
+  def optional_port
+    port unless port.to_i == 80
+  end
+
+  def image_url(source)
+    protocol + host_with_port + image_path(source)
+  end
 end
