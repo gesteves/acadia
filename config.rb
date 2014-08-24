@@ -18,7 +18,7 @@ configure :build do
   activate :asset_hash
   activate :relative_assets
   set :protocol, "http://"
-  set :host, "www.gesteves.com"
+  set :host, "www.gesteves.com/"
   set :port, 80
 end
 
