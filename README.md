@@ -1,6 +1,6 @@
 # About
 
-_Acadia_ is a static Middleman-based website I’m using as my personal site at [gesteves.com](http://gesteves.com). It pulls data from several social networks and services I use and puts it in the `data/` folder to populate the site. It's hosted on an Amazon S3 bucket backed by Amazon CloudFront for extra speediness.
+_Acadia_ is a static Middleman-based website I’m using as my personal site at [gesteves.com](http://gesteves.com). It pulls data from several social networks and services I use and puts it in the `data/` folder to populate the site. A cron job running on a cheap [Digital Ocean](https://www.digitalocean.com/?refcode=1805b0874bd3) VPS periodically re-generates the site using [Middleman](http://middlemanapp.com/) and pushes it to an Amazon S3 bucket, where it gets served from Amazon CloudFront for extra speediness.
 
 ## Useful tasks
 
