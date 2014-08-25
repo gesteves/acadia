@@ -160,7 +160,7 @@ def save_photoblog_photos(data)
     original = Magick::Image::from_blob(HTTParty.get(url).body).first
     sizes = [1280, 1000, 950, 900, 850, 800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 200, 150, 100]
     sizes.each do |size|
-      image = original.resize_to_fit(size)
+      image = original.resize_to_fill(size, (size * original.rows)/original.columns)
       image.write("source/images/photoblog/#{post_id}_#{size}.jpg")
     end
   end
@@ -281,7 +281,7 @@ def save_beer_label(checkin)
   label = Magick::Image::from_blob(HTTParty.get(checkin["image"]).body).first
   sizes = [100, 50]
   sizes.each do |size|
-    image = label.resize_to_fit(size)
+    image = label.resize_to_fill(size, (size * label.rows)/label.columns)
     image.write("source/images/untappd/#{checkin["checkin"]}_#{size}.jpg")
   end
 end
@@ -310,7 +310,7 @@ def save_rdio_images(albums)
     album = Magick::Image::from_blob(HTTParty.get(a["icon"]).body).first
     sizes = [200, 150, 100, 50]
     sizes.each do |size|
-      image = album.resize_to_fit(size)
+      image = album.resize_to_fill(size, (size * album.rows)/album.columns)
       image.write("source/images/rdio/#{a["key"]}_#{size}.jpg")
     end
   end
