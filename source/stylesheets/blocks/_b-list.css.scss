@@ -34,6 +34,8 @@ $b : '.b-list';
   display: table-cell;
   vertical-align: middle;
   width: 50px;
+
+  img { width: 50px; }
 }
 
 #{$b}__meta {
