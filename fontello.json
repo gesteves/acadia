@@ -13,12 +13,6 @@
       "src": "fontawesome"
     },
     {
-      "uid": "dc3f1d5b1d006f7f7b3b6295eccab9da",
-      "css": "camera",
-      "code": 59408,
-      "src": "fontawesome"
-    },
-    {
       "uid": "0ddd3e8201ccc7d41f7b7c9d27eca6c1",
       "css": "link",
       "code": 59397,
@@ -107,6 +101,12 @@
       "css": "beer",
       "code": 59406,
       "src": "typicons"
+    },
+    {
+      "uid": "1n2jlgp5brxxzpvvrly6jbfutnk2fpra",
+      "css": "camera",
+      "code": 59409,
+      "src": "modernpics"
     }
   ]
 }
