@@ -1,11 +1,9 @@
 $b : '.b-header';
 
 #{$b} {
-  -webkit-column-span: all;
-     -moz-column-span: all;
-          column-span: all;
   margin: 1rem 0 0 0;
   text-align:center;
+  width: 100%;
   h1 {
     @include kerning;
     color: $color-header-text;

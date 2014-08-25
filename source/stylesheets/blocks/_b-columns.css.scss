@@ -1,4 +1,4 @@
-$b : '.b-container';
+$b : '.b-columns';
 
 #{$b} {
   @include columns($width: 18rem, $gap: 4rem);
