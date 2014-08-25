@@ -1,11 +1,9 @@
 $b : '.b-footer';
 
 #{$b} {
-  -webkit-column-span: all;
-     -moz-column-span: all;
-          column-span: all;
   margin: 0 0 1rem 0;
   text-align:center;
+  width: 100%;
 
   p {
     font-size: 0.85rem;
