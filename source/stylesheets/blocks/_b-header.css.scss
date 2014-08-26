@@ -35,11 +35,10 @@ $b : '.b-header';
   abbr[title="and"] {
     border-bottom:none;
     cursor: auto;
-    font-family: Baskerville, $calluna;
-    font-size:150%;
-    font-style:italic;
+    font-family: fontello;
+    font-size:125%;
     font-weight:normal;
-    margin:0 -3px 0 -6px;
+    margin:0 -4px 0 -3px;
     vertical-align:middle;
   }
   a:link, a:visited {
