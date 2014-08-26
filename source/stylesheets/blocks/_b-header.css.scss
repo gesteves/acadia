@@ -4,50 +4,37 @@ $b : '.b-header';
   margin: 1rem 0 0 0;
   text-align:center;
   width: 100%;
-  h1 {
-    @include kerning;
-    color: $color-header-text;
-    font-family: $proxima-nova;
-    font-weight: bold;
-    font-size: 1.75rem;
-    line-height: 1;
-    @media (min-width: $bp-small) {
-      font-size: 2rem;
-    }
-    @media (min-width: $bp-medium) {
-      font-size: 3rem;
-    }
+}
+
+#{$b}__link {
+  display: block;
+  height: 52px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  text-indent: -9999px;
+  width: 256px;
+
+  @media (min-width: $bp-small) {
+    height: 61px;
+    width: 300px;
   }
-  h2 {
-    @include kerning;
-    color: $color-header-text;
-    font-family: $proxima-nova;
-    font-weight: 100;
-    font-size: 1.5rem;
-    line-height: 1;
-    @media (min-width: $bp-small) {
-      font-size: 1.75rem;
-    }
-    @media (min-width: $bp-medium) {
-      font-size: 2rem;
+  @media (min-width: $bp-medium) {
+    height: 81px;
+    width: 400px;
+  }
+
+  &:hover, &:active {
+    #{$b}__logo-hed {
+      fill: $color-links;
     }
   }
-  abbr[title="and"] {
-    border-bottom:none;
-    cursor: auto;
-    font-family: Baskerville, $calluna;
-    font-size:150%;
-    font-style:italic;
-    font-weight:normal;
-    margin:0 -3px 0 -6px;
-    vertical-align:middle;
-  }
-  a:link, a:visited {
-    color: $color-header-text;
-    text-decoration: none;
-  }
-  a:hover, a:active {
-    color: $color-links;
-    text-decoration: none;
-  }
+}
+
+#{$b}__logo {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
