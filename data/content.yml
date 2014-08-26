@@ -1,6 +1,7 @@
 copy:
   hed: "Guillermo Esteves"
-  dek: "Web design <abbr title=\"and\">&amp;</abbr> stuff."
+  dek_1: "Web design"
+  dek_2: "stuff."
   intro: |
           <h3>Hello</h3>
           <p>My name is Guillermo Esteves. I specialize in building simple, usable, elegant websites using modern web standards and technologies.</p>
