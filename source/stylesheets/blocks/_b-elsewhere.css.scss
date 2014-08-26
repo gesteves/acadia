@@ -10,6 +10,7 @@ $b : '.b-elsewhere';
   line-height: 1.5;
   width: 50%;
   a {
+    display: block;
     &:before {
       content: '\e808';
       display: inline-block;
