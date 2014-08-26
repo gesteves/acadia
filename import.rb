@@ -253,7 +253,7 @@ def get_untappd_data
     config = get_config["untappd"]
     checkins_endpoint = config["checkins"]
     count             = config["count"]
-    checkins = JSON.parse(HTTParty.get(checkins_endpoint).body)["results"]["beers"].slice(0, count)
+    checkins = JSON.parse(HTTParty.get(checkins_endpoint).body)["results"]["beers"].uniq{ |c| c["name"]["href"] }.slice(0, count)
     checkins.each do |c|
       beer_html = Nokogiri::HTML(HTTParty.get(c["name"]["href"]).body)
       beer = {
@@ -264,12 +264,13 @@ def get_untappd_data
         url: c["name"]["href"],
         brewery: c["brewery"]["text"],
         brewery_url: c["brewery"]["href"],
+        image: beer_html.css(".basic a.label img").first["src"],
         type: beer_html.css("p.style").first.content.strip,
         abv: beer_html.css("p.abv").first.content.strip,
         ibu: beer_html.css("p.ibu").first.content.strip
       }
       beers << beer
-      save_beer_label(c)
+      save_beer_label(beer)
     end
     File.open("data/untappd.json","w"){ |f| f << beers.to_json }
   rescue => e
@@ -277,12 +278,12 @@ def get_untappd_data
   end
 end
 
-def save_beer_label(checkin)
-  label = Magick::Image::from_blob(HTTParty.get(checkin["image"]).body).first
+def save_beer_label(beer)
+  label = Magick::Image::from_blob(HTTParty.get(beer[:image]).body).first
   sizes = [100, 50]
   sizes.each do |size|
     image = label.resize_to_fill(size, (size * label.rows)/label.columns)
-    image.write("source/images/untappd/#{checkin["checkin"]}_#{size}.jpg")
+    image.write("source/images/untappd/#{beer["checkin"]}_#{size}.jpg")
   end
 end
 
