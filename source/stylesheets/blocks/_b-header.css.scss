@@ -50,19 +50,4 @@ $b : '.b-header';
     color: $color-links;
     text-decoration: none;
   }
-
-  .amp {
-    margin: 0 2px 0 -2px;
-    vertical-align: middle;
-    width: 30px;
-    height: 26px;
-    @media (min-width: $bp-small) {
-      height: 35px;
-      width: 40px;
-    }
-    @media (min-width: $bp-medium) {
-      height: 44px;
-      width: 50px;
-    }
-  }
 }
