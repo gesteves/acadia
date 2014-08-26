@@ -283,7 +283,7 @@ def save_beer_label(beer)
   sizes = [100, 50]
   sizes.each do |size|
     image = label.resize_to_fill(size, (size * label.rows)/label.columns)
-    image.write("source/images/untappd/#{beer["checkin"]}_#{size}.jpg")
+    image.write("source/images/untappd/#{beer[:checkin]}_#{size}.jpg")
   end
 end
 
