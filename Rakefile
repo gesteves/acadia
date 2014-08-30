@@ -90,18 +90,20 @@ task :import => [ "clobber",
                   "import:untappd",
                   "import:rdio" ]
 
-desc "Import content and publish the site"
-task :pub => [:import] do
-  puts "== Building the site"
-  system("middleman build")
-  puts "== Syncing with S3"
-  system("middleman s3_sync")
-end
+namespace :publish do
+  desc "Import content and publish the site"
+  task :full => [:import] do
+    puts "== Building the site"
+    system("middleman build")
+    puts "== Syncing with S3"
+    system("middleman s3_sync")
+  end
 
-desc "Just publish the site"
-task :repub do
-  puts "== Building the site"
-  system("middleman build")
-  puts "== Syncing with S3"
-  system("middleman s3_sync")
+  desc "Just publish the site"
+  task :simple do
+    puts "== Building the site"
+    system("middleman build")
+    puts "== Syncing with S3"
+    system("middleman s3_sync")
+  end
 end
