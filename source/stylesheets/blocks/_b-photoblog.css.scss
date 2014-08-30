@@ -5,20 +5,11 @@ $b : '.b-photoblog';
     width: 100%;
   }
 
-  .timestamp {
+  .meta {
     color: $color-alt-text;
     font-size: 0.85rem;
     font-style: italic;
     margin: 0;
     text-indent: 0;
-
-    a:link, a:visited {
-      color: $color-alt-text;
-      text-decoration: none;
-    }
-    a:hover, a:active {
-      color: $color-links;
-      text-decoration: none;
-    }
   }
 }

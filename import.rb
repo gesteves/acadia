@@ -143,7 +143,7 @@ def get_photoblog_photos
     consumer_key = config["consumer_key"]
     count        = config["photos_count"]
     response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&limit=#{count}")
-    data = JSON.parse(response.body)
+    data = JSON.parse(response.body)["response"]["posts"].map!{ |p| update_exif(p) }
     save_photoblog_photos(data) unless data.nil?
     File.open("data/photoblog.json","w"){ |f| f << data.to_json }
   rescue => e
@@ -152,7 +152,7 @@ def get_photoblog_photos
 end
 
 def save_photoblog_photos(data)
-  data["response"]["posts"].each do |post|
+  data.each do |post|
     post_id = post["id"]
     # Tumblr posts can have more than one photo (photosets),
     # but I'm only interested in showing the first one.
@@ -164,6 +164,19 @@ def save_photoblog_photos(data)
       image.write("source/images/photoblog/#{post_id}_#{size}.jpg")
     end
   end
+end
+
+def update_exif(post)
+  exif = {}
+  film_regex = /^film:name=/i
+  lens_regex = /^lens:model=/i
+  film = post["tags"].select{ |t| t =~ film_regex }.map{ |t| t.gsub(film_regex, "") }.first
+  lens = post["tags"].select{ |t| t =~ lens_regex }.map{ |t| t.gsub(lens_regex, "") }.first
+  exif[:camera] = post["photos"][0]["exif"]["Camera"] unless post["photos"][0]["exif"]["Camera"].nil?
+  exif[:film]   = film unless film.nil?
+  exif[:lens]   = lens unless lens.nil?
+  post[:exif] = exif
+  post
 end
 
 def get_tumblr_links

@@ -68,6 +68,14 @@ module CustomHelpers
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
+  def photo_exif(photo)
+    exif = []
+    exif << photo.exif.camera unless photo.exif.camera.nil?
+    exif << photo.exif.lens unless photo.exif.lens.nil?
+    exif << photo.exif.film unless photo.exif.lens.nil?
+    exif.join(" &middot ")
+  end
+
   def host_with_port
     [host, optional_port].compact.join(':')
   end

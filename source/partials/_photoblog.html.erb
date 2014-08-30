@@ -1,12 +1,12 @@
 <section class="b-card b-photoblog">
 <h3>Photoblog</h3>
-<% data.photoblog.response.posts.each do |photo| %>
+<% data.photoblog.each do |photo| %>
   <a href="<%= photo.post_url %>">
     <%= photoblog_image_tag(photo) %>
   </a>
   <% unless photo.caption.nil? %>
     <%= photo.caption %>
   <% end %>
-  <p class="timestamp"><a href="<%= photo.post_url %>">Published on <%= formatted_date_in_eastern(photo.date, "%d %B %Y") %></a></p>
+  <p class="meta"><%= photo_exif(photo) %></p>
 <% end %>
 </section>
