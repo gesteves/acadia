@@ -90,36 +90,18 @@ task :import => [ "clobber",
                   "import:untappd",
                   "import:rdio" ]
 
-desc "Import data and build the website"
-task :build => ["import"] do
-  puts "== Building website"
-  start_time = Time.now
-  status = system("middleman build --clean")
-  puts status ? "OK" : "FAILED"
-  puts "Completed in #{Time.now - start_time} seconds"
-end
- 
-desc "Run the preview server at http://localhost:4567"
-task :preview => [:import] do
-  puts "== Starting Middleman"
-  system("middleman server")
+desc "Import content and publish the site"
+task :pub => [:import] do
+  puts "== Building the site"
+  system("middleman build")
+  puts "== Syncing with S3"
+  system("middleman s3_sync")
 end
 
-
-namespace :publish do
-  desc "Import content and publish the site"
-  task :full => [:import] do
-    puts "== Building the site"
-    system("middleman build")
-    puts "== Syncing with S3"
-    system("middleman s3_sync")
-  end
-
-  desc "Just publish the site"
-  task :build_only do
-    puts "== Building the site"
-    system("middleman build")
-    puts "== Syncing with S3"
-    system("middleman s3_sync")
-  end
+desc "Just publish the site"
+task :repub do
+  puts "== Building the site"
+  system("middleman build")
+  puts "== Syncing with S3"
+  system("middleman s3_sync")
 end
