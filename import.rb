@@ -3,6 +3,7 @@ require "httparty"
 require "nokogiri"
 require "RMagick"
 require "oauth"
+require "sanitize"
 
 def get_config
   YAML.load_file("config.yml")
@@ -143,7 +144,7 @@ def get_photoblog_photos
     consumer_key = config["consumer_key"]
     count        = config["photos_count"]
     response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&limit=#{count}")
-    data = JSON.parse(response.body)["response"]["posts"].map!{ |p| update_exif(p) }
+    data = JSON.parse(response.body)["response"]["posts"].map!{ |p| update_exif(p) }.map!{ |p| strip_html(p) }
     save_photoblog_photos(data) unless data.nil?
     File.open("data/photoblog.json","w"){ |f| f << data.to_json }
   rescue => e
@@ -176,6 +177,11 @@ def update_exif(post)
   exif[:film]   = film unless film.nil?
   exif[:lens]   = lens unless lens.nil?
   post[:exif] = exif
+  post
+end
+
+def strip_html(post)
+  post[:plain_caption] = post["caption"].nil? ? "" : Sanitize.fragment(post["caption"]).strip
   post
 end
 

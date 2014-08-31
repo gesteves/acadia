@@ -15,4 +15,5 @@ gem "nokogiri"
 gem "compass"
 gem "tzinfo"
 gem "rmagick"
+gem "sanitize"
 gem "whenever", :require => false
