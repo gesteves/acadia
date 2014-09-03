@@ -19,7 +19,7 @@
       <li class="b-twitter__tweet">
         <p><%= t.expanded_text %></p>
         <p class="b-twitter__meta">
-          <span class="timestamp"><a href="https://twitter.com/statuses/<%= t.id_str %>"><%= formatted_date_in_eastern(t.created_at, "%d %B %Y %-l:%M %P") %></a></span>
+          <span class="timestamp"><a href="https://twitter.com/statuses/<%= t.id_str %>"><%= formatted_date_in_eastern(t.created_at, "%-d %B %Y %-l:%M %P") %></a></span>
           <span class="actions">
             <a href="https://twitter.com/intent/tweet?in_reply_to=<%= t.id_str %>" title="Reply">&#xe802;</a>
             <a href="https://twitter.com/intent/retweet?tweet_id=<%= t.id_str %>" title="Retweet">&#xe800;</a>
