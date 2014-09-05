@@ -2,6 +2,8 @@ $b : '.b-columns';
 
 #{$b} {
   @include columns($width: 18rem, $gap: 4rem);
-  max-width: 90rem;
   margin: 0 auto;
+  @media (min-width: 88rem) {
+    @include columns($count: 4, $gap: 4rem);
+  }
 }

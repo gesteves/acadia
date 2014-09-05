@@ -1,10 +1,25 @@
-@mixin columns($width, $gap) {
+@mixin columns($width: '', $count: '', $gap: 0) {
+  @if $width == '' {
+    -webkit-column-width: auto;
+       -moz-column-width: auto;
+            column-width: auto;
+  } @else {
+    -webkit-column-width: $width;
+       -moz-column-width: $width;
+            column-width: $width;
+  }
+  @if $count == '' {
+    -webkit-column-count: auto;
+       -moz-column-count: auto;
+            column-count: auto;
+  } @else {
+    -webkit-column-count: $count;
+       -moz-column-count: $count;
+            column-count: $count;
+  }
   -webkit-column-gap: $gap;
-  -webkit-column-width: $width;
      -moz-column-gap: $gap;
-     -moz-column-width: $width;
           column-gap: $gap;
-          column-width: $width;
 }
 
 @mixin kerning {
