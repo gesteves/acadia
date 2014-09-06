@@ -42,8 +42,11 @@ def get_twitter_user
     twitter_user = JSON.parse(response.body)
     File.open("data/twitter.json","w"){ |f| f << response.body }
     avatar = Magick::Image::from_blob(HTTParty.get(twitter_user["profile_image_url"].sub("_normal", "")).body).first
-    avatar = avatar.resize_to_fit(100)
-    avatar.write("source/images/twitter/#{twitter_user["screen_name"]}.jpg")
+    sizes = [200, 150, 100, 50]
+    sizes.each do |size|
+      image = avatar.resize_to_fill(size, (size * avatar.rows)/avatar.columns)
+      image.write("source/images/twitter/#{twitter_user["screen_name"]}_#{size}.jpg")
+    end
   rescue => e
     puts e
   end

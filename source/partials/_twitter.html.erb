@@ -3,7 +3,7 @@
 
   <div class="b-twitter__user">
     <a href="https://twitter.com/<%= data.twitter.screen_name %>" class="b-twitter__avatar">
-      <img src="<%= image_path "twitter/#{data.twitter.screen_name}.jpg" %>" alt="<%= data.twitter.name %>" />
+      <%= twitter_avatar_image_tag(data.twitter.screen_name, data.twitter.name) %>
     </a>
     <div class="b-twitter__username">
       <a href="https://twitter.com/<%= data.twitter.screen_name %>">

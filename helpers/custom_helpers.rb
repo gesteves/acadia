@@ -44,6 +44,17 @@ module CustomHelpers
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
+  def twitter_avatar_image_tag(username, name)
+    src = image_path "twitter/#{username}_100.jpg"
+    srcset = []
+    sizes = [200, 150, 100, 50]
+    sizes.each do |size|
+      srcset << "#{image_path("twitter/#{username}_#{size}.jpg")} #{size}w"
+    end
+    sizes = "50px"
+    "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{name}\" />"
+  end
+
   def untappd_image_tag(beer)
     alt = beer.name
     src = image_path "untappd/#{beer.checkin}_100.jpg"
