@@ -16,7 +16,7 @@ module CustomHelpers
     sizes.each do |size|
       srcset << "#{image_path("photoblog/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 1470px) 312px, (min-width: 1120px) 405px, (min-width: 765px) 465px, (min-width: 400px) 640px, 256px"
+    sizes = "(min-width: 1408px) calc(25vw - 5rem), (min-width: 1120px) calc(33.333vw - 5.333rem), (min-width: 768px) calc(50vw - 6rem), (min-width: 400px) calc(100vw - 8rem), calc(100vw - 4rem)"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
@@ -28,7 +28,7 @@ module CustomHelpers
     sizes.each do |size|
       srcset << "#{image_path("instagram/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 1470px) 94px, (min-width: 1120px) 121px, (min-width: 765px) 140px, (min-width: 400px) 192px, 77px"
+    sizes = "(min-width: 1408px) calc((25vw - 5rem) * 0.3), (min-width: 1120px) calc((33.333vw - 5.333rem) * 0.3), (min-width: 768px) calc((50vw - 6rem) * 0.3), (min-width: 400px) calc((100vw - 4rem) * 0.3), calc((100vw - 4rem) * 0.3)"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
