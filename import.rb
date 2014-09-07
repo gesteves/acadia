@@ -132,7 +132,7 @@ def save_instagram_photos(data)
   data.each do |photo|
     id = photo["id"]
     original = Magick::Image::from_blob(HTTParty.get(photo["images"]["standard_resolution"]["url"]).body).first
-    sizes = [640, 600, 550, 500, 450, 400, 350, 300, 250, 200, 150, 100, 50]
+    sizes = [640, 320, 240, 200, 160, 140, 120, 100, 80, 60]
     sizes.each do |size|
       image = original.resize_to_fit(size)
       image.write("source/images/instagram/#{id}_#{size}.jpg")
@@ -162,7 +162,7 @@ def save_photoblog_photos(data)
     # but I'm only interested in showing the first one.
     url = post["photos"][0]["original_size"]["url"]
     original = Magick::Image::from_blob(HTTParty.get(url).body).first
-    sizes = [1280, 1000, 950, 900, 850, 800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 200, 150, 100]
+    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 450, 400, 320]
     sizes.each do |size|
       image = original.resize_to_fill(size, (size * original.rows)/original.columns)
       image.write("source/images/photoblog/#{post_id}_#{size}.jpg")

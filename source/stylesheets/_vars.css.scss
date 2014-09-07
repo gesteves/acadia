@@ -5,6 +5,7 @@ $color-links           : #bf0222;
 $color-header-text     : #000;
 $color-alt-text        : #999;
 $color-very-light-gray : #ddd;
+$color-background      : #fdfdfd;
 
 // Heat colors
 $color-heat-10 : #ff2a00;
@@ -28,8 +29,10 @@ $border: 2px solid $color-heading;
 
 // Breakpoints
 
+$bp-xsmall: 320px;
 $bp-small: 400px;
 $bp-medium: 600px;
-$bp-two-columns: 765px;
-$bp-three-columns: 1120px;
-$bp-four-colums: 1470px;
+$bp-large: 1000px;
+$bp-xlarge: 1280px;
+$bp-max: 1920px;
+$bp-photoblog: 640px;

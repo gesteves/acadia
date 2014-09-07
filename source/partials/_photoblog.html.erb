@@ -1,7 +1,7 @@
 <section class="b-card b-photoblog">
 <h3>Photoblog</h3>
 <% data.photoblog.each do |photo| %>
-  <a href="<%= photo.post_url %>">
+  <a href="<%= photo.post_url %>" class="b-photoblog__photo">
     <%= photoblog_image_tag(photo) %>
   </a>
   <% unless photo.caption.nil? %>
