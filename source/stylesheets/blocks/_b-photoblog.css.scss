@@ -1,6 +1,8 @@
 $b : '.b-photoblog';
 
 #{$b} {
+  margin: 0;
+  text-align: center;
   img {
     width: 100%;
   }
@@ -11,5 +13,14 @@ $b : '.b-photoblog';
     font-style: italic;
     margin: 0;
     text-indent: 0;
+  }
+}
+
+#{$b}__photo {
+  display: block;
+  margin: 0 -2rem;
+
+  @media (min-width: $bp-photoblog) {
+    margin: 0;
   }
 }

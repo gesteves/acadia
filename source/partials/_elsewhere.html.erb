@@ -1,6 +1,6 @@
 <% unless data.content.links.empty? %>
   <section class="b-card b-elsewhere">
-    <h3>Elsewhere</h3>
+    <h3>Elsewhere on the web</h3>
     <ul>
       <% data.content.links.sort{ |a,b| a.name <=> b.name }.each do |link| %>
         <li class="b-elsewhere__link <%= link.name %>"><%= link_to link.title, link.url %></li>

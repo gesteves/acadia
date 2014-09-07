@@ -1,14 +1,38 @@
 <%= partial "partials/_header" %>
-<div class="b-columns">
-  <%= partial "partials/_intro" %>
-  <%= partial "partials/_twitter" %>
-  <%= partial "partials/_writing" %>
-  <%= partial "partials/_github" %>
-  <%= partial "partials/_photoblog" %>
-  <%= partial "partials/_instagram" %>
-  <%= partial "partials/_rdio" %>
-  <%= partial "partials/_goodreads" %>
-  <%= partial "partials/_untappd" %>
-  <%= partial "partials/_elsewhere" %>
-</div>
+
+  <section class="b-section">
+    <div class="b-section__container">
+      <%= partial "partials/_intro" %>
+    </div>
+  </section>
+
+  <section class="b-section">
+    <div class="b-section__container work">
+      <%= partial "partials/_twitter" %>
+      <%= partial "partials/_writing" %>
+      <%= partial "partials/_github" %>
+    </div>
+  </section>
+
+  <section class="b-section">
+    <div class="b-section__container photoblog">
+      <%= partial "partials/_photoblog" %>
+    </div>
+  </section>
+
+  <section class="b-section">
+    <div class="b-section__container social">
+      <%= partial "partials/_instagram" %>
+      <%= partial "partials/_rdio" %>
+      <%= partial "partials/_goodreads" %>
+      <%= partial "partials/_untappd" %>
+    </div>
+  </section>
+
+  <section class="b-section">
+    <div class="b-section__container">
+      <%= partial "partials/_elsewhere" %>
+    </div>
+  </section>
+
 <%= partial "partials/_footer" %>

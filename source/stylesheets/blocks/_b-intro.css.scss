@@ -1,5 +1,20 @@
 $b : '.b-intro';
 
 #{$b} {
-
+  margin: 0;
+  @media (min-width: $bp-medium) {
+    text-align:center;
+  }
+  p {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    @media (min-width: $bp-medium) {
+      font-size: 1.25rem;
+    }
+    @media (min-width: $bp-large) {
+      font-size: 1.5rem;
+    }
+  }
 }

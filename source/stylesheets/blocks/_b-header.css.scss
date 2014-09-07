@@ -1,9 +1,12 @@
 $b : '.b-header';
 
 #{$b} {
-  margin: 1rem 0 0 0;
+  margin: 2rem 0;
   text-align:center;
   width: 100%;
+  @media (min-width: $bp-large) {
+    margin: 4rem 0;
+  }
   h1 {
     @include kerning;
     color: $color-header-text;

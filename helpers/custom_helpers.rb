@@ -10,25 +10,25 @@ module CustomHelpers
 
   def photoblog_image_tag(photo)
     caption = photo.plain_caption || "Latest from my photoblog"
-    src = image_path "photoblog/#{photo.id}_600.jpg"
+    src = image_path "photoblog/#{photo.id}_1280.jpg"
     srcset = []
-    sizes = [1280, 1000, 950, 900, 850, 800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 200, 150, 100]
+    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 450, 400, 320]
     sizes.each do |size|
       srcset << "#{image_path("photoblog/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 1408px) calc(25vw - 5rem), (min-width: 1120px) calc(33.333vw - 5.333rem), (min-width: 768px) calc(50vw - 6rem), (min-width: 400px) calc(100vw - 8rem), calc(100vw - 4rem)"
+    sizes = "(min-width: 640px) 640px, 100vw"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
   def instagram_image_tag(photo)
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
-    src = image_path "instagram/#{photo.id}_300.jpg"
+    src = image_path "instagram/#{photo.id}_320.jpg"
     srcset = []
-    sizes = [640, 600, 550, 500, 450, 400, 350, 300, 250, 200, 150, 100, 50]
+    sizes = [640, 320, 240, 200, 160, 140, 120, 100, 80, 60]
     sizes.each do |size|
       srcset << "#{image_path("instagram/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 1408px) calc((25vw - 5rem) * 0.3), (min-width: 1120px) calc((33.333vw - 5.333rem) * 0.3), (min-width: 768px) calc((50vw - 6rem) * 0.3), (min-width: 400px) calc((100vw - 4rem) * 0.3), calc((100vw - 4rem) * 0.3)"
+    sizes = "(min-width: 1280px) calc((25vw - 6rem) * 0.3), (min-width: 1000px) calc((25vw - 5rem) * 0.3), (min-width: 600px) calc((50vw - 4rem) * 0.3), calc((100vw - 4rem) * 0.3)"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 

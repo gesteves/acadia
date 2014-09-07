@@ -5,9 +5,9 @@ $b : '.b-card';
   break-inside: avoid-column;
   page-break-inside: avoid-column;
   display: inline-block;
-  margin: 2rem 0;
+  margin: 0 0 4rem 0;
   width: 100%;
-
+  
   img {
     max-width: 100%;
   }
@@ -45,8 +45,8 @@ $b : '.b-card';
     line-height: 1.5;
     margin: 1rem 0 0 0;
   }
-  p + p {
-    margin: 0;
-    text-indent: 1rem;
+
+  strong {
+    font-weight: bold;
   }
 }
