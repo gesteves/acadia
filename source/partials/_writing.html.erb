@@ -1,10 +1,10 @@
 <% unless data.links.response.posts.empty? %>
   <section class="b-card b-writing">
-    <h3>Writing</h3>
+    <h1>Writing</h1>
     <ol>
       <% data.links.response.posts.each do |link| %>
         <li>
-          <h4 class="b-writing__headline"><%= link_to link.title, link.url %> <a href="<%= link.post_url %>" class="b-writing__permalink">&#xe805;</a></h4>
+          <h2 class="b-writing__headline"><%= link_to link.title, link.url %> <a href="<%= link.post_url %>" class="b-writing__permalink">&#xe805;</a></h2>
           <%= link.description %>
         </li>
       <% end %>

@@ -1,9 +1,9 @@
 <section class="b-card b-github">
-  <h3>Featured Repos</h3>
+  <h1>Featured Repos</h1>
   <ol>
     <% data.repos.each do |r| %>
       <li class="b-github__repo">
-          <h4 class="b-github__name"><a href="<%= r.html_url %>"><%= r.name %></a></h4>
+          <h2 class="b-github__name"><a href="<%= r.html_url %>"><%= r.name %></a></h2>
 
           <div class="b-github__meta">
             <span><%= r.language %></span>

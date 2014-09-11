@@ -21,7 +21,7 @@ $b : '.b-card';
     text-decoration: underline;
   }
 
-  h3 {
+  h1 {
     @include kerning;
     color: $color-heading;
     font-family: $proxima-nova;
@@ -32,7 +32,7 @@ $b : '.b-card';
     text-transform: uppercase;
   }
 
-  h4 {
+  h2 {
     @include kerning;
     font-family: $calluna;
     font-size: 1.25rem;
