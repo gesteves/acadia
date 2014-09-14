@@ -1,12 +1,12 @@
 <section class="b-card b-photoblog">
 <h1>Photoblog</h1>
-<% data.photoblog.each do |photo| %>
-  <a href="<%= photo.post_url %>" class="b-photoblog__photo">
-    <%= photoblog_image_tag(photo) %>
-  </a>
-  <% unless photo.caption.nil? %>
-    <%= photo.caption %>
-  <% end %>
-  <p class="meta"><%= photo_exif(photo) %></p>
+
+<a href="<%= data.photoblog.post_url %>" class="b-photoblog__photo">
+  <%= photoblog_image_tag(data.photoblog) %>
+</a>
+<% unless data.photoblog.caption.nil? %>
+  <%= data.photoblog.caption %>
 <% end %>
+<p class="meta"><%= photo_exif(data.photoblog) %></p>
+
 </section>

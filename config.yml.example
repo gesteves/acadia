@@ -16,6 +16,7 @@ tumblr:
   photos_count: 1
   links_count: 5
   link_tag: writing
+  photo_tag: featured
 github:
   access_token: abc123
   repos: 

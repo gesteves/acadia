@@ -145,28 +145,26 @@ def get_photoblog_photos
     config = get_config["tumblr"]
     url          = config["photoblog"]
     consumer_key = config["consumer_key"]
-    count        = config["photos_count"]
-    response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&limit=#{count}")
-    data = JSON.parse(response.body)["response"]["posts"].map!{ |p| update_exif(p) }.map!{ |p| strip_html(p) }
-    save_photoblog_photos(data) unless data.nil?
-    File.open("data/photoblog.json","w"){ |f| f << data.to_json }
+    tag          = config["photo_tag"]
+    response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&tag=#{tag}")
+    post = JSON.parse(response.body)["response"]["posts"].map!{ |p| update_exif(p) }.map!{ |p| strip_html(p) }.sample
+    save_photoblog_photos(post) unless post.nil?
+    File.open("data/photoblog.json","w"){ |f| f << post.to_json }
   rescue => e
     puts e
   end
 end
 
-def save_photoblog_photos(data)
-  data.each do |post|
-    post_id = post["id"]
-    # Tumblr posts can have more than one photo (photosets),
-    # but I'm only interested in showing the first one.
-    url = post["photos"][0]["original_size"]["url"]
-    original = Magick::Image::from_blob(HTTParty.get(url).body).first
-    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 450, 400, 320]
-    sizes.each do |size|
-      image = original.resize_to_fill(size, (size * original.rows)/original.columns)
-      image.write("source/images/photoblog/#{post_id}_#{size}.jpg")
-    end
+def save_photoblog_photos(post)
+  post_id = post["id"]
+  # Tumblr posts can have more than one photo (photosets),
+  # but I'm only interested in showing the first one.
+  url = post["photos"][0]["original_size"]["url"]
+  original = Magick::Image::from_blob(HTTParty.get(url).body).first
+  sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 450, 400, 320]
+  sizes.each do |size|
+    image = original.resize_to_fill(size, (size * original.rows)/original.columns)
+    image.write("source/images/photoblog/#{post_id}_#{size}.jpg")
   end
 end
 
