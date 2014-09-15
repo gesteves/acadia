@@ -269,41 +269,27 @@ end
 
 def get_untappd_data
   begin
-    beers = []
     config = get_config["untappd"]
-    checkins_endpoint = config["checkins"]
-    count             = config["count"]
-    checkins = JSON.parse(HTTParty.get(checkins_endpoint).body)["results"]["beers"].uniq{ |c| c["name"]["href"] }.slice(0, count)
-    checkins.each do |c|
-      beer_html = Nokogiri::HTML(HTTParty.get(c["name"]["href"]).body)
-      beer = {
-        checkin: c["checkin"],
-        checkin_url: c["date"]["href"],
-        date: c["date"]["data-gregtime"],
-        name: c["name"]["text"],
-        url: c["name"]["href"],
-        brewery: c["brewery"]["text"],
-        brewery_url: c["brewery"]["href"],
-        image: beer_html.css(".basic a.label img").first["src"],
-        type: beer_html.css("p.style").first.content.strip,
-        abv: beer_html.css("p.abv").first.content.strip,
-        ibu: beer_html.css("p.ibu").first.content.strip
-      }
-      beers << beer
-      save_beer_label(beer)
-    end
-    File.open("data/untappd.json","w"){ |f| f << beers.to_json }
+    count         = config["count"]
+    username      = config["username"]
+    client_id     = config["client_id"]
+    client_secret = config["client_secret"]
+    checkins = JSON.parse(HTTParty.get("http://api.untappd.com/v4/user/info/#{username}?client_id=#{client_id}&client_secret=#{client_secret}").body)["response"]["user"]["checkins"]["items"].uniq{ |b| b["beer"]["bid"] }.slice(0, count)
+    save_beer_labels(checkins)
+    File.open("data/untappd.json","w"){ |f| f << checkins.to_json }
   rescue => e
     puts e
   end
 end
 
-def save_beer_label(beer)
-  label = Magick::Image::from_blob(HTTParty.get(beer[:image]).body).first
-  sizes = [100, 50]
-  sizes.each do |size|
-    image = label.resize_to_fill(size, (size * label.rows)/label.columns)
-    image.write("source/images/untappd/#{beer[:checkin]}_#{size}.jpg")
+def save_beer_labels(checkins)
+  checkins.each do |c|
+    label = Magick::Image::from_blob(HTTParty.get(c["beer"]["beer_label"]).body).first
+    sizes = [100, 50]
+    sizes.each do |size|
+      image = label.resize_to_fill(size, (size * label.rows)/label.columns)
+      image.write("source/images/untappd/#{c["beer"]["bid"]}_#{size}.jpg")
+    end
   end
 end
 

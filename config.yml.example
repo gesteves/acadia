@@ -28,7 +28,9 @@ goodreads:
     - read
   count: 5
 untappd:
-  checkins: "http://example.com"
+  username: gesteves
+  client_id: abc123
+  client_secret: abc123
   count: 5
 rdio:
   key: 123
