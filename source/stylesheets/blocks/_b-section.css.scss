@@ -8,7 +8,7 @@ $b : '.b-section';
     margin: 4rem 0;
     padding: 4rem;
   }
-  @media (min-width: $bp-xlarge) {
+  @media (min-width: $bp-max) {
     padding: 4rem 8rem;
   }
 
