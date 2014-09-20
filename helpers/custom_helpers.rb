@@ -22,7 +22,7 @@ module CustomHelpers
 
   def instagram_image_tag(photo)
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
-    src = image_path "instagram/#{photo.id}_320.jpg"
+    src = image_path "instagram/#{photo.id}_640.jpg"
     srcset = []
     sizes = [640, 320, 240, 200, 160, 140, 120, 100, 80, 60]
     sizes.each do |size|
