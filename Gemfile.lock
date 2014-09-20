@@ -60,6 +60,7 @@ GEM
     hike (1.2.3)
     hooks (0.4.0)
       uber (~> 0.0.4)
+    htmlcompressor (0.1.2)
     http_parser.rb (0.6.0)
     httparty (0.13.1)
       json (~> 1.8)
@@ -102,6 +103,9 @@ GEM
       middleman-core (>= 3.0.2)
       multi_json (~> 1.0)
       rack-livereload
+    middleman-minify-html (3.4.0)
+      htmlcompressor (~> 0.1.0)
+      middleman-core (>= 3.2)
     middleman-s3_sync (3.0.31)
       colorize
       fog (>= 1.10.1)
@@ -187,6 +191,7 @@ DEPENDENCIES
   httparty
   middleman (~> 3.3.3)
   middleman-livereload (~> 3.1.0)
+  middleman-minify-html
   middleman-s3_sync
   nokogiri
   oauth
