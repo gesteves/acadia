@@ -17,6 +17,7 @@ meta:
   google_plus_url: "https://plus.google.com/114617182643828033131"
   google_analytics_id: "UA-250261-28"
   canonical_url: "http://www.gesteves.com"
+  pingdom_id: "542e9923abe53d5151ffc798"
 links:
   - name: github
     title: Github
