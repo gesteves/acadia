@@ -34,7 +34,7 @@ module CustomHelpers
 
   def rdio_image_tag(album)
     alt = album.name
-    src = image_path "rdio/#{album["key"]}_100.jpg"
+    src = image_path "rdio/#{album["key"]}_150.jpg"
     srcset = []
     sizes = [200, 150, 100, 50]
     sizes.each do |size|
@@ -45,7 +45,7 @@ module CustomHelpers
   end
 
   def twitter_avatar_image_tag(username, name)
-    src = image_path "twitter/#{username}_100.jpg"
+    src = image_path "twitter/#{username}_150.jpg"
     srcset = []
     sizes = [200, 150, 100, 50]
     sizes.each do |size|
@@ -69,7 +69,7 @@ module CustomHelpers
 
   def goodreads_image_tag(book)
     alt = book.title
-    src = image_path "goodreads/#{book.id}_100.jpg"
+    src = image_path "goodreads/#{book.id}_150.jpg"
     srcset = []
     sizes = [150, 100, 50]
     sizes.each do |size|
