@@ -13,16 +13,3 @@
 
 </script>
 <% end %>
-<% unless data.content.meta.pingdom_id.nil? %>
-<script>
-var _prum = [['id', '<%= data.content.meta.pingdom_id %>'],
-             ['mark', 'firstbyte', (new Date()).getTime()]];
-(function() {
-    var s = document.getElementsByTagName('script')[0]
-      , p = document.createElement('script');
-    p.async = 'async';
-    p.src = '//rum-static.pingdom.net/prum.min.js';
-    s.parentNode.insertBefore(p, s);
-})();
-</script>
-<% end %> 
