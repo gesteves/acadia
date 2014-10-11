@@ -10,45 +10,37 @@ def get_config
 end
 
 def get_tweets
-  begin
-    config = get_config["twitter"]
-    consumer_key        = config["consumer_key"]
-    consumer_secret     = config["consumer_secret"]
-    access_token        = config["access_token"]
-    access_token_secret = config["access_token_secret"]
-    user                = config["user"]
-    count               = config["count"]
-    consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
-    access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
-    response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false&trim_user=true&count=200")
-    tweets = JSON.parse(response.body).slice(0, count).map!{ |t| expand_tweet(t) }.to_json
-    File.open("data/tweets.json","w"){ |f| f << tweets }
-  rescue => e
-    puts e
-  end
+  config = get_config["twitter"]
+  consumer_key        = config["consumer_key"]
+  consumer_secret     = config["consumer_secret"]
+  access_token        = config["access_token"]
+  access_token_secret = config["access_token_secret"]
+  user                = config["user"]
+  count               = config["count"]
+  consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
+  access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
+  response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false&trim_user=true&count=200")
+  tweets = JSON.parse(response.body).slice(0, count).map!{ |t| expand_tweet(t) }.to_json
+  File.open("data/tweets.json","w"){ |f| f << tweets }
 end
 
 def get_twitter_user
-  begin
-    config = get_config["twitter"]
-    consumer_key        = config["consumer_key"]
-    consumer_secret     = config["consumer_secret"]
-    access_token        = config["access_token"]
-    access_token_secret = config["access_token_secret"]
-    user                = config["user"]
-    consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
-    access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
-    response = access_token.get("https://api.twitter.com/1.1/users/show.json?screen_name=#{user}")
-    twitter_user = JSON.parse(response.body)
-    File.open("data/twitter.json","w"){ |f| f << response.body }
-    avatar = Magick::Image::from_blob(HTTParty.get(twitter_user["profile_image_url"].sub("_normal", "")).body).first
-    sizes = [200, 150, 100, 50]
-    sizes.each do |size|
-      image = avatar.resize_to_fill(size, (size * avatar.rows)/avatar.columns)
-      image.write("source/images/twitter/#{twitter_user["screen_name"]}_#{size}.jpg")
-    end
-  rescue => e
-    puts e
+  config = get_config["twitter"]
+  consumer_key        = config["consumer_key"]
+  consumer_secret     = config["consumer_secret"]
+  access_token        = config["access_token"]
+  access_token_secret = config["access_token_secret"]
+  user                = config["user"]
+  consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
+  access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
+  response = access_token.get("https://api.twitter.com/1.1/users/show.json?screen_name=#{user}")
+  twitter_user = JSON.parse(response.body)
+  File.open("data/twitter.json","w"){ |f| f << response.body }
+  avatar = Magick::Image::from_blob(HTTParty.get(twitter_user["profile_image_url"].sub("_normal", "")).body).first
+  sizes = [200, 150, 100, 50]
+  sizes.each do |size|
+    image = avatar.resize_to_fill(size, (size * avatar.rows)/avatar.columns)
+    image.write("source/images/twitter/#{twitter_user["screen_name"]}_#{size}.jpg")
   end
 end
 
@@ -114,18 +106,14 @@ end
 
 
 def get_instagram_photos
-  begin
-    config = get_config["instagram"]
-    user_id      = config["user_id"]
-    consumer_key = config["consumer_key"]
-    count        = config["count"]
-    response = HTTParty.get("https://api.instagram.com/v1/users/#{user_id}/media/recent/?client_id=#{consumer_key}&count=#{count}")
-    photos = JSON.parse(response.body)["data"]
-    save_instagram_photos(photos) unless photos.nil?
-    File.open("data/instagram.json","w"){ |f| f << photos.to_json }
-  rescue => e
-    puts e
-  end
+  config = get_config["instagram"]
+  user_id      = config["user_id"]
+  consumer_key = config["consumer_key"]
+  count        = config["count"]
+  response = HTTParty.get("https://api.instagram.com/v1/users/#{user_id}/media/recent/?client_id=#{consumer_key}&count=#{count}")
+  photos = JSON.parse(response.body)["data"]
+  save_instagram_photos(photos) unless photos.nil?
+  File.open("data/instagram.json","w"){ |f| f << photos.to_json }
 end
 
 def save_instagram_photos(data)
@@ -141,18 +129,14 @@ def save_instagram_photos(data)
 end
 
 def get_photoblog_photos
-  begin
-    config = get_config["tumblr"]
-    url          = config["photoblog"]
-    consumer_key = config["consumer_key"]
-    tag          = config["photo_tag"]
-    response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&tag=#{tag}")
-    post = JSON.parse(response.body)["response"]["posts"].map!{ |p| update_exif(p) }.map!{ |p| strip_html(p) }.sample
-    save_photoblog_photos(post) unless post.nil?
-    File.open("data/photoblog.json","w"){ |f| f << post.to_json }
-  rescue => e
-    puts e
-  end
+  config = get_config["tumblr"]
+  url          = config["photoblog"]
+  consumer_key = config["consumer_key"]
+  tag          = config["photo_tag"]
+  response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&tag=#{tag}")
+  post = JSON.parse(response.body)["response"]["posts"].map!{ |p| update_exif(p) }.map!{ |p| strip_html(p) }.sample
+  save_photoblog_photos(post) unless post.nil?
+  File.open("data/photoblog.json","w"){ |f| f << post.to_json }
 end
 
 def save_photoblog_photos(post)
@@ -187,55 +171,43 @@ def strip_html(post)
 end
 
 def get_tumblr_links
-  begin
-    config = get_config["tumblr"]
-    url          = config["links"]
-    consumer_key = config["consumer_key"]
-    count        = config["links_count"]
-    tag          = config["link_tag"]
-    response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/link?api_key=#{consumer_key}&limit=#{count}&tag=#{tag}")
-    data = JSON.parse(response.body)
-    File.open("data/links.json","w"){ |f| f << data.to_json }
-  rescue => e
-    puts e
-  end
+  config = get_config["tumblr"]
+  url          = config["links"]
+  consumer_key = config["consumer_key"]
+  count        = config["links_count"]
+  tag          = config["link_tag"]
+  response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/link?api_key=#{consumer_key}&limit=#{count}&tag=#{tag}")
+  data = JSON.parse(response.body)
+  File.open("data/links.json","w"){ |f| f << data.to_json }
 end
 
 def get_github_repos
-  begin
-    config = get_config["github"]
-    access_token = config["access_token"]
-    repos = config["repos"]
-    repo_array = []
-    repos.each do |r|
-      owner = r.split('/').first
-      name = r.split('/').last
-      response = HTTParty.get("https://api.github.com/repos/#{owner}/#{name}?access_token=#{access_token}",
-                              headers: { "User-Agent" => "gesteves/farragut" })
-      repo_array << JSON.parse(response.body)
-    end
-    repo_array.sort!{ |a,b| a["name"] <=> b["name"] }
-    File.open("data/repos.json","w"){ |f| f << repo_array.to_json }
-  rescue => e
-    puts e
+  config = get_config["github"]
+  access_token = config["access_token"]
+  repos = config["repos"]
+  repo_array = []
+  repos.each do |r|
+    owner = r.split('/').first
+    name = r.split('/').last
+    response = HTTParty.get("https://api.github.com/repos/#{owner}/#{name}?access_token=#{access_token}",
+                            headers: { "User-Agent" => "gesteves/farragut" })
+    repo_array << JSON.parse(response.body)
   end
+  repo_array.sort!{ |a,b| a["name"] <=> b["name"] }
+  File.open("data/repos.json","w"){ |f| f << repo_array.to_json }
 end
 
 def get_goodreads_data
-  begin
-    config = get_config["goodreads"]
-    shelves = config["shelves"]
-    count   = config["count"]
-    books = []
-    shelves.each do |shelf|
-      books << import_goodreads_shelf(shelf)
-    end
-    books = books.flatten.slice(0, count)
-    save_book_covers(books)
-    File.open("data/goodreads.json","w"){ |f| f << books.to_json }
-  rescue => e
-    puts e
+  config = get_config["goodreads"]
+  shelves = config["shelves"]
+  count   = config["count"]
+  books = []
+  shelves.each do |shelf|
+    books << import_goodreads_shelf(shelf)
   end
+  books = books.flatten.slice(0, count)
+  save_book_covers(books)
+  File.open("data/goodreads.json","w"){ |f| f << books.to_json }
 end
 
 def save_book_covers(books)
@@ -268,18 +240,14 @@ def import_goodreads_shelf(shelf)
 end
 
 def get_untappd_data
-  begin
-    config = get_config["untappd"]
-    count         = config["count"]
-    username      = config["username"]
-    client_id     = config["client_id"]
-    client_secret = config["client_secret"]
-    checkins = JSON.parse(HTTParty.get("http://api.untappd.com/v4/user/info/#{username}?client_id=#{client_id}&client_secret=#{client_secret}").body)["response"]["user"]["checkins"]["items"].uniq{ |b| b["beer"]["bid"] }.slice(0, count)
-    save_beer_labels(checkins)
-    File.open("data/untappd.json","w"){ |f| f << checkins.to_json }
-  rescue => e
-    puts e
-  end
+  config = get_config["untappd"]
+  count         = config["count"]
+  username      = config["username"]
+  client_id     = config["client_id"]
+  client_secret = config["client_secret"]
+  checkins = JSON.parse(HTTParty.get("http://api.untappd.com/v4/user/info/#{username}?client_id=#{client_id}&client_secret=#{client_secret}").body)["response"]["user"]["checkins"]["items"].uniq{ |b| b["beer"]["bid"] }.slice(0, count)
+  save_beer_labels(checkins)
+  File.open("data/untappd.json","w"){ |f| f << checkins.to_json }
 end
 
 def save_beer_labels(checkins)
@@ -294,22 +262,18 @@ def save_beer_labels(checkins)
 end
 
 def get_rdio_data
-  begin
-    config = get_config["rdio"]
-    user_id  = config["user_id"]
-    count    = config["count"]
-    key      = config["key"]
-    secret   = config["secret"]
-    params = { method: "getHeavyRotation", user: user_id, type: "albums", friends: false, count: count }
-    query_string = params.map{ |k,v| "#{URI::escape(k.to_s)}=#{URI::escape(v.to_s)}" }.join("&")
-    consumer = OAuth::Consumer.new(key, secret, { site: "http://api.rdio.com", scheme: "header" })
-    response = consumer.request(:post, "/1/", nil, {}, query_string, { "Content-Type" => "application/x-www-form-urlencoded" })
-    albums = JSON.parse(response.body)["result"]
-    save_rdio_images(albums) unless albums.nil?
-    File.open("data/rdio.json","w"){ |f| f << albums.to_json }
-  rescue => e
-    puts e
-  end
+  config = get_config["rdio"]
+  user_id  = config["user_id"]
+  count    = config["count"]
+  key      = config["key"]
+  secret   = config["secret"]
+  params = { method: "getHeavyRotation", user: user_id, type: "albums", friends: false, count: count }
+  query_string = params.map{ |k,v| "#{URI::escape(k.to_s)}=#{URI::escape(v.to_s)}" }.join("&")
+  consumer = OAuth::Consumer.new(key, secret, { site: "http://api.rdio.com", scheme: "header" })
+  response = consumer.request(:post, "/1/", nil, {}, query_string, { "Content-Type" => "application/x-www-form-urlencoded" })
+  albums = JSON.parse(response.body)["result"]
+  save_rdio_images(albums) unless albums.nil?
+  File.open("data/rdio.json","w"){ |f| f << albums.to_json }
 end
 
 def save_rdio_images(albums)

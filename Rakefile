@@ -16,67 +16,99 @@ namespace :import do
 
   desc "Import latest tweets from a twitter account"
   task :twitter => [:set_up_directories] do
-    puts "== Importing tweets"
-    start_time = Time.now
-    get_tweets
-    get_twitter_user
-    puts "Completed in #{Time.now - start_time} seconds"
+    begin
+      puts "== Importing tweets"
+      start_time = Time.now
+      get_tweets
+      get_twitter_user
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import tweets: #{e}"
+    end
   end
 
   desc "Import latest photos from Instagram"
   task :instagram => [:set_up_directories] do
-    puts "== Importing Instagram photos"
-    start_time = Time.now
-    get_instagram_photos
-    puts "Completed in #{Time.now - start_time} seconds"
+    begin
+      puts "== Importing Instagram photos"
+      start_time = Time.now
+      get_instagram_photos
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import Instagram photos: #{e}"
+    end
   end
 
   desc "Import latest photoblog photos from Tumblr"
   task :photoblog => [:set_up_directories] do
-    puts "== Importing photoblog photos"
-    start_time = Time.now
-    get_photoblog_photos
-    puts "Completed in #{Time.now - start_time} seconds"
+    begin
+      puts "== Importing photoblog photos"
+      start_time = Time.now
+      get_photoblog_photos
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import photoblog photos: #{e}"
+    end
   end
 
   desc "Import latest links from Tumblr"
   task :links => [:set_up_directories] do
-    puts "== Importing links"
-    start_time = Time.now
-    get_tumblr_links
-    puts "Completed in #{Time.now - start_time} seconds"
+    begin
+      puts "== Importing links"
+      start_time = Time.now
+      get_tumblr_links
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import links: #{e}"
+    end
   end
 
   desc "Import featured repos from Github"
   task :github => [:set_up_directories] do
+    begin
     puts "== Importing Github repos"
-    start_time = Time.now
-    get_github_repos
-    puts "Completed in #{Time.now - start_time} seconds"
+      start_time = Time.now
+      get_github_repos
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import repos: #{e}"
+    end
   end
 
   desc "Import data from Goodreads"
   task :goodreads => [:set_up_directories] do
-    puts "== Importing data from Goodreads"
-    start_time = Time.now
-    get_goodreads_data
-    puts "Completed in #{Time.now - start_time} seconds"
+    begin
+      puts "== Importing data from Goodreads"
+      start_time = Time.now
+      get_goodreads_data
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import Goodreads data: #{e}"
+    end
   end
 
   desc "Import data from Untappd"
   task :untappd => [:set_up_directories] do
-    puts "== Importing data from Untappd"
-    start_time = Time.now
-    get_untappd_data
-    puts "Completed in #{Time.now - start_time} seconds"
+    begin
+      puts "== Importing data from Untappd"
+      start_time = Time.now
+      get_untappd_data
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import Untappd data: #{e}"
+    end
   end
 
   desc "Import data from Rdio"
   task :rdio => [:set_up_directories] do
-    puts "== Importing data from Rdio"
-    start_time = Time.now
-    get_rdio_data
-    puts "Completed in #{Time.now - start_time} seconds"
+    begin
+      puts "== Importing data from Rdio"
+      start_time = Time.now
+      get_rdio_data
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import Rdio data: #{e}"
+    end
   end
 end
 
