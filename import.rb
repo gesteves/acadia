@@ -245,7 +245,7 @@ def get_untappd_data
   username      = config["username"]
   client_id     = config["client_id"]
   client_secret = config["client_secret"]
-  checkins = JSON.parse(HTTParty.get("http://api.untappd.com/v4/user/info/#{username}?client_id=#{client_id}&client_secret=#{client_secret}").body)["response"]["user"]["checkins"]["items"].uniq{ |b| b["beer"]["bid"] }.slice(0, count)
+  checkins = JSON.parse(HTTParty.get("https://api.untappd.com/v4/user/info/#{username}?client_id=#{client_id}&client_secret=#{client_secret}").body)["response"]["user"]["checkins"]["items"].uniq{ |b| b["beer"]["bid"] }.slice(0, count)
   save_beer_labels(checkins)
   File.open("data/untappd.json","w"){ |f| f << checkins.to_json }
 end
