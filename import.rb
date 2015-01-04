@@ -129,14 +129,25 @@ def save_instagram_photos(data)
 end
 
 def get_photoblog_photos
+  posts = call_photoblog_api
+  post = posts.map!{ |p| update_exif(p) }.map!{ |p| strip_html(p) }.sample
+  save_photoblog_photos(post) unless post.nil?
+  File.open("data/photoblog.json","w"){ |f| f << post.to_json }
+end
+
+def call_photoblog_api(offset = 0, limit = 20)
+  posts = []
   config = get_config["tumblr"]
   url          = config["photoblog"]
   consumer_key = config["consumer_key"]
   tag          = config["photo_tag"]
-  response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&tag=#{tag}")
-  post = JSON.parse(response.body)["response"]["posts"].map!{ |p| update_exif(p) }.map!{ |p| strip_html(p) }.sample
-  save_photoblog_photos(post) unless post.nil?
-  File.open("data/photoblog.json","w"){ |f| f << post.to_json }
+  response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&tag=#{tag}&offset=#{offset}&limit=#{limit}")
+  body = JSON.parse(response.body)
+  posts << body["response"]["posts"]
+  if body["response"]["total_posts"] > offset + limit
+    posts << call_photoblog_api(offset + limit, limit)
+  end
+  posts.flatten
 end
 
 def save_photoblog_photos(post)
