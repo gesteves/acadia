@@ -83,7 +83,7 @@ module CustomHelpers
     exif = []
     exif << photo.exif.camera unless photo.exif.camera.nil?
     exif << photo.exif.lens unless photo.exif.lens.nil?
-    exif << photo.exif.film unless photo.exif.lens.nil?
+    exif << photo.exif.film unless photo.exif.film.nil?
     exif.join(" &middot ")
   end
 
