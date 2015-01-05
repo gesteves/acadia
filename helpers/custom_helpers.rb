@@ -16,7 +16,7 @@ module CustomHelpers
     sizes.each do |size|
       srcset << "#{image_path("photoblog/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 640px) 640px, 100vw"
+    sizes = "(min-width: 800px) 800px, 100vw"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
