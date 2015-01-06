@@ -5,6 +5,7 @@ $b : '.b-photoblog';
   text-align: center;
   img {
     width: 100%;
+    max-height: 100vh;
   }
 
   .meta {
