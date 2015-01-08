@@ -21,8 +21,8 @@ $l : '.l-section';
 }
 
 #{$l}__container {
-  max-width: $bp-max;
   margin: 0 auto;
+  max-width: $bp-max;
 }
 
 #{$l}.odd-columns {

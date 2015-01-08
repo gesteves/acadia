@@ -12,8 +12,8 @@ $avatar_size: 50px;
 #{$m}__avatar {
   display: block;
   float: left;
-  width: $avatar_size;
   height: $avatar_size;
+  width: $avatar_size;
 
   img {
     @include border-radius($avatar_size/2);
@@ -46,8 +46,8 @@ $avatar_size: 50px;
 #{$m}__follow {
   @include vertical-center($top: $avatar_size/2);
   display: none;
-  font-size: 0.85rem;
   float: right;
+  font-size: 0.85rem;
 
   a {
     @include border-radius(2px);

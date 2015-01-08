@@ -11,8 +11,8 @@ $m : '.m-header';
     @include kerning;
     color: $color-header-text;
     font-family: $proxima-nova;
-    font-weight: bold;
     font-size: 1.75rem;
+    font-weight: bold;
     line-height: 1;
     @media (min-width: $bp-s) {
       font-size: 2rem;
@@ -28,8 +28,8 @@ $m : '.m-header';
     @include kerning;
     color: $color-header-text;
     font-family: $proxima-nova;
-    font-weight: 100;
     font-size: 1.5rem;
+    font-weight: 100;
     line-height: 1;
     @media (min-width: $bp-s) {
       font-size: 1.75rem;
@@ -42,13 +42,13 @@ $m : '.m-header';
     }
   }
   abbr[title="and"] {
-    border-bottom:none;
+    border-bottom: none;
     cursor: auto;
     font-family: fontello;
-    font-size:125%;
-    font-weight:normal;
-    margin:0 -4px 0 -3px;
-    vertical-align:middle;
+    font-size: 125%;
+    font-weight: normal;
+    margin: 0 -4px 0 -3px;
+    vertical-align: middle;
   }
   a:link, a:visited {
     color: $color-header-text;
