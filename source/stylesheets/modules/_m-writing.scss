@@ -1,6 +1,6 @@
-$b : '.b-writing';
+$m : '.m-writing';
 
-#{$b} {
+#{$m} {
   li {
     margin: 0 0 1rem 0;
   }
@@ -14,7 +14,7 @@ $b : '.b-writing';
   }
 }
 
-#{$b} #{$b}__permalink {
+#{$m} #{$m}__permalink {
   font-family: fontello;
   font-size: 0.65rem;
 

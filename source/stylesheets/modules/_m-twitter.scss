@@ -1,15 +1,15 @@
-$b : '.b-twitter';
+$m : '.m-twitter';
 
 $avatar_size: 50px;
 
-#{$b}__user {
+#{$m}__user {
   @include clearfix;
   border-bottom: 1px solid $color-very-light-gray;
   padding-bottom: 1rem;
   width: 100%;
 }
 
-#{$b}__avatar {
+#{$m}__avatar {
   display: block;
   float: left;
   width: $avatar_size;
@@ -21,29 +21,29 @@ $avatar_size: 50px;
   }
 }
 
-#{$b}__username {
+#{$m}__username {
   @include vertical-center($top: $avatar_size/2);
   display: block;
   float: left;
   padding: 0 1rem;
 
-  #{$b}__screenname {
+  #{$m}__screenname {
     color: $color-alt-text;
     display: inline-block;
     font-size: 0.85rem;
   }
 }
 
-#{$b} #{$b}__username a {
+#{$m} #{$m}__username a {
   &:hover, &:active {
-    #{$b}__screenname {
+    #{$m}__screenname {
       color: $color-links;
       text-decoration: none;
    }
   }
 }
 
-#{$b}__follow {
+#{$m}__follow {
   @include vertical-center($top: $avatar_size/2);
   display: none;
   font-size: 0.85rem;
@@ -79,12 +79,12 @@ $avatar_size: 50px;
     margin-right: 0.25rem;
   }
 
-  @media (min-width: $bp-small) {
+  @media (min-width: $bp-s) {
     display: inline-block;
   }
 }
 
-#{$b} #{$b}__meta {
+#{$m} #{$m}__meta {
   @include clearfix;
   color: $color-alt-text;
   font-size: 0.85rem;
@@ -105,7 +105,7 @@ $avatar_size: 50px;
     float: left;
     font-style: italic;
     width: 100%;
-    @media (min-width: $bp-small) {
+    @media (min-width: $bp-s) {
       width: 50%;
     }
   }
@@ -127,8 +127,8 @@ $avatar_size: 50px;
   }
 }
 
-#{$b}__tweet:hover #{$b}__meta .actions {
-  @media (min-width: $bp-small) {
+#{$m}__tweet:hover #{$m}__meta .actions {
+  @media (min-width: $bp-s) {
     display: inline-block;
   }
 }

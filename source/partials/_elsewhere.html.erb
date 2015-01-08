@@ -1,9 +1,9 @@
 <% unless data.content.links.empty? %>
-  <section class="b-card b-elsewhere">
+  <section class="m-card m-elsewhere">
     <h1>Elsewhere on the web</h1>
     <ul>
       <% data.content.links.sort{ |a,b| a.name <=> b.name }.each do |link| %>
-        <li class="b-elsewhere__link <%= link.name %>"><%= link_to link.title, link.url %></li>
+        <li class="m-elsewhere__link <%= link.name %>"><%= link_to link.title, link.url %></li>
       <% end %>
     </ul>
   </section>

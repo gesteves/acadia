@@ -1,6 +1,6 @@
-$b : '.b-card';
+$m : '.m-card';
 
-#{$b} {
+#{$m} {
   -webkit-column-break-inside: avoid-column;
   break-inside: avoid-column;
   page-break-inside: avoid-column;

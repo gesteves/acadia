@@ -1,17 +1,17 @@
-$b : '.b-github';
+$m : '.m-github';
 
-#{$b}__repo {
+#{$m}__repo {
   @include clearfix;
   margin: 1rem 0 0 0;
   position: relative;
 }
 
-#{$b}__name {
+#{$m}__name {
   display: block;
   float: left;
 }
 
-#{$b}__meta {
+#{$m}__meta {
   color: $color-alt-text;
   display: block;
   float: right;
@@ -48,7 +48,7 @@ $b : '.b-github';
 
 }
 
-#{$b} #{$b}__description {
+#{$m} #{$m}__description {
   clear: both;
   font-size: 0.85rem;
   margin: 0 0 0 1rem;

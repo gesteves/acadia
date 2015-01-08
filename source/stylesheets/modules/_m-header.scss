@@ -1,10 +1,10 @@
-$b : '.b-header';
+$m : '.m-header';
 
-#{$b} {
+#{$m} {
   margin: 2rem 0;
   text-align:center;
   width: 100%;
-  @media (min-width: $bp-large) {
+  @media (min-width: $bp-xl) {
     margin: 4rem 0;
   }
   h1 {
@@ -14,13 +14,13 @@ $b : '.b-header';
     font-weight: bold;
     font-size: 1.75rem;
     line-height: 1;
-    @media (min-width: $bp-small) {
+    @media (min-width: $bp-s) {
       font-size: 2rem;
     }
-    @media (min-width: $bp-medium) {
+    @media (min-width: $bp-m) {
       font-size: 3rem;
     }
-    @media (min-width: $bp-large) {
+    @media (min-width: $bp-xl) {
       font-size: 3.5rem;
     }
   }
@@ -31,13 +31,13 @@ $b : '.b-header';
     font-weight: 100;
     font-size: 1.5rem;
     line-height: 1;
-    @media (min-width: $bp-small) {
+    @media (min-width: $bp-s) {
       font-size: 1.75rem;
     }
-    @media (min-width: $bp-medium) {
+    @media (min-width: $bp-m) {
       font-size: 2rem;
     }
-    @media (min-width: $bp-large) {
+    @media (min-width: $bp-xl) {
       font-size: 2.5rem;
     }
   }

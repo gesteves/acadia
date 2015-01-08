@@ -1,8 +1,8 @@
-<section class="b-card b-instagram">
+<section class="m-card m-instagram">
   <h1>Instagram</h1>
-  <ol class="b-instagram__photo-list">
+  <ol class="m-instagram__photo-list">
     <% data.instagram.each do |photo| %>
-      <li class="b-instagram__photo-item">
+      <li class="m-instagram__photo-item">
         <a href="<%= photo.link %>">
           <%= instagram_image_tag(photo) %>
         </a>

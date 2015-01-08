@@ -1,8 +1,8 @@
-$b : '.b-intro';
+$m : '.m-intro';
 
-#{$b} {
+#{$m} {
   margin: 0;
-  @media (min-width: $bp-medium) {
+  @media (min-width: $bp-m) {
     text-align:center;
   }
   p {
@@ -10,10 +10,10 @@ $b : '.b-intro';
     font-size: 1rem;
     line-height: 1.5;
     margin: 0;
-    @media (min-width: $bp-medium) {
+    @media (min-width: $bp-m) {
       font-size: 1.25rem;
     }
-    @media (min-width: $bp-large) {
+    @media (min-width: $bp-xl) {
       font-size: 1.5rem;
     }
   }

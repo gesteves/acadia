@@ -1,12 +1,20 @@
-$b : '.b-footer';
+$m : '.m-error';
 
-#{$b} {
-  margin: 0 0 2rem 0;
+#{$m} {
+  margin: 6rem 0;
   text-align:center;
   width: 100%;
 
+  h3 {
+    @include kerning;
+    font-family: $proxima-nova;
+    font-weight: 100;
+    font-size: 10rem;
+    line-height: 1;
+  }
+
   p {
-    font-size: 0.85rem;
+    font-size: 1.5rem;
   }
 
   a:link, a:visited {

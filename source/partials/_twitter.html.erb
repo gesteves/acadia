@@ -1,24 +1,24 @@
-<section class="b-card b-twitter">
+<section class="m-card m-twitter">
   <h1>Tweets</h1>
 
-  <div class="b-twitter__user">
-    <a href="https://twitter.com/<%= data.twitter.screen_name %>" class="b-twitter__avatar">
+  <div class="m-twitter__user">
+    <a href="https://twitter.com/<%= data.twitter.screen_name %>" class="m-twitter__avatar">
       <%= twitter_avatar_image_tag(data.twitter.screen_name, data.twitter.name) %>
     </a>
-    <div class="b-twitter__username">
+    <div class="m-twitter__username">
       <a href="https://twitter.com/<%= data.twitter.screen_name %>">
-        <%= data.twitter.name %><br/><span class="b-twitter__screenname">@<%= data.twitter.screen_name %></span>
+        <%= data.twitter.name %><br/><span class="m-twitter__screenname">@<%= data.twitter.screen_name %></span>
       </a>
     </div>
-    <div class="b-twitter__follow">
+    <div class="m-twitter__follow">
       <a href="https://twitter.com/intent/user?screen_name=<%= data.twitter.screen_name %>">Follow</a>
     </div>
   </div>
   <ol>
     <% data.tweets.each do |t| %>
-      <li class="b-twitter__tweet">
+      <li class="m-twitter__tweet">
         <p><%= t.expanded_text %></p>
-        <p class="b-twitter__meta">
+        <p class="m-twitter__meta">
           <span class="timestamp"><a href="https://twitter.com/statuses/<%= t.id_str %>"><%= formatted_date_in_eastern(t.created_at, "%-d %B %Y %-l:%M %P") %></a></span>
           <span class="actions">
             <a href="https://twitter.com/intent/tweet?in_reply_to=<%= t.id_str %>" title="Reply">&#xe802;</a>

@@ -1,6 +1,6 @@
-$b : '.b-photoblog';
+$m : '.m-photoblog';
 
-#{$b} {
+#{$m} {
   margin: 0;
   text-align: center;
   img {
@@ -17,11 +17,11 @@ $b : '.b-photoblog';
   }
 }
 
-#{$b}__photo {
+#{$m}__photo {
   display: block;
   margin: 0 -2rem;
 
-  @media (min-width: $bp-photoblog) {
+  @media (min-width: $bp-l) {
     margin: 0;
   }
 }

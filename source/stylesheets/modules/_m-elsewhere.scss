@@ -1,19 +1,19 @@
-$b : '.b-elsewhere';
+$m : '.m-elsewhere';
 
-#{$b} {
+#{$m} {
   @include clearfix;
   margin: 0;
-  @media (min-width: $bp-medium) {
+  @media (min-width: $bp-m) {
     text-align: center;
   }
 }
 
-#{$b}__link {
+#{$m}__link {
   display: inline-block;
   float: left;
   line-height: 1.5;
   width: 50%;
-  @media (min-width: $bp-medium) {
+  @media (min-width: $bp-m) {
     float: none;
     margin-right: 2rem;
     width: auto;

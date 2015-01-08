@@ -1,18 +1,18 @@
-<section class="b-card b-github">
+<section class="m-card m-github">
   <h1>Featured Repos</h1>
   <ol>
     <% data.repos.each do |r| %>
-      <li class="b-github__repo">
-          <h2 class="b-github__name"><a href="<%= r.html_url %>"><%= r.name %></a></h2>
+      <li class="m-github__repo">
+          <h2 class="m-github__name"><a href="<%= r.html_url %>"><%= r.name %></a></h2>
 
-          <div class="b-github__meta">
+          <div class="m-github__meta">
             <span><%= r.language %></span>
             <a href="<%= r.html_url %>/stargazers" class="icon-star"><%= r.stargazers_count %></a>
             <a href="<%= r.html_url %>/network" class="icon-fork"><%= r.forks %></a>
           </div>
 
         <% unless r.description == "" %>
-          <p class="b-github__description"><%= r.description %></p>
+          <p class="m-github__description"><%= r.description %></p>
         <% end %>
       </li>
     <% end %>

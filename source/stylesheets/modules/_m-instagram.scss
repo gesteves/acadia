@@ -1,11 +1,11 @@
-$b : '.b-instagram';
+$m : '.m-instagram';
 
-#{$b}__photo-list {
+#{$m}__photo-list {
   @include clearfix;
   width: 100%;
 }
 
-#{$b}__photo-item {
+#{$m}__photo-item {
   display: block;
   float: left;
   font-size: 0;
@@ -32,6 +32,6 @@ $b : '.b-instagram';
   }
 }
 
-#{$b}__photo {
+#{$m}__photo {
   width: 100%;
 }

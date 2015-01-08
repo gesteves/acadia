@@ -1,19 +1,19 @@
 <% unless data.goodreads.empty? %>
-  <section class="b-card b-list">
+  <section class="m-card m-list">
     <h1>Reading</h1>
     <ul>
       <% data.goodreads.each do |book| %>
         <li>
-          <div class="b-list__item">
-            <a href="<%= book.url %>" class="b-list__image">
+          <div class="m-list__item">
+            <a href="<%= book.url %>" class="m-list__image">
               <%= goodreads_image_tag(book) %>
             </a>
-            <div class="b-list__meta">
-              <span class="b-list__eyebrow">
+            <div class="m-list__meta">
+              <span class="m-list__eyebrow">
                 <%= book.shelf.gsub("-", " ") %>
               </span>
-              <a href="<%= book.url %>" class="b-list__title"><%= book.title %></a>
-              <span class="b-list__author"><%= book.author %></span>
+              <a href="<%= book.url %>" class="m-list__title"><%= book.title %></a>
+              <span class="m-list__author"><%= book.author %></span>
             </div>
           </div>
         </li>
