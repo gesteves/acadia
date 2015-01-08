@@ -1,25 +1,15 @@
 @mixin columns($width: '', $count: '', $gap: 0) {
   @if $width == '' {
-    -webkit-column-width: auto;
-       -moz-column-width: auto;
-            column-width: auto;
+    column-width: auto;
   } @else {
-    -webkit-column-width: $width;
-       -moz-column-width: $width;
-            column-width: $width;
+    column-width: $width;
   }
   @if $count == '' {
-    -webkit-column-count: auto;
-       -moz-column-count: auto;
-            column-count: auto;
+    column-count: auto;
   } @else {
-    -webkit-column-count: $count;
-       -moz-column-count: $count;
-            column-count: $count;
+    column-count: $count;
   }
-  -webkit-column-gap: $gap;
-     -moz-column-gap: $gap;
-          column-gap: $gap;
+  column-gap: $gap;
 }
 
 @mixin kerning {
@@ -32,7 +22,18 @@
 }
 
 @mixin vertical-center($top: 50%) {
-  @include translateY(-50%);
   position: relative;
   top: $top;
+  transform: translateY(-50%);
+}
+
+/// Helper to clear inner floats
+/// @author Nicolas Gallagher
+/// @link http://nicolasgallagher.com/micro-clearfix-hack/ Micro Clearfix
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
 }

@@ -16,7 +16,7 @@ $avatar_size: 50px;
   width: $avatar_size;
 
   img {
-    @include border-radius($avatar_size/2);
+    border-radius: $avatar_size/2;
     max-width: 100%;
   }
 }
@@ -50,8 +50,8 @@ $avatar_size: 50px;
   font-size: 0.85rem;
 
   a {
-    @include border-radius(2px);
     border: 1px solid;
+    border-radius: 2px;
     padding: 0.25rem 0.5rem;
   }
 

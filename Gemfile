@@ -5,6 +5,7 @@ source 'http://rubygems.org'
 gem "middleman", "~>3.3.3"
 gem "middleman-s3_sync"
 gem "middleman-minify-html"
+gem "middleman-autoprefixer"
 
 # Live-reloading plugin
 gem "middleman-livereload", "~> 3.1.0"
@@ -13,7 +14,6 @@ gem "oauth"
 gem "httparty"
 gem "rake"
 gem "nokogiri"
-gem "compass"
 gem "tzinfo"
 gem "rmagick"
 gem "sanitize"

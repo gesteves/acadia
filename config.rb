@@ -7,6 +7,7 @@ set :host, "0.0.0.0"
 set :port, 4567
 
 activate :gzip
+activate :autoprefixer
 activate :s3_sync do |s3|
   s3.prefer_gzip = true
 end

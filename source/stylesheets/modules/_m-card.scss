@@ -3,9 +3,9 @@ $m : '.m-card';
 #{$m} {
   -webkit-column-break-inside: avoid-column;
   break-inside: avoid-column;
-  page-break-inside: avoid-column;
   display: inline-block;
   margin: 0 0 4rem 0;
+  page-break-inside: avoid-column;
   width: 100%;
   
   img {
