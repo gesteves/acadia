@@ -1,22 +1,20 @@
 $m : '.m-github';
 
 #{$m}__repo {
-  @include clearfix;
+  display: flex;
+  flex-flow: row wrap;
   margin: 1rem 0 0 0;
   position: relative;
 }
 
 #{$m}__name {
   display: block;
-  float: left;
+  flex-grow: 1;
 }
 
 #{$m}__meta {
   color: $color-alt-text;
   display: block;
-  float: right;
-  position: absolute;
-  right: 0;
 
   a {
     font-size: 0.85rem;
@@ -43,7 +41,7 @@ $m : '.m-github';
 }
 
 #{$m} #{$m}__description {
-  clear: both;
+  flex: 0 0 100%;
   font-size: 0.85rem;
   margin: 0 0 0 1rem;
 }

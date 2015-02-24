@@ -1,25 +1,28 @@
 $m : '.m-elsewhere';
 
 #{$m} {
-  @include clearfix;
   margin: 0;
   @media (min-width: $bp-m) {
     text-align: center;
   }
 }
 
-#{$m}__link {
-  display: inline-block;
-  float: left;
-  line-height: 1.5;
-  width: 50%;
+#{$m}__list {
+  display: flex;
+  flex-flow: row wrap;
   @media (min-width: $bp-m) {
-    float: none;
-    margin-right: 2rem;
-    width: auto;
-    &:last-child {
-      margin: 0;
-    }
+    justify-content: center;
+  }
+}
+
+#{$m}__link {
+  flex: 0 0 50%;
+  line-height: 1.5;
+  text-align: left;
+  @media (min-width: $bp-m) {
+    flex: 0 0 auto;
+    margin: 0 1rem;
+    text-align: center;
   }
   a {
     display: block;

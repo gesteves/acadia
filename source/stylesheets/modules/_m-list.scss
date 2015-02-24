@@ -6,8 +6,8 @@ $m : '.m-list';
 
 
 #{$m} #{$m}__item {
-  display: table-row;
-
+  align-items: center;
+  display: flex;
   #{$m}__eyebrow {
     color: $color-alt-text;
     font-size: 0.65rem;
@@ -31,18 +31,18 @@ $m : '.m-list';
 }
 
 #{$m}__image {
-  display: table-cell;
-  vertical-align: middle;
+  align-items: center;
+  display: flex;
   width: 50px;
 
   img { width: 50px; }
 }
 
 #{$m}__meta {
-  display: table-cell;
+  display: flex;
+  flex-direction: column;
   line-height: 1.25;
   padding-left: 1rem;
-  vertical-align: middle;
   span, a {
     display: block;
   }
