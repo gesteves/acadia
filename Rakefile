@@ -125,6 +125,8 @@ task :import => [ "clobber",
 namespace :publish do
   desc "Import content and publish the site"
   task :full => [:import] do
+    puts "== Pulling the latest code from Github"
+    system("git pull origin master")
     puts "== Building the site"
     system("middleman build")
     puts "== Syncing with S3"
@@ -133,6 +135,8 @@ namespace :publish do
 
   desc "Just publish the site"
   task :simple do
+    puts "== Pulling the latest code from Github"
+    system("git pull origin master")
     puts "== Building the site"
     system("middleman build")
     puts "== Syncing with S3"
