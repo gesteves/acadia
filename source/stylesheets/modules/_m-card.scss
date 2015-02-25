@@ -46,6 +46,16 @@ $m : '.m-card';
     margin: 1rem 0 0 0;
   }
 
+  code {
+    background-color: $color-background;
+    border: 1px solid $color-very-light-gray;
+    border-radius: 2px;
+    color: $color-text;
+    font-family: monospace;
+    font-size: 0.9rem;
+    padding: 2px 4px;
+  }
+
   strong {
     font-weight: bold;
   }
