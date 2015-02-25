@@ -48,3 +48,11 @@ links:
   - name: dribbble
     title: Dribbble
     url: https://dribbble.com/gesteves
+repos:
+  - gesteves/snarkov
+  - gesteves/acadia
+  - gesteves/present-tense
+  - gesteves/csstarwars
+  - gesteves/caniuse-slack
+  - voxmedia/verge-50
+  - voxmedia/yobot

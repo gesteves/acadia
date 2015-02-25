@@ -188,7 +188,7 @@ end
 
 def get_github_repos
   access_token = ENV["GITHUB_ACCESS_TOKEN"]
-  repos = YAML.load_file("repos.yml")["repos"]
+  repos = YAML.load_file("data/content.yml")["repos"]
   repo_array = []
   repos.each do |r|
     owner = r.split('/').first
