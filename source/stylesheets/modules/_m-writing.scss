@@ -13,17 +13,3 @@ $m : '.m-writing';
     line-height: 1.5;
   }
 }
-
-#{$m} #{$m}__permalink {
-  font-family: fontello;
-  font-size: 0.65rem;
-
-  &:link, &:visited {
-    color: $color-very-light-gray;
-    text-decoration: none;
-  }
-  &:hover, &:active {
-    color: $color-links;
-    text-decoration: none;
-  }
-}
