@@ -1,1 +1,0 @@
-middleman: bundle exec rake publish
