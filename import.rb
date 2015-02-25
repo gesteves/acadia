@@ -4,19 +4,17 @@ require "nokogiri"
 require "RMagick"
 require "oauth"
 require "sanitize"
+require "dotenv"
 
-def get_config
-  YAML.load_file("config.yml")
-end
+Dotenv.load
 
 def get_tweets
-  config = get_config["twitter"]
-  consumer_key        = config["consumer_key"]
-  consumer_secret     = config["consumer_secret"]
-  access_token        = config["access_token"]
-  access_token_secret = config["access_token_secret"]
-  user                = config["user"]
-  count               = config["count"]
+  consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
+  consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
+  access_token        = ENV["TWITTER_ACCESS_TOKEN"]
+  access_token_secret = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
+  user                = ENV["TWITTER_USER"]
+  count               = ENV["TWITTER_COUNT"].to_i
   consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
   access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
   response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false&trim_user=true&count=200")
@@ -25,12 +23,11 @@ def get_tweets
 end
 
 def get_twitter_user
-  config = get_config["twitter"]
-  consumer_key        = config["consumer_key"]
-  consumer_secret     = config["consumer_secret"]
-  access_token        = config["access_token"]
-  access_token_secret = config["access_token_secret"]
-  user                = config["user"]
+  consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
+  consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
+  access_token        = ENV["TWITTER_ACCESS_TOKEN"]
+  access_token_secret = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
+  user                = ENV["TWITTER_USER"]
   consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
   access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
   response = access_token.get("https://api.twitter.com/1.1/users/show.json?screen_name=#{user}")
@@ -106,10 +103,9 @@ end
 
 
 def get_instagram_photos
-  config = get_config["instagram"]
-  user_id      = config["user_id"]
-  consumer_key = config["consumer_key"]
-  count        = config["count"]
+  user_id      = ENV["INSTAGRAM_USER_ID"]
+  consumer_key = ENV["INSTAGRAM_CONSUMER_KEY"]
+  count        = ENV["INSTAGRAM_COUNT"].to_i
   response = HTTParty.get("https://api.instagram.com/v1/users/#{user_id}/media/recent/?client_id=#{consumer_key}&count=#{count}")
   photos = JSON.parse(response.body)["data"]
   save_instagram_photos(photos) unless photos.nil?
@@ -137,10 +133,9 @@ end
 
 def call_photoblog_api(offset = 0, limit = 20)
   posts = []
-  config = get_config["tumblr"]
-  url          = config["photoblog"]
-  consumer_key = config["consumer_key"]
-  tag          = config["photo_tag"]
+  url          = ENV["TUMBLR_PHOTOBLOG"]
+  consumer_key = ENV["TUMBLR_CONSUMER_KEY"]
+  tag          = ENV["TUMBLR_PHOTO_TAG"]
   response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&tag=#{tag}&offset=#{offset}&limit=#{limit}")
   body = JSON.parse(response.body)
   posts << body["response"]["posts"]
@@ -182,20 +177,18 @@ def strip_html(post)
 end
 
 def get_tumblr_links
-  config = get_config["tumblr"]
-  url          = config["links"]
-  consumer_key = config["consumer_key"]
-  count        = config["links_count"]
-  tag          = config["link_tag"]
+  url          = ENV["TUMBLR_LINKS"]
+  consumer_key = ENV["TUMBLR_CONSUMER_KEY"]
+  count        = ENV["TUMBLR_LINKS_COUNT"].to_i
+  tag          = ENV["TUMBLR_LINK_TAG"]
   response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/link?api_key=#{consumer_key}&limit=#{count}&tag=#{tag}")
   data = JSON.parse(response.body)
   File.open("data/links.json","w"){ |f| f << data.to_json }
 end
 
 def get_github_repos
-  config = get_config["github"]
-  access_token = config["access_token"]
-  repos = config["repos"]
+  access_token = ENV["GITHUB_ACCESS_TOKEN"]
+  repos = YAML.load_file("repos.yml")["repos"]
   repo_array = []
   repos.each do |r|
     owner = r.split('/').first
@@ -209,9 +202,8 @@ def get_github_repos
 end
 
 def get_goodreads_data
-  config = get_config["goodreads"]
-  shelves = config["shelves"]
-  count   = config["count"]
+  shelves = ["currently-reading", "read"]
+  count   = ENV["GOODREADS_COUNT"].to_i
   books = []
   shelves.each do |shelf|
     books << import_goodreads_shelf(shelf)
@@ -233,8 +225,7 @@ def save_book_covers(books)
 end
 
 def import_goodreads_shelf(shelf)
-  config = get_config["goodreads"]
-  rss_feed = config["rss_feed"] + "&shelf=#{shelf}"
+  rss_feed = ENV["GOODREADS_RSS_FEED"] + "&shelf=#{shelf}"
   books = []
   Nokogiri::XML(HTTParty.get(rss_feed).body).xpath("//channel/item").each do |item|
     book = {
@@ -251,11 +242,10 @@ def import_goodreads_shelf(shelf)
 end
 
 def get_untappd_data
-  config = get_config["untappd"]
-  count         = config["count"]
-  username      = config["username"]
-  client_id     = config["client_id"]
-  client_secret = config["client_secret"]
+  count         = ENV["UNTAPPD_COUNT"].to_i
+  username      = ENV["UNTAPPD_USERNAME"]
+  client_id     = ENV["UNTAPPD_CLIENT_ID"]
+  client_secret = ENV["UNTAPPD_CLIENT_SECRET"]
   checkins = JSON.parse(HTTParty.get("https://api.untappd.com/v4/user/info/#{username}?client_id=#{client_id}&client_secret=#{client_secret}").body)["response"]["user"]["checkins"]["items"].uniq{ |b| b["beer"]["bid"] }.slice(0, count)
   save_beer_labels(checkins)
   File.open("data/untappd.json","w"){ |f| f << checkins.to_json }
@@ -273,11 +263,10 @@ def save_beer_labels(checkins)
 end
 
 def get_rdio_data
-  config = get_config["rdio"]
-  user_id  = config["user_id"]
-  count    = config["count"]
-  key      = config["key"]
-  secret   = config["secret"]
+  user_id  = ENV["RDIO_USER_ID"]
+  count    = ENV["RDIO_COUNT"].to_i
+  key      = ENV["RDIO_KEY"]
+  secret   = ENV["RDIO_SECRET"]
   params = { method: "getHeavyRotation", user: user_id, type: "albums", friends: false, count: count }
   query_string = params.map{ |k,v| "#{URI::escape(k.to_s)}=#{URI::escape(v.to_s)}" }.join("&")
   consumer = OAuth::Consumer.new(key, secret, { site: "http://api.rdio.com", scheme: "header" })

@@ -8,8 +8,13 @@ set :port, 4567
 
 activate :gzip
 activate :autoprefixer
+activate :dotenv
 activate :s3_sync do |s3|
-  s3.prefer_gzip = true
+  s3.prefer_gzip           = true
+  s3.bucket                = ENV["AWS_BUCKET"]
+  s3.region                = ENV["AWS_REGION"]
+  s3.aws_access_key_id     = ENV["AWS_ACCESS_KEY_ID"]
+  s3.aws_secret_access_key = ENV["AWS_SECRET_ACCESS_KEY_ID"]
 end
 
 # Build-specific configuration
