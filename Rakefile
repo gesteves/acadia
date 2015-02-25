@@ -124,20 +124,10 @@ task :import => [ "dotenv",
                   "import:untappd",
                   "import:rdio" ]
 
-namespace :publish do
-  desc "Import content and publish the site"
-  task :full => [:import] do
-    puts "== Building the site"
-    system("middleman build")
-    puts "== Syncing with S3"
-    system("middleman s3_sync")
-  end
-
-  desc "Just publish the site"
-  task :simple do
-    puts "== Building the site"
-    system("middleman build")
-    puts "== Syncing with S3"
-    system("middleman s3_sync")
-  end
+desc "Import content and publish the site"
+task :publish => [:import] do
+  puts "== Building the site"
+  system("middleman build")
+  puts "== Syncing with S3"
+  system("middleman s3_sync")
 end
