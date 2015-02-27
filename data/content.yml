@@ -54,5 +54,6 @@ repos:
   - gesteves/present-tense
   - gesteves/csstarwars
   - gesteves/caniuse-slack
+  - gesteves/trebekbot
   - voxmedia/verge-50
   - voxmedia/yobot
