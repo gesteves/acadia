@@ -1,0 +1,26 @@
+$m : '.m-stats';
+
+#{$m}__stat {
+  margin-bottom: 1rem;
+}
+
+#{$m}__number {
+  font-family: $proxima-nova;
+  font-size: 4rem;
+  font-weight: 100;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin: 0;
+  text-align: right;
+}
+
+#{$m}__meta {
+  border-top: 1px solid $color-very-light-gray;
+  color: $color-alt-text;
+  font-size: 0.65rem;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  margin: 0 0 1rem 0;
+  text-align: left;
+  text-transform: uppercase;
+}
