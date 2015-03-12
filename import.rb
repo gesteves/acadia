@@ -231,11 +231,18 @@ end
 
 def get_total_commits(days = 7)
   commits = {
-    :total_commits => 0
+    :total_commits => 0,
+    :additions => 0,
+    :deletions => 0
   }
   pushes = get_push_events(Time.now - (60*60*24*days))
   pushes.each do |p|
     commits[:total_commits] += p["payload"]["distinct_size"]
+    p["payload"]["commits"].find_all{ |c| c["distinct"] }.each do |c|
+      stats = get_commit_stats(c["url"])
+      commits[:additions] += stats["additions"]
+      commits[:deletions] += stats["deletions"]
+    end
   end
   File.open("data/commits.json","w"){ |f| f << commits.to_json }
 end
@@ -249,6 +256,13 @@ def get_push_events(oldest, page = 1)
     pushes += get_push_events(oldest, page + 1)
   end
   pushes
+end
+
+def get_commit_stats(url)
+  access_token = ENV["GITHUB_ACCESS_TOKEN"]
+  commit = JSON.parse(HTTParty.get("#{url}?access_token=#{access_token}",
+                      headers: { "User-Agent" => "gesteves/acadia" }).body)
+  commit["stats"]
 end
 
 def get_goodreads_data
