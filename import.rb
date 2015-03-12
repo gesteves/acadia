@@ -222,11 +222,33 @@ def get_github_repos
     owner = r.split('/').first
     name = r.split('/').last
     response = HTTParty.get("https://api.github.com/repos/#{owner}/#{name}?access_token=#{access_token}",
-                            headers: { "User-Agent" => "gesteves/farragut" })
+                            headers: { "User-Agent" => "gesteves/acadia" })
     repo_array << JSON.parse(response.body)
   end
   repo_array.sort!{ |a,b| a["name"] <=> b["name"] }
   File.open("data/repos.json","w"){ |f| f << repo_array.to_json }
+end
+
+def get_total_commits(days = 7)
+  commits = {
+    :total_commits => 0
+  }
+  pushes = get_push_events(Time.now - (60*60*24*days))
+  pushes.each do |p|
+    commits[:total_commits] += p["payload"]["distinct_size"]
+  end
+  File.open("data/commits.json","w"){ |f| f << commits.to_json }
+end
+
+def get_push_events(oldest, page = 1)
+  access_token = ENV["GITHUB_ACCESS_TOKEN"]
+  events = JSON.parse(HTTParty.get("https://api.github.com/users/gesteves/events?access_token=#{access_token}&page=#{page}",
+                      headers: { "User-Agent" => "gesteves/acadia" }).body)
+  pushes = events.find_all{ |e| e["type"] == "PushEvent" && Time.parse(e["created_at"]) >= oldest }
+  if page < 10 && (pushes.nil? || pushes.size == 0 || Time.parse(pushes.last["created_at"]) > oldest)
+    pushes += get_push_events(oldest, page + 1)
+  end
+  pushes
 end
 
 def get_goodreads_data

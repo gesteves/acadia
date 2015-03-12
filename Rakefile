@@ -70,9 +70,10 @@ namespace :import do
     puts "== Importing Github repos"
       start_time = Time.now
       get_github_repos
+      get_total_commits
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort "Failed to import repos: #{e}"
+     abort "Failed to import repos: #{e}"
     end
   end
 
