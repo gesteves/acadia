@@ -9,6 +9,7 @@ set :port, 4567
 activate :gzip
 activate :autoprefixer
 activate :dotenv
+activate :livereload
 activate :s3_sync do |s3|
   s3.prefer_gzip           = true
   s3.bucket                = ENV["AWS_BUCKET"]
