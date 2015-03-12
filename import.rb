@@ -8,6 +8,34 @@ require "dotenv"
 
 Dotenv.load
 
+def get_fitbit_data
+  consumer_key        = ENV["FITBIT_CONSUMER_KEY"]
+  consumer_secret     = ENV["FITBIT_CONSUMER_SECRET"]
+  access_token        = ENV["FITBIT_ACCESS_TOKEN"]
+  access_token_secret = ENV["FITBIT_ACCESS_TOKEN_SECRET"]
+  user_id             = ENV["FITBIT_USER_ID"]
+  consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "https://api.fitbit.com" })
+  access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
+  profile = JSON.parse(access_token.get("https://api.fitbit.com/1/user/#{user_id}/profile.json").body)
+  offset_from_utc = offset_from_utc(profile["user"]["offsetFromUTCMillis"].to_f)
+  today = Time.now.getlocal(offset_from_utc)
+  activities = JSON.parse(access_token.get("https://api.fitbit.com/1/user/-/activities/date/#{today.strftime("%Y-%m-%d")}.json").body)
+  sleep = JSON.parse(access_token.get("https://api.fitbit.com/1/user/-/sleep/date/#{today.strftime("%Y-%m-%d")}.json").body)
+  fitbit = {
+    :steps => activities["summary"]["steps"],
+    :distance => activities["summary"]["distances"].find{ |d| d["activity"] == "total" }["distance"],
+    :sleep => sleep["summary"]["totalMinutesAsleep"]
+  }
+  File.open("data/fitbit.json","w"){ |f| f << fitbit.to_json }
+end
+
+def offset_from_utc(milliseconds)
+  seconds = milliseconds/1000
+  minutes = (seconds / 60) % 60
+  hours = seconds / (60 * 60)
+  format("%+03d:%02d", hours, minutes)
+end
+
 def get_tweets
   consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
   consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
