@@ -237,10 +237,10 @@ def get_total_commits(days = 7)
   }
   pushes = get_push_events(Time.now - (60*60*24*days))
   pushes.each do |p|
-    commits[:total_commits] += p["payload"]["distinct_size"]
     p["payload"]["commits"].find_all{ |c| c["distinct"] }.each do |c|
       stats = get_commit_stats(c["url"])
       unless stats.nil?
+        commits[:total_commits] += 1
         commits[:additions] += stats["additions"]
         commits[:deletions] += stats["deletions"]
       end
