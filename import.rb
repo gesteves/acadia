@@ -240,8 +240,10 @@ def get_total_commits(days = 30)
     commits[:total_commits] += p["payload"]["distinct_size"]
     p["payload"]["commits"].find_all{ |c| c["distinct"] }.each do |c|
       stats = get_commit_stats(c["url"])
-      commits[:additions] += stats["additions"]
-      commits[:deletions] += stats["deletions"]
+      unless stats.nil?
+        commits[:additions] += stats["additions"]
+        commits[:deletions] += stats["deletions"]
+      end
     end
   end
   File.open("data/commits.json","w"){ |f| f << commits.to_json }
