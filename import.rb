@@ -229,7 +229,7 @@ def get_github_repos
   File.open("data/repos.json","w"){ |f| f << repo_array.to_json }
 end
 
-def get_total_commits(days = 30)
+def get_total_commits(days = 7)
   commits = {
     :total_commits => 0,
     :additions => 0,

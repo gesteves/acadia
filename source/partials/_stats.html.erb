@@ -11,11 +11,11 @@
     <% end %>
     <% unless data.commits.total_commits == 0 %>
       <dt class="m-stats__number"><%= format_number data.commits.total_commits %></dt>
-      <dd class="m-stats__meta">Commits pushed in the past month</dd>
+      <dd class="m-stats__meta">Commits pushed in the past week</dd>
       <dt class="m-stats__number"><%= format_number data.commits.additions %></dt>
-      <dd class="m-stats__meta">Code additions in the past month</dd>
+      <dd class="m-stats__meta">Code additions in the past week</dd>
       <dt class="m-stats__number"><%= format_number data.commits.deletions %></dt>
-      <dd class="m-stats__meta">Code deletions in the past month</dd>
+      <dd class="m-stats__meta">Code deletions in the past week</dd>
     <% end %>
   </dl>
 
