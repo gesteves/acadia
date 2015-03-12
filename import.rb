@@ -8,6 +8,34 @@ require "dotenv"
 
 Dotenv.load
 
+def get_fitbit_data
+  consumer_key        = ENV["FITBIT_CONSUMER_KEY"]
+  consumer_secret     = ENV["FITBIT_CONSUMER_SECRET"]
+  access_token        = ENV["FITBIT_ACCESS_TOKEN"]
+  access_token_secret = ENV["FITBIT_ACCESS_TOKEN_SECRET"]
+  user_id             = ENV["FITBIT_USER_ID"]
+  consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "https://api.fitbit.com" })
+  access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
+  profile = JSON.parse(access_token.get("https://api.fitbit.com/1/user/#{user_id}/profile.json").body)
+  offset_from_utc = offset_from_utc(profile["user"]["offsetFromUTCMillis"].to_f)
+  today = Time.now.getlocal(offset_from_utc)
+  activities = JSON.parse(access_token.get("https://api.fitbit.com/1/user/-/activities/date/#{today.strftime("%Y-%m-%d")}.json").body)
+  sleep = JSON.parse(access_token.get("https://api.fitbit.com/1/user/-/sleep/date/#{today.strftime("%Y-%m-%d")}.json").body)
+  fitbit = {
+    :steps => activities["summary"]["steps"],
+    :distance => activities["summary"]["distances"].find{ |d| d["activity"] == "total" }["distance"],
+    :sleep => sleep["summary"]["totalMinutesAsleep"]
+  }
+  File.open("data/fitbit.json","w"){ |f| f << fitbit.to_json }
+end
+
+def offset_from_utc(milliseconds)
+  seconds = milliseconds/1000
+  minutes = (seconds / 60) % 60
+  hours = seconds / (60 * 60)
+  format("%+03d:%02d", hours, minutes)
+end
+
 def get_tweets
   consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
   consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
@@ -194,11 +222,33 @@ def get_github_repos
     owner = r.split('/').first
     name = r.split('/').last
     response = HTTParty.get("https://api.github.com/repos/#{owner}/#{name}?access_token=#{access_token}",
-                            headers: { "User-Agent" => "gesteves/farragut" })
+                            headers: { "User-Agent" => "gesteves/acadia" })
     repo_array << JSON.parse(response.body)
   end
   repo_array.sort!{ |a,b| a["name"] <=> b["name"] }
   File.open("data/repos.json","w"){ |f| f << repo_array.to_json }
+end
+
+def get_total_commits(days = 7)
+  commits = {
+    :total_commits => 0
+  }
+  pushes = get_push_events(Time.now - (60*60*24*days))
+  pushes.each do |p|
+    commits[:total_commits] += p["payload"]["distinct_size"]
+  end
+  File.open("data/commits.json","w"){ |f| f << commits.to_json }
+end
+
+def get_push_events(oldest, page = 1)
+  access_token = ENV["GITHUB_ACCESS_TOKEN"]
+  events = JSON.parse(HTTParty.get("https://api.github.com/users/gesteves/events?access_token=#{access_token}&page=#{page}",
+                      headers: { "User-Agent" => "gesteves/acadia" }).body)
+  pushes = events.find_all{ |e| e["type"] == "PushEvent" && Time.parse(e["created_at"]) >= oldest }
+  if page < 10 && (pushes.nil? || pushes.size == 0 || Time.parse(pushes.last["created_at"]) > oldest)
+    pushes += get_push_events(oldest, page + 1)
+  end
+  pushes
 end
 
 def get_goodreads_data

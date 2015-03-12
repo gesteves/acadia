@@ -98,4 +98,12 @@ module CustomHelpers
   def image_url(source)
     protocol + host_with_port + image_path(source)
   end
+
+  def format_number(number)
+    number = number.to_s
+    while number.match(/(\d+)(\d\d\d)/)
+      number.gsub!(/(\d+)(\d\d\d)/, "\\1,\\2")
+    end
+    number
+  end
 end

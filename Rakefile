@@ -70,9 +70,10 @@ namespace :import do
     puts "== Importing Github repos"
       start_time = Time.now
       get_github_repos
+      get_total_commits
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort "Failed to import repos: #{e}"
+     abort "Failed to import repos: #{e}"
     end
   end
 
@@ -111,6 +112,18 @@ namespace :import do
       abort "Failed to import Rdio data: #{e}"
     end
   end
+
+  desc "Import activity from Fitbit"
+  task :fitbit => [:set_up_directories] do
+    begin
+      puts "== Importing Fitbit data"
+      start_time = Time.now
+      get_fitbit_data
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import Fitbit: #{e}"
+    end
+  end
 end
 
 task :import => [ "dotenv",
@@ -122,7 +135,8 @@ task :import => [ "dotenv",
                   "import:github",
                   "import:goodreads",
                   "import:untappd",
-                  "import:rdio" ]
+                  "import:rdio",
+                  "import:fitbit" ]
 
 desc "Import content and publish the site"
 task :publish => [:import] do
