@@ -5,6 +5,7 @@ require "RMagick"
 require "oauth"
 require "sanitize"
 require "dotenv"
+require "active_support/all"
 
 Dotenv.load
 
@@ -13,12 +14,10 @@ def get_fitbit_data
   consumer_secret     = ENV["FITBIT_CONSUMER_SECRET"]
   access_token        = ENV["FITBIT_ACCESS_TOKEN"]
   access_token_secret = ENV["FITBIT_ACCESS_TOKEN_SECRET"]
-  user_id             = ENV["FITBIT_USER_ID"]
   consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "https://api.fitbit.com" })
   access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
-  profile = JSON.parse(access_token.get("https://api.fitbit.com/1/user/#{user_id}/profile.json").body)
-  offset_from_utc = offset_from_utc(profile["user"]["offsetFromUTCMillis"].to_f)
-  today = Time.now.getlocal(offset_from_utc)
+  Time.zone = "America/New_York"
+  today = Time.zone.now
   activities = JSON.parse(access_token.get("https://api.fitbit.com/1/user/-/activities/date/#{today.strftime("%Y-%m-%d")}.json").body)
   sleep = JSON.parse(access_token.get("https://api.fitbit.com/1/user/-/sleep/date/#{today.strftime("%Y-%m-%d")}.json").body)
   fitbit = {
@@ -27,13 +26,6 @@ def get_fitbit_data
     :sleep => sleep["summary"]["totalMinutesAsleep"]
   }
   File.open("data/fitbit.json","w"){ |f| f << fitbit.to_json }
-end
-
-def offset_from_utc(milliseconds)
-  seconds = milliseconds/1000
-  minutes = (seconds / 60) % 60
-  hours = seconds / (60 * 60)
-  format("%+03d:%02d", hours, minutes)
 end
 
 def get_tweets
@@ -235,7 +227,7 @@ def get_total_commits(days = 7)
     :additions => 0,
     :deletions => 0
   }
-  pushes = get_push_events(Time.now - (60*60*24*days))
+  pushes = get_push_events(Time.now - days.days)
   pushes.each do |p|
     p["payload"]["commits"].find_all{ |c| c["distinct"] }.each do |c|
       stats = get_commit_stats(c["url"])
