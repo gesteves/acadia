@@ -7,6 +7,7 @@ $m : '.m-footer';
 
   p {
     font-size: 1.4rem;
+    line-height: 1.5;
   }
 
   a:link,
@@ -19,5 +20,9 @@ $m : '.m-footer';
   a:active {
     color: $color-links;
     text-decoration: underline;
+  }
+
+  span {
+    white-space: nowrap;
   }
 }
