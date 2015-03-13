@@ -5,10 +5,6 @@
     <dd class="m-stats__meta">Steps taken today</dd>
     <dt class="m-stats__number"><%= format_number data.fitbit.distance %></dt>
     <dd class="m-stats__meta">Kilometers walked or run today</dd>
-    <% unless data.fitbit.sleep == 0 %>
-      <dt class="m-stats__number"><%= format_number data.fitbit.sleep %></dt>
-      <dd class="m-stats__meta">Hours slept last night</dd>
-    <% end %>
     <% unless data.commits.total_commits == 0 %>
       <dt class="m-stats__number"><%= format_number data.commits.total_commits %></dt>
       <dd class="m-stats__meta">Commits in the past week</dd>
