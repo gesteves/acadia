@@ -98,7 +98,7 @@ def expand_tweet(tweet)
         expanded_text << text[start_index..end_index]
       end
     end
-    
+
     # Now join the placeholder array into a string and put it in the tweet object
     tweet["expanded_text"] = expanded_text.join
   end
@@ -276,7 +276,7 @@ def save_book_covers(books)
     cover = Magick::Image::from_blob(HTTParty.get(book[:image]).body).first
     sizes = [150, 100, 50]
     sizes.each do |size|
-      image = cover.resize_to_fill(size, (size * cover.rows)/cover.columns)
+      image = cover.resize_to_fill(size)
       image.write("source/images/goodreads/#{book[:id]}_#{size}.jpg")
     end
   end
@@ -314,7 +314,7 @@ def save_beer_labels(checkins)
     label = Magick::Image::from_blob(HTTParty.get(c["beer"]["beer_label"]).body).first
     sizes = [100, 50]
     sizes.each do |size|
-      image = label.resize_to_fill(size, (size * label.rows)/label.columns)
+      image = label.resize_to_fill(size)
       image.write("source/images/untappd/#{c["beer"]["bid"]}_#{size}.jpg")
     end
   end
@@ -339,7 +339,7 @@ def save_rdio_images(albums)
     album = Magick::Image::from_blob(HTTParty.get(a["icon"]).body).first
     sizes = [200, 150, 100, 50]
     sizes.each do |size|
-      image = album.resize_to_fill(size, (size * album.rows)/album.columns)
+      image = album.resize_to_fill(size)
       image.write("source/images/rdio/#{a["key"]}_#{size}.jpg")
     end
   end
