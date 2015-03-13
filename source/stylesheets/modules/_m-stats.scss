@@ -6,12 +6,12 @@ $m : '.m-stats';
 }
 
 #{$m}__stat {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 #{$m}__number {
   font-family: $proxima-nova;
-  font-size: 4rem;
+  font-size: 6rem;
   font-weight: 100;
   letter-spacing: -2px;
   line-height: 1;
@@ -21,7 +21,7 @@ $m : '.m-stats';
 #{$m}__meta {
   border-top: 1px solid $color-very-light-gray;
   color: $color-alt-text;
-  font-size: 0.65rem;
+  font-size: 1rem;
   line-height: 1.5;
   letter-spacing: 1px;
   margin: 0 0 1rem;

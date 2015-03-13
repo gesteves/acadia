@@ -1,7 +1,7 @@
 $m : '.m-list';
 
 #{$m} {
-  li { margin-bottom: 1rem; }
+  li { margin-bottom: 2rem; }
 }
 
 
@@ -11,14 +11,14 @@ $m : '.m-list';
 
   #{$m}__eyebrow {
     color: $color-alt-text;
-    font-size: 0.65rem;
+    font-size: 1rem;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
 
   #{$m}__author {
     color: $color-alt-text;
-    font-size: 0.85rem;
+    font-size: 1.2rem;
     font-style: italic;
   }
 
@@ -33,6 +33,11 @@ $m : '.m-list';
       color: $color-links;
     }
   }
+}
+
+#{$m}__title {
+  font-size: 1.4rem;
+  line-height: 1.5;
 }
 
 #{$m}__image {

@@ -25,7 +25,7 @@ $m : '.m-card';
     @include kerning;
     color: $color-heading;
     font-family: $proxima-nova;
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: bold;
     line-height: 1;
     margin: 0 0 1rem;
@@ -35,13 +35,13 @@ $m : '.m-card';
   h2 {
     @include kerning;
     font-family: $calluna;
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: normal;
     line-height: 1;
   }
 
   p {
-    font-size: 1rem;
+    font-size: 1.4rem;
     line-height: 1.5;
     margin: 1rem 0 0;
   }
@@ -52,7 +52,7 @@ $m : '.m-card';
     border-radius: 2px;
     color: $color-text;
     font-family: monospace;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     padding: 2px 4px;
   }
 

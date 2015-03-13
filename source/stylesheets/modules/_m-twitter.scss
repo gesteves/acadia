@@ -23,12 +23,13 @@ $m : '.m-twitter';
 #{$m}__username {
   display: block;
   flex-grow: 1;
+  font-size: 1.4rem;
   padding: 0 1rem;
 
   #{$m}__screenname {
     color: $color-alt-text;
     display: inline-block;
-    font-size: 0.85rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -44,7 +45,7 @@ $m : '.m-twitter';
 
 #{$m}__follow {
   display: none;
-  font-size: 0.85rem;
+  font-size: 1.2rem;
 
   a {
     border: 1px solid;
@@ -85,10 +86,14 @@ $m : '.m-twitter';
   }
 }
 
+#{$m}__tweet {
+  margin: 0 0 2rem;
+}
+
 #{$m} #{$m}__meta {
   color: $color-alt-text;
   display: flex;
-  font-size: 0.85rem;
+  font-size: 1.2rem;
   margin: 0;
   text-indent: 0;
 
