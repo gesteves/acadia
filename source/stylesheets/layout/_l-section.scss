@@ -12,6 +12,7 @@ $l : '.l-section';
     margin-bottom: 4rem;
     padding: 0 4rem;
   }
+
   @media (min-width: $bp-max) {
     padding: 0 8rem;
   }
@@ -22,9 +23,11 @@ $l : '.l-section';
     border-width: 1px 0;
     background-color: $color-background;
     padding: 2rem;
+
     @media (min-width: $bp-xl) {
       padding: 4rem;
     }
+    
     @media (min-width: $bp-max) {
       padding: 4rem 8rem;
     }

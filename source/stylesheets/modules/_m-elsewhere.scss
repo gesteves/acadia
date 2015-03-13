@@ -3,6 +3,7 @@ $m : '.m-elsewhere';
 #{$m} {
   flex: 0 0 100%;
   margin: 0;
+
   @media (min-width: $bp-m) {
     text-align: center;
   }
@@ -11,6 +12,7 @@ $m : '.m-elsewhere';
 #{$m}__list {
   display: flex;
   flex-flow: row wrap;
+
   @media (min-width: $bp-m) {
     justify-content: center;
   }
@@ -20,37 +22,53 @@ $m : '.m-elsewhere';
   flex: 0 0 50%;
   line-height: 1.5;
   text-align: left;
+
   @media (min-width: $bp-m) {
     flex: 0 0 auto;
     margin: 0 1rem;
     text-align: center;
   }
+
   a {
     display: block;
+
     &:before {
       content: '\e808';
       display: inline-block;
       font-family: fontello;
-      width:1.5rem;
+      width: 1.5rem;
     }
-    &:link:before, &:visited:before {
+
+    &:link:before,
+    &:visited:before {
       color: $color-very-light-gray;
       text-decoration: none;
     }
-    &:hover:before, &:visited:active {
+
+    &:hover:before,
+    &:visited:active {
       color: $color-links;
       text-decoration: none;
     }
   }
 
   &.blog      a:before { content: '\e80c'; }
+
   &.github    a:before { content: '\e80a'; }
+  
   &.instagram a:before { content: '\e809'; }
+  
   &.linkedin  a:before { content: '\e80d'; }
+  
   &.photoblog a:before { content: '\e811'; }
+  
   &.rdio      a:before { content: '\e807'; }
+  
   &.twitter   a:before { content: '\e804'; }
+  
   &.untappd   a:before { content: '\e80e'; }
+  
   &.goodreads a:before { content: '\e80f'; }
+  
   &.dribbble  a:before { content: '\e80b'; }
 }

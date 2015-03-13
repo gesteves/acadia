@@ -2,7 +2,7 @@ $m : '.m-error';
 
 #{$m} {
   margin: 6rem 0;
-  text-align:center;
+  text-align: center;
   width: 100%;
 
   h3 {
@@ -17,11 +17,14 @@ $m : '.m-error';
     font-size: 1.5rem;
   }
 
-  a:link, a:visited {
+  a:link,
+  a:visited {
     color: $color-links;
     text-decoration: none;
   }
-  a:hover, a:active {
+
+  a:hover,
+  a:active {
     color: $color-links;
     text-decoration: underline;
   }

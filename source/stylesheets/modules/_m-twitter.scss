@@ -1,7 +1,5 @@
 $m : '.m-twitter';
 
-$avatar_size: 50px;
-
 #{$m}__user {
   align-items: center;
   border-bottom: 1px solid $color-very-light-gray;
@@ -11,12 +9,13 @@ $avatar_size: 50px;
 }
 
 #{$m}__avatar {
+  $avatar-size: 50px;
   display: block;
-  height: $avatar_size;
-  width: $avatar_size;
+  height: $avatar-size;
+  width: $avatar-size;
 
   img {
-    border-radius: $avatar_size/2;
+    border-radius: $avatar-size/2;
     max-width: 100%;
   }
 }
@@ -34,7 +33,8 @@ $avatar_size: 50px;
 }
 
 #{$m} #{$m}__username a {
-  &:hover, &:active {
+  &:hover,
+  &:active {
     #{$m}__screenname {
       color: $color-links;
       text-decoration: none;
@@ -52,7 +52,8 @@ $avatar_size: 50px;
     padding: 0.25rem 0.5rem;
   }
 
-  a:link, a:visited {
+  a:link,
+  a:visited {
     border-color: lighten($color-very-light-gray, 5%);
     color: $color-alt-text;
     text-decoration: none;
@@ -61,7 +62,9 @@ $avatar_size: 50px;
       color: $color-very-light-gray;
     }
   }
-  a:hover, a:active {
+
+  a:hover,
+  a:active {
     border-color: darken($color-very-light-gray, 5%);
     color: $color-links;
     text-decoration: none;
@@ -70,6 +73,7 @@ $avatar_size: 50px;
       color: $color-links;
     }
   }
+
   a:before {
     content: '\e804';
     font-family: fontello;
@@ -88,11 +92,14 @@ $avatar_size: 50px;
   margin: 0;
   text-indent: 0;
 
-  a:link, a:visited {
+  a:link,
+  a:visited {
     color: $color-alt-text;
     text-decoration: none;
   }
-  a:hover, a:active {
+
+  a:hover,
+  a:active {
     color: $color-links;
     text-decoration: none;
   }
@@ -102,22 +109,29 @@ $avatar_size: 50px;
     flex-grow: 1;
     font-style: italic;
     width: 100%;
+
     @media (min-width: $bp-s) {
       width: 50%;
     }
   }
+  
   .actions {
     display: none;
     text-align: right;
     width: 50%;
+
     a {
       font-family: 'fontello';
       margin-left: 0.5rem;
     }
-    a:link, a:visited {
+
+    a:link,
+    a:visited {
       color: $color-very-light-gray;
     }
-    a:hover, a:active {
+
+    a:hover,
+    a:active {
       color: $color-links;
     }
   }

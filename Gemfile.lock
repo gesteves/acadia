@@ -221,6 +221,7 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rainbow (2.0.0)
     rake (10.4.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
@@ -232,6 +233,9 @@ GEM
       nokogiri (>= 1.4.4)
       nokogumbo (= 1.2.0)
     sass (3.4.12)
+    scss-lint (0.34.0)
+      rainbow (~> 2.0)
+      sass (~> 3.4.1)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -275,4 +279,5 @@ DEPENDENCIES
   rake
   rmagick
   sanitize
+  scss-lint
   tzinfo

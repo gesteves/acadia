@@ -3,7 +3,7 @@ $m : '.m-github';
 #{$m}__repo {
   display: flex;
   flex-flow: row wrap;
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 0;
   position: relative;
 }
 
@@ -27,12 +27,17 @@ $m : '.m-github';
     position: relative;
     top: 0.1rem;
   }
-  a:link, a:visited {
+
+  a:link,
+  a:visited {
     color: $color-alt-text;
   }
-  a:hover, a:active {
+  
+  a:hover,
+  a:active {
     color: $color-links;
     text-decoration: none;
+
     &:before {
       color: $color-links;
     }

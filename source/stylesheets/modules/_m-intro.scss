@@ -3,17 +3,21 @@ $m : '.m-intro';
 #{$m} {
   flex: 0 0 100%;
   margin: 0;
+
   @media (min-width: $bp-m) {
-    text-align:center;
+    text-align: center;
   }
+
   p {
     color: $color-text;
     font-size: 1rem;
     line-height: 1.5;
     margin: 0;
+
     @media (min-width: $bp-m) {
       font-size: 1.25rem;
     }
+
     @media (min-width: $bp-xl) {
       font-size: 1.5rem;
     }

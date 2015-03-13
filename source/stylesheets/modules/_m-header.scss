@@ -2,11 +2,13 @@ $m : '.m-header';
 
 #{$m} {
   margin: 2rem 0;
-  text-align:center;
+  text-align: center;
   width: 100%;
+
   @media (min-width: $bp-xl) {
     margin: 4rem 0;
   }
+
   h1 {
     @include kerning;
     color: $color-header-text;
@@ -14,16 +16,20 @@ $m : '.m-header';
     font-size: 1.75rem;
     font-weight: bold;
     line-height: 1;
+
     @media (min-width: $bp-s) {
       font-size: 2rem;
     }
+
     @media (min-width: $bp-m) {
       font-size: 3rem;
     }
+
     @media (min-width: $bp-xl) {
       font-size: 3.5rem;
     }
   }
+
   h2 {
     @include kerning;
     color: $color-header-text;
@@ -31,18 +37,22 @@ $m : '.m-header';
     font-size: 1.5rem;
     font-weight: 100;
     line-height: 1;
+
     @media (min-width: $bp-s) {
       font-size: 1.75rem;
     }
+
     @media (min-width: $bp-m) {
       font-size: 2rem;
     }
+
     @media (min-width: $bp-xl) {
       font-size: 2.5rem;
     }
   }
-  abbr[title="and"] {
-    border-bottom: none;
+
+  [title="and"] {
+    border-bottom: 0;
     cursor: auto;
     font-family: fontello;
     font-size: 125%;
@@ -50,11 +60,15 @@ $m : '.m-header';
     margin: 0 -4px 0 -3px;
     vertical-align: middle;
   }
-  a:link, a:visited {
+
+  a:link,
+  a:visited {
     color: $color-header-text;
     text-decoration: none;
   }
-  a:hover, a:active {
+
+  a:hover,
+  a:active {
     color: $color-links;
     text-decoration: none;
   }

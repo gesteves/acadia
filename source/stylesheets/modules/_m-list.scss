@@ -8,6 +8,7 @@ $m : '.m-list';
 #{$m} #{$m}__item {
   align-items: center;
   display: flex;
+
   #{$m}__eyebrow {
     color: $color-alt-text;
     font-size: 0.65rem;
@@ -20,11 +21,15 @@ $m : '.m-list';
     font-size: 0.85rem;
     font-style: italic;
   }
+
   a#{$m}__author {
-    &:link, &:visited {
+    &:link,
+    &:visited {
       color: $color-alt-text;
     }
-    &:hover, &:active {
+
+    &:hover,
+    &:active {
       color: $color-links;
     }
   }
@@ -43,7 +48,9 @@ $m : '.m-list';
   flex-direction: column;
   line-height: 1.25;
   padding-left: 1rem;
-  span, a {
+
+  span,
+  a {
     display: block;
   }
 }
