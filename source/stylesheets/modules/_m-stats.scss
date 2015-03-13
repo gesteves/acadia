@@ -1,5 +1,10 @@
 $m : '.m-stats';
 
+#{$m} {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 #{$m}__stat {
   margin-bottom: 1rem;
 }

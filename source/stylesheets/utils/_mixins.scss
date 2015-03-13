@@ -1,17 +1,3 @@
-@mixin columns($width: '', $count: '', $gap: 0) {
-  @if $width == '' {
-    column-width: auto;
-  } @else {
-    column-width: $width;
-  }
-  @if $count == '' {
-    column-count: auto;
-  } @else {
-    column-count: $count;
-  }
-  column-gap: $gap;
-}
-
 @mixin kerning {
   -webkit-font-feature-settings: "kern";
      -moz-font-feature-settings: "kern";

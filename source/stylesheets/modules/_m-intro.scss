@@ -1,6 +1,7 @@
 $m : '.m-intro';
 
 #{$m} {
+  flex: 0 0 100%;
   margin: 0;
   @media (min-width: $bp-m) {
     text-align:center;
