@@ -7,7 +7,6 @@ module.exports = function(grunt) {
     jshint: {
       files: ['Gruntfile.js', 'source/javascripts/**/*.js'],
       options: {
-        esnext: true,
         node: true,
         curly: true,
         eqeqeq: true,

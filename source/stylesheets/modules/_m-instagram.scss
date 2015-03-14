@@ -29,3 +29,9 @@ $m : '.m-instagram';
 #{$m}__photo {
   width: 100%;
 }
+
+.no-flexbox #{$m}__photo-item {
+  display: inline-block;
+  margin-right: 1rem;
+  width: calc((100%/3) - 1rem);
+}

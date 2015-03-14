@@ -40,3 +40,17 @@ $m : '.m-photoblog';
     flex-shrink: 0;
   }
 }
+
+.no-flexbox #{$m}__photo-item {
+  display: inline-block;
+  margin-right: 2rem;
+  width: calc(50% - 2rem);
+
+  @media (min-width: $bp-m) {
+    width: calc((100%/3) - 2rem);
+  }
+
+  @media (min-width: $bp-xl) {
+    width: calc(25% - 2rem);
+  }
+}
