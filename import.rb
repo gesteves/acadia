@@ -2,10 +2,9 @@ require "oauth"
 require "httparty"
 require "nokogiri"
 require "RMagick"
-require "oauth"
 require "sanitize"
 require "dotenv"
-require "active_support/all"
+require "active_support/time"
 
 Dotenv.load
 

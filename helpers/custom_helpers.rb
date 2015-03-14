@@ -1,7 +1,8 @@
 module CustomHelpers
   require "date"
   require "tzinfo"
-  require "active_support/all"
+  require "active_support/time"
+  require "active_support/core_ext/numeric"
 
   def formatted_date_in_eastern(date_string, format = "%F")
     tz = TZInfo::Timezone.get("America/New_York")

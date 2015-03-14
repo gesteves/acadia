@@ -17,10 +17,6 @@ activate :s3_sync do |s3|
   s3.aws_secret_access_key = ENV["AWS_SECRET_ACCESS_KEY_ID"]
 end
 
-configure :development do
-  activate :livereload
-end
-
 # Build-specific configuration
 configure :build do
   activate :minify_css
