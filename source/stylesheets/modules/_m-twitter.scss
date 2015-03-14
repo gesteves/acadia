@@ -100,9 +100,9 @@ $m : '.m-twitter';
 
 #{$m}__timestamp {
   display: block;
+  flex: 1 0 auto;
   font-style: italic;
   margin-right: 1rem;
-  flex: 1 0 auto;
 }
 
 #{$m}__actions {
