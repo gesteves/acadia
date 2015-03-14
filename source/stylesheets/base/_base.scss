@@ -7,8 +7,8 @@ html {
 }
 
 body {
+  @include serif;
   color: $color-text;
-  font-family: $calluna;
   font-weight: 300;
 }
 

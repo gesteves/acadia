@@ -7,7 +7,7 @@ $m : '.m-error';
 
   h3 {
     @include kerning;
-    font-family: $proxima-nova;
+    @include sans-serif;
     font-size: 16rem;
     font-weight: 100;
     line-height: 1;

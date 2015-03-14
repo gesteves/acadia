@@ -11,8 +11,8 @@ $m : '.m-header';
 
   h1 {
     @include kerning;
+    @include sans-serif;
     color: $color-header-text;
-    font-family: $proxima-nova;
     font-size: 2.8rem;
     font-weight: bold;
     line-height: 1;
@@ -32,8 +32,8 @@ $m : '.m-header';
 
   h2 {
     @include kerning;
+    @include sans-serif;
     color: $color-header-text;
-    font-family: $proxima-nova;
     font-size: 2.4rem;
     font-weight: 100;
     line-height: 1;
