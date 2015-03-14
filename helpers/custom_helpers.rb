@@ -13,7 +13,7 @@ module CustomHelpers
     caption = photo.plain_caption || "Latest from my photoblog"
     src = image_path "photoblog/#{photo.id}_1280.jpg"
     srcset = []
-    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 480, 400, 320, 240]
+    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 480, 400, 300, 240]
     sizes.each do |size|
       srcset << "#{image_path("photoblog/#{photo.id}_#{size}.jpg")} #{size}w"
     end
