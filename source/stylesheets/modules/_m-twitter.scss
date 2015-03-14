@@ -30,7 +30,7 @@ $m : '.m-twitter';
   border-top: 1px solid $color-very-light-gray;
   color: $color-alt-text;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   font-size: 1.2rem;
   margin: 0;
   padding: 2rem 0 0;
@@ -47,12 +47,21 @@ $m : '.m-twitter';
     color: $color-links;
     text-decoration: none;
   }
+
+  @media (min-width: $bp-m) {
+    flex-flow: row nowrap;
+  }
 }
 
 #{$m}__user {
   align-items: center;
   display: flex;
   flex: 1 0 auto;
+  margin-bottom: 2rem;
+
+  @media (min-width: $bp-m) {
+    margin: 0;
+  }
 }
 
 #{$m}__avatar {
@@ -93,6 +102,7 @@ $m : '.m-twitter';
   display: block;
   font-style: italic;
   margin-right: 1rem;
+  flex: 1 0 auto;
 }
 
 #{$m}__actions {
