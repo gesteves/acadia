@@ -25,11 +25,10 @@ $m : '.m-card';
     @include kerning;
     color: $color-heading;
     font-family: $proxima-nova;
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 4rem;
+    font-weight: 100;
     line-height: 1;
-    margin: 0 0 1rem;
-    text-transform: uppercase;
+    margin: 0 0 2rem;
   }
 
   h2 {
@@ -60,12 +59,12 @@ $m : '.m-card';
     font-weight: bold;
   }
 
-  @media (min-width: $bp-m) {
+  @media (min-width: $bp-l) {
     flex: 0 0 calc(50% - 2rem);
+    margin: 0;
   }
 
   @media (min-width: $bp-xxl) {
-    flex: 0 0 calc(25% - 4rem);
-    margin: 0;
+    flex: 0 0 calc(50% - 4rem);
   }
 }

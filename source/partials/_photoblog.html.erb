@@ -4,9 +4,11 @@
 <a href="<%= data.photoblog.post_url %>" class="m-photoblog__photo">
   <%= photoblog_image_tag(data.photoblog) %>
 </a>
-<% unless data.photoblog.caption.nil? %>
-  <%= data.photoblog.caption %>
-<% end %>
-<p class="meta"><%= photo_exif(data.photoblog) %></p>
 
+  <div class="m-photoblog__caption">
+    <% unless data.photoblog.caption.nil? %>
+      <%= data.photoblog.caption %>
+    <% end %>
+    <p class="meta"><%= photo_exif(data.photoblog) %></p>
+  </div>
 </section>

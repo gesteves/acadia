@@ -2,28 +2,44 @@ $m : '.m-stats';
 
 #{$m} {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 
 #{$m}__stat {
-  margin-bottom: 2rem;
+  flex: 1 1 auto;
+  margin: 2rem 0;
+  padding: 0 3rem;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: $bp-xxl) {
+    margin: 0;
+  }
 }
 
 #{$m}__number {
   font-family: $proxima-nova;
-  font-size: 6rem;
+  font-size: 8em;
   font-weight: 100;
   letter-spacing: -2px;
   line-height: 1;
   margin: 0;
+  text-align: center;
 }
 
 #{$m}__meta {
-  border-top: 1px solid $color-very-light-gray;
   color: $color-alt-text;
   font-size: 1rem;
-  line-height: 1.5;
   letter-spacing: 1px;
+  line-height: 1.5;
   margin: 0 0 1rem;
+  text-align: center;
   text-transform: uppercase;
 }

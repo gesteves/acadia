@@ -6,7 +6,7 @@ $m : '.m-header';
   width: 100%;
 
   @media (min-width: $bp-xl) {
-    margin: 4rem 0;
+    margin: 8rem 0 4rem;
   }
 
   h1 {
@@ -26,7 +26,7 @@ $m : '.m-header';
     }
 
     @media (min-width: $bp-xl) {
-      font-size: 5.5rem;
+      font-size: 7rem;
     }
   }
 
