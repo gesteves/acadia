@@ -12,7 +12,7 @@ module CustomHelpers
     caption = photo.plain_caption || "Latest from my photoblog"
     src = image_path "photoblog/#{photo.id}_1280.jpg"
     srcset = []
-    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 480, 400, 300, 240]
+    sizes = [1280, 636, 531, 508, 460, 446, 432, 378, 316, 260, 230, 223, 216]
     sizes.each do |size|
       srcset << "#{image_path("photoblog/#{photo.id}_#{size}.jpg")} #{size}w"
     end
@@ -24,7 +24,7 @@ module CustomHelpers
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
     src = image_path "instagram/#{photo.id}_640.jpg"
     srcset = []
-    sizes = [640, 320, 240, 200, 160, 140, 120, 100, 80, 60]
+    sizes = [640, 345, 332, 297, 210, 204, 176, 166, 154, 110, 105, 77, 55]
     sizes.each do |size|
       srcset << "#{image_path("instagram/#{photo.id}_#{size}.jpg")} #{size}w"
     end
