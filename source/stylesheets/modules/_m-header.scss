@@ -68,17 +68,21 @@ $m : '.m-header';
     fill: $color-header-text;
     height: 3.2rem;
     vertical-align: middle;
+    width: 3.2rem;
 
     @media (min-width: $bp-s) {
       height: 3.8rem;
+      width: 3.8rem;
     }
 
     @media (min-width: $bp-m) {
       height: 5.2rem;
+      width: 5.2rem;
     }
 
     @media (min-width: $bp-xl) {
       height: 6rem;
+      width: 6rem;
     }
   }
 }
