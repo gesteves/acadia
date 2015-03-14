@@ -15,7 +15,14 @@
       </div>
       
       <div class="m-twitter__actions">
-        <a href="https://twitter.com/statuses/<%= t.id_str %>" class="m-twitter__timestamp"><%= formatted_date_in_eastern(t.created_at, "%-d %B %Y %-l:%M %P") %></a>
+        <span class="m-twitter__timestamp">
+        <% unless t.in_reply_to_status_id_str.nil? || t.in_reply_to_screen_name.nil? %>
+          <a href="<%= "http://twitter.com/#{t.in_reply_to_screen_name}/status/#{t.in_reply_to_status_id_str}" %>">In reply to @<%= t.in_reply_to_screen_name %></a>, 
+        <% end %>
+        <a href="https://twitter.com/statuses/<%= t.id_str %>">
+          <%= formatted_date_in_eastern(t.created_at, "%-d %B %Y") %>
+        </a>
+        </span>
         <a class="m-twitter__action" href="https://twitter.com/intent/tweet?in_reply_to=<%= t.id_str %>" title="Reply"><%= inline_svg "svg-reply" %></a>
         <a class="m-twitter__action" href="https://twitter.com/intent/retweet?tweet_id=<%= t.id_str %>" title="Retweet"><%= inline_svg "svg-retweet" %></a>
         <a class="m-twitter__action" href="https://twitter.com/intent/favorite?tweet_id=<%= t.id_str %>" title="Favorite"><%= inline_svg "svg-star" %></a>

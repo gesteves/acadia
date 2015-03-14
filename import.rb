@@ -35,7 +35,7 @@ def get_tweets
   count               = ENV["TWITTER_COUNT"].to_i
   consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "http://api.twitter.com" })
   access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
-  response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=true&include_rts=false&trim_user=true&count=200")
+  response = access_token.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{user}&exclude_replies=false&include_rts=false&trim_user=true&count=200")
   tweets = JSON.parse(response.body).slice(0, count).map!{ |t| expand_tweet(t) }.to_json
   File.open("data/tweets.json","w"){ |f| f << tweets }
 end
@@ -76,7 +76,7 @@ def expand_tweet(tweet)
     entities.each_with_index do |e, i|
       # If it's the first entity, start by putting the text from the beginning of the tweet
       # to the start of the entity in the placeholder array
-      if i == 0
+      if i == 0 && e["indices"].first > 0
         end_index = e["indices"].first - 1
         expanded_text << text[0..end_index]
       end
