@@ -29,7 +29,7 @@ module CustomHelpers
     sizes.each do |size|
       srcset << "#{image_path("instagram/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 1280px) calc((25vw - 6rem) * 0.3), (min-width: 1000px) calc((25vw - 5rem) * 0.3), (min-width: 600px) calc((50vw - 4rem) * 0.3), calc((100vw - 4rem) * 0.3)"
+    sizes = "(min-width: 1280px) calc(((25vw - 1rem)/3)), (min-width: 1000px) calc(((25vw - 1rem)/3) - 8rem), (min-width: 600px) calc(((50vw - 1rem)/3) - 4rem), calc(((100vw - 2rem)/3) - 4rem)"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 

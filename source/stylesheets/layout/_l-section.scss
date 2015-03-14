@@ -47,5 +47,5 @@ $l : '.l-section';
 }
 
 #{$l}.wide #{$l}__container {
-  max-width: 100%;
+  max-width: $bp-xxl;
 }
