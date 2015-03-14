@@ -12,9 +12,9 @@ $m : '.m-photoblog';
 
 #{$m}__photo-item {
   display: block;
-  flex: 0 0 calc((100%/4) - 1rem);
+  flex: 0 0 calc(50% - 1rem);
   font-size: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
   a {
     display: block;
@@ -25,8 +25,12 @@ $m : '.m-photoblog';
       width: 100%;
     }
   }
-}
 
-#{$m}__photo {
-  width: 100%;
+  @media (min-width: $bp-m) {
+    flex: 0 0 calc((100%/3) - 2rem);
+  }
+
+  @media (min-width: $bp-xl) {
+    flex: 0 0 calc(25% - 2rem);
+  }
 }
