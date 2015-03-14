@@ -9,7 +9,7 @@ $m : '.m-instagram';
 
 #{$m}__photo-item {
   display: block;
-  flex: 0 0 30%;
+  flex: 0 0 calc((100%/3) - 1rem);
   font-size: 0;
   margin-bottom: 1rem;
 

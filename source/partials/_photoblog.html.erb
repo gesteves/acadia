@@ -1,12 +1,13 @@
 <section class="m-card m-photoblog">
-<h1>Photoblog</h1>
+<h1>Featured Photos</h1>
 
-<a href="<%= data.photoblog.post_url %>" class="m-photoblog__photo">
-  <%= photoblog_image_tag(data.photoblog) %>
-</a>
-<% unless data.photoblog.caption.nil? %>
-  <%= data.photoblog.caption %>
-<% end %>
-<p class="meta"><%= photo_exif(data.photoblog) %></p>
-
+<ol class="m-photoblog__photos">
+  <% data.photoblog.each do |photo| %>
+    <li class="m-photoblog__photo-item">
+      <a href="<%= photo.post_url %>">
+        <%= photoblog_image_tag(photo) %>
+      </a>
+    </li>
+  <% end %>
+</ol>
 </section>

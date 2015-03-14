@@ -146,49 +146,34 @@ end
 
 def get_photoblog_photos
   posts = call_photoblog_api
-  post = posts.map!{ |p| update_exif(p) }.map!{ |p| strip_html(p) }.sample
-  save_photoblog_photos(post) unless post.nil?
-  File.open("data/photoblog.json","w"){ |f| f << post.to_json }
+  posts.map!{ |p| strip_html(p) }
+  save_photoblog_photos(posts)
+  File.open("data/photoblog.json","w"){ |f| f << posts.to_json }
 end
 
 def call_photoblog_api(offset = 0, limit = 20)
-  posts = []
   url          = ENV["TUMBLR_PHOTOBLOG"]
   consumer_key = ENV["TUMBLR_CONSUMER_KEY"]
   tag          = ENV["TUMBLR_PHOTO_TAG"]
-  response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&tag=#{tag}&offset=#{offset}&limit=#{limit}")
+  count        = ENV["TUMBLR_PHOTOS_COUNT"].to_i
+  response = HTTParty.get("http://api.tumblr.com/v2/blog/#{url}/posts/photo?api_key=#{consumer_key}&tag=#{tag}&offset=#{offset}&limit=#{count}")
   body = JSON.parse(response.body)
-  posts << body["response"]["posts"]
-  if body["response"]["total_posts"] > offset + limit
-    posts << call_photoblog_api(offset + limit, limit)
-  end
-  posts.flatten
+  body["response"]["posts"]
 end
 
-def save_photoblog_photos(post)
-  post_id = post["id"]
-  # Tumblr posts can have more than one photo (photosets),
-  # but I'm only interested in showing the first one.
-  url = post["photos"][0]["original_size"]["url"]
-  original = Magick::Image::from_blob(HTTParty.get(url).body).first
-  sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 450, 400, 320]
-  sizes.each do |size|
-    image = original.resize_to_fill(size, (size * original.rows)/original.columns)
-    image.write("source/images/photoblog/#{post_id}_#{size}.jpg")
+def save_photoblog_photos(posts)
+  posts.each do |post|
+    post_id = post["id"]
+    # Tumblr posts can have more than one photo (photosets),
+    # but I'm only interested in showing the first one.
+    url = post["photos"][0]["original_size"]["url"]
+    original = Magick::Image::from_blob(HTTParty.get(url).body).first
+    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 480, 400, 300, 240]
+    sizes.each do |size|
+      image = original.resize_to_fill(size, size)
+      image.write("source/images/photoblog/#{post_id}_#{size}.jpg")
+    end
   end
-end
-
-def update_exif(post)
-  exif = {}
-  film_regex = /^film:name=/i
-  lens_regex = /^lens:model=/i
-  film = post["tags"].select{ |t| t =~ film_regex }.map{ |t| t.gsub(film_regex, "") }.first
-  lens = post["tags"].select{ |t| t =~ lens_regex }.map{ |t| t.gsub(lens_regex, "") }.first
-  exif[:camera] = post["photos"][0]["exif"]["Camera"] unless post["photos"][0]["exif"]["Camera"].nil?
-  exif[:film]   = film unless film.nil?
-  exif[:lens]   = lens unless lens.nil?
-  post[:exif] = exif
-  post
 end
 
 def strip_html(post)
@@ -276,7 +261,7 @@ def save_book_covers(books)
     cover = Magick::Image::from_blob(HTTParty.get(book[:image]).body).first
     sizes = [150, 100, 50]
     sizes.each do |size|
-      image = cover.resize_to_fill(size)
+      image = cover.resize_to_fill(size, (size * cover.rows)/cover.columns)
       image.write("source/images/goodreads/#{book[:id]}_#{size}.jpg")
     end
   end
@@ -314,7 +299,7 @@ def save_beer_labels(checkins)
     label = Magick::Image::from_blob(HTTParty.get(c["beer"]["beer_label"]).body).first
     sizes = [100, 50]
     sizes.each do |size|
-      image = label.resize_to_fill(size)
+      image = label.resize_to_fill(size, (size * label.rows)/label.columns)
       image.write("source/images/untappd/#{c["beer"]["bid"]}_#{size}.jpg")
     end
   end
@@ -339,7 +324,7 @@ def save_rdio_images(albums)
     album = Magick::Image::from_blob(HTTParty.get(a["icon"]).body).first
     sizes = [200, 150, 100, 50]
     sizes.each do |size|
-      image = album.resize_to_fill(size)
+      image = album.resize_to_fill(size, (size * album.rows)/album.columns)
       image.write("source/images/rdio/#{a["key"]}_#{size}.jpg")
     end
   end

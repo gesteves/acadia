@@ -13,11 +13,11 @@ module CustomHelpers
     caption = photo.plain_caption || "Latest from my photoblog"
     src = image_path "photoblog/#{photo.id}_1280.jpg"
     srcset = []
-    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 450, 400, 320]
+    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 480, 400, 320, 240]
     sizes.each do |size|
       srcset << "#{image_path("photoblog/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 800px) 800px, 100vw"
+    sizes = "(min-width: 1000px) calc(250px - 2rem), (min-width: 600px) calc(33.33vw - 6rem), calc(50vw - 4rem)"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
@@ -29,7 +29,7 @@ module CustomHelpers
     sizes.each do |size|
       srcset << "#{image_path("instagram/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 1280px) calc((25vw - 6rem) * 0.3), (min-width: 1000px) calc((25vw - 5rem) * 0.3), (min-width: 600px) calc((50vw - 4rem) * 0.3), calc((100vw - 4rem) * 0.3)"
+    sizes = "(min-width: 1280px) calc(((25vw - 1rem)/3)), (min-width: 1000px) calc(((25vw - 1rem)/3) - 8rem), (min-width: 600px) calc(((50vw - 1rem)/3) - 4rem), calc(((100vw - 2rem)/3) - 4rem)"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
