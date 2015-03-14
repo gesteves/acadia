@@ -51,16 +51,6 @@ $m : '.m-header';
     }
   }
 
-  [title="and"] {
-    border-bottom: 0;
-    cursor: auto;
-    font-family: fontello;
-    font-size: 125%;
-    font-weight: normal;
-    margin: 0 -4px 0 -3px;
-    vertical-align: middle;
-  }
-
   a:link,
   a:visited {
     color: $color-header-text;
@@ -71,5 +61,24 @@ $m : '.m-header';
   a:active {
     color: $color-links;
     text-decoration: none;
+  }
+
+  .svg-and {
+    display: inline-block;
+    fill: $color-header-text;
+    height: 3.2rem;
+    vertical-align: middle;
+
+    @media (min-width: $bp-s) {
+      height: 3.8rem;
+    }
+
+    @media (min-width: $bp-m) {
+      height: 5.2rem;
+    }
+
+    @media (min-width: $bp-xl) {
+      height: 6rem;
+    }
   }
 }

@@ -8,6 +8,9 @@
 /.bundle
 /node_modules
 
+# Ignore tmp folder
+/tmp
+
 # Ignore the build directory
 /build
 

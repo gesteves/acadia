@@ -3,7 +3,7 @@
     <h1>Elsewhere on the web</h1>
     <ul class="m-elsewhere__list">
       <% data.content.links.sort{ |a,b| a.name <=> b.name }.each do |link| %>
-        <li class="m-elsewhere__link <%= link.name %>"><%= link_to link.title, link.url %></li>
+        <li class="m-elsewhere__link"><a href="<%= link.url %>"><%= inline_svg "svg-#{link.name}" %><%= link.title %></a></li>
       <% end %>
     </ul>
   </section>

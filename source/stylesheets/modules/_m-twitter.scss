@@ -122,7 +122,7 @@ $m : '.m-twitter';
   }
 }
 
-#{$m}__action {
-  font-family: 'fontello';
+#{$m}__action .svg {
+  @include svg-icon($width: 1.4rem);
   margin-left: 1rem;
 }

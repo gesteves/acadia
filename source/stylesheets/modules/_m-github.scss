@@ -19,18 +19,16 @@ $m : '.m-github';
   a {
     font-size: 1.4rem;
     line-height: 1.5;
-    margin-left: 0.5rem;
-  }
-
-  a:before {
-    color: $color-very-light-gray;
-    position: relative;
-    top: 0.1rem;
+    margin-left: 1rem;
   }
 
   a:link,
   a:visited {
     color: $color-alt-text;
+
+    .svg {
+      fill: $color-very-light-gray;
+    }
   }
   
   a:hover,
@@ -38,11 +36,15 @@ $m : '.m-github';
     color: $color-links;
     text-decoration: none;
 
-    &:before {
-      color: $color-links;
+    .svg {
+      fill: $color-links;
     }
   }
 
+  .svg {
+    @include svg-icon($width: 1.4rem);
+    margin-right: 0.25rem;
+  }
 }
 
 #{$m} #{$m}__description {

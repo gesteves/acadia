@@ -7,3 +7,9 @@
   font-kerning: normal;
   text-rendering: optimizeLegibility;
 }
+
+@mixin svg-icon($width: 1rem, $height: $width, $fill: currentColor) {
+  fill: $fill;
+  height: $height;
+  width: $width;
+}
