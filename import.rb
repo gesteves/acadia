@@ -4,7 +4,7 @@ require "nokogiri"
 require "RMagick"
 require "sanitize"
 require "dotenv"
-require "active_support/time"
+require "tzinfo"
 
 Dotenv.load
 
@@ -15,8 +15,7 @@ def get_fitbit_data
   access_token_secret = ENV["FITBIT_ACCESS_TOKEN_SECRET"]
   consumer = OAuth::Consumer.new(consumer_key, consumer_secret, { site: "https://api.fitbit.com" })
   access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
-  Time.zone = "America/New_York"
-  today = Time.zone.now
+  today = TZInfo::Timezone.get("America/New_York").now
   activities = JSON.parse(access_token.get("https://api.fitbit.com/1/user/-/activities/date/#{today.strftime("%Y-%m-%d")}.json").body)
   sleep = JSON.parse(access_token.get("https://api.fitbit.com/1/user/-/sleep/date/#{today.strftime("%Y-%m-%d")}.json").body)
   fitbit = {
@@ -205,13 +204,14 @@ def get_github_repos
   File.open("data/repos.json","w"){ |f| f << repo_array.to_json }
 end
 
-def get_total_commits(days = 7)
+def get_total_commits
   commits = {
     :total_commits => 0,
     :additions => 0,
     :deletions => 0
   }
-  pushes = get_push_events(Time.now - days.days)
+  days = ENV["GITHUB_STATS_DAYS"].to_i
+  pushes = get_push_events(Time.now - (days * 60 * 60 * 24))
   pushes.each do |p|
     p["payload"]["commits"].find_all{ |c| c["distinct"] }.each do |c|
       stats = get_commit_stats(c["url"])

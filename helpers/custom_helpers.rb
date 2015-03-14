@@ -1,8 +1,6 @@
 module CustomHelpers
   require "date"
   require "tzinfo"
-  require "active_support/time"
-  require "active_support/core_ext/numeric"
 
   def formatted_date_in_eastern(date_string, format = "%F")
     tz = TZInfo::Timezone.get("America/New_York")
@@ -102,11 +100,10 @@ module CustomHelpers
   end
 
   def format_number(number)
-    number.to_s(:delimited)
-  end
-
-  def local_time(format = "%F", zone = "America/New_York")
-    Time.zone = zone
-    Time.zone.now.strftime(format)
+    number = number.to_s
+    while number.match(/(\d+)(\d\d\d)/)
+      number.gsub!(/(\d+)(\d\d\d)/, "\\1,\\2")
+    end
+    number
   end
 end

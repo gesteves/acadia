@@ -265,7 +265,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
   dotenv
   httparty
   middleman (~> 3.3.10)

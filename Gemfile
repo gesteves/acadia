@@ -5,7 +5,6 @@ ruby "2.1.5"
 
 gem "middleman", "~>3.3.10"
 gem "middleman-s3_sync"
-gem "middleman-autoprefixer"
 gem "middleman-minify-html"
 gem "middleman-dotenv"
 
@@ -20,5 +19,8 @@ gem "tzinfo"
 gem "rmagick"
 gem "sanitize"
 gem "dotenv"
-gem "activesupport"
-gem "scss-lint"
+
+group :development do
+  gem "scss-lint"
+  gem "middleman-autoprefixer"
+end
