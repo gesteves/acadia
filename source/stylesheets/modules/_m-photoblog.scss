@@ -1,28 +1,32 @@
 $m : '.m-photoblog';
 
 #{$m} {
-  flex: 0 0 auto;
-  margin: 0;
-  
-  img {
-    max-height: 100vh;
-    max-width: 100%;
-  }
+  flex: 0 0 100%;
+}
 
-  .meta {
-    color: $color-alt-text;
-    font-size: 1.2rem;
-    font-style: italic;
-    margin: 0;
-    text-indent: 0;
+#{$m}__photos {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+#{$m}__photo-item {
+  display: block;
+  flex: 0 0 calc((100%/4) - 1rem);
+  font-size: 0;
+  margin-bottom: 1rem;
+
+  a {
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
   }
 }
 
 #{$m}__photo {
-  display: block;
-  margin: 0 -2rem;
-
-  @media (min-width: $bp-l) {
-    margin: 0;
-  }
+  width: 100%;
 }
