@@ -1,11 +1,58 @@
 $m : '.m-twitter';
 
+#{$m} {
+  flex: 1 1 100%;
+  margin: 0;
+}
+
+#{$m}__eyebrow {
+  color: $color-alt-text;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+#{$m} #{$m}__tweet {
+  font-size: 1.6rem;
+  font-style: italic;
+  margin: 1rem 0 2rem;
+
+  @media (min-width: $bp-m) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: $bp-xl) {
+    font-size: 2.4rem;
+  }
+}
+
+#{$m} #{$m}__meta {
+  border-top: 1px solid $color-very-light-gray;
+  color: $color-alt-text;
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 2rem 0 0;
+  text-indent: 0;
+
+  a:link,
+  a:visited {
+    color: $color-alt-text;
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:active {
+    color: $color-links;
+    text-decoration: none;
+  }
+}
+
 #{$m}__user {
   align-items: center;
-  border-bottom: 1px solid $color-very-light-gray;
   display: flex;
-  padding-bottom: 1rem;
-  width: 100%;
+  flex: 1 0 auto;
 }
 
 #{$m}__avatar {
@@ -22,14 +69,13 @@ $m : '.m-twitter';
 
 #{$m}__username {
   display: block;
-  flex-grow: 1;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   padding: 0 1rem;
 
   #{$m}__screenname {
     color: $color-alt-text;
     display: inline-block;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -43,107 +89,30 @@ $m : '.m-twitter';
   }
 }
 
-#{$m}__follow {
-  display: none;
-  font-size: 1.2rem;
-
-  a {
-    border: 1px solid;
-    border-radius: 2px;
-    padding: 0.25rem 0.5rem;
-  }
-
-  a:link,
-  a:visited {
-    border-color: lighten($color-very-light-gray, 5%);
-    color: $color-alt-text;
-    text-decoration: none;
-
-    &:before {
-      color: $color-very-light-gray;
-    }
-  }
-
-  a:hover,
-  a:active {
-    border-color: darken($color-very-light-gray, 5%);
-    color: $color-links;
-    text-decoration: none;
-
-    &:before {
-      color: $color-links;
-    }
-  }
-
-  a:before {
-    content: '\e804';
-    font-family: fontello;
-    margin-right: 0.25rem;
-  }
-
-  @media (min-width: $bp-s) {
-    display: block;
-  }
+#{$m}__timestamp {
+  display: block;
+  font-style: italic;
+  margin-right: 1rem;
 }
 
-#{$m}__tweet {
-  margin: 0 0 2rem;
-}
-
-#{$m} #{$m}__meta {
-  color: $color-alt-text;
+#{$m}__actions {
+  align-items: center;
   display: flex;
-  font-size: 1.2rem;
-  margin: 0;
-  text-indent: 0;
+  flex: 0 0 auto;
+  font-size: 1.4rem;
 
   a:link,
   a:visited {
-    color: $color-alt-text;
-    text-decoration: none;
+    color: $color-very-light-gray;
   }
 
   a:hover,
   a:active {
     color: $color-links;
-    text-decoration: none;
-  }
-
-  .timestamp {
-    display: block;
-    flex-grow: 1;
-    font-style: italic;
-    width: 100%;
-
-    @media (min-width: $bp-s) {
-      width: 50%;
-    }
-  }
-  
-  .actions {
-    display: none;
-    text-align: right;
-    width: 50%;
-
-    a {
-      font-family: 'fontello';
-      margin-left: 0.5rem;
-    }
-
-    a:link,
-    a:visited {
-      color: $color-very-light-gray;
-    }
-
-    a:hover,
-    a:active {
-      color: $color-links;
-    }
   }
 }
 
-#{$m}__tweet:hover #{$m}__meta .actions {
-  @media (min-width: $bp-s) {
-    display: block;
-  }
+#{$m}__action {
+  font-family: 'fontello';
+  margin-left: 1rem;
 }
