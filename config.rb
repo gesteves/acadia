@@ -19,6 +19,7 @@ end
 
 # Build-specific configuration
 configure :build do
+  ignore "svg/*"
   activate :minify_css
   activate :minify_javascript
   activate :minify_html
