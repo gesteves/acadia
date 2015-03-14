@@ -10,18 +10,6 @@ $m : '.m-stats';
   flex: 1 1 auto;
   margin: 2rem 0;
   padding: 0 3rem;
-
-  &:first-of-type {
-    margin-top: 0;
-  }
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-
-  @media (min-width: $bp-xxl) {
-    margin: 0;
-  }
 }
 
 #{$m}__number {
