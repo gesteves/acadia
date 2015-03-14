@@ -35,9 +35,9 @@ $m : '.m-card';
   h2 {
     @include kerning;
     font-family: $calluna;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: normal;
-    line-height: 1;
+    line-height: 1.5;
   }
 
   p {
