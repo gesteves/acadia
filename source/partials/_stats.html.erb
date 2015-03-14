@@ -1,13 +1,5 @@
 <section class="m-stats">
   <div class="m-stats__stat">
-    <div class="m-stats__number"><%= format_number data.fitbit.steps %></div>
-    <div class="m-stats__meta">Steps taken today</div>
-  </div>
-  <div class="m-stats__stat">
-    <div class="m-stats__number"><%= format_number data.fitbit.distance %></div>
-    <div class="m-stats__meta">Kilometers walked &amp; run today</div>
-  </div>
-  <div class="m-stats__stat">
     <div class="m-stats__number"><%= format_number data.commits.total_commits %></div>
     <div class="m-stats__meta">Commits in the past week</div>
   </div>
@@ -18,5 +10,13 @@
   <div class="m-stats__stat">
     <div class="m-stats__number"><%= format_number data.commits.deletions %></div>
     <div class="m-stats__meta">Code deletions in the past week</div>
+  </div>
+  <div class="m-stats__stat">
+    <div class="m-stats__number"><%= format_number data.fitbit.steps %></div>
+    <div class="m-stats__meta">Steps taken today</div>
+  </div>
+  <div class="m-stats__stat">
+    <div class="m-stats__number"><%= format_number data.fitbit.distance %></div>
+    <div class="m-stats__meta">Kilometers walked &amp; run today</div>
   </div>
 </section>
