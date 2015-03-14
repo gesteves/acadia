@@ -168,7 +168,7 @@ def save_photoblog_photos(posts)
     # but I'm only interested in showing the first one.
     url = post["photos"][0]["original_size"]["url"]
     original = Magick::Image::from_blob(HTTParty.get(url).body).first
-    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 460, 400, 300, 230]
+    sizes = [1280, 1200, 1100, 1000, 900, 800, 640, 600, 550, 500, 480, 400, 300, 240]
     sizes.each do |size|
       image = original.resize_to_fill(size, size)
       image.write("source/images/photoblog/#{post_id}_#{size}.jpg")
