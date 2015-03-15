@@ -8,7 +8,7 @@
             <%= untappd_image_tag(c.beer) %>
           </a>
           <div class="p-list__meta">
-            <span class="p-eyebrow"><%= c.beer.beer_style %> &middot; <%= c.beer.beer_abv %>% ABV</span>
+            <span class="p-eyebrow"><%= c.beer.beer_style %></span>
             <a href="https://untappd.com/beer/<%= c.beer.bid %>" class="p-list__title"><%= c.beer.beer_name %></a>
             <a href="https://untappd.com/brewery/<%= c.brewery.brewery_id %>" class="p-list__author"><%= c.brewery.brewery_name %></a>
           </div>
