@@ -50,3 +50,7 @@ $l : '.l-section';
 #{$l}.wide #{$l}__container {
   max-width: $bp-xxl;
 }
+
+#{$l}.wide.single #{$l}__container {
+  justify-content: center;
+}

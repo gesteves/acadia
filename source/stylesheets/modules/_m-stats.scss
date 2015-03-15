@@ -9,7 +9,7 @@ $m : '.m-stats';
 #{$m}__stat {
   flex: 1 1 auto;
   margin: 2rem 0;
-  padding: 0 3rem;
+  padding: 0 2rem;
 }
 
 #{$m}__number {
@@ -17,7 +17,7 @@ $m : '.m-stats';
   font-size: 8em;
   font-weight: 100;
   letter-spacing: -2px;
-  line-height: 1;
+  line-height: 8rem;
   margin: 0;
   text-align: center;
 }
