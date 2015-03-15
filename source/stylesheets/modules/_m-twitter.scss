@@ -110,16 +110,3 @@ $m : '.m-twitter';
     margin-left: 1rem;
   }
 }
-
-.no-flexbox {
-  #{$m}__user {
-    display: block;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
-
-  #{$m}__actions {
-    display: block;
-    width: 100%;
-  }
-}

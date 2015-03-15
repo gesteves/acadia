@@ -23,9 +23,3 @@ $m : '.m-intro';
     }
   }
 }
-
-.no-flexbox #{$m} {
-  @media (min-width: $bp-m) {
-    text-align: left;
-  }
-}
