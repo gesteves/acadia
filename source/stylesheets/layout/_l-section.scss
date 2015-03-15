@@ -50,3 +50,13 @@ $l : '.l-section';
 #{$l}.wide #{$l}__container {
   max-width: $bp-xxl;
 }
+
+.no-flexbox {
+  #{$l}__container,
+  #{$l}.narrow #{$l}__container,
+  #{$l}.wide #{$l}__container {
+    margin: 0 auto;
+    max-width: $bp-m;
+  }
+
+}
