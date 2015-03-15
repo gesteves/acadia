@@ -25,23 +25,15 @@ $m : '.m-github';
   a:link,
   a:visited {
     color: $color-alt-text;
-
-    .svg {
-      fill: $color-very-light-gray;
-    }
   }
   
   a:hover,
   a:active {
     color: $color-links;
     text-decoration: none;
-
-    .svg {
-      fill: $color-links;
-    }
   }
 
-  .svg {
+  .p-svg {
     @include svg-icon($width: 1.4rem);
     margin-right: 0.25rem;
   }

@@ -107,7 +107,7 @@ module CustomHelpers
     number
   end
 
-  def inline_svg(svg_id, svg_class = "svg")
+  def inline_svg(svg_id, svg_class = "p-svg")
     svg_id = svg_id.gsub("#", "")
     "<svg viewBox=\"0 0 100 100\" class=\"#{svg_class} #{svg_id}\"><use xlink:href=\"##{svg_id}\"></use></svg>"
   end

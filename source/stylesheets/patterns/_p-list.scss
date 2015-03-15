@@ -1,28 +1,17 @@
-$m : '.m-list';
+$p : '.p-list';
 
-#{$m} {
-  li { margin-bottom: 2rem; }
-}
-
-
-#{$m} #{$m}__item {
+#{$p}__item {
   align-items: center;
   display: flex;
+  margin-bottom: 2rem;
 
-  #{$m}__eyebrow {
-    color: $color-alt-text;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  #{$m}__author {
+  #{$p}__author {
     color: $color-alt-text;
     font-size: 1.2rem;
     font-style: italic;
   }
 
-  a#{$m}__author {
+  a#{$p}__author {
     &:link,
     &:visited {
       color: $color-alt-text;
@@ -35,12 +24,12 @@ $m : '.m-list';
   }
 }
 
-#{$m}__title {
+#{$p}__title {
   font-size: 1.4rem;
   line-height: 1.5;
 }
 
-#{$m}__image {
+#{$p}__image {
   align-items: center;
   display: flex;
   width: 50px;
@@ -48,7 +37,7 @@ $m : '.m-list';
   img { width: 50px; }
 }
 
-#{$m}__meta {
+#{$p}__meta {
   display: flex;
   flex-direction: column;
   line-height: 1.25;

@@ -1,19 +1,17 @@
 <% unless data.untappd.empty? %>
-  <section class="m-card m-list">
+  <section class="m-card p-list">
     <h1>Drinking responsibly</h1>
     <ol>
       <% data.untappd.each do |c| %>
-        <li>
-          <div class="m-list__item">
-            <a href="https://untappd.com/user/<%= c.user.user_name %>/checkin/<%= c.checkin_id %>" class="m-list__image">
-              <%= untappd_image_tag(c.beer) %>
-            </a>
-            <div class="m-list__meta">
-              <span class="m-list__eyebrow"><%= c.beer.beer_style %> &middot; <%= c.beer.beer_abv %>% ABV</span>
-              <a href="https://untappd.com/beer/<%= c.beer.bid %>" class="m-list__title"><%= c.beer.beer_name %></a>
-              <a href="https://untappd.com/brewery/<%= c.brewery.brewery_id %>" class="m-list__author"><%= c.brewery.brewery_name %></a>
-            </div>
+        <li class="p-list__item">
+          <a href="https://untappd.com/user/<%= c.user.user_name %>/checkin/<%= c.checkin_id %>" class="p-list__image">
+            <%= untappd_image_tag(c.beer) %>
           </a>
+          <div class="p-list__meta">
+            <span class="p-eyebrow"><%= c.beer.beer_style %> &middot; <%= c.beer.beer_abv %>% ABV</span>
+            <a href="https://untappd.com/beer/<%= c.beer.bid %>" class="p-list__title"><%= c.beer.beer_name %></a>
+            <a href="https://untappd.com/brewery/<%= c.brewery.brewery_id %>" class="p-list__author"><%= c.brewery.brewery_name %></a>
+          </div>
         </li>
       <% end %>
     </ol>

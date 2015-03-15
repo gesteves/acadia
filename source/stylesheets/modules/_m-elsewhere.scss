@@ -32,21 +32,11 @@ $m : '.m-elsewhere';
     display: block;
     font-size: 1.6rem;
     line-height: 1.5;
+  }
 
-    .svg {
-      @include svg-icon($width: 1.8rem);
-      margin-right: 0.5rem;
-      vertical-align: text-bottom;
-    }
-
-    &:link .svg,
-    &:visited .svg {
-      fill: $color-very-light-gray;
-    }
-
-    &:hover .svg,
-    &:active .svg {
-      fill: $color-links;
-    }
+  .p-svg {
+    @include svg-icon($width: 1.8rem);
+    margin-right: 0.5rem;
+    vertical-align: text-bottom;
   }
 }

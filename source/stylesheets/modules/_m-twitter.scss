@@ -3,29 +3,22 @@ $m : '.m-twitter';
 #{$m} {
   flex: 1 1 100%;
   margin: 0;
-}
 
-#{$m}__eyebrow {
-  color: $color-alt-text;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
+  #{$m}__tweet {
+    font-size: 1.6rem;
+    margin: 1rem 0 2rem;
 
-#{$m} #{$m}__tweet {
-  font-size: 1.6rem;
-  margin: 1rem 0 2rem;
+    @media (min-width: $bp-m) {
+      font-size: 2rem;
+    }
 
-  @media (min-width: $bp-m) {
-    font-size: 2rem;
-  }
-
-  @media (min-width: $bp-xl) {
-    font-size: 2.4rem;
+    @media (min-width: $bp-xl) {
+      font-size: 2.4rem;
+    }
   }
 }
 
-#{$m} #{$m}__meta {
+#{$m}__meta {
   border-top: 1px solid $color-very-light-gray;
   color: $color-alt-text;
   display: flex;
@@ -109,19 +102,11 @@ $m : '.m-twitter';
   display: flex;
   flex: 0 0 auto;
   font-size: 1.4rem;
-
-  a:link,
-  a:visited {
-    color: $color-very-light-gray;
-  }
-
-  a:hover,
-  a:active {
-    color: $color-links;
-  }
 }
 
-#{$m}__action .svg {
-  @include svg-icon($width: 1.4rem);
-  margin-left: 1rem;
+#{$m}__action {
+  .p-svg {
+    @include svg-icon($width: 1.4rem);
+    margin-left: 1rem;
+  }
 }
