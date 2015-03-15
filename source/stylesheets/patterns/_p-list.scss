@@ -32,7 +32,7 @@ $p : '.p-list';
 #{$p}__image {
   align-items: center;
   display: flex;
-  width: 50px;
+  flex: 0 0 50px;
 
   img { width: 50px; }
 }
