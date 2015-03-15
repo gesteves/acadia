@@ -9,11 +9,11 @@ $m : '.m-instagram';
 
 #{$m}__photo-item {
   display: block;
-  flex-basis: calc((100%/3) - 1rem);
+  flex-basis: calc((100%/3) - 1px);
   flex-grow: 0;
   flex-shrink: 0;
   font-size: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 2px;
 
   a {
     display: block;
@@ -32,6 +32,6 @@ $m : '.m-instagram';
 
 .no-flexbox #{$m}__photo-item {
   display: inline-block;
-  margin-right: 1rem;
-  width: calc((100%/3) - 1rem);
+  margin-right: 1px;
+  width: calc((100%/3) - 1px);
 }

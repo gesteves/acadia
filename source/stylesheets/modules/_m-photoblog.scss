@@ -12,11 +12,11 @@ $m : '.m-photoblog';
 
 #{$m}__photo-item {
   display: block;
-  flex-basis: calc(50% - 1rem);
+  flex-basis: calc(50% - 1px);
   flex-grow: 0;
   flex-shrink: 0;
   font-size: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 2px;
 
   a {
     display: block;
@@ -29,13 +29,13 @@ $m : '.m-photoblog';
   }
 
   @media (min-width: $bp-m) {
-    flex-basis: calc((100%/3) - 2rem);
+    flex-basis: calc((100%/3) - 1px);
     flex-grow: 0;
     flex-shrink: 0;
   }
 
   @media (min-width: $bp-xl) {
-    flex-basis: calc(25% - 2rem);
+    flex-basis: calc(25% - 1px);
     flex-grow: 0;
     flex-shrink: 0;
   }
@@ -43,14 +43,14 @@ $m : '.m-photoblog';
 
 .no-flexbox #{$m}__photo-item {
   display: inline-block;
-  margin-right: 2rem;
-  width: calc(50% - 2rem);
+  margin-right: 1px;
+  width: calc(50% - 1px);
 
   @media (min-width: $bp-m) {
-    width: calc((100%/3) - 2rem);
+    width: calc((100%/3) - 1px);
   }
 
   @media (min-width: $bp-xl) {
-    width: calc(25% - 2rem);
+    width: calc(25% - 1px);
   }
 }

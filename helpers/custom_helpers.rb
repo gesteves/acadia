@@ -12,11 +12,11 @@ module CustomHelpers
     caption = photo.plain_caption || "Latest from my photoblog"
     src = image_path "photoblog/#{photo.id}_1280.jpg"
     srcset = []
-    sizes = [1280, 636, 531, 508, 460, 446, 432, 378, 316, 260, 230, 223, 216]
+    sizes = [1280, 693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
     sizes.each do |size|
       srcset << "#{image_path("photoblog/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 1090px) 230px, (min-width: 1000px) calc((100vw - 8rem)/4 - 2rem), (min-width: 600px) calc((100vw - 4rem)/3 - 2rem), calc((100vw - 4rem)/2 - 1rem)"
+    sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
@@ -24,11 +24,11 @@ module CustomHelpers
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
     src = image_path "instagram/#{photo.id}_640.jpg"
     srcset = []
-    sizes = [640, 345, 332, 297, 210, 204, 176, 166, 154, 110, 105, 77, 55]
+    sizes = [640, 372, 350, 324, 228, 222, 194, 184, 172, 128, 114, 92, 86, 64]
     sizes.each do |size|
       srcset << "#{image_path("instagram/#{photo.id}_#{size}.jpg")} #{size}w"
     end
-    sizes = "(min-width: 1360px) 83px, (min-width: 1000px) calc((25vw - 8rem)/3 - 1rem), (min-width: 600px) calc((50vw - 4rem)/3 - 1rem), calc((100vw - 4rem)/3 - 1rem)"
+    sizes = "(min-width: 1360px) 92px, (min-width: 1000px) calc((25vw - 8rem)/3 - 1px), (min-width: 600px) calc((50vw - 4rem)/3 - 1px), calc((100vw - 4rem)/3 - 1px)"
     "<img src=\"#{src}\" srcset=\"#{srcset.join(", ")}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
