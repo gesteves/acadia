@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @include serif;
+  @extend %serif;
   color: $color-text;
   font-weight: 300;
 }
@@ -17,4 +17,26 @@ body {
   height: 1rem;
   vertical-align: middle;
   width: 1rem;
+}
+
+%sans-serif {
+  font-family: 'Helvetica Neue', sans-serif;
+
+  .wf-active & {
+    font-family: $font-sans-serif;
+  }
+}
+
+%serif {
+  font-family: 'Georgia', serif;
+
+  .wf-active & {
+    font-family: $font-serif;
+  }
+}
+
+h1,
+h2,
+h3 {
+  @extend %sans-serif;
 }

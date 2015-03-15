@@ -13,7 +13,7 @@ $m : '.m-stats';
 }
 
 #{$m}__number {
-  @include sans-serif;
+  @extend %sans-serif;
   font-size: 8em;
   font-weight: 100;
   letter-spacing: -2px;

@@ -13,19 +13,3 @@
   height: $height;
   width: $width;
 }
-
-@mixin sans-serif() {
-  font-family: 'Helvetica Neue', sans-serif;
-
-  .wf-active & {
-    font-family: $font-sans-serif;
-  }
-}
-
-@mixin serif() {
-  font-family: 'Georgia', serif;
-
-  .wf-active & {
-    font-family: $font-serif;
-  }
-}
