@@ -60,7 +60,7 @@ namespace :import do
     begin
       puts '== Importing links'
       start_time = Time.now
-      linkblog = Import::LinkBlog.new(ENV['TUMBLR_CONSUMER_KEY'], ENV['TUMBLR_LINKS'], ENV['TUMBLR_LINKS_COUNT'].to_i, ENV['TUMBLR_LINK_TAG'])
+      linkblog = Import::LinkBlog.new(ENV['TUMBLR_CONSUMER_KEY'], ENV['TUMBLR_LINKS'],ENV['TUMBLR_LINK_TAG'], ENV['TUMBLR_LINKS_COUNT'].to_i)
       linkblog.get_links
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e

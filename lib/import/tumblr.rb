@@ -4,7 +4,7 @@ require 'RMagick'
 
 module Import
   class Photoblog
-    def initialize(consumer_key, photo_url, photo_count, photo_tag)
+    def initialize(consumer_key, photo_url, photo_tag, photo_count)
       @consumer_key = consumer_key
       @photo_url    = photo_url
       @photo_tag    = photo_tag
@@ -40,7 +40,7 @@ module Import
   end
 
   class LinkBlog
-    def initialize(consumer_key, link_url, link_count, link_tag)
+    def initialize(consumer_key, link_url, link_tag, link_count)
       @consumer_key = consumer_key
       @link_url     = link_url
       @link_count   = link_count
