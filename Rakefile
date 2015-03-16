@@ -1,5 +1,6 @@
 require 'rake/clean'
 require 'dotenv/tasks'
+require 'open-uri'
 require_relative 'lib/import'
 
 CLOBBER.include('data/*.json', 'source/images/instagram/*', 'source/images/photoblog/*', 'source/images/goodreads/*', 'source/images/untappd/*', 'source/images/twitter/*', 'source/images/rdio/*')
@@ -148,9 +149,13 @@ task :import => [ 'clobber',
                   'import:fitbit' ]
 
 desc 'Import content and publish the site'
-task :publish => [:import] do
+task :publish => [:dotenv, :import] do
+  publish_start = Time.now
   puts '== Building the site'
   system('middleman build')
   puts '== Syncing with S3'
   system('middleman s3_sync')
+  complete_message = "Site published in #{Time.now - publish_start} seconds"
+  puts complete_message
+  open("https://nosnch.in/#{ENV['SNITCH_ID']}?m=#{URI.escape(complete_message)}") unless ENV['SNITCH_ID'].nil?
 end
