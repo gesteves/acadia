@@ -26,7 +26,7 @@ namespace :import do
       twitter.get_twitter_user
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort 'Failed to import tweets: #{e}'
+      abort "Failed to import s: #{e}"
     end
   end
 
@@ -39,7 +39,7 @@ namespace :import do
       instagram.get_photos
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort 'Failed to import Instagram photos: #{e}'
+      abort "Failed to import Instagram photos: #{e}"
     end
   end
 
@@ -52,7 +52,7 @@ namespace :import do
       photoblog.get_photos
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort 'Failed to import photoblog photos: #{e}'
+      abort "Failed to import photoblog photos: #{e}"
     end
   end
 
@@ -65,7 +65,7 @@ namespace :import do
       linkblog.get_links
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort 'Failed to import links: #{e}'
+      abort "Failed to import s: #{e}"
     end
   end
 
@@ -80,7 +80,7 @@ namespace :import do
       github.get_stats
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-     abort 'Failed to import repos: #{e}'
+     abort "Failed to import s: #{e}"
     end
   end
 
@@ -132,7 +132,7 @@ namespace :import do
       fitbit.get_steps
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort 'Failed to import Fitbit: #{e}'
+      abort "Failed to import t: #{e}"
     end
   end
 end
