@@ -10,7 +10,7 @@ module CustomHelpers
 
   def photoblog_image_tag(photo)
     caption = photo.plain_caption || "Latest from my photoblog"
-    src = image_path "photoblog/#{photo.id}_1280.jpg"
+    src = image_path "photoblog/#{photo.id}_693.jpg"
     srcset = []
     sizes = [1280, 693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
     sizes.each do |size|
@@ -22,7 +22,7 @@ module CustomHelpers
 
   def instagram_image_tag(photo)
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
-    src = image_path "instagram/#{photo.id}_640.jpg"
+    src = image_path "instagram/#{photo.id}_372.jpg"
     srcset = []
     sizes = [640, 372, 350, 324, 228, 222, 194, 184, 172, 128, 114, 92, 86, 64]
     sizes.each do |size|
