@@ -25,7 +25,7 @@ module Import
         sizes = [200, 150, 100, 50]
         sizes.each do |size|
           image = album.resize_to_fill(size, (size * album.rows)/album.columns)
-          image.write("source/images/rdio/#{a['key']}_#{size}.jpg")
+          image.write("source/images/rdio/#{a['key']}_#{size}.jpg"){ self.interlace = Magick::LineInterlace }
         end
       end
     end

@@ -42,7 +42,7 @@ module Import
         sizes = [150, 100, 50]
         sizes.each do |size|
           image = cover.resize_to_fill(size, (size * cover.rows)/cover.columns)
-          image.write("source/images/goodreads/#{book[:id]}_#{size}.jpg")
+          image.write("source/images/goodreads/#{book[:id]}_#{size}.jpg"){ self.interlace = Magick::LineInterlace }
         end
       end
     end
