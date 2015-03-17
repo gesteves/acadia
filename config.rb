@@ -19,7 +19,7 @@ end
 activate :imageoptim do |options|
   options.manifest         = false
   options.image_extensions = %w(.jpg)
-  options.jpegoptim        = { :strip => ['all'], :max_quality => 100 }
+  options.jpegoptim        = { :max_quality => 100 }
   options.jpegtran         = { :copy_chunks => false, :progressive => true, :jpegrescan => true }
   options.advpng           = false
   options.gifsicle         = false
