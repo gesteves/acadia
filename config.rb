@@ -29,7 +29,7 @@ configure :build do
     options.manifest         = false
     options.image_extensions = %w(.jpg)
     options.allow_lossy      = true
-    options.jpegoptim        = { :strip => ['all'], :max_quality => 80 }
+    options.jpegoptim        = { :strip => ['all'], :max_quality => 85 }
     options.jpegtran         = false
     options.advpng           = false
     options.gifsicle         = false
