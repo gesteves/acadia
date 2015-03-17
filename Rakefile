@@ -156,7 +156,6 @@ task :invalidate => [:dotenv] do
     invalidator = CloudfrontInvalidator.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY_ID'], ENV['AWS_CLOUDFRONT_DISTRIBUTION_ID'])
     list = %w{
       index.html
-      404.html
     }
     invalidator.invalidate(list)
   end
