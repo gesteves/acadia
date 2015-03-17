@@ -3,12 +3,13 @@ $p : '.p-list';
 #{$p}__item {
   align-items: center;
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 
   #{$p}__author {
     color: $color-alt-text;
     font-size: 1.2rem;
     font-style: italic;
+    line-height: (2.1/1.2);
   }
 
   a#{$p}__author {
@@ -26,7 +27,7 @@ $p : '.p-list';
 
 #{$p}__title {
   font-size: 1.4rem;
-  line-height: 1.5;
+  line-height: (2.1/1.4);
 }
 
 #{$p}__image {
@@ -40,7 +41,6 @@ $p : '.p-list';
 #{$p}__meta {
   display: flex;
   flex-direction: column;
-  line-height: 1.25;
   padding-left: 1rem;
 
   span,

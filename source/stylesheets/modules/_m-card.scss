@@ -26,8 +26,8 @@ $m : '.m-card';
     color: $color-heading;
     font-size: 2rem;
     font-weight: bold;
-    line-height: 1;
-    margin: 0 0 2rem;
+    line-height: (2.1/2);
+    margin: 0 0 ((2.1/2) * 1rem);
     text-transform: uppercase;
   }
 
@@ -36,12 +36,12 @@ $m : '.m-card';
     @include kerning;
     font-size: 1.8rem;
     font-weight: normal;
-    line-height: 1.5;
+    line-height: (2.1/1.8);
   }
 
   p {
     font-size: 1.4rem;
-    line-height: 1.5;
+    line-height: (2.1/1.4);
     margin: 1rem 0 0;
   }
 

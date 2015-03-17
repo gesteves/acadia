@@ -8,7 +8,7 @@ $m : '.m-stats';
 
 #{$m}__stat {
   flex: 1 1 auto;
-  margin: 2rem 0;
+  margin: 2.1rem 0;
   padding: 0 2rem;
 }
 
@@ -26,8 +26,7 @@ $m : '.m-stats';
   color: $color-alt-text;
   font-size: 1rem;
   letter-spacing: 1px;
-  line-height: 1.5;
-  margin: 0 0 1rem;
+  line-height: (2.1/1);
   text-align: center;
   text-transform: uppercase;
 }

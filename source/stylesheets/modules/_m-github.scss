@@ -3,7 +3,7 @@ $m : '.m-github';
 #{$m}__repo {
   display: flex;
   flex-flow: row wrap;
-  margin: 0 0 2rem;
+  margin: 0 0 2.1rem;
   position: relative;
 }
 
@@ -41,5 +41,5 @@ $m : '.m-github';
 
 #{$m} #{$m}__description {
   flex: 0 0 100%;
-  margin: 0 0 0 1rem;
+  margin: 0 0 0 1.5rem;
 }
