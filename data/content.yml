@@ -3,7 +3,7 @@ copy:
   dek: "Web design <svg viewBox=\"0 0 100 100\" class=\"svg svg-and\"><use xlink:href=\"#svg-and\"></use></svg> stuff."
   intro: |
           <p><strong>Hello.</strong> My name is Guillermo Esteves.</p>
-          <p>I specialize in building simple, usable, elegant websites using modern web standards and&nbsp;technologies.</p>
+          <p>I specialize in building fast, usable, elegant websites using modern web standards and&nbsp;technologies.</p>
           <p>I live in Washington, DC and currently I’m a senior front-end engineer at <a href="http://www.voxmedia.com">Vox&nbsp;Media</a>’s <a href="http://product.voxmedia.com/team">Product&nbsp;Team</a>.</p>
           <p>Do you want to get in touch? <a href="http://www.google.com/recaptcha/mailhide/d?k=01G06pksk2qzpcEpeQwEr-ag==&c=qWUutQW9ggF5dA5cZPlp8K-ABPxMKcCbnFW87hSSaQ4=">Email&nbsp;me</a>.</p>
 meta:
