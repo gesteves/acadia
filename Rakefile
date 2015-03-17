@@ -1,7 +1,6 @@
 require 'rake/clean'
 require 'dotenv/tasks'
 require 'open-uri'
-require 'cloudfront-invalidator'
 require_relative 'lib/import'
 
 CLOBBER.include('data/*.json', 'source/images/instagram/*', 'source/images/photoblog/*', 'source/images/goodreads/*', 'source/images/untappd/*', 'source/images/twitter/*', 'source/images/rdio/*')
@@ -149,20 +148,8 @@ task :import => [ 'clobber',
                   'import:rdio',
                   'import:fitbit' ]
 
-desc 'Send CloudFront invalidation request'
-task :invalidate => [:dotenv] do
-  unless ENV['AWS_CLOUDFRONT_DISTRIBUTION_ID'].nil?
-    puts '== Sending CloudFront invalidation request'
-    invalidator = CloudfrontInvalidator.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY_ID'], ENV['AWS_CLOUDFRONT_DISTRIBUTION_ID'])
-    list = %w{
-      index.html
-    }
-    invalidator.invalidate(list)
-  end
-end                 
-
 desc 'Import content and publish the site'
-task :publish => [:dotenv, :import, :invalidate] do
+task :publish => [:dotenv, :import] do
   puts '== Building the site'
   system('middleman build')
   puts '== Syncing with S3'

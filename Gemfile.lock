@@ -25,8 +25,6 @@ GEM
     celluloid (0.16.0)
       timers (~> 4.0.0)
     chunky_png (1.3.4)
-    cloudfront-invalidator (0.2.1)
-      ruby-hmac
     coffee-script (2.3.0)
       coffee-script-source
       execjs
@@ -252,7 +250,6 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rmagick (2.13.4)
-    ruby-hmac (0.4.0)
     ruby-progressbar (1.7.1)
     sanitize (3.1.2)
       crass (~> 1.0.1)
@@ -291,7 +288,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cloudfront-invalidator
   dotenv
   httparty
   image_optim
