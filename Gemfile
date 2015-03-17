@@ -21,6 +21,7 @@ gem 'tzinfo'
 gem 'rmagick'
 gem 'sanitize'
 gem 'dotenv'
+gem 'cloudfront-invalidator'
 
 group :development do
   gem 'scss-lint'

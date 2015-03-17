@@ -44,7 +44,5 @@ configure :build do
 end
 
 after_configuration do
-  caching_policy 'text/html',    :max_age => 60 * 60
-  caching_policy 'image/x-icon', :max_age => 60 * 60 * 24 * 365
   default_caching_policy         :max_age => 60 * 60 * 24 * 365
 end
