@@ -28,7 +28,14 @@ configure :build do
   activate :imageoptim do |options|
     options.manifest         = false
     options.image_extensions = %w(.jpg)
-    options.jpegoptim        = { :strip => ['all'], :max_quality => 90 }
+    options.jpegoptim        = { :strip => ['all'], :max_quality => 100 }
+    options.jpegtran         = false
+    options.advpng           = false
+    options.gifsicle         = false
+    options.optipng          = false
+    options.pngcrush         = false
+    options.pngout           = false
+    options.svgo             = false
   end
   set :protocol, 'http://'
   set :host, 'www.gesteves.com/'
