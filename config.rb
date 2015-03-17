@@ -28,7 +28,8 @@ configure :build do
   activate :imageoptim do |options|
     options.manifest         = false
     options.image_extensions = %w(.jpg)
-    options.jpegoptim        = { :strip => ['all'], :max_quality => 100 }
+    options.allow_lossy      = true
+    options.jpegoptim        = { :strip => ['all'], :max_quality => 90 }
     options.jpegtran         = false
     options.advpng           = false
     options.gifsicle         = false
