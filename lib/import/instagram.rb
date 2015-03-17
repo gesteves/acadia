@@ -23,7 +23,7 @@ module Import
         sizes = [640, 372, 350, 324, 228, 222, 194, 184, 172, 128, 114, 92, 86, 64]
         sizes.each do |size|
           image = original.resize_to_fit(size)
-          image.write("source/images/instagram/#{id}_#{size}.jpg"){ self.interlace = Magick::LineInterlace }
+          image.write("source/images/instagram/#{id}_#{size}.jpg")
         end
       end
     end

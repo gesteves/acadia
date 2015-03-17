@@ -16,6 +16,17 @@ activate :s3_sync do |s3|
   s3.aws_access_key_id     = ENV['AWS_ACCESS_KEY_ID']
   s3.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY_ID']
 end
+activate :imageoptim do |options|
+  options.image_extensions = %w(.jpg)
+  options.jpegoptim = { :strip => ['all'], :max_quality => 100 }
+  options.jpegtran  = { :copy_chunks => false, :progressive => true, :jpegrescan => true }
+  options.advpng    = false
+  options.gifsicle  = false
+  options.optipng   = false
+  options.pngcrush  = false
+  options.pngout    = false
+  options.svgo      = false
+end
 
 # Build-specific configuration
 configure :build do

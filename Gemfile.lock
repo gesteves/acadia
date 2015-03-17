@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/plasticine/middleman-imageoptim.git
+  revision: 7cf5202cefa05e12ca8e5727b7d050d29822fb63
+  specs:
+    middleman-imageoptim (0.2.0)
+      image_optim (~> 0.20.2)
+      image_optim_pack (~> 0.2.1)
+      middleman-core (>= 3.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -41,6 +50,7 @@ GEM
     eventmachine (1.0.7)
     excon (0.44.3)
     execjs (2.3.0)
+    exifr (1.2.1)
     ffi (1.9.6)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
@@ -125,6 +135,7 @@ GEM
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
+    fspath (2.1.1)
     haml (4.0.6)
       tilt
     hike (1.2.3)
@@ -137,6 +148,17 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
+    image_optim (0.20.2)
+      exifr (~> 1.1, >= 1.1.3)
+      fspath (~> 2.1)
+      image_size (~> 1.3)
+      in_threads (~> 1.3)
+      progress (~> 3.0, >= 3.0.1)
+    image_optim_pack (0.2.1.20150310)
+      fspath (~> 2.1)
+      image_optim (~> 0.19)
+    image_size (1.4.1)
+    in_threads (1.3.1)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     json (1.8.2)
@@ -216,6 +238,7 @@ GEM
     padrino-support (0.12.4)
       activesupport (>= 3.1)
     pmap (1.0.2)
+    progress (3.1.0)
     rack (1.6.0)
     rack-livereload (0.3.15)
       rack
@@ -267,9 +290,12 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   httparty
+  image_optim
+  image_optim_pack
   middleman (~> 3.3.10)
   middleman-autoprefixer
   middleman-dotenv
+  middleman-imageoptim!
   middleman-livereload (~> 3.1.0)
   middleman-minify-html
   middleman-s3_sync

@@ -28,7 +28,7 @@ module Import
         sizes = [1280, 693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
         sizes.each do |size|
           image = original.resize_to_fill(size, size)
-          image.write("source/images/photoblog/#{post_id}_#{size}.jpg"){ self.interlace = Magick::LineInterlace }
+          image.write("source/images/photoblog/#{post_id}_#{size}.jpg")
         end
       end
     end

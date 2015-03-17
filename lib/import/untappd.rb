@@ -22,7 +22,7 @@ module Import
         sizes = [100, 50]
         sizes.each do |size|
           image = label.resize_to_fill(size, (size * label.rows)/label.columns)
-          image.write("source/images/untappd/#{c['beer']['bid']}_#{size}.jpg"){ self.interlace = Magick::LineInterlace }
+          image.write("source/images/untappd/#{c['beer']['bid']}_#{size}.jpg")
         end
       end
     end
