@@ -27,7 +27,7 @@ module Import
       sizes = [200, 150, 100, 50]
       sizes.each do |size|
         image = avatar.resize_to_fill(size, (size * avatar.rows)/avatar.columns)
-        image.write("source/images/twitter/#{twitter_user["screen_name"]}_#{size}.jpg")
+        image.write("source/images/twitter/#{twitter_user["screen_name"]}_#{size}.jpg"){ self.interlace = Magick::LineInterlace }
       end
     end
 

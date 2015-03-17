@@ -16,18 +16,6 @@ activate :s3_sync do |s3|
   s3.aws_access_key_id     = ENV['AWS_ACCESS_KEY_ID']
   s3.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY_ID']
 end
-activate :imageoptim do |options|
-  options.manifest         = false
-  options.image_extensions = %w(.jpg)
-  options.jpegoptim        = { :strip => ['all'], :max_quality => 100 }
-  options.jpegtran         = { :copy_chunks => false, :progressive => true, :jpegrescan => true }
-  options.advpng           = false
-  options.gifsicle         = false
-  options.optipng          = false
-  options.pngcrush         = false
-  options.pngout           = false
-  options.svgo             = false
-end
 
 # Build-specific configuration
 configure :build do
@@ -37,6 +25,11 @@ configure :build do
   activate :minify_html
   activate :asset_hash
   activate :relative_assets
+  activate :imageoptim do |options|
+    options.manifest         = false
+    options.image_extensions = %w(.jpg)
+    options.jpegoptim        = { :strip => ['all'], :max_quality => 90 }
+  end
   set :protocol, 'http://'
   set :host, 'www.gesteves.com/'
   set :port, 80
