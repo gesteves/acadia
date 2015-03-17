@@ -155,4 +155,5 @@ task :publish => [:dotenv, :import] do
   puts '== Syncing with S3'
   system('middleman s3_sync')
   open("https://nosnch.in/#{ENV['SNITCH_ID']}") unless ENV['SNITCH_ID'].nil?
+  open(ENV['SITE_URL']) unless ENV['SITE_URL'].nil?
 end
