@@ -168,5 +168,6 @@ task :publish => [:dotenv, :import] do
   system('middleman build')
   puts '== Syncing with S3'
   system('middleman s3_sync')
+  open(ENV['SITE_URL']) unless ENV['SITE_URL'].nil? # Request site so CloudFront caches it
   open("https://nosnch.in/#{ENV['SNITCH_ID']}") unless ENV['SNITCH_ID'].nil?
 end
