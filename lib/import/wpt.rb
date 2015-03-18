@@ -32,7 +32,7 @@ module Import
     def results
       latest_test = @redis.get('wpt:test_url')
       if latest_test.nil?
-        puts 'There are no pending tests.'
+        puts 'There are no pending WPT tests.'
       else
         request = HTTParty.get(latest_test)
         response = JSON.parse(request.body)
@@ -47,7 +47,6 @@ module Import
           puts "WPT results not available: #{response['statusText']}"
         end
       end
-      request_test
     end
   end
 end

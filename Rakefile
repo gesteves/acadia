@@ -162,12 +162,33 @@ task :import => [ 'clobber',
                   'import:fitbit',
                   'import:wpt' ]
 
-desc 'Import content and publish the site'
-task :publish => [:dotenv, :import] do
+desc 'Import content and build the site'
+task :build => [:dotenv, :import] do
   puts '== Building the site'
   system('middleman build')
+end
+
+desc 'Sync the site to S3'
+task :sync do
   puts '== Syncing with S3'
   system('middleman s3_sync')
-  open(ENV['SITE_URL']) unless ENV['SITE_URL'].nil? # Request site so CloudFront caches it
+end
+
+desc 'Requests a new WebPageTest test'
+task :wpt => [:dotenv] do
+  begin
+    puts '== Requesting new WPT test'
+    start_time = Time.now
+    open(ENV['SITE_URL']) unless ENV['SITE_URL'].nil? # Request site so CloudFront caches it
+    wpt = Import::WPT.new(ENV['SITE_URL'], ENV['WPT_API_KEY'])
+    wpt.request_test
+    puts "Completed in #{Time.now - start_time} seconds"
+  rescue => e
+    abort "Failed to request WPT test: #{e}"
+  end
+end
+
+desc 'Publishes the site'
+task :publish => [:dotenv, :build, :sync, :wpt] do
   open("https://nosnch.in/#{ENV['SNITCH_ID']}") unless ENV['SNITCH_ID'].nil?
 end
