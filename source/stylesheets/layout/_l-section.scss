@@ -48,6 +48,14 @@ $l : '.l-section';
   max-width: $bp-xxl;
 }
 
-#{$l}.wide.single #{$l}__container {
+#{$l}.single #{$l}__container {
   justify-content: center;
+}
+
+#{$l}.full-width {
+  padding: 0 2rem;
+
+  #{$l}__container {
+    max-width: 100%;
+  }
 }
