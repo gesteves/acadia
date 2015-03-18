@@ -13,7 +13,9 @@ module Import
     end
 
     def request_test
-      unless @redis.exists('wpt:skip_test')
+      if @redis.exists('wpt:skip_test')
+        puts 'WPT request skipped'
+      else
         url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json"
         request = HTTParty.get(url)
         response = JSON.parse(request.body)
@@ -29,7 +31,9 @@ module Import
 
     def results
       latest_test = @redis.get('wpt:test_url')
-      unless latest_test.nil?
+      if latest_test.nil?
+        puts 'There are no pending tests.'
+      else
         request = HTTParty.get(latest_test)
         response = JSON.parse(request.body)
         if response['statusCode'] == 200 && response['statusText'].downcase == 'test complete'
@@ -42,8 +46,6 @@ module Import
         else
           puts "WPT results not available: #{response['statusText']}"
         end
-      else
-        puts 'There are no pending tests.'
       end
       request_test
     end
