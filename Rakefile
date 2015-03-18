@@ -26,7 +26,7 @@ namespace :import do
       twitter.get_twitter_user
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort "Failed to import tweets: #{e}"
+      abort "Failed to import s: #{e}"
     end
   end
 
@@ -65,14 +65,14 @@ namespace :import do
       linkblog.get_links
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort "Failed to import links: #{e}"
+      abort "Failed to import s: #{e}"
     end
   end
 
   desc 'Import featured repos from Github'
   task :github => [:dotenv, :set_up_directories] do
     begin
-      puts '== Importing Github data'
+      puts '== Importing Github repos'
       start_time = Time.now
       repos = YAML.load_file('data/content.yml')['repos']
       github = Import::Github.new(ENV['GITHUB_ACCESS_TOKEN'], repos, ENV['GITHUB_STATS_DAYS'].to_i)
@@ -80,7 +80,7 @@ namespace :import do
       github.get_stats
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-     abort "Failed to import Github data: #{e}"
+     abort "Failed to import s: #{e}"
     end
   end
 
@@ -93,7 +93,7 @@ namespace :import do
       goodreads.get_books
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort "Failed to import Goodreads data: #{e}"
+      abort "Failed to import s data: #{e}"
     end
   end
 
@@ -106,7 +106,7 @@ namespace :import do
       untappd.get_beers
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort "Failed to import Untappd data: #{e}"
+      abort "Failed to import d data: #{e}"
     end
   end
 
@@ -119,7 +119,7 @@ namespace :import do
       rdio.get_heavy_rotation
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort "Failed to import Rdio data: #{e}"
+      abort "Failed to import o data: #{e}"
     end
   end
 
@@ -132,20 +132,7 @@ namespace :import do
       fitbit.get_steps
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort "Failed to import Fitbit data: #{e}"
-    end
-  end
-
-  desc 'Import score from WPT'
-  task :wpt => [:dotenv, :set_up_directories] do
-    begin
-      puts '== Importing WPT test results'
-      start_time = Time.now
-      wpt = Import::WPT.new(ENV['WPT_PROXY_URL'])
-      wpt.results
-      puts "Completed in #{Time.now - start_time} seconds"
-    rescue => e
-      abort "Failed to import WPT results: #{e}"
+      abort "Failed to import t: #{e}"
     end
   end
 end
@@ -159,8 +146,7 @@ task :import => [ 'clobber',
                   'import:goodreads',
                   'import:untappd',
                   'import:rdio',
-                  'import:fitbit',
-                  'import:wpt' ]
+                  'import:fitbit' ]
 
 desc 'Import content and publish the site'
 task :publish => [:dotenv, :import] do

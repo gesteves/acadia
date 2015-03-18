@@ -2,30 +2,14 @@ $m : '.m-stats';
 
 #{$m} {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row wrap;
   justify-content: center;
-
-  @media (min-width: $bp-m) {
-    flex-flow: row wrap;
-  }
 }
 
 #{$m}__stat {
   flex: 1 1 auto;
   margin: 2.1rem 0;
   padding: 0 2rem;
-
-  @media (min-width: $bp-m) {
-    flex-basis: 50%;
-  }
-
-  @media (min-width: $bp-l) {
-    flex-basis: calc(100%/3);
-  }
-
-  @media (min-width: $bp-xxxl) {
-    flex-basis: auto;
-  }
 }
 
 #{$m}__number {
@@ -36,16 +20,6 @@ $m : '.m-stats';
   line-height: 8rem;
   margin: 0;
   text-align: center;
-
-  a:link, a:visited {
-    color: $color-text;
-    text-decoration: none;
-  }
-
-  a:hover, a:active {
-    color: $color-links;
-    text-decoration: none;
-  }
 }
 
 #{$m}__meta {

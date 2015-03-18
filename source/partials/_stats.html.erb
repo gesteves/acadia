@@ -1,10 +1,4 @@
 <section class="m-stats">
-  <% unless data.wpt.speed_index.nil? %>
-    <div class="m-stats__stat">
-      <div class="m-stats__number"><a href="<%= data.wpt.result_url %>"><%= format_number data.wpt.speed_index %></a></div>
-      <div class="m-stats__meta">Current Speed Index</div>
-    </div>
-  <% end %>
   <div class="m-stats__stat">
     <div class="m-stats__number"><%= format_number data.commits.total_commits %></div>
     <div class="m-stats__meta">Commits in the past week</div>
