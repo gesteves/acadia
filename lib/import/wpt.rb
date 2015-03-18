@@ -23,7 +23,7 @@ module Import
           puts "WPT test requested: #{response['data']['userUrl']}"
           @redis.pipelined do
             @redis.set('wpt:test_url', response['data']['jsonUrl'])
-            @redis.setex('wpt:skip_test', 60 * 60, 'ok')
+            @redis.setex('wpt:skip_test', 60 * 59, 'ok')
           end
         end
       end
