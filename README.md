@@ -4,7 +4,7 @@ This is a static Middleman-based website I’m using as my personal site at [ges
 
 ## Useful tasks
 
-* `$ bundle exec rake import`: Runs the tasks to import external data and populate the `data/` and `source/images/` folders with it. It can also import individual sources, such as `rake import:twitter`. The available sources are `twitter`, `instagram`, `photoblog`, `links`, `github`, `rdio`, `goodreads`, `fitbit`, and `untappd`.
+* `$ bundle exec rake import`: Runs the tasks to import external data and populate the `data/` and `source/images/` folders with it. It can also import individual sources, such as `rake import:twitter`. The available sources are `twitter`, `instagram`, `photoblog`, `links`, `github`, `rdio`, `goodreads`, `fitbit`, `untappd`, and `wpt`.
 * `$ bundle exec rake publish`: Runs the import tasks, builds the site, and syncs it to S3.
 
 &copy; 2014 Guillermo Esteves. Feel free to take a look and use this for your own projects, but please don’t straight up republish my website verbatim.
