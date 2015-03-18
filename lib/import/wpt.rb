@@ -13,12 +13,17 @@ module Import
     end
 
     def request_test
-      url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json"
-      request = HTTParty.get(url)
-      response = JSON.parse(request.body)
-      if response['statusCode'] == 200
-        puts "WPT test requested: #{response['data']['userUrl']}"
-        @redis.set('wpt:test_url', response['data']['jsonUrl'])
+      unless @redis.exists('wpt:skip_test')
+        url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json"
+        request = HTTParty.get(url)
+        response = JSON.parse(request.body)
+        if response['statusCode'] == 200
+          puts "WPT test requested: #{response['data']['userUrl']}"
+          @redis.pipelined do
+            @redis.set('wpt:test_url', response['data']['jsonUrl'])
+            @redis.setex('wpt:skip_test', 60 * 60 * 6, 'ok')
+          end
+        end
       end
     end
 
