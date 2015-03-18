@@ -10,7 +10,7 @@
           <div class="p-list__meta">
             <span class="p-eyebrow"><%= c.beer.beer_style %></span>
             <a href="https://untappd.com/beer/<%= c.beer.bid %>" class="p-list__title"><%= c.beer.beer_name %></a>
-            <a href="https://untappd.com/brewery/<%= c.brewery.brewery_id %>" class="p-list__author"><%= c.brewery.brewery_name %></a>
+            <span class="p-list__author"><%= c.brewery.brewery_name %></span>
           </div>
         </li>
       <% end %>
