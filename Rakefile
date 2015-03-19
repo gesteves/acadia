@@ -185,7 +185,6 @@ task :wpt => [:dotenv] do
   begin
     puts '== Requesting new WPT test'
     start_time = Time.now
-    open(ENV['SITE_URL']) unless ENV['SITE_URL'].nil?
     wpt = Import::WPT.new(ENV['SITE_URL'], ENV['WPT_API_KEY'])
     wpt.request_test
     puts "Completed in #{Time.now - start_time} seconds"
