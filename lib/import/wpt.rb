@@ -1,6 +1,7 @@
 require 'httparty'
 require 'redis'
 require 'dotenv'
+require 'socket'
 
 module Import
   class WPT
@@ -51,6 +52,7 @@ module Import
         response = JSON.parse(request.body)
 
         if response['statusCode'] == 200 && response['statusText'].downcase == 'test complete'
+          log(response['data'])
           result = {
             :speed_index => response['data']['runs']['1']['firstView']['SpeedIndex'],
             :result_url => response['data']['summary']
@@ -66,6 +68,15 @@ module Import
         unless result.nil?
           File.open('data/wpt.json','w'){ |f| f << result }
         end
+      end
+    end
+
+    def log(data)
+      unless ENV['HOSTEDGRAPHITE_APIKEY'].nil?
+        key = ENV['HOSTEDGRAPHITE_APIKEY']
+        conn   = TCPSocket.new 'carbon.hostedgraphite.com', 2003
+        conn.puts key + ".wpt.speed_index #{data['runs']['1']['firstView']['SpeedIndex']}\n"
+        conn.close
       end
     end
   end
