@@ -36,15 +36,22 @@ module Import
       else
         request = HTTParty.get(latest_test)
         response = JSON.parse(request.body)
+
         if response['statusCode'] == 200 && response['statusText'].downcase == 'test complete'
           result = {
             :speed_index => response['data']['runs']['1']['firstView']['SpeedIndex'],
             :result_url => response['data']['summary']
           }
-          File.open('data/wpt.json','w'){ |f| f << result.to_json }
+          result = result.to_json
+          @redis.set('wpt:test_result', result)
           puts "WPT results stored: #{response['data']['summary']}"
         else
+          result = @redis.get('wpt:test_result')
           puts "WPT results not available: #{response['statusText']}"
+        end
+
+        unless result.nil?
+          File.open('data/wpt.json','w'){ |f| f << result }
         end
       end
     end
