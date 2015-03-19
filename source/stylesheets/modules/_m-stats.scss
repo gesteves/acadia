@@ -37,12 +37,14 @@ $m : '.m-stats';
   margin: 0;
   text-align: center;
 
-  a:link, a:visited {
+  a:link,
+  a:visited {
     color: $color-text;
     text-decoration: none;
   }
 
-  a:hover, a:active {
+  a:hover,
+  a:active {
     color: $color-links;
     text-decoration: none;
   }
