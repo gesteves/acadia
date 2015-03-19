@@ -75,7 +75,17 @@ module Import
       unless ENV['HOSTEDGRAPHITE_APIKEY'].nil?
         key = ENV['HOSTEDGRAPHITE_APIKEY']
         conn   = TCPSocket.new 'carbon.hostedgraphite.com', 2003
-        conn.puts key + ".wpt.speed_index #{data['runs']['1']['firstView']['SpeedIndex']}\n"
+        metrics = ""
+        metrics += key + ".wpt.load_time #{data['runs']['1']['firstView']['loadTime']}\n"
+        metrics += key + ".wpt.ttfb #{data['runs']['1']['firstView']['TTFB']}\n"
+        metrics += key + ".wpt.start_render #{data['runs']['1']['firstView']['render']}\n"
+        metrics += key + ".wpt.speed_index #{data['runs']['1']['firstView']['SpeedIndex']}\n"
+        metrics += key + ".wpt.dom_elements #{data['runs']['1']['firstView']['domElements']}\n"
+        metrics += key + ".wpt.doc_complete #{data['runs']['1']['firstView']['docTime']}\n"
+        metrics += key + ".wpt.doc_bytes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
+        metrics += key + ".wpt.fully_loaded #{data['runs']['1']['firstView']['fullyLoaded']}\n"
+        metrics += key + ".wpt.full_byes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
+        conn.puts metrics
         conn.close
       end
     end
