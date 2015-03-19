@@ -51,6 +51,7 @@ module Import
         response = JSON.parse(request.body)
 
         if response['statusCode'] == 200 && response['statusText'].downcase == 'test complete'
+          log(response)
           result = {
             :speed_index => response['data']['runs']['1']['firstView']['SpeedIndex'],
             :result_url => response['data']['summary']
@@ -67,6 +68,10 @@ module Import
           File.open('data/wpt.json','w'){ |f| f << result }
         end
       end
+    end
+
+    def log(results)
+      puts "sample#wpt.speed_index=#{results['data']['runs']['1']['firstView']['SpeedIndex']}"
     end
   end
 end
