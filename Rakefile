@@ -180,7 +180,7 @@ task :wpt => [:dotenv] do
   begin
     puts '== Requesting new WPT test'
     start_time = Time.now
-    open(ENV['SITE_URL']) unless ENV['SITE_URL'].nil? # Request site so CloudFront caches it
+    open(ENV['SITE_URL']) unless ENV['SITE_URL'].nil?
     wpt = Import::WPT.new(ENV['SITE_URL'], ENV['WPT_API_KEY'])
     wpt.request_test
     puts "Completed in #{Time.now - start_time} seconds"
@@ -190,7 +190,7 @@ task :wpt => [:dotenv] do
 end
 
 desc 'Publishes the site'
-task :publish => [:dotenv, :build, :sync, :wpt] do
+task :publish => [:dotenv, :build, :sync] do
   open("https://nosnch.in/#{ENV['SNITCH_ID']}") unless ENV['SNITCH_ID'].nil?
 end
 
