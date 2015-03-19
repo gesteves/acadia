@@ -45,9 +45,9 @@ links:
   - name: linkedin
     title: LinkedIn
     url: https://www.linkedin.com/in/gesteves
-  - name: dribbble
-    title: Dribbble
-    url: https://dribbble.com/gesteves
+  - name: codepen
+    title: CodePen
+    url: http://codepen.io/gesteves/
 repos:
   - gesteves/snarkov
   - gesteves/acadia
