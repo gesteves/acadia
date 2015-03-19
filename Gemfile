@@ -22,6 +22,7 @@ gem 'rmagick'
 gem 'sanitize'
 gem 'dotenv'
 gem 'redis'
+gem 'cloudfront-invalidator'
 
 group :development do
   gem 'scss-lint'

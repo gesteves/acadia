@@ -1,6 +1,7 @@
 require 'rake/clean'
 require 'dotenv/tasks'
 require 'open-uri'
+require 'cloudfront-invalidator'
 require_relative 'lib/import'
 
 CLOBBER.include('data/*.json', 'source/images/instagram/*', 'source/images/photoblog/*', 'source/images/goodreads/*', 'source/images/untappd/*', 'source/images/twitter/*', 'source/images/rdio/*')
@@ -192,3 +193,17 @@ desc 'Publishes the site'
 task :publish => [:dotenv, :build, :sync, :wpt] do
   open("https://nosnch.in/#{ENV['SNITCH_ID']}") unless ENV['SNITCH_ID'].nil?
 end
+
+desc 'Send CloudFront invalidation request'
+task :invalidate => [:dotenv] do
+  unless ENV['AWS_CLOUDFRONT_DISTRIBUTION_ID'].nil?
+    puts '== Sending CloudFront invalidation request'
+    start_time = Time.now
+    invalidator = CloudfrontInvalidator.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY_ID'], ENV['AWS_CLOUDFRONT_DISTRIBUTION_ID'])
+    list = %w{
+      index.html
+    }
+    invalidator.invalidate(list)
+    puts "Completed in #{Time.now - start_time} seconds"
+  end
+end 
