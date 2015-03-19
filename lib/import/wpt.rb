@@ -80,11 +80,10 @@ module Import
         metrics += key + ".wpt.ttfb #{data['runs']['1']['firstView']['TTFB']}\n"
         metrics += key + ".wpt.start_render #{data['runs']['1']['firstView']['render']}\n"
         metrics += key + ".wpt.speed_index #{data['runs']['1']['firstView']['SpeedIndex']}\n"
-        metrics += key + ".wpt.dom_elements #{data['runs']['1']['firstView']['domElements']}\n"
         metrics += key + ".wpt.doc_complete #{data['runs']['1']['firstView']['docTime']}\n"
         metrics += key + ".wpt.doc_bytes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
         metrics += key + ".wpt.fully_loaded #{data['runs']['1']['firstView']['fullyLoaded']}\n"
-        metrics += key + ".wpt.full_byes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
+        metrics += key + ".wpt.full_bytes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
         conn.puts metrics
         conn.close
       end
