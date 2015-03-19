@@ -15,6 +15,8 @@ module Import
     def request_test
       if @redis.exists('wpt:skip_test')
         puts 'WPT request skipped'
+      elsif !test_complete?
+        puts 'WPT request skipped; last test not complete'
       else
         url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json"
         request = HTTParty.get(url)
@@ -26,6 +28,17 @@ module Import
             @redis.setex('wpt:skip_test', 60 * 59, 'ok')
           end
         end
+      end
+    end
+
+    def test_complete?
+      latest_test = @redis.get('wpt:test_url')
+      if latest_test.nil?
+        true
+      else
+        request = HTTParty.get(latest_test)
+        response = JSON.parse(request.body)
+        response['statusCode'] == 200 && response['statusText'].downcase == 'test complete'
       end
     end
 
