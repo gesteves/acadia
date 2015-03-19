@@ -175,6 +175,11 @@ task :sync do
   system('middleman s3_sync')
 end
 
+desc 'Publishes the site'
+task :publish => [:dotenv, :build, :sync] do
+  open("https://nosnch.in/#{ENV['SNITCH_ID']}") unless ENV['SNITCH_ID'].nil?
+end
+
 desc 'Requests a new WebPageTest test'
 task :wpt => [:dotenv] do
   begin
@@ -187,11 +192,6 @@ task :wpt => [:dotenv] do
   rescue => e
     abort "Failed to request WPT test: #{e}"
   end
-end
-
-desc 'Publishes the site'
-task :publish => [:dotenv, :build, :sync] do
-  open("https://nosnch.in/#{ENV['SNITCH_ID']}") unless ENV['SNITCH_ID'].nil?
 end
 
 desc 'Send CloudFront invalidation request'
