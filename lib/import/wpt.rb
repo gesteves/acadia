@@ -79,25 +79,20 @@ module Import
         unless wpt['data']['runs']['1']['firstView'].nil?
           first_view = wpt['data']['runs']['1']['firstView']
           metrics += key + ".wpt.first_view.speed_index #{first_view['SpeedIndex']}\n"
-
           metrics += key + ".wpt.first_view.ttfb #{first_view['TTFB']}\n"
           metrics += key + ".wpt.first_view.doc_complete #{first_view['docTime']}\n"
           metrics += key + ".wpt.first_view.fully_loaded #{first_view['fullyLoaded']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['visualComplete']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['render']}\n"
-
           metrics += key + ".wpt.first_view.visually_complete #{first_view['bytesIn']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['bytesInDoc']}\n"
-
           metrics += key + ".wpt.first_view.visually_complete #{first_view['score_cache']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['score_cdn']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['score_gzip']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['score_keep-alive']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['score_combine']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['score_compress']}\n"
-
           metrics += key + ".wpt.first_view.visually_complete #{first_view['domElements']}\n"
-
           metrics += key + ".wpt.first_view.visually_complete #{first_view['responses_200']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['responses_404']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{first_view['responses_other']}\n"
@@ -106,30 +101,26 @@ module Import
         unless wpt['data']['runs']['1']['repeatView'].nil?
           repeat_view = wpt['data']['runs']['1']['repeatView']
           metrics += key + ".wpt.repeat_view.speed_index #{repeat_view['SpeedIndex']}\n"
-
           metrics += key + ".wpt.repeat_view.ttfb #{repeat_view['TTFB']}\n"
           metrics += key + ".wpt.repeat_view.doc_complete #{repeat_view['docTime']}\n"
           metrics += key + ".wpt.repeat_view.fully_loaded #{repeat_view['fullyLoaded']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['visualComplete']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['render']}\n"
-
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['bytesIn']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['bytesInDoc']}\n"
-
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['score_cache']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['score_cdn']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['score_gzip']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['score_keep-alive']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['score_combine']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['score_compress']}\n"
-
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['domElements']}\n"
-
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['responses_200']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['responses_404']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{repeat_view['responses_other']}\n"
         end
 
+        puts metrics
         conn.puts metrics
         conn.close
       end
