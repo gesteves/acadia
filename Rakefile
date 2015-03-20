@@ -143,7 +143,7 @@ namespace :import do
       puts '== Importing WPT test results'
       start_time = Time.now
       wpt = Import::WPT.new(ENV['SITE_URL'], ENV['WPT_API_KEY'])
-      wpt.results
+      wpt.save_results
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
       abort "Failed to import WPT results: #{e}"
@@ -151,17 +151,47 @@ namespace :import do
   end
 end
 
-task :import => [ 'clobber',
-                  'import:twitter',
-                  'import:instagram',
-                  'import:photoblog',
-                  'import:links',
-                  'import:github',
-                  'import:goodreads',
-                  'import:untappd',
-                  'import:rdio',
-                  'import:fitbit',
-                  'import:wpt' ]
+namespace :wpt do
+  desc 'Requests a new WebPageTest test'
+  task :request => [:dotenv] do
+    begin
+      puts '== Requesting new WPT test'
+      start_time = Time.now
+      wpt = Import::WPT.new(ENV['SITE_URL'], ENV['WPT_API_KEY'])
+      wpt.request_test
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to request WPT test: #{e}"
+    end
+  end
+
+  desc 'Logs results of last WebPageTest test'
+  task :log => [:dotenv] do
+    begin
+      puts '== Logging latest WPT test'
+      start_time = Time.now
+      wpt = Import::WPT.new(ENV['SITE_URL'], ENV['WPT_API_KEY'])
+      wpt.log_results
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to log WPT test: #{e}"
+    end
+  end
+end
+
+task :import => %w{
+  clobber
+  import:wpt
+  import:twitter
+  import:instagram
+  import:photoblog
+  import:links
+  import:github
+  import:goodreads
+  import:untappd
+  import:rdio
+  import:fitbit
+}
 
 desc 'Import content and build the site'
 task :build => [:dotenv, :import] do
@@ -180,19 +210,6 @@ task :publish => [:dotenv, :build, :sync] do
   open("https://nosnch.in/#{ENV['SNITCH_ID']}") unless ENV['SNITCH_ID'].nil?
 end
 
-desc 'Requests a new WebPageTest test'
-task :wpt => [:dotenv] do
-  begin
-    puts '== Requesting new WPT test'
-    start_time = Time.now
-    wpt = Import::WPT.new(ENV['SITE_URL'], ENV['WPT_API_KEY'])
-    wpt.request_test
-    puts "Completed in #{Time.now - start_time} seconds"
-  rescue => e
-    abort "Failed to request WPT test: #{e}"
-  end
-end
-
 desc 'Send CloudFront invalidation request'
 task :invalidate => [:dotenv] do
   unless ENV['AWS_CLOUDFRONT_DISTRIBUTION_ID'].nil?
@@ -205,4 +222,4 @@ task :invalidate => [:dotenv] do
     invalidator.invalidate(list)
     puts "Completed in #{Time.now - start_time} seconds"
   end
-end 
+end
