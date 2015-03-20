@@ -76,14 +76,30 @@ module Import
         key = ENV['HOSTEDGRAPHITE_APIKEY']
         conn   = TCPSocket.new 'carbon.hostedgraphite.com', 2003
         metrics = ""
-        metrics += key + ".wpt.load_time #{data['runs']['1']['firstView']['loadTime']}\n"
-        metrics += key + ".wpt.ttfb #{data['runs']['1']['firstView']['TTFB']}\n"
-        metrics += key + ".wpt.start_render #{data['runs']['1']['firstView']['render']}\n"
-        metrics += key + ".wpt.speed_index #{data['runs']['1']['firstView']['SpeedIndex']}\n"
-        metrics += key + ".wpt.doc_complete #{data['runs']['1']['firstView']['docTime']}\n"
-        metrics += key + ".wpt.doc_bytes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
-        metrics += key + ".wpt.fully_loaded #{data['runs']['1']['firstView']['fullyLoaded']}\n"
-        metrics += key + ".wpt.full_bytes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
+        unless data['runs']['1']['firstView'].nil?
+          metrics += key + ".wpt.first_view.speed_index #{data['runs']['1']['firstView']['SpeedIndex']}\n"
+          metrics += key + ".wpt.first_view.load_time #{data['runs']['1']['firstView']['loadTime']}\n"
+          metrics += key + ".wpt.first_view.ttfb #{data['runs']['1']['firstView']['TTFB']}\n"
+          metrics += key + ".wpt.first_view.start_render #{data['runs']['1']['firstView']['render']}\n"
+          metrics += key + ".wpt.first_view.doc_complete #{data['runs']['1']['firstView']['docTime']}\n"
+          metrics += key + ".wpt.first_view.doc_bytes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
+          metrics += key + ".wpt.first_view.fully_loaded #{data['runs']['1']['firstView']['fullyLoaded']}\n"
+          metrics += key + ".wpt.first_view.full_bytes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
+          metrics += key + ".wpt.first_view.visually_complete #{data['runs']['1']['firstView']['visualComplete']}\n"
+        end
+
+        unless data['runs']['1']['repeatView'].nil?
+          metrics += key + ".wpt.repeat_view.speed_index #{data['runs']['1']['repeatView']['SpeedIndex']}\n"
+          metrics += key + ".wpt.repeat_view.load_time #{data['runs']['1']['repeatView']['loadTime']}\n"
+          metrics += key + ".wpt.repeat_view.ttfb #{data['runs']['1']['repeatView']['TTFB']}\n"
+          metrics += key + ".wpt.repeat_view.start_render #{data['runs']['1']['repeatView']['render']}\n"
+          metrics += key + ".wpt.repeat_view.doc_complete #{data['runs']['1']['repeatView']['docTime']}\n"
+          metrics += key + ".wpt.repeat_view.doc_bytes_in #{data['runs']['1']['repeatView']['bytesInDoc']}\n"
+          metrics += key + ".wpt.repeat_view.fully_loaded #{data['runs']['1']['repeatView']['fullyLoaded']}\n"
+          metrics += key + ".wpt.repeat_view.full_bytes_in #{data['runs']['1']['repeatView']['bytesInDoc']}\n"
+          metrics += key + ".wpt.repeat_view.visually_complete #{data['runs']['1']['repeatView']['visualComplete']}\n"
+        end
+
         conn.puts metrics
         conn.close
       end
