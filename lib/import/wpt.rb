@@ -108,7 +108,6 @@ module Import
           metrics += key + ".wpt.repeat_view.responses.other #{repeat_view['responses_other']}\n"
         end
 
-        puts "\nWPT Results:\n#{metrics}\n"
         conn.puts metrics
         conn.close
       end
