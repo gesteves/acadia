@@ -75,8 +75,8 @@ module Import
       unless ENV['HOSTEDGRAPHITE_APIKEY'].nil?
         key = ENV['HOSTEDGRAPHITE_APIKEY']
         conn   = TCPSocket.new 'carbon.hostedgraphite.com', 2003
-
         metrics = ""
+
         unless data['runs']['1']['firstView'].nil?
           metrics += key + ".wpt.first_view.speed_index #{data['runs']['1']['firstView']['SpeedIndex']}\n"
           metrics += key + ".wpt.first_view.ttfb #{data['runs']['1']['firstView']['TTFB']}\n"
@@ -87,9 +87,7 @@ module Import
           metrics += key + ".wpt.first_view.full_bytes_in #{data['runs']['1']['firstView']['bytesInDoc']}\n"
           metrics += key + ".wpt.first_view.visually_complete #{data['runs']['1']['firstView']['visualComplete']}\n"
         end
-        conn.puts metrics
 
-        metrics = ""
         unless data['runs']['1']['repeatView'].nil?
           metrics += key + ".wpt.repeat_view.speed_index #{data['runs']['1']['repeatView']['SpeedIndex']}\n"
           metrics += key + ".wpt.repeat_view.ttfb #{data['runs']['1']['repeatView']['TTFB']}\n"
@@ -100,8 +98,8 @@ module Import
           metrics += key + ".wpt.repeat_view.full_bytes_in #{data['runs']['1']['repeatView']['bytesInDoc']}\n"
           metrics += key + ".wpt.repeat_view.visually_complete #{data['runs']['1']['repeatView']['visualComplete']}\n"
         end
-        conn.puts metrics
 
+        conn.puts metrics
         conn.close
       end
     end
