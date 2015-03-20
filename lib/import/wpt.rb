@@ -76,6 +76,7 @@ module Import
         key = ENV['HOSTEDGRAPHITE_APIKEY']
         conn   = TCPSocket.new 'carbon.hostedgraphite.com', 2003
         metrics = ""
+
         unless data['runs']['1']['firstView'].nil?
           metrics += key + ".wpt.first_view.speed_index #{data['runs']['1']['firstView']['SpeedIndex']}\n"
           metrics += key + ".wpt.first_view.load_time #{data['runs']['1']['firstView']['loadTime']}\n"
