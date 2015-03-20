@@ -78,7 +78,7 @@ module Import
 
         unless wpt['data']['runs']['1']['firstView'].nil?
           first_view = wpt['data']['runs']['1']['firstView']
-          metrics += key + ".wpt.first_view.speed_index #{first_view['SpeedIndex']}\n"
+          metrics += key + ".wpt.first_view.speedindex #{first_view['SpeedIndex']}\n"
           metrics += key + ".wpt.first_view.timings.ttfb #{first_view['TTFB']}\n"
           metrics += key + ".wpt.first_view.timings.doc_complete #{first_view['docTime']}\n"
           metrics += key + ".wpt.first_view.timings.fully_loaded #{first_view['fullyLoaded']}\n"
@@ -94,7 +94,7 @@ module Import
 
         unless wpt['data']['runs']['1']['repeatView'].nil?
           repeat_view = wpt['data']['runs']['1']['repeatView']
-          metrics += key + ".wpt.repeat_view.speed_index #{repeat_view['SpeedIndex']}\n"
+          metrics += key + ".wpt.repeat_view.speedindex #{repeat_view['SpeedIndex']}\n"
           metrics += key + ".wpt.repeat_view.timings.ttfb #{repeat_view['TTFB']}\n"
           metrics += key + ".wpt.repeat_view.timings.doc_complete #{repeat_view['docTime']}\n"
           metrics += key + ".wpt.repeat_view.timings.fully_loaded #{repeat_view['fullyLoaded']}\n"
