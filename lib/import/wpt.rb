@@ -15,20 +15,20 @@ module Import
 
     def test_complete?
       latest_test = @redis.get('wpt:test_url')
-      if latest_test.nil?
-        true
-      else
-        request = HTTParty.get(latest_test)
-        response = JSON.parse(request.body)
-        puts "Status for #{latest_test}: (#{response['statusCode']}) #{response['statusText']}"
-        response['statusCode'] == 200 && response['statusText'].downcase == 'test complete'
-      end
+      request = HTTParty.get(latest_test)
+      response = JSON.parse(request.body)
+      puts "Status for #{latest_test}: (#{response['statusCode']}) #{response['statusText']}"
+      response['statusCode'] == 200 && response['statusText'].downcase == 'test complete'
+    end
+
+    def active_test?
+      @redis.exists('wpt:test_url')
     end
 
     def request_test
       if @redis.exists('wpt:skip_test')
         puts 'WPT request skipped'
-      elsif !test_complete?
+      elsif active_test? && !test_complete?
         puts 'WPT request skipped; last test not complete'
       else
         url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json"
@@ -45,7 +45,7 @@ module Import
     end
 
     def save_results
-      if test_complete?
+      if active_test? && test_complete?
         wpt = get_latest_result
         results = {
           :speed_index => wpt['data']['runs']['1']['firstView']['SpeedIndex'],
@@ -69,7 +69,7 @@ module Import
     end
 
     def log_results
-      unless ENV['HOSTEDGRAPHITE_APIKEY'].nil? || !test_complete? || !@redis.exists('wpt:test_url')
+      unless ENV['HOSTEDGRAPHITE_APIKEY'].nil? || !active_test? || !test_complete?
 
         wpt = get_latest_result
 
