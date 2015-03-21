@@ -27,9 +27,7 @@ module Import
     end
 
     def request_test
-      if @redis.exists('wpt:skip_test')
-        puts 'WPT request skipped'
-      elsif active_test? && !test_complete?
+      if active_test? && !test_complete?
         puts 'WPT request skipped; last test not complete'
       else
         url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json"
@@ -37,10 +35,7 @@ module Import
         response = JSON.parse(request.body)
         if response['statusCode'] == 200
           puts "WPT test requested: #{response['data']['userUrl']}"
-          @redis.pipelined do
-            @redis.set('wpt:test_url', response['data']['jsonUrl'])
-            @redis.setex('wpt:skip_test', 60 * 59, 'ok')
-          end
+          @redis.set('wpt:test_url', response['data']['jsonUrl'])
         end
       end
     end
