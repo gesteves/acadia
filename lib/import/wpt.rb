@@ -17,7 +17,8 @@ module Import
       latest_test = @redis.get('wpt:test_url')
       request = HTTParty.get(latest_test)
       response = JSON.parse(request.body)
-      puts "WPT #{response['statusCode']}: #{response['statusText']}"
+      puts "WPT status #{response['statusCode']}: #{response['statusText']}"
+      @redis.del('wpt:test_url') if response['statusCode'] == 400
       response['statusCode'] == 200 && response['statusText'].downcase == 'test complete'
     end
 
