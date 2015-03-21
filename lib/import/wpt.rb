@@ -68,7 +68,7 @@ module Import
     end
 
     def log_results
-      unless ENV['HOSTEDGRAPHITE_APIKEY'].nil? || !test_complete?
+      unless ENV['HOSTEDGRAPHITE_APIKEY'].nil? || !test_complete? || !@redis.exists('wpt:test_url')
 
         wpt = get_latest_result
 
