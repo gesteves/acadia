@@ -70,7 +70,7 @@ module Import
     end
 
     def log_results
-      unless ENV['HOSTEDGRAPHITE_APIKEY'].nil? || !active_test? || !test_complete?
+      if !ENV['HOSTEDGRAPHITE_APIKEY'].nil? && active_test? && test_complete?
 
         wpt = get_latest_result
 
