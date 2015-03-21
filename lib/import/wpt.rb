@@ -16,7 +16,7 @@ module Import
     def test_complete?
       latest_test = @redis.get('wpt:test_url')
       if latest_test.nil?
-        false
+        true
       else
         request = HTTParty.get(latest_test)
         response = JSON.parse(request.body)
