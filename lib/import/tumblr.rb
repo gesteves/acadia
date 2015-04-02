@@ -8,14 +8,24 @@ module Import
       @consumer_key = consumer_key
       @photo_url    = photo_url
       @photo_tag    = photo_tag
-      @photo_count  = photo_count
+      @photo_count  = photo_count.to_i
     end
 
     def get_photos
-      response = HTTParty.get("http://api.tumblr.com/v2/blog/#{@photo_url}/posts/photo?api_key=#{@consumer_key}&tag=#{@photo_tag}&limit=#{@photo_count}")
-      posts = JSON.parse(response.body)['response']['posts'].map!{ |p| Photoblog.strip_html(p) }
+      posts = get_all_photos.sample(@photo_count).map!{ |p| Photoblog.strip_html(p) }
       Photoblog.save_photos(posts)
-      File.open('data/photoblog.json','w'){ |f| f << posts.to_json }
+      File.open("data/photoblog.json","w"){ |f| f << posts.to_json }
+    end
+
+    def get_all_photos(offset = 0, limit = 20)
+      posts = []
+      response = HTTParty.get("http://api.tumblr.com/v2/blog/#{@photo_url}/posts/photo?api_key=#{@consumer_key}&tag=#{@photo_tag}&offset=#{offset}&limit=#{limit}")
+      body = JSON.parse(response.body)
+      posts << body["response"]["posts"]
+      if body["response"]["total_posts"] > offset + limit
+        posts << get_all_photos(offset + limit, limit)
+      end
+      posts.flatten
     end
 
     def self.save_photos(posts)
