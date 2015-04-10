@@ -20,7 +20,7 @@ module Import
       data.each do |photo|
         id = photo['id']
         original = Magick::Image::from_blob(HTTParty.get(photo['images']['standard_resolution']['url']).body).first
-        sizes = [640, 372, 350, 324, 228, 222, 194, 184, 172, 128, 114, 92, 86, 64]
+        sizes = [640, 372, 350, 324, 228, 222, 194, 184, 172, 114, 92, 86]
         sizes.each do |size|
           image = original.resize_to_fit(size)
           image.write("source/images/instagram/#{id}_#{size}.jpg"){ self.interlace = Magick::LineInterlace }

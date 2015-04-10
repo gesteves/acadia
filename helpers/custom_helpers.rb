@@ -24,7 +24,7 @@ module CustomHelpers
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
     src = image_path "instagram/#{photo.id}_372.jpg"
     srcset = []
-    sizes = [640, 372, 350, 324, 228, 222, 194, 184, 172, 128, 114, 92, 86, 64]
+    sizes = [640, 372, 350, 324, 228, 222, 194, 184, 172, 114, 92, 86]
     sizes.each do |size|
       srcset << "#{image_path("instagram/#{photo.id}_#{size}.jpg")} #{size}w"
     end
