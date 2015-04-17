@@ -8,21 +8,17 @@ gem 'middleman-s3_sync'
 gem 'middleman-minify-html'
 gem 'middleman-dotenv'
 gem 'middleman-autoprefixer'
-gem 'middleman-imageoptim', :github => 'plasticine/middleman-imageoptim'
-
-gem 'image_optim'
-gem 'image_optim_pack'
 
 gem 'oauth'
 gem 'httparty'
 gem 'rake'
 gem 'nokogiri'
 gem 'tzinfo'
-gem 'rmagick'
 gem 'sanitize'
 gem 'dotenv'
 gem 'redis'
 gem 'cloudfront-invalidator'
+gem 'ruby-thumbor'
 
 group :development do
   gem 'scss-lint'

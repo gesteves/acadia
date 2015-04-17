@@ -1,5 +1,4 @@
 require 'nokogiri'
-require 'RMagick'
 require 'httparty'
 
 module Import
@@ -15,7 +14,6 @@ module Import
         books << get_shelf(shelf)
       end
       books = books.flatten.slice(0, @book_count)
-      save_covers(books)
       File.open('data/goodreads.json','w'){ |f| f << books.to_json }
     end
 
@@ -34,17 +32,6 @@ module Import
         books << book
       end
       books
-    end
-
-    def save_covers(books)
-      books.each do |book|
-        cover = Magick::Image::from_blob(HTTParty.get(book[:image]).body).first
-        sizes = [150, 100, 50]
-        sizes.each do |size|
-          image = cover.resize_to_fill(size, (size * cover.rows)/cover.columns)
-          image.write("source/images/goodreads/#{book[:id]}_#{size}.jpg"){ self.interlace = Magick::LineInterlace }
-        end
-      end
     end
   end
 end

@@ -1,6 +1,5 @@
 require 'oauth'
 require 'httparty'
-require 'RMagick'
 
 module Import
   class Twitter
@@ -23,12 +22,6 @@ module Import
       response = @access_token.get("https://api.twitter.com/1.1/users/show.json?screen_name=#{@user}")
       twitter_user = JSON.parse(response.body)
       File.open('data/twitter.json','w'){ |f| f << response.body }
-      avatar = Magick::Image::from_blob(HTTParty.get(twitter_user['profile_image_url'].sub('_normal', '')).body).first
-      sizes = [200, 150, 100, 50]
-      sizes.each do |size|
-        image = avatar.resize_to_fill(size, (size * avatar.rows)/avatar.columns)
-        image.write("source/images/twitter/#{twitter_user["screen_name"]}_#{size}.jpg"){ self.interlace = Magick::LineInterlace }
-      end
     end
 
     # Horrible method to expand tweet entities (urls, hashtags, mentions, etc.) in tweets

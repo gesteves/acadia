@@ -17,6 +17,9 @@ activate :s3_sync do |s3|
   s3.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY_ID']
 end
 
+set :thumbor_key, ENV['THUMBOR_KEY']
+set :thumbor_server_url, ENV['THUMBOR_URL']
+
 # Build-specific configuration
 configure :build do
   ignore 'svg/*'
@@ -25,19 +28,6 @@ configure :build do
   activate :minify_html
   activate :asset_hash
   activate :relative_assets
-  activate :imageoptim do |options|
-    options.manifest         = false
-    options.image_extensions = %w(.jpg)
-    options.allow_lossy      = true
-    options.jpegoptim        = { :strip => ['all'], :max_quality => 80 }
-    options.jpegtran         = false
-    options.advpng           = false
-    options.gifsicle         = false
-    options.optipng          = false
-    options.pngcrush         = false
-    options.pngout           = false
-    options.svgo             = false
-  end
   set :protocol, 'http://'
   set :host, 'www.gesteves.com/'
   set :port, 80
