@@ -19,6 +19,7 @@ end
 
 set :thumbor_key, ENV['THUMBOR_KEY']
 set :thumbor_server_url, ENV['THUMBOR_URL']
+set :thumbor_jpg_quality, ENV['THUMBOR_JPG_QUALITY']
 
 # Build-specific configuration
 configure :build do
