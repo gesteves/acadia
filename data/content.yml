@@ -55,5 +55,6 @@ repos:
   - gesteves/csstarwars
   - gesteves/caniuse-slack
   - gesteves/trebekbot
+  - gesteves/biscayne
   - voxmedia/verge-50
   - voxmedia/yobot
