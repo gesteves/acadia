@@ -12,7 +12,7 @@ module CustomHelpers
   def thumbor_url(url, width = 0, height = 0)
     url.gsub!(/^https?:\/\//, '')
     crypto = Thumbor::CryptoURL.new thumbor_key
-    "#{thumbor_server_url}#{crypto.generate(:filters => ["quality(#{thumbor_jpg_quality})"], :width => width, :height => height, :image => url)}"
+    "#{thumbor_server_url}#{crypto.generate(:filters => ["quality(#{thumbor_jpg_quality})"], :smart => true, :width => width, :height => height, :image => url)}"
   end
 
   def build_srcset(url, sizes, square = false)
