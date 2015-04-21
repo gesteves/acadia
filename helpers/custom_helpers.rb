@@ -39,7 +39,7 @@ module CustomHelpers
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
     photo_url = photo.images.standard_resolution.url
     src = thumbor_url(photo_url, 372, 372)
-    sizes_array = [640, 372, 350, 324, 228, 222, 194, 184, 172, 114, 92, 86]
+    sizes_array = [372, 350, 324, 228, 222, 194, 184, 172, 114, 92, 86]
     srcset = build_srcset(photo_url, sizes_array, true)
     sizes = "(min-width: 1360px) 92px, (min-width: 1000px) calc(((100vw - 8rem)/4 - 4rem)/3 - 1px), (min-width: 600px) calc(((100vw - 4rem)/2 - 2rem)/3 - 1px), calc((100vw - 4rem)/3 - 1px)"
     "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
