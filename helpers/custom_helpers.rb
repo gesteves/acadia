@@ -12,7 +12,7 @@ module CustomHelpers
   def thumbor_url(url, width = 0, height = 0)
     url.gsub!(/^https?:\/\//, '')
     crypto = Thumbor::CryptoURL.new thumbor_key
-    "#{thumbor_server_url}#{crypto.generate(:filters => ["quality(#{thumbor_jpg_quality})"], :smart => true, :width => width, :height => height, :image => url)}"
+    "#{thumbor_server_url}#{crypto.generate(:filters => ["quality(#{thumbor_jpg_quality})", "no_upscale"], :smart => true, :width => width, :height => height, :image => url)}"
   end
 
   def build_srcset(url, sizes, square = false)
@@ -29,7 +29,7 @@ module CustomHelpers
     caption = photo.plain_caption || "Latest from my photoblog"
     photo_url = photo.photos[0].original_size.url
     src = thumbor_url(photo_url, 693, 693)
-    sizes_array = [1280, 693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
+    sizes_array = [693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
     srcset = build_srcset(photo_url, sizes_array, true)
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
     "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
