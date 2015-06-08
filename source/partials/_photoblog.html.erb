@@ -4,7 +4,7 @@
 <ol class="m-photoblog__photos">
   <% data.photoblog.each do |photo| %>
     <li class="m-photoblog__photo-item">
-      <a href="<%= photo.post_url %>">
+      <a href="<%= photo.url %>">
         <%= photoblog_image_tag(photo) %>
       </a>
     </li>

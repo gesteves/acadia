@@ -26,8 +26,8 @@ module CustomHelpers
   end
 
   def photoblog_image_tag(photo)
-    caption = photo.plain_caption || "Latest from my photoblog"
-    photo_url = photo.photos[0].original_size.url
+    caption = photo.title || "Latest from my photoblog"
+    photo_url = photo.photos[0].url
     src = thumbor_url(photo_url, 693, 693)
     sizes_array = [693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
     srcset = build_srcset(photo_url, sizes_array, true)
