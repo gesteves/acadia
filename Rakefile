@@ -107,7 +107,7 @@ namespace :import do
     begin
       puts '== Importing data from Rdio'
       start_time = Time.now
-      rdio = Import::Rdio.new(ENV['RDIO_USER_ID'], ENV['RDIO_KEY'], ENV['RDIO_SECRET'], ENV['RDIO_COUNT'].to_i)
+      rdio = Import::Rdio.new(ENV['RDIO_USER_ID'], ENV['RDIO_KEY'], ENV['RDIO_SECRET'], ENV['RDIO_REFRESH_TOKEN'], ENV['RDIO_COUNT'].to_i)
       rdio.get_heavy_rotation
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
