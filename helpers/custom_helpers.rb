@@ -1,7 +1,7 @@
 module CustomHelpers
   require "date"
   require "tzinfo"
-  require "ruby-thumbor"
+  require "imgix"
 
   def formatted_date_in_eastern(date_string, format = "%F")
     tz = TZInfo::Timezone.get("America/New_York")
@@ -9,18 +9,21 @@ module CustomHelpers
     local.strftime(format)
   end
 
-  def thumbor_url(url, width = 0, height = 0, smart = false)
-    url.gsub!(/^https?:\/\//, '')
-    crypto = Thumbor::CryptoURL.new thumbor_key
-    "#{thumbor_server_url}#{crypto.generate(:filters => ["quality(#{thumbor_jpg_quality})", "no_upscale()"], :width => width, :height => height, :image => url, :smart => smart)}"
+  def imgix_url(url, width, square = false)
+    client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, include_library_param: false).path(url)
+    client.auto('format').q(90)
+    if square
+      client.fit('crop').crop('faces').height(width)
+    else
+      client.fit('max')
+    end
+    client.width(width).to_url
   end
 
-  def build_srcset(url, sizes, square = false, smart = false)
+  def build_srcset(url, sizes, square = false)
     srcset = []
     sizes.each do |size|
-      width = size
-      height = square ? size : 0
-      srcset << "#{thumbor_url(url, width, height, smart)} #{size}w"
+      srcset << "#{imgix_url(url, size, square)} #{size}w"
     end
     srcset.join(', ')
   end
@@ -29,7 +32,7 @@ module CustomHelpers
     caption = photo.title || "Latest from my photoblog"
     photo_url = photo.photos[0].url
     sizes_array = [693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
-    srcset = build_srcset(photo_url, sizes_array, true, true)
+    srcset = build_srcset(photo_url, sizes_array, true)
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
     "<img srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end

@@ -19,9 +19,8 @@ activate :s3_sync do |s3|
   s3.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY_ID']
 end
 
-set :thumbor_key, ENV['THUMBOR_KEY']
-set :thumbor_server_url, ENV['THUMBOR_URL']
-set :thumbor_jpg_quality, ENV['THUMBOR_JPG_QUALITY']
+set :imgix_token, ENV['IMGIX_TOKEN']
+set :imgix_domains, ENV['IMGIX_DOMAIN']
 
 # Build-specific configuration
 configure :build do

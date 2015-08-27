@@ -18,7 +18,7 @@ gem 'sanitize'
 gem 'dotenv'
 gem 'redis'
 gem 'cloudfront-invalidator'
-gem 'ruby-thumbor'
+gem 'imgix'
 gem 'rdioid'
 
 group :development do

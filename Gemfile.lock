@@ -7,6 +7,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.3.8)
     ansi (1.5.0)
     autoprefixer-rails (5.2.1.2)
       execjs
@@ -78,6 +79,8 @@ GEM
       multi_xml (>= 0.5.2)
     httpclient (2.6.0.1)
     i18n (0.7.0)
+    imgix (0.3.5)
+      addressable
     ipaddress (0.8.0)
     json (1.8.3)
     kramdown (1.8.0)
@@ -170,7 +173,6 @@ GEM
     redis (3.2.1)
     ruby-hmac (0.4.0)
     ruby-progressbar (1.7.5)
-    ruby-thumbor (2.0.0)
     sanitize (4.0.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
@@ -211,6 +213,7 @@ DEPENDENCIES
   cloudfront-invalidator
   dotenv
   httparty
+  imgix
   middleman (~> 3.4.0)
   middleman-autoprefixer
   middleman-dotenv
@@ -222,7 +225,6 @@ DEPENDENCIES
   rake
   rdioid
   redis
-  ruby-thumbor
   sanitize
   scss-lint
   tzinfo
