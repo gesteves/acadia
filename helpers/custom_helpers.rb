@@ -113,4 +113,12 @@ module CustomHelpers
     svg_id = svg_id.gsub("#", "")
     "<svg viewBox=\"0 0 100 100\" class=\"#{svg_class} #{svg_id}\"><use xlink:href=\"##{svg_id}\"></use></svg>"
   end
+
+  # Render inline css
+  # Source: http://blog.ruppel.io/post/52645746944/inline-assets-in-middleman
+  def inline_stylesheet(name)
+    content_tag :style do
+      sprockets["#{name}.css"].to_s
+    end
+  end
 end

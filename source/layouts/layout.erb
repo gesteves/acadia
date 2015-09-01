@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%= partial "partials/_head" %>
     <%= partial "partials/_analytics" %>
+    <%= partial "partials/_head" %>
   </head>
   
   <body>
     <%= partial "partials/icons" %>
     <%= yield %>
-    <%= javascript_include_tag  "main" %>
   </body>
 </html>

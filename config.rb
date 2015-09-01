@@ -10,6 +10,7 @@ activate :gzip
 activate :dotenv
 activate :autoprefixer do |config|
   config.browsers = ['last 2 versions', 'Explorer > 9']
+  config.inline   = true
 end
 activate :s3_sync do |s3|
   s3.prefer_gzip           = true
@@ -26,7 +27,7 @@ set :imgix_image_quality, ENV['IMGIX_IMAGE_QUALITY'].to_i || 75
 # Build-specific configuration
 configure :build do
   ignore 'svg/*'
-  activate :minify_css
+  activate :minify_css, :inline => true
   activate :minify_javascript
   activate :minify_html
   activate :asset_hash
