@@ -9,21 +9,21 @@ module CustomHelpers
     local.strftime(format)
   end
 
-  def imgix_url(url, width, square = false)
+  def imgix_url(url, width, square, crop)
     client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, include_library_param: false).path(url)
     client.auto('format').q(imgix_image_quality)
     if square
-      client.fit('crop').crop('faces').height(width)
+      client.fit('crop').crop(crop).height(width)
     else
       client.fit('max')
     end
     client.width(width).to_url
   end
 
-  def build_srcset(url, sizes, square = false)
+  def build_srcset(url, sizes, square = false, crop = 'faces')
     srcset = []
     sizes.each do |size|
-      srcset << "#{imgix_url(url, size, square)} #{size}w"
+      srcset << "#{imgix_url(url, size, square, crop)} #{size}w"
     end
     srcset.join(', ')
   end
@@ -31,8 +31,9 @@ module CustomHelpers
   def photoblog_image_tag(photo)
     caption = photo.title || "Latest from my photoblog"
     photo_url = photo.photos[0].url
+    crop = photo.photos[0].crop
     sizes_array = [693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
-    srcset = build_srcset(photo_url, sizes_array, true)
+    srcset = build_srcset(photo_url, sizes_array, true, crop)
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
     "<img srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
