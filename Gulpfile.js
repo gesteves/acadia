@@ -41,7 +41,13 @@ gulp.task('svg', function () {
     .pipe(rename({
       prefix: 'svg-'
     }))
-    .pipe(svgmin())
+    .pipe(svgmin({
+      plugins: [
+        {
+          removeUselessDefs: false
+        }
+      ]
+    }))
     .pipe(cheerio({
       run: function ($) {
         $('[style]').removeAttr('style');
