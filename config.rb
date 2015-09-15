@@ -9,7 +9,7 @@ set :port, 4567
 activate :gzip
 activate :dotenv
 activate :autoprefixer do |config|
-  config.browsers = ['last 2 versions', 'Explorer > 9']
+  config.browsers = ['last 2 versions', 'IE 11']
   config.inline   = true
 end
 activate :s3_sync do |s3|
