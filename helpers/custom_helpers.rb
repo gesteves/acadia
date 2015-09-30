@@ -9,7 +9,7 @@ module CustomHelpers
     local.strftime(format)
   end
 
-  def imgix_url(url, width, square, crop)
+  def imgix_url(url, width, square = false, crop = 'faces')
     client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, include_library_param: false).path(url)
     client.auto('format').q(imgix_image_quality)
     if square
