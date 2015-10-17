@@ -17,7 +17,7 @@ module CustomHelpers
     else
       client.fit('max')
     end
-    client.to_url(ch: 'Width,DPR', width: width)
+    client.width(width).to_url
   end
 
   def build_srcset(url, sizes, square = false, crop = 'faces')
