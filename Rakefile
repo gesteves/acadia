@@ -196,9 +196,7 @@ task :sync do
 end
 
 desc 'Publishes the site'
-task :publish => [:dotenv, :build, :sync] do
-  open("https://nosnch.in/#{ENV['SNITCH_ID']}") unless ENV['SNITCH_ID'].nil?
-end
+task :publish => [:dotenv, :build, :sync]
 
 desc 'Send CloudFront invalidation request'
 task :invalidate => [:dotenv] do
