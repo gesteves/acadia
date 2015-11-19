@@ -22,13 +22,18 @@ module Import
       if response.code == 200 && albums["albums"]["total"] > 0
         {
           artist: artist,
-          name: album,
+          name: unclutter_album_name(album),
           url: albums["albums"]["items"][0]["external_urls"]["spotify"],
           image_url: albums["albums"]["items"][0]["images"][0]["url"]
         }
       else
         nil
       end
+    end
+
+    # Remove shit like [remastered] and (deluxe version) or whatever from album names
+    def unclutter_album_name(album)
+      album.gsub(/\[[\w\s]+\]/,'').strip.gsub(/\([\w\s-]+\)$/,'').strip
     end
   end
 end
