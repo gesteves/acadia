@@ -10,7 +10,7 @@ module CustomHelpers
   end
 
   def imgix_url(url, width, square, crop)
-    client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, include_library_param: false).path(url)
+    client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, secure: true, include_library_param: false).path(url)
     client.auto('format').q(imgix_image_quality)
     if square
       client.fit('crop').crop(crop).height(width)
