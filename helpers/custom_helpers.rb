@@ -9,7 +9,7 @@ module CustomHelpers
     local.strftime(format)
   end
 
-  def imgix_url(url, width, square, crop)
+  def imgix_url(url, width, square = false, crop ='faces')
     client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, secure: true, include_library_param: false).path(url)
     client.auto('format').q(imgix_image_quality)
     if square
@@ -34,8 +34,9 @@ module CustomHelpers
     crop = photo.photos[0].crop
     sizes_array = [693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
     srcset = build_srcset(photo_url, sizes_array, true, crop)
+    src = imgix_url(photo_url, sizes_array.first, true, crop)
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
-    "<img srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
   def instagram_image_tag(photo)
@@ -43,8 +44,9 @@ module CustomHelpers
     photo_url = photo.images.standard_resolution.url
     sizes_array = [372, 350, 324, 228, 222, 194, 184, 172, 114, 92, 86]
     srcset = build_srcset(photo_url, sizes_array, true)
+    src = imgix_url(photo_url, sizes_array.first, true)
     sizes = "(min-width: 1360px) 92px, (min-width: 1000px) calc(((100vw - 8rem)/4 - 4rem)/3 - 1px), (min-width: 600px) calc(((100vw - 4rem)/2 - 2rem)/3 - 1px), calc((100vw - 4rem)/3 - 1px)"
-    "<img srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
   def album_image_tag(album)
@@ -52,16 +54,18 @@ module CustomHelpers
     photo_url = album.image_url
     sizes_array = [200, 150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
+    src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
-    "<img srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
   def twitter_avatar_image_tag(username, name)
     photo_url = username.profile_image_url.sub('_normal', '')
     sizes_array = [200, 150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
+    src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
-    "<img srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{name}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{name}\" />"
   end
 
   def untappd_image_tag(beer)
@@ -69,8 +73,9 @@ module CustomHelpers
     photo_url = beer.beer_label
     sizes_array = [100, 50]
     srcset = build_srcset(photo_url, sizes_array)
+    src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
-    "<img srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
   def goodreads_image_tag(book)
@@ -78,8 +83,9 @@ module CustomHelpers
     photo_url = book.image
     sizes_array = [150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
+    src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
-    "<img srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
   def photo_exif(photo)
