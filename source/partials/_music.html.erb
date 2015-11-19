@@ -1,14 +1,14 @@
-<% unless data.rdio.empty? %>
+<% unless data.music.empty? %>
   <section class="m-card p-list">
     <h1>Listening</h1>
     <ol>
-      <% data.rdio.each do |album| %>
+      <% data.music.each do |album| %>
         <li class="p-list__item">
-          <a href="<%= album.shortUrl %>" class="p-list__image">
-            <%= rdio_image_tag(album) %>
+          <a href="<%= album.url %>" class="p-list__image">
+            <%= album_image_tag(album) %>
           </a>
           <div class="p-list__meta">
-            <a href="<%= album.shortUrl %>" class="p-list__title"><%= album.name %></a>
+            <a href="<%= album.url %>" class="p-list__title"><%= album.name %></a>
             <span class="p-list__author"><%= album.artist %></a>
           </div>
         </li>

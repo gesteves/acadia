@@ -77,7 +77,6 @@ GEM
     httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    httpclient (2.6.0.1)
     i18n (0.7.0)
     imgix (0.3.5)
       addressable
@@ -168,8 +167,6 @@ GEM
     rb-fsevent (0.9.5)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    rdioid (0.0.3)
-      httpclient (~> 2.6.0)
     redis (3.2.1)
     ruby-hmac (0.4.0)
     ruby-progressbar (1.7.5)
@@ -223,7 +220,6 @@ DEPENDENCIES
   nokogiri
   oauth
   rake
-  rdioid
   redis
   sanitize
   scss-lint

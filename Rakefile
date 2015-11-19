@@ -102,16 +102,16 @@ namespace :import do
     end
   end
 
-  desc 'Import data from Rdio'
-  task :rdio => [:dotenv, :set_up_directories] do
+  desc 'Import data from Last.fm & Spotify'
+  task :music => [:dotenv, :set_up_directories] do
     begin
-      puts '== Importing data from Rdio'
+      puts '== Importing music data'
       start_time = Time.now
-      rdio = Import::Rdio.new(ENV['RDIO_USER_ID'], ENV['RDIO_KEY'], ENV['RDIO_SECRET'], ENV['RDIO_REFRESH_TOKEN'], ENV['RDIO_COUNT'].to_i)
-      rdio.get_heavy_rotation
+      music = Import::Music.new(ENV['LASTFM_USERNAME'], ENV['LASTFM_API_KEY'], ENV['LASTFM_COUNT'])
+      music.get_latest_albums
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
-      abort "Failed to import Rdio data: #{e}"
+      abort "Failed to import Music data: #{e}"
     end
   end
 
@@ -179,7 +179,7 @@ task :import => %w{
   import:github
   import:goodreads
   import:untappd
-  import:rdio
+  import:music
   import:fitbit
 }
 

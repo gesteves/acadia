@@ -47,9 +47,9 @@ module CustomHelpers
     "<img srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
-  def rdio_image_tag(album)
+  def album_image_tag(album)
     alt = album.name
-    photo_url = album.icon
+    photo_url = album.image_url
     sizes_array = [200, 150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
     sizes = "50px"

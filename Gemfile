@@ -19,7 +19,6 @@ gem 'dotenv'
 gem 'redis'
 gem 'cloudfront-invalidator'
 gem 'imgix'
-gem 'rdioid'
 
 group :development do
   gem 'scss-lint'
