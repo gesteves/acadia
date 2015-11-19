@@ -38,6 +38,6 @@ configure :build do
 end
 
 after_configuration do
-  caching_policy 'text/html',    :max_age => 60 * 5, :must_revalidate => true
+  caching_policy 'text/html',    :max_age => ENV['MAX_AGE'] || 300, :must_revalidate => true
   default_caching_policy         :max_age => 60 * 60 * 24 * 365
 end
