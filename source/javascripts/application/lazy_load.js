@@ -29,7 +29,7 @@ Acadia.LazyLoad = (function () {
       return;
     }
 
-    bottom = window.scrollY + document.documentElement.clientHeight;
+    bottom = window.pageYOffset + document.documentElement.clientHeight;
 
     for (var i = 0; i < images.length; i++) {
       image = images[i];
