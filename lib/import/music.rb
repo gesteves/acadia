@@ -9,9 +9,11 @@ module Import
     def get_latest_albums
       response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=#{@username}&api_key=#{@api_key}&format=json&limit=200")
       if response.code == 200
-        tracks = JSON.parse(response.body)["recenttracks"]["track"]
-                  .uniq! { |t| t["album"]["#text"] }[0, 5]
-                  .map!{ |t| get_spotify_data(t["artist"]["#text"],t["album"]["#text"]) }
+        data = JSON.parse(response.body)["recenttracks"]["track"]
+        tracks = data
+                  .sort { |a,b| album_count(data, b["album"]["#text"]) <=> album_count(data, a["album"]["#text"]) }
+                  .uniq { |t| t["album"]["#text"] }[0, 5]
+                  .map { |t| get_spotify_data(t["artist"]["#text"],t["album"]["#text"]) }
       end
       File.open('data/music.json','w'){ |f| f << tracks.to_json }
     end
@@ -34,6 +36,10 @@ module Import
     # Remove shit like [remastered] and (deluxe version) or whatever from album names
     def unclutter_album_name(album)
       album.gsub(/\[[\w\s]+\]/,'').strip.gsub(/\([\w\s-]+\)$/,'').strip
+    end
+
+    def album_count(data, name)
+      data.count { |a| a["album"]["#text"] == name }
     end
   end
 end
