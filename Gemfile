@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 ruby '2.2.2'
 
 gem 'middleman', '~>3.4.0'
-gem 'middleman-s3_sync'
+gem 'middleman-s3_sync', '~>3.3.0'
 gem 'middleman-minify-html'
 gem 'middleman-dotenv'
 gem 'middleman-autoprefixer'
