@@ -20,13 +20,13 @@ module Import
     def get_shelf(shelf)
       rss_feed = @feed + "&shelf=#{shelf}"
       books = []
-      Nokogiri::XML(HTTParty.get(rss_feed).body).xpath('//channel/item').each do |item|
+      Nokogiri::XML(HTTParty.get(rss_feed).body).css('item').sort { |a,b|  Time.parse(b.css('user_date_created').text) <=> Time.parse(a.css('user_date_created').text)}.each do |item|
         book = {
-          :id => item.xpath('book_id').first.content,
-          :title => item.xpath('title').first.content,
-          :author => item.xpath('author_name').first.content,
-          :image => item.xpath('book_large_image_url').first.content,
-          :url => Nokogiri.HTML(item.xpath('description').first.content).css('a').first['href'],
+          :id => item.css('book_id').first.content,
+          :title => item.css('title').first.content,
+          :author => item.css('author_name').first.content,
+          :image => item.css('book_large_image_url').first.content,
+          :url => Nokogiri.HTML(item.css('description').first.content).css('a').first['href'].gsub('?utm_medium=api&utm_source=rss', ''),
           :shelf => shelf
         }
         books << book
