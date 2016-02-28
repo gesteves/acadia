@@ -1,7 +1,7 @@
 # If you have OpenSSL installed, we recommend updating
 # the following line to use 'https'
 source 'http://rubygems.org'
-ruby '2.2.2'
+ruby '2.3.0'
 
 gem 'middleman', '~>3.4.0'
 gem 'middleman-s3_sync'
