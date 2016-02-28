@@ -5,7 +5,7 @@ require_relative 'lib/import'
 
 namespace :import do
   directory 'data'
-  
+
   task :set_up_directories => ['data']
 
   desc 'Import latest tweets from a twitter account'
@@ -153,19 +153,6 @@ namespace :wpt do
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
       abort "Failed to request WPT test: #{e}"
-    end
-  end
-
-  desc 'Logs results of last WebPageTest test'
-  task :log => [:dotenv] do
-    begin
-      puts '== Logging latest WPT test'
-      start_time = Time.now
-      wpt = Import::WPT.new(ENV['SITE_URL'], ENV['WPT_API_KEY'])
-      wpt.log_results
-      puts "Completed in #{Time.now - start_time} seconds"
-    rescue => e
-      abort "Failed to log WPT test: #{e}"
     end
   end
 end
