@@ -36,7 +36,7 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array, true, crop)
     src = imgix_url(photo_url, sizes_array.first, true, crop)
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
-    "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
   def instagram_image_tag(photo)
@@ -46,7 +46,7 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array, true)
     src = imgix_url(photo_url, sizes_array.first, true)
     sizes = "(min-width: 1360px) 92px, (min-width: 1000px) calc(((100vw - 8rem)/4 - 4rem)/3 - 1px), (min-width: 600px) calc(((100vw - 4rem)/2 - 2rem)/3 - 1px), calc((100vw - 4rem)/3 - 1px)"
-    "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
   def album_image_tag(album)
@@ -56,7 +56,7 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
-    "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
   def twitter_avatar_image_tag(username, name)
@@ -65,7 +65,7 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
-    "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{name}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{name}\" />"
   end
 
   def untappd_image_tag(beer)
@@ -75,7 +75,7 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
-    "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
   def goodreads_image_tag(book)
@@ -85,7 +85,7 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
-    "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
   def photo_exif(photo)
