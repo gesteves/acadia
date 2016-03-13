@@ -2,10 +2,10 @@
 <h1>Featured Photos</h1>
 
 <ol class="m-photoblog__photos">
-  <% data.photoblog.each do |photo| %>
+  <% data.photoblog.data.each do |entry| %>
     <li class="m-photoblog__photo-item">
-      <a href="<%= photo.url %>">
-        <%= photoblog_image_tag(photo) %>
+      <a href="<%= entry.links.self %>">
+        <%= photoblog_image_tag(entry.relationships.photos.data.first, entry.attributes.plain_title) %>
       </a>
     </li>
   <% end %>

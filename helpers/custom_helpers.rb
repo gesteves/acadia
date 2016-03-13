@@ -28,10 +28,9 @@ module CustomHelpers
     srcset.join(', ')
   end
 
-  def photoblog_image_tag(photo)
-    caption = photo.title || "Latest from my photoblog"
-    photo_url = photo.photos[0].url
-    crop = photo.photos[0].crop
+  def photoblog_image_tag(photo, caption = "Latest from my photoblog")
+    photo_url = photo.attributes.original_url
+    crop = photo.attributes.crop
     sizes_array = [693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
     srcset = build_srcset(photo_url, sizes_array, true, crop)
     src = imgix_url(photo_url, sizes_array.first, true, crop)

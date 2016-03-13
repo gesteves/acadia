@@ -10,8 +10,8 @@ module Import
 
     def get_photos
       url = @photo_tag.nil? ? "#{@photo_url}/count/#{@photo_count}.json" : "#{@photo_url}/tagged/#{@photo_tag}/count/#{@photo_count}.json"
-      response = HTTParty.get(url)
-      posts = JSON.parse(response.body)['entries']
+      response = HTTParty.get(url, headers: { 'Content-Type' => 'application/vnd.api+json' })
+      posts = JSON.parse(response.body)
       File.open('data/photoblog.json','w'){ |f| f << posts.to_json }
     end
   end
