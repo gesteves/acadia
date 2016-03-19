@@ -29,7 +29,7 @@ module CustomHelpers
   end
 
   def photoblog_image_tag(photo, caption = "Latest from my photoblog")
-    photo_url = photo.attributes.original_url
+    photo_url = photo.links.large_square
     crop = photo.attributes.crop
     sizes_array = [693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
     srcset = build_srcset(photo_url, sizes_array, true, crop)
