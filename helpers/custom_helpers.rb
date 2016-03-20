@@ -12,7 +12,7 @@ module CustomHelpers
   def imgix_url(url, width, square = false)
     if ENV['RACK_ENV'] == 'production'
       client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, secure: true, include_library_param: false).path(url)
-      client.auto('format').q(imgix_image_quality)
+      client.auto('format').q(imgix_image_quality).ch('Width,DPR,Save-Data')
       if square
         client.fit('crop').height(width)
       else
