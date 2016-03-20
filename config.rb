@@ -22,7 +22,6 @@ end
 
 set :imgix_token, ENV['IMGIX_TOKEN']
 set :imgix_domains, ENV['IMGIX_DOMAIN']
-set :imgix_image_quality, ENV['IMGIX_IMAGE_QUALITY'].to_i || 75
 
 # Build-specific configuration
 configure :build do
