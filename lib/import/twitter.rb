@@ -21,6 +21,7 @@ module Import
     def get_twitter_user
       response = @access_token.get("https://api.twitter.com/1.1/users/show.json?screen_name=#{@user}")
       twitter_user = JSON.parse(response.body)
+      File.open("source/images/twitter/#{@user}.jpg",'w'){ |f| f << HTTParty.get(twitter_user['profile_image_url'].sub('_normal', '')).body }
       File.open('data/twitter.json','w'){ |f| f << response.body }
     end
 

@@ -1,12 +1,21 @@
+require 'rake/clean'
 require 'dotenv/tasks'
 require 'open-uri'
 require 'cloudfront-invalidator'
 require_relative 'lib/import'
 
+CLOBBER.include('data/*.json', 'source/images/instagram/*', 'source/images/photoblog/*', 'source/images/goodreads/*', 'source/images/untappd/*', 'source/images/twitter/*', 'source/images/music/*')
+
 namespace :import do
   directory 'data'
+  directory 'source/images/instagram'
+  directory 'source/images/photoblog'
+  directory 'source/images/goodreads'
+  directory 'source/images/untappd'
+  directory 'source/images/twitter'
+  directory 'source/images/music'
 
-  task :set_up_directories => ['data']
+  task :set_up_directories => ['data', 'source/images/instagram', 'source/images/photoblog', 'source/images/goodreads', 'source/images/untappd', 'source/images/twitter', 'source/images/music']
 
   desc 'Import latest tweets from a twitter account'
   task :twitter => [:dotenv, :set_up_directories] do
@@ -158,6 +167,7 @@ namespace :wpt do
 end
 
 task :import => %w{
+  clobber
   import:wpt
   import:twitter
   import:instagram

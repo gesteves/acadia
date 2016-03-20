@@ -10,14 +10,18 @@ module CustomHelpers
   end
 
   def imgix_url(url, width, square = false, crop ='faces')
-    client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, secure: true, include_library_param: false).path(url)
-    client.auto('format').q(imgix_image_quality)
-    if square
-      client.fit('crop').crop(crop).height(width)
+    if ENV['RACK_ENV'] == 'production'
+      client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, secure: true, include_library_param: false).path(url)
+      client.auto('format').q(imgix_image_quality)
+      if square
+        client.fit('crop').crop(crop).height(width)
+      else
+        client.fit('max')
+      end
+      client.width(width).to_url
     else
-      client.fit('max')
+      url
     end
-    client.width(width).to_url
   end
 
   def build_srcset(url, sizes, square = false, crop = 'faces')
@@ -29,7 +33,7 @@ module CustomHelpers
   end
 
   def photoblog_image_tag(photo, caption = "Latest from my photoblog")
-    photo_url = photo.links.large_square
+    photo_url = image_path "photoblog/#{photo.id}.jpg"
     crop = photo.attributes.crop
     sizes_array = [693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
     srcset = build_srcset(photo_url, sizes_array, true, crop)
@@ -40,7 +44,7 @@ module CustomHelpers
 
   def instagram_image_tag(photo)
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
-    photo_url = photo.images.standard_resolution.url
+    photo_url = image_path "instagram/#{photo.id}.jpg"
     sizes_array = [372, 350, 324, 228, 222, 194, 184, 172, 114, 92, 86]
     srcset = build_srcset(photo_url, sizes_array, true)
     src = imgix_url(photo_url, sizes_array.first, true)
@@ -50,7 +54,7 @@ module CustomHelpers
 
   def album_image_tag(album)
     alt = album.name
-    photo_url = album.image_url
+    photo_url = image_path "music/#{album.id}.jpg"
     sizes_array = [200, 150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
@@ -59,7 +63,7 @@ module CustomHelpers
   end
 
   def twitter_avatar_image_tag(username, name)
-    photo_url = username.profile_image_url.sub('_normal', '')
+    photo_url = image_path "twitter/#{username.screen_name}.jpg"
     sizes_array = [200, 150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
@@ -69,7 +73,7 @@ module CustomHelpers
 
   def untappd_image_tag(beer)
     alt = beer.beer_name
-    photo_url = beer.beer_label
+    photo_url = image_path "untappd/#{beer.bid}.jpg"
     sizes_array = [100, 50]
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
@@ -79,7 +83,7 @@ module CustomHelpers
 
   def goodreads_image_tag(book)
     alt = book.title
-    photo_url = book.image
+    photo_url = image_path "goodreads/#{book.id}.jpg"
     sizes_array = [150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)

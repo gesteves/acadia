@@ -15,6 +15,9 @@ module Import
                   .uniq { |t| t["album"]["#text"] }[0, 5]
                   .map { |t| get_spotify_data(t["artist"]["#text"],t["album"]["#text"]) }
       end
+      tracks.each do |t|
+        File.open("source/images/music/#{t[:id]}.jpg",'w'){ |f| f << HTTParty.get(t[:image_url]).body }
+      end
       File.open('data/music.json','w'){ |f| f << tracks.to_json }
     end
 
@@ -26,7 +29,8 @@ module Import
           artist: artist,
           name: unclutter_album_name(album),
           url: albums["albums"]["items"][0]["external_urls"]["spotify"],
-          image_url: albums["albums"]["items"][0]["images"][0]["url"]
+          image_url: albums["albums"]["items"][0]["images"][0]["url"],
+          id: albums["albums"]["items"][0]["id"]
         }
       else
         nil

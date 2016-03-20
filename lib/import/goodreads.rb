@@ -14,6 +14,9 @@ module Import
         books << get_shelf(shelf)
       end
       books = books.flatten.slice(0, @book_count)
+      books.each do |b|
+        File.open("source/images/goodreads/#{b[:id]}.jpg",'w'){ |f| f << HTTParty.get(b[:image]).body }
+      end
       File.open('data/goodreads.json','w'){ |f| f << books.to_json }
     end
 
