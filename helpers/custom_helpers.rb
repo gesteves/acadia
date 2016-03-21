@@ -9,16 +9,17 @@ module CustomHelpers
     local.strftime(format)
   end
 
-  def imgix_url(url, width, square = false)
+  def imgix_url(url, options)
     if ENV['RACK_ENV'] == 'production'
+      opts = { auto: 'format', ch: 'Width,DPR,Save-Data', fit: 'max' }.merge(options)
       client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, secure: true, include_library_param: false).path(url)
-      client.auto('format').ch('Width,DPR,Save-Data')
-      if square
-        client.fit('crop').height(width)
-      else
-        client.fit('max')
+      if opts[:square]
+        opts[:ch] = 'Save-Data'
+        opts[:fit] = 'crop'
+        opts[:h] = opts[:w]
+        opts.delete(:square)
       end
-      client.width(width).to_url
+      client.to_url(opts)
     else
       url
     end
@@ -27,7 +28,9 @@ module CustomHelpers
   def build_srcset(url, sizes, square = false)
     srcset = []
     sizes.each do |size|
-      srcset << "#{imgix_url(url, size, square)} #{size}w"
+      opts = { w: size }
+      opts[:square] = true if square
+      srcset << "#{imgix_url(url, opts)} #{size}w"
     end
     srcset.join(', ')
   end
@@ -36,7 +39,7 @@ module CustomHelpers
     photo_url = image_path "photoblog/#{photo.id}.jpg"
     sizes_array = [558, 498, 249]
     srcset = build_srcset(photo_url, sizes_array)
-    src = imgix_url(photo_url, sizes_array.first)
+    src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
@@ -46,7 +49,7 @@ module CustomHelpers
     photo_url = image_path "instagram/#{photo.id}.jpg"
     sizes_array = [347, 172, 86]
     srcset = build_srcset(photo_url, sizes_array, true)
-    src = imgix_url(photo_url, sizes_array.first, true)
+    src = imgix_url(photo_url, { w: sizes_array.first, square: true })
     sizes = "(min-width: 1360px) 92px, (min-width: 1000px) calc(((100vw - 8rem)/4 - 4rem)/3 - 1px), (min-width: 600px) calc(((100vw - 4rem)/2 - 2rem)/3 - 1px), calc((100vw - 4rem)/3 - 1px)"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
@@ -56,7 +59,7 @@ module CustomHelpers
     photo_url = image_path "music/#{album.id}.jpg"
     sizes_array = [150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
-    src = imgix_url(photo_url, sizes_array.first)
+    src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "50px"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
@@ -65,7 +68,7 @@ module CustomHelpers
     photo_url = image_path "twitter/#{username.screen_name}.jpg"
     sizes_array = [150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
-    src = imgix_url(photo_url, sizes_array.first)
+    src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "50px"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{name}\" />"
   end
@@ -75,7 +78,7 @@ module CustomHelpers
     photo_url = image_path "untappd/#{beer.bid}.jpg"
     sizes_array = [100, 50]
     srcset = build_srcset(photo_url, sizes_array)
-    src = imgix_url(photo_url, sizes_array.first)
+    src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "50px"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
@@ -85,7 +88,7 @@ module CustomHelpers
     photo_url = image_path "goodreads/#{book.id}.jpg"
     sizes_array = [150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
-    src = imgix_url(photo_url, sizes_array.first)
+    src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "50px"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
