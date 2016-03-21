@@ -34,7 +34,7 @@ module CustomHelpers
 
   def photoblog_image_tag(photo, caption = "Latest from my photoblog")
     photo_url = image_path "photoblog/#{photo.id}.jpg"
-    sizes_array = [693, 558, 526, 498, 484, 470, 416, 334, 278, 249, 242, 235]
+    sizes_array = [558, 498, 249]
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
@@ -44,7 +44,7 @@ module CustomHelpers
   def instagram_image_tag(photo)
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
     photo_url = image_path "instagram/#{photo.id}.jpg"
-    sizes_array = [372, 350, 324, 228, 222, 194, 184, 172, 114, 92, 86]
+    sizes_array = [347, 172, 86]
     srcset = build_srcset(photo_url, sizes_array, true)
     src = imgix_url(photo_url, sizes_array.first, true)
     sizes = "(min-width: 1360px) 92px, (min-width: 1000px) calc(((100vw - 8rem)/4 - 4rem)/3 - 1px), (min-width: 600px) calc(((100vw - 4rem)/2 - 2rem)/3 - 1px), calc((100vw - 4rem)/3 - 1px)"
@@ -54,7 +54,7 @@ module CustomHelpers
   def album_image_tag(album)
     alt = album.name
     photo_url = image_path "music/#{album.id}.jpg"
-    sizes_array = [200, 150, 100, 50]
+    sizes_array = [150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
@@ -63,7 +63,7 @@ module CustomHelpers
 
   def twitter_avatar_image_tag(username, name)
     photo_url = image_path "twitter/#{username.screen_name}.jpg"
-    sizes_array = [200, 150, 100, 50]
+    sizes_array = [150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, sizes_array.first)
     sizes = "50px"
