@@ -11,10 +11,9 @@ module CustomHelpers
 
   def imgix_url(url, options)
     if ENV['RACK_ENV'] == 'production'
-      opts = { auto: 'format', ch: 'Width,DPR,Save-Data', fit: 'max' }.merge(options)
+      opts = { auto: 'format', fit: 'max' }.merge(options)
       client = Imgix::Client.new(hosts: imgix_domains.split(','), token: imgix_token, secure: true, include_library_param: false).path(url)
       if opts[:square]
-        opts[:ch] = 'Save-Data'
         opts[:fit] = 'crop'
         opts[:h] = opts[:w]
         opts.delete(:square)
