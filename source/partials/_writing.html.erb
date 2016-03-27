@@ -1,11 +1,11 @@
-<% unless data.links.response.posts.empty? %>
+<% unless data.content.reading.empty? %>
   <section class="m-card m-writing">
     <h1>Writing</h1>
     <ol>
-      <% data.links.response.posts.each do |link| %>
+      <% data.content.reading.reverse.each do |link| %>
         <li>
           <h2><%= link_to link.title, link.url %></h2>
-          <%= link.description %>
+          <p><%= link.description %></p>
         </li>
       <% end %>
     </ol>

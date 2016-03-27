@@ -57,19 +57,6 @@ namespace :import do
     end
   end
 
-  desc 'Import latest links from Tumblr'
-  task :links => [:dotenv, :set_up_directories] do
-    begin
-      puts '== Importing links'
-      start_time = Time.now
-      linkblog = Import::LinkBlog.new(ENV['TUMBLR_CONSUMER_KEY'], ENV['TUMBLR_LINKS'],ENV['TUMBLR_LINK_TAG'], ENV['TUMBLR_LINKS_COUNT'].to_i)
-      linkblog.get_links
-      puts "Completed in #{Time.now - start_time} seconds"
-    rescue => e
-      abort "Failed to import links: #{e}"
-    end
-  end
-
   desc 'Import featured repos from Github'
   task :github => [:dotenv, :set_up_directories] do
     begin
@@ -172,7 +159,6 @@ task :import => %w{
   import:twitter
   import:instagram
   import:photoblog
-  import:links
   import:github
   import:goodreads
   import:untappd
