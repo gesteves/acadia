@@ -30,7 +30,7 @@ module Import
       if active_test? && !test_complete?
         puts 'WPT request skipped; last test not complete'
       else
-        url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json"
+        url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json&runs=3"
         request = HTTParty.get(url)
         response = JSON.parse(request.body)
         if response['statusCode'] == 200
@@ -43,8 +43,9 @@ module Import
     def save_results
       if active_test? && test_complete?
         wpt = get_latest_result
+        speedindexes = wpt['data']['runs'].map { |k, v| v['firstView']['SpeedIndex'] }
         results = {
-          :speed_index => wpt['data']['runs']['1']['firstView']['SpeedIndex'],
+          :speed_index => median(speedindexes),
           :result_url => wpt['data']['summary']
         }
         result_json = results.to_json
@@ -62,6 +63,12 @@ module Import
       latest_test = @redis.get('wpt:test_url')
       request = HTTParty.get(latest_test)
       JSON.parse(request.body)
+    end
+
+    def median(values)
+      middle = values.length / 2
+      sorted = values.sort
+      values.length.odd? ? sorted[middle] : (sorted[middle] + sorted[middles - 1]) / 2.0
     end
   end
 end
