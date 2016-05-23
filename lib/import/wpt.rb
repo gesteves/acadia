@@ -43,9 +43,8 @@ module Import
     def save_results
       if active_test? && test_complete?
         wpt = get_latest_result
-        speedindexes = wpt['data']['runs'].map { |k, v| v['firstView']['SpeedIndex'] }
         results = {
-          :speed_index => median(speedindexes),
+          :speed_index => wpt['data']['median']['firstView']['SpeedIndex'],
           :result_url => wpt['data']['summary']
         }
         result_json = results.to_json
@@ -63,12 +62,6 @@ module Import
       latest_test = @redis.get('wpt:test_url')
       request = HTTParty.get(latest_test)
       JSON.parse(request.body)
-    end
-
-    def median(values)
-      middle = values.length / 2
-      sorted = values.sort
-      values.length.odd? ? sorted[middle] : (sorted[middle] + sorted[middles - 1]) / 2.0
     end
   end
 end
