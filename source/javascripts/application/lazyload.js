@@ -8,6 +8,28 @@ Acadia.LazyLoad = (function () {
   };
 
   var requested_animation_frame = false;
+  var observer;
+
+  var init = function () {
+    var images;
+
+    if (typeof IntersectionObserver === 'undefined') {
+      document.addEventListener('scroll', handleScroll);
+    } else {
+      observer = new IntersectionObserver(handleIntersection);
+      images = document.querySelectorAll('.' + opts.load_class);
+      for (var i = 0; i < images.length; i++) {
+        observer.observe(images[i]);
+      }
+    }
+  };
+
+  var handleIntersection = function (changes) {
+    changes.forEach(function (change) {
+      loadImage(change.target);
+      observer.unobserve(change.target);
+    });
+  };
 
   var handleScroll = function () {
     if (requested_animation_frame) {
@@ -54,7 +76,7 @@ Acadia.LazyLoad = (function () {
   };
 
   return {
-    loadImages : loadImages,
-    handleScroll : handleScroll
+    init : init,
+    loadImages : loadImages
   };
 })();
