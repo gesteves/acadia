@@ -20,7 +20,6 @@
 <title><%= data.content.meta.title %></title>
 <link rel="me" type="text/html" href="https://plus.google.com/114617182643828033131"/>
 <link rel="preconnect" href="https://acadia.imgix.com" />
-<%= inline_stylesheet "inline" %>
-<noscript><%= stylesheet_link_tag "main" %></noscript>
-<%= javascript_include_tag  "main", :async => "async", :onload => "loadCSS('#{asset_path :css, 'main.css'}')" %>
+<%= inline_stylesheet "main" %>
+<%= javascript_include_tag  "main", :async => "async" %>
 <script src="https://use.typekit.net/<%= data.content.meta.typekit_id %>.js" onload="try{Typekit.load({async:true});}catch(e){}" async="async"></script>
