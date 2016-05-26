@@ -1,7 +1,6 @@
 //= require_tree .
 
-if (document.readyState !== 'loading') {
-  Acadia.LazyLoad.loadImages();
-}
-
-Acadia.LazyLoad.init();
+document.addEventListener('DOMContentLoaded', function() {
+  'use strict';
+  Acadia.LazyLoad.init();
+});

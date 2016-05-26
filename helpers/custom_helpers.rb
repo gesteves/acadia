@@ -132,4 +132,10 @@ module CustomHelpers
       sprockets["#{name}.css"].to_s
     end
   end
+
+  def inline_javascript(name)
+    content_tag :script do
+      sprockets["#{name}.js"].to_s
+    end
+  end
 end

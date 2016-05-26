@@ -27,7 +27,7 @@ set :imgix_domains, ENV['IMGIX_DOMAIN']
 configure :build do
   ignore 'svg/*'
   activate :minify_css, :inline => true
-  activate :minify_javascript
+  activate :minify_javascript, :inline => true
   activate :minify_html
   activate :asset_hash
   activate :relative_assets
