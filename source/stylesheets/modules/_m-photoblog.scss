@@ -11,6 +11,7 @@ $m : '.m-photoblog';
 }
 
 #{$m}__photo-item {
+  @include aspect-ratio(1, 1);
   display: block;
   flex-basis: calc(50% - 1px);
   flex-grow: 0;

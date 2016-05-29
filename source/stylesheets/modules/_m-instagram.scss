@@ -8,6 +8,7 @@ $m : '.m-instagram';
 }
 
 #{$m}__photo-item {
+  @include aspect-ratio(1, 1);
   display: block;
   flex-basis: calc((100%/3) - 1px);
   flex-grow: 0;
