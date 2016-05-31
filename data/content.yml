@@ -56,7 +56,7 @@ repos:
   - gesteves/denali
   - gesteves/trebekbot
   - voxmedia/verge-50
-  - gesteves/frinkiac-slack
+  - gesteves/frink
 reading:
   - title: Better infinite scrolling with the HTML5 History API
     description: A technique to improve infinite or endless scrolling using the HTML5 History API.
