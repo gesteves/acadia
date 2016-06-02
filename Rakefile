@@ -36,7 +36,7 @@ namespace :import do
     begin
       puts '== Importing Instagram photos'
       start_time = Time.now
-      instagram = Import::Instagram.new(ENV['INSTAGRAM_USER_ID'], ENV['INSTAGRAM_CONSUMER_KEY'], ENV['INSTAGRAM_COUNT'].to_i)
+      instagram = Import::Instagram.new(ENV['INSTAGRAM_USER_ID'], ENV['INSTAGRAM_ACCESS_TOKEN'], ENV['INSTAGRAM_COUNT'].to_i)
       instagram.get_photos
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
