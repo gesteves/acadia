@@ -8,7 +8,7 @@ set :port, 4567
 
 activate :dotenv
 activate :autoprefixer do |config|
-  config.browsers = ['IE 11']
+  config.browsers = ['last 1 version', 'last 3 safari versions']
   config.inline   = true
 end
 activate :s3_sync do |s3|
