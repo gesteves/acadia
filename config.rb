@@ -29,7 +29,7 @@ configure :build do
   activate :minify_html
   activate :asset_hash
   activate :relative_assets
-  set :protocol, 'http://'
+  set :protocol, 'https://'
   set :host, 'www.gesteves.com/'
   set :port, 80
 end
