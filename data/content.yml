@@ -73,6 +73,6 @@ reading:
   - title: Building iOS-like transparency effects with CSS
     description: Here’s how you can use the new <code>-webkit-backdrop-filter</code> property, which just landed on the <a href="http://nightly.webkit.org/">WebKit Nightly</a>, to build cool iOS-like transparency effects with CSS.
     url: http://product.voxmedia.com/til/2015/2/17/8053347/css-ios-transparency-with-webkit-backdrop-filter
-  - title: Responsive Web Design Podcast Episode 92: Vox Media Performance
+  - title: "Responsive Web Design Podcast Episode 92: Vox Media Performance"
     description: My coworker Dan Chilton and I spoke to Ethan Marcotte and Karen McGrane about how we helped build a culture of performance at Vox Media.
     url: https://responsivewebdesign.com/podcast/vox-media-performance/
