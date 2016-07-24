@@ -56,7 +56,7 @@ repos:
   - gesteves/denali
   - gesteves/trebekbot
   - voxmedia/verge-50
-  - gesteves/frink
+  - gesteves/slackapps
 reading:
   - title: "Introducing CampfireBot: how our robotic assistant fosters productivity and team-building"
     description: How we use our homebrew chat bot at Vox Media for fun and profit. (But mostly for fun.)
