@@ -161,7 +161,6 @@ task :import => %w{
   import:photoblog
   import:github
   import:goodreads
-  import:untappd
   import:music
   import:fitbit
 }
