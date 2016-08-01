@@ -52,7 +52,6 @@ repos:
   - gesteves/snarkov
   - gesteves/acadia
   - gesteves/csstarwars
-  - gesteves/caniuse-slack
   - gesteves/denali
   - gesteves/trebekbot
   - voxmedia/verge-50
