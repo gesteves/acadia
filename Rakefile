@@ -116,7 +116,7 @@ namespace :import do
     begin
       puts '== Importing Fitbit data'
       start_time = Time.now
-      fitbit = Import::Fitbit.new(ENV['FITBIT_CONSUMER_KEY'], ENV['FITBIT_CONSUMER_SECRET'], ENV['FITBIT_ACCESS_TOKEN'], ENV['FITBIT_ACCESS_TOKEN_SECRET'])
+      fitbit = Import::Fitbit.new(ENV['FITBIT_ACCESS_TOKEN'])
       fitbit.get_steps
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
