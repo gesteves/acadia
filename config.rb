@@ -6,12 +6,14 @@ set :protocol, 'http://'
 set :host, '0.0.0.0'
 set :port, 4567
 
+activate :gzip
 activate :dotenv
 activate :autoprefixer do |config|
   config.browsers = ['last 1 version', 'Safari >= 8', 'iOS >= 8']
   config.inline   = true
 end
 activate :s3_sync do |s3|
+  s3.prefer_gzip           = true
   s3.bucket                = ENV['AWS_BUCKET']
   s3.region                = ENV['AWS_REGION']
   s3.aws_access_key_id     = ENV['AWS_ACCESS_KEY_ID']
