@@ -57,9 +57,6 @@ repos:
   - voxmedia/verge-50
   - gesteves/slackapps
 reading:
-  - title: "Introducing CampfireBot: how our robotic assistant fosters productivity and team-building"
-    description: How we use our homebrew chat bot at Vox Media for fun and profit. (But mostly for fun.)
-    url: http://product.voxmedia.com/2013/8/22/5426860/introducing-campfirebot-how-our-robotic-assistant-fosters
   - title: "Bigger, faster, leaner: The Verge 1.8 brings many improvements to its front page"
     description: A quick summary of the improvements we made to The Verge with the release of version 1.8.
     url: http://product.voxmedia.com/2013/9/12/5426866/bigger-faster-leaner-the-verge-1-8-brings-many-improvements-to-its
@@ -75,3 +72,6 @@ reading:
   - title: "Responsive Web Design Podcast Episode 92: Vox Media Performance"
     description: My coworker Dan Chilton and I spoke to Ethan Marcotte and Karen McGrane about how we helped build a culture of performance at Vox Media.
     url: https://responsivewebdesign.com/podcast/vox-media-performance/
+  - title: "Intrinsic ratio elements with a max height"
+    description: A little CSS technique I wrote for making elements with a fixed ratio that can also be constrained to a maximum height.
+    url: http://codepen.io/gesteves/post/intrinsic-ratio-with-a-max-height
