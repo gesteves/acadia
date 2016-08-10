@@ -74,4 +74,4 @@ reading:
     url: https://responsivewebdesign.com/podcast/vox-media-performance/
   - title: "Intrinsic ratio elements with a max height"
     description: A little CSS technique I wrote for making elements with a fixed ratio that can also be constrained to a maximum height.
-    url: http://codepen.io/gesteves/post/intrinsic-ratio-with-a-max-height
+    url: http://product.voxmedia.com/2016/8/10/12426844/making-intrinsic-ratio-elements-with-a-max-height
