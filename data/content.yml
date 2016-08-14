@@ -55,7 +55,7 @@ repos:
   - gesteves/denali
   - gesteves/trebekbot
   - voxmedia/verge-50
-  - gesteves/slackapps
+  - gesteves/slackbots
 reading:
   - title: "Bigger, faster, leaner: The Verge 1.8 brings many improvements to its front page"
     description: A quick summary of the improvements we made to The Verge with the release of version 1.8.
