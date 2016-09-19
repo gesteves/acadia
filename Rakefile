@@ -124,6 +124,19 @@ namespace :import do
     end
   end
 
+  desc 'Import activity from Withings'
+  task :withings => [:dotenv, :set_up_directories] do
+    begin
+      puts '== Importing Withings data'
+      start_time = Time.now
+      withings = Import::Withings.new(ENV['WITHINGS_API_KEY'], ENV['1f52347c33f31519248d8b82e1108603d8cc231b9c198280887ced1c9'], ENV['WITHINGS_ACCESS_TOKEN'], ENV['WITHINGS_ACCESS_TOKEN_SECRET'], ENV['WITHINGS_USER_ID'])
+      withings.get_steps
+      puts "Completed in #{Time.now - start_time} seconds"
+    rescue => e
+      abort "Failed to import Fitbit data: #{e}"
+    end
+  end
+
   desc 'Import score from WPT'
   task :wpt => [:dotenv, :set_up_directories] do
     begin
@@ -164,6 +177,7 @@ task :import => %w{
   import:untappd
   import:music
   import:fitbit
+  import:withings
 }
 
 desc 'Import content and build the site'
