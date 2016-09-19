@@ -3,6 +3,7 @@ require 'date'
 require 'cgi'
 require 'base64'
 require 'openssl'
+require 'tzinfo'
 
 module Import
   class Withings
@@ -14,7 +15,8 @@ module Import
       @access_token_secret = access_token_secret
     end
 
-    def get_steps
+    def get_steps(time_zone = 'America/New_York')
+      today = TZInfo::Timezone.get(time_zone).now
       parameters = 'action=getactivity' +
                    "&oauth_consumer_key=#{@consumer_key}" +
                    "&oauth_nonce=#{rand(100000).to_s}" +
@@ -22,7 +24,7 @@ module Import
                    "&oauth_timestamp=#{Time.now.to_i}" +
                    "&oauth_token=#{@access_token}" +
                    '&oauth_version=1.0' +
-                   "&date=#{DateTime.now.strftime("%Y-%m-%d")}" +
+                   "&date=#{today.strftime("%Y-%m-%d")}" +
                    "&userid=#{@user}"
 
       base_url = 'https://wbsapi.withings.net/v2/measure'
