@@ -34,8 +34,8 @@ module Import
       response = HTTParty.get(url)
       activities = JSON.parse(response.body)
       withings = {
-        :steps => activities['body']['steps'],
-        :distance => (activities['body']['distance']/1000).round(2)
+        :steps => activities['body']['steps'].nil? ? 0 : activities['body']['steps'],
+        :distance => activities['body']['distance'].nil? ? 0 : (activities['body']['distance']/1000).round(2)
       }
       File.open('data/withings.json','w'){ |f| f << withings.to_json }
     end
