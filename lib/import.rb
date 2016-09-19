@@ -7,7 +7,6 @@ require_relative 'import/music'
 require_relative 'import/twitter'
 require_relative 'import/untappd'
 require_relative 'import/wpt'
-require_relative 'import/withings'
 
 module Import
 end
