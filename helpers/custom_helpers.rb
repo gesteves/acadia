@@ -53,9 +53,9 @@ module CustomHelpers
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" title=\"#{caption}\" />"
   end
 
-  def album_image_tag(album)
-    alt = album.name
-    photo_url = image_path "music/#{album.id}.jpg"
+  def artist_image_tag(artist)
+    alt = artist.name
+    photo_url = image_path "music/#{artist.id}.jpg"
     sizes_array = [150, 100, 50]
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, { w: sizes_array.first })
