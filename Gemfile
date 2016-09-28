@@ -3,11 +3,12 @@
 source 'http://rubygems.org'
 ruby '2.3.0'
 
-gem 'middleman', '~>3.4.0'
+gem 'middleman', '~>4.0'
 gem 'middleman-s3_sync'
 gem 'middleman-minify-html'
 gem 'middleman-dotenv'
 gem 'middleman-autoprefixer'
+gem 'middleman-sprockets', '~> 4.0.0.rc'
 
 gem 'oauth'
 gem 'httparty'

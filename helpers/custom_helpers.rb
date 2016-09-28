@@ -101,15 +101,15 @@ module CustomHelpers
   end
 
   def host_with_port
-    [host, optional_port].compact.join(':')
+    [config[:host], optional_port].compact.join(':')
   end
 
   def optional_port
-    port unless port.to_i == 80
+    config[:port] unless config[:port].to_i == 80
   end
 
   def image_url(source)
-    protocol + host_with_port + image_path(source)
+    config[:protocol] + host_with_port + image_path(source)
   end
 
   def format_number(number)
