@@ -12,7 +12,7 @@ module CustomHelpers
   def imgix_url(url, options)
     if ENV['RACK_ENV'] == 'production'
       opts = { auto: 'format', fit: 'max' }.merge(options)
-      client = Imgix::Client.new(hosts: config[:imgix_domains].split(','), token: config[:imgix_token], secure: true, include_library_param: false).path(url)
+      client = Imgix::Client.new(host: config[:imgix_domain], secure_url_token: config[:imgix_token], include_library_param: false).path(url)
       if opts[:square]
         opts[:fit] = 'crop'
         opts[:h] = opts[:w]

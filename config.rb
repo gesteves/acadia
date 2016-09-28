@@ -27,7 +27,7 @@ configure :production do
   config[:js_dir]        = 'javascripts'
   config[:images_dir]    = 'images'
   config[:imgix_token]   = ENV['IMGIX_TOKEN']
-  config[:imgix_domains] = ENV['IMGIX_DOMAIN']
+  config[:imgix_domain]  = ENV['IMGIX_DOMAIN']
 
   activate :sprockets
   activate :gzip
