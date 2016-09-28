@@ -21,6 +21,7 @@ gem 'redis'
 gem 'cloudfront-invalidator'
 gem 'imgix'
 gem 'text'
+gem 'mime-types'
 
 group :development do
   gem 'scss-lint'
