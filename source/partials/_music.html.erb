@@ -9,6 +9,7 @@
           </a>
           <div class="p-list__meta">
             <a href="<%= artist.url %>" class="p-list__title"><%= artist.name %></a>
+            <span class="p-list__author"><%= artist.albums %> <%= artist.albums == 1 ? 'album' : 'albums' %> &middot; <%= artist.plays %> <%= artist.plays == 1 ? 'play' : 'plays' %></span>
           </div>
         </li>
       <% end %>

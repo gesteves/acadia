@@ -15,13 +15,30 @@ module Import
         tracks = data
                   .sort { |a,b| artist_count(data, b["artist"]["#text"]) <=> artist_count(data, a["artist"]["#text"]) }
                   .uniq { |t| t["artist"]["#text"] }[0, 5]
-                  .map { |t| get_spotify_data(t["artist"]["#text"]) }
+                  .map { |t| build_json(data, t["artist"]["#text"]) }
                   .reject(&:nil?)
       end
       tracks.each do |t|
         File.open("source/images/music/#{t[:id]}.jpg",'w'){ |f| f << HTTParty.get(t[:image_url]).body }
       end
       File.open('data/music.json','w'){ |f| f << tracks.to_json }
+    end
+
+    def build_json(data, artist_name)
+      spotify_data = get_spotify_data(artist_name)
+      if spotify_data.nil?
+        artist = nil
+      else
+        artist = {
+          name: spotify_data["name"],
+          url: spotify_data["external_urls"]["spotify"],
+          image_url: spotify_data["images"][0]["url"],
+          id: spotify_data["id"],
+          plays: artist_count(data, artist_name),
+          albums: album_count(data, artist_name)
+        }
+      end
+      artist
     end
 
     def get_spotify_data(artist)
@@ -31,20 +48,18 @@ module Import
       if response.code == 200 && artists["artists"]["total"] > 0
         white = Text::WhiteSimilarity.new
         best_match = artists["artists"]["items"].max { |a, b| white.similarity(a["name"], artist) <=> white.similarity(b["name"], artist) }
-        artist = {
-          name: best_match["name"],
-          url: best_match["external_urls"]["spotify"],
-          image_url: best_match["images"][0]["url"],
-          id: best_match["id"]
-        }
       else
-        artist = nil
+        best_match = nil
       end
-      artist
+      best_match
     end
 
     def artist_count(data, name)
       data.count { |a| a["artist"]["#text"] == name }
+    end
+
+    def album_count(data, name)
+      data.select { |a| a["artist"]["#text"] == name }.uniq { |t| t["album"]["#text"] }.count
     end
   end
 end
