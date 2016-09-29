@@ -9,7 +9,7 @@ var rename      = require('gulp-rename');
 var scsslint    = require('gulp-scss-lint');
 var scssstylish = require('gulp-scss-lint-stylish');
 var svgmin      = require('gulp-svgmin');
-var svgstore    = require('gulp-svgstore');
+var replace     = require('gulp-replace');
 
 var paths = {
   js: ['Gulpfile.js', 'source/javascripts/**/*.js', '!source/javascripts/vendors/*.js'],
@@ -35,19 +35,10 @@ gulp.task('sass', function() {
 });
 
 // Minify and concatenate SVGs
-// and save as a Rails partial
+// and save as a partial
 gulp.task('svg', function () {
   return gulp.src(paths.svg)
-    .pipe(rename({
-      prefix: 'svg-'
-    }))
-    .pipe(svgmin({
-      plugins: [
-        {
-          removeUselessDefs: false
-        }
-      ]
-    }))
+    .pipe(svgmin())
     .pipe(cheerio({
       run: function ($) {
         $('[style]').removeAttr('style');
@@ -56,18 +47,21 @@ gulp.task('svg', function () {
       },
       parserOptions: { xmlMode: true }
     }))
-    .pipe(svgstore({ inlineSvg: true }))
     .pipe(cheerio({
-      run: function ($) {
+      run: function ($, file) {
+        var path = file.path.split('/');
+        var name = path[path.length - 1].split('.')[0];
         $('svg').attr({
-          'style': 'display:none'
+          'class': '{{{%= svg_class %}}}'
         });
         $('svg').removeAttr('xmlns');
       },
       parserOptions: { xmlMode: true }
     }))
-    .pipe(rename('_icons.svg.erb'))
-    .pipe(gulp.dest('source/partials'));
+    .pipe(replace('{{{', '<'))
+    .pipe(replace('}}}', '>'))
+    .pipe(rename({ extname: '.html.erb', prefix: '_' }))
+    .pipe(gulp.dest('source/partials/svg'));
 });
 
 gulp.task('watch', function () {

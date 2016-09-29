@@ -1,11 +1,3 @@
-copy:
-  hed: "Guillermo Esteves"
-  dek: "Web design <svg viewBox=\"0 0 100 100\" class=\"svg svg-and\"><use xlink:href=\"#svg-and\"></use></svg> stuff."
-  intro: |
-          <p><strong>Hello.</strong> My name is Guillermo Esteves.</p>
-          <p>I specialize in building fast, usable, elegant websites using modern web standards and&nbsp;technologies.</p>
-          <p>I live in Washington, DC and I’m a front-end engineering director at <a href="http://www.voxmedia.com">Vox&nbsp;Media</a>’s <a href="http://product.voxmedia.com/pages/our-team">Product&nbsp;Team</a>.</p>
-          <p>Do you want to get in touch? <a href="mailto:contact@gesteves.com">Email&nbsp;me</a>.</p>
 meta:
   title: "Guillermo Esteves &middot; Web design &amp; Stuff."
   description: "Guillermo Esteves is a web developer in Washington, DC."
