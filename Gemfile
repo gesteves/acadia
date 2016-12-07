@@ -8,7 +8,7 @@ gem 'middleman-s3_sync'
 gem 'middleman-minify-html'
 gem 'middleman-dotenv'
 gem 'middleman-autoprefixer'
-gem 'middleman-sprockets', '~> 4.0.0.rc'
+gem 'middleman-sprockets'
 
 gem 'oauth'
 gem 'httparty'
