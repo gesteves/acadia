@@ -12,7 +12,6 @@ module Import
     def get_top_artists
       url = "https://api.spotify.com/v1/me/top/artists?limit=#{ENV['SPOTIFY_COUNT']}&time_range=#{ENV['SPOTIFY_TIME_RANGE']}"
       response = HTTParty.get(url, headers: { 'Authorization': "Bearer #{@access_token}" })
-      puts response.body
       if response.code == 200
         items = JSON.parse(response.body)['items']
         items.map! { |i| get_spotify_data(i) }
@@ -41,16 +40,13 @@ module Import
         client_secret: ENV['SPOTIFY_CLIENT_SECRET']
       }
       response = HTTParty.post('https://accounts.spotify.com/api/token', body: body)
-      puts response.body
       if response.code ==  200
         response_body = JSON.parse(response.body)
         @redis.set('spotify:refresh_token', response_body['refresh_token']) unless response_body['refresh_token'].nil?
-        puts "Spotify access token expires in #{response_body['expires_in']} seconds"
         access_token = response_body['access_token']
       else
         access_token = nil
       end
-      puts access_token
       access_token
     end
   end
