@@ -15,7 +15,6 @@ module Import
         items = get_top_artists(r)
         break unless items.empty?
       end
-      items = items.slice(0, ENV['SPOTIFY_COUNT'].to_i)
       items.each do |i|
         File.open("source/images/music/#{i[:id]}.jpg",'w'){ |f| f << HTTParty.get(i[:image_url]).body }
       end
@@ -28,19 +27,33 @@ module Import
       items = []
       if response.code == 200
         items = JSON.parse(response.body)['items']
-        items = items.group_by { |i| i['album']['name'] }.sort { |k,v| v.size }.map { |k, v| get_spotify_data(v.first) } unless items.empty?
+        items = items.group_by { |i| i['album']['name'] }
+                     .sort { |k,v| v.size }
+                     .slice(0, ENV['SPOTIFY_COUNT'].to_i)
+                     .map { |k, v| get_spotify_data(v[0]['album']['href']) }
+                     .reject { |i| i.nil? } unless items.empty?
       end
       items
     end
 
-    def get_spotify_data(item)
-      {
-        id: item['album']['id'],
-        name: unclutter_album_name(item['album']['name']),
-        url: item['album']['external_urls']['spotify'],
-        artist_name: item['artists'][0]['name'],
-        image_url: item['album']['images'].sort { |a,b| a['width'] <=> b['width'] }.first['url']
-      }
+    def get_spotify_data(album_url)
+      response = HTTParty.get(album_url)
+
+      if response.code == 200
+        data = JSON.parse(response.body)
+        {
+          id: data['id'],
+          name: unclutter_album_name(data['name']),
+          url: data['external_urls']['spotify'],
+          artists: data['artists'].map { |a| a['name'] },
+          image_url: data['images'][0]['url'],
+          release_date: data['release_date'],
+          release_date_precision: data['release_date_precision'],
+          genres: data['genres']
+        }
+      else
+        nil
+      end
     end
 
     # Remove shit like [remastered] and (deluxe version) or whatever from album names

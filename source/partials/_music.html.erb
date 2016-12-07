@@ -8,8 +8,11 @@
             <%= music_image_tag(album) %>
           </a>
           <div class="p-list__meta">
+            <span class="p-eyebrow">
+              <%= album.release_date.split('-').first %>
+            </span>
             <a href="<%= album.url %>" class="p-list__title"><%= album.name %></a>
-            <span class="p-list__author"><%= album.artist_name %></span>
+            <span class="p-list__author"><%= album.artists.join(', ') %></span>
           </div>
         </li>
       <% end %>
