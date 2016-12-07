@@ -2,59 +2,56 @@ require 'text'
 
 module Import
   class Music
-    def initialize(username, api_key, count)
-      @api_key = api_key
-      @username = username
-      @count = count
+    def initialize(refresh_token)
+      uri = URI.parse(ENV['REDISCLOUD_URL'])
+      @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+      refresh_token = @redis.get('spotify:refresh_token') || ENV['SPOTIFY_REFRESH_TOKEN']
+      @access_token = get_access_token(refresh_token)
     end
 
-    def get_latest_albums
-      response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=#{@username}&api_key=#{@api_key}&format=json&limit=200")
+    def get_top_artists
+      url = "https://api.spotify.com/v1/me/top/artists?limit=#{ENV['SPOTIFY_COUNT']}&time_range=#{ENV['SPOTIFY_TIME_RANGE']}"
+      response = HTTParty.get(url, headers: { 'Authorization': "Bearer #{@access_token}" })
+      puts response.body
       if response.code == 200
-        data = JSON.parse(response.body)["recenttracks"]["track"]
-        tracks = data
-                  .sort { |a,b| album_count(data, b["album"]["#text"]) <=> album_count(data, a["album"]["#text"]) }
-                  .uniq { |t| t["album"]["#text"] }[0, 5]
-                  .map { |t| get_spotify_data(t["artist"]["#text"],t["album"]["#text"]) }
-                  .reject(&:nil?)
+        items = JSON.parse(response.body)['items']
+        items.map! { |i| get_spotify_data(i) }
+        items.each do |i|
+          File.open("source/images/music/#{i[:id]}.jpg",'w'){ |f| f << HTTParty.get(i[:image_url]).body }
+        end
+        File.open('data/music.json','w'){ |f| f << items.to_json }
       end
-      tracks.each do |t|
-        File.open("source/images/music/#{t[:id]}.jpg",'w'){ |f| f << HTTParty.get(t[:image_url]).body }
-      end
-      File.open('data/music.json','w'){ |f| f << tracks.to_json }
     end
 
-    def get_spotify_data(artist, album)
-      response = HTTParty.get("https://api.spotify.com/v1/search?q=artist:#{artist}%20album:#{album}&type=album&limit=10")
-      File.open("data/#{album}.json",'w'){ |f| f << response.body }
-      albums = JSON.parse(response.body)
-      if response.code == 200 && albums["albums"]["total"] > 0
-        white = Text::WhiteSimilarity.new
-        best_match = albums["albums"]["items"].max { |a, b| white.similarity(a["name"], album) <=> white.similarity(b["name"], album) }
-        album = {
-          artist: artist,
-          name: unclutter_album_name(best_match["name"]),
-          url: best_match["external_urls"]["spotify"],
-          image_url: best_match["images"][0]["url"],
-          id: best_match["id"]
-        }
+    def get_spotify_data(item)
+      {
+        id: item['id'],
+        name: item['name'],
+        url: item['external_urls']['spotify'],
+        image_url: item['images'].sort { |a,b| a['width'] <=> b['width'] }.first['url']
+      }
+    end
+
+    def get_access_token(refresh_token)
+      body = {
+        grant_type: 'refresh_token',
+        refresh_token: refresh_token,
+        redirect_uri: 'https://www.gesteves.com',
+        client_id: ENV['SPOTIFY_CLIENT_ID'],
+        client_secret: ENV['SPOTIFY_CLIENT_SECRET']
+      }
+      response = HTTParty.post('https://accounts.spotify.com/api/token', body: body)
+      puts response.body
+      if response.code ==  200
+        response_body = JSON.parse(response.body)
+        @redis.set('spotify:refresh_token', response_body['refresh_token']) unless response_body['refresh_token'].nil?
+        puts "Spotify access token expires in #{response_body['expires_in']} seconds"
+        access_token = response_body['access_token']
       else
-        album = nil
+        access_token = nil
       end
-      album
-    end
-
-    # Remove shit like [remastered] and (deluxe version) or whatever from album names
-    def unclutter_album_name(album)
-      album.gsub(/\[[\w\s]+\]/,'').strip.gsub(/\([\w\s-]+\)$/,'').strip
-    end
-
-    def album_count(data, name)
-      data.count { |a| a["album"]["#text"] == name }
-    end
-
-    def album_count(data, name)
-      data.select { |a| a["artist"]["#text"] == name }.uniq { |t| t["album"]["#text"] }.count
+      puts access_token
+      access_token
     end
   end
 end

@@ -98,13 +98,13 @@ namespace :import do
     end
   end
 
-  desc 'Import data from Last.fm & Spotify'
+  desc 'Import data from Spotify'
   task :music => [:dotenv, :set_up_directories] do
     begin
       puts '== Importing music data'
       start_time = Time.now
-      music = Import::Music.new(ENV['LASTFM_USERNAME'], ENV['LASTFM_API_KEY'], ENV['LASTFM_COUNT'])
-      music.get_latest_albums
+      music = Import::Music.new(ENV['SPOTIFY_REFRESH_TOKEN'])
+      music.get_top_artists
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
       abort "Failed to import Music data: #{e}"
