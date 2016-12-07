@@ -104,7 +104,7 @@ namespace :import do
       puts '== Importing music data'
       start_time = Time.now
       music = Import::Music.new(ENV['SPOTIFY_REFRESH_TOKEN'])
-      music.get_top_artists
+      music.spotify
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
       abort "Failed to import Music data: #{e}"

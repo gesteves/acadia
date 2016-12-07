@@ -9,17 +9,27 @@ module Import
       @access_token = get_access_token(refresh_token)
     end
 
-    def get_top_artists
-      url = "https://api.spotify.com/v1/me/top/artists?limit=#{ENV['SPOTIFY_COUNT']}&time_range=#{ENV['SPOTIFY_TIME_RANGE']}"
+    def spotify
+      items = []
+      ['short_term', 'medium_term', 'long_term'].each do |r|
+        items = get_top_artists(r)
+        break if items.size > 0
+      end
+      items.each do |i|
+        File.open("source/images/music/#{i[:id]}.jpg",'w'){ |f| f << HTTParty.get(i[:image_url]).body }
+      end
+      File.open('data/music.json','w'){ |f| f << items.to_json }
+    end
+
+    def get_top_artists(time_range)
+      url = "https://api.spotify.com/v1/me/top/artists?limit=#{ENV['SPOTIFY_COUNT']}&time_range=#{time_range}"
       response = HTTParty.get(url, headers: { 'Authorization': "Bearer #{@access_token}" })
+      items = []
       if response.code == 200
         items = JSON.parse(response.body)['items']
         items.map! { |i| get_spotify_data(i) }
-        items.each do |i|
-          File.open("source/images/music/#{i[:id]}.jpg",'w'){ |f| f << HTTParty.get(i[:image_url]).body }
-        end
-        File.open('data/music.json','w'){ |f| f << items.to_json }
       end
+      items
     end
 
     def get_spotify_data(item)
