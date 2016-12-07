@@ -26,10 +26,9 @@ module Import
       url = "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=#{time_range}"
       response = HTTParty.get(url, headers: { 'Authorization': "Bearer #{@access_token}" })
       items = []
-      puts response.body
       if response.code == 200
         items = JSON.parse(response.body)['items']
-        items.uniq! { |i| i['album']['name'] }.map! { |i| get_spotify_data(i) } unless items.empty?
+        items = items.group_by { |i| i['album']['name'] }.sort { |k,v| v.size }.map { |k, v| get_spotify_data(v.first) } unless items.empty?
       end
       items
     end
