@@ -2,13 +2,14 @@
   <section class="m-card p-list">
     <h1>Listening</h1>
     <ol>
-      <% data.music.each do |artist| %>
+      <% data.music.each do |album| %>
         <li class="p-list__item">
-          <a href="<%= artist.url %>" class="p-list__image">
-            <%= artist_image_tag(artist) %>
+          <a href="<%= album.url %>" class="p-list__image">
+            <%= music_image_tag(album) %>
           </a>
           <div class="p-list__meta">
-            <a href="<%= artist.url %>" class="p-list__title"><%= artist.name %></a>
+            <a href="<%= album.url %>" class="p-list__title"><%= album.name %></a>
+            <span class="p-list__author"><%= album.artist_name %></span>
           </div>
         </li>
       <% end %>

@@ -13,8 +13,9 @@ module Import
       items = []
       ['short_term', 'medium_term', 'long_term'].each do |r|
         items = get_top_artists(r)
-        break if items.size > 0
+        break unless items.empty?
       end
+      items = items.slice(0, ENV['SPOTIFY_COUNT'].to_i)
       items.each do |i|
         File.open("source/images/music/#{i[:id]}.jpg",'w'){ |f| f << HTTParty.get(i[:image_url]).body }
       end
@@ -22,23 +23,30 @@ module Import
     end
 
     def get_top_artists(time_range)
-      url = "https://api.spotify.com/v1/me/top/artists?limit=#{ENV['SPOTIFY_COUNT']}&time_range=#{time_range}"
+      url = "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=#{time_range}"
       response = HTTParty.get(url, headers: { 'Authorization': "Bearer #{@access_token}" })
       items = []
+      puts response.body
       if response.code == 200
         items = JSON.parse(response.body)['items']
-        items.map! { |i| get_spotify_data(i) }
+        items.uniq! { |i| i['album']['name'] }.map! { |i| get_spotify_data(i) } unless items.empty?
       end
       items
     end
 
     def get_spotify_data(item)
       {
-        id: item['id'],
-        name: item['name'],
-        url: item['external_urls']['spotify'],
-        image_url: item['images'].sort { |a,b| a['width'] <=> b['width'] }.first['url']
+        id: item['album']['id'],
+        name: unclutter_album_name(item['album']['name']),
+        url: item['album']['external_urls']['spotify'],
+        artist_name: item['artists'][0]['name'],
+        image_url: item['album']['images'].sort { |a,b| a['width'] <=> b['width'] }.first['url']
       }
+    end
+
+    # Remove shit like [remastered] and (deluxe version) or whatever from album names
+    def unclutter_album_name(album)
+      album.gsub(/\[[\w\s]+\]/,'').strip.gsub(/\([\w\s-]+\)$/,'').strip
     end
 
     def get_access_token(refresh_token)
