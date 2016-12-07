@@ -35,7 +35,7 @@ module Import
       body = {
         grant_type: 'refresh_token',
         refresh_token: refresh_token,
-        redirect_uri: 'https://www.gesteves.com',
+        redirect_uri: ENV['SITE_URL'],
         client_id: ENV['SPOTIFY_CLIENT_ID'],
         client_secret: ENV['SPOTIFY_CLIENT_SECRET']
       }
