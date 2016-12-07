@@ -104,7 +104,7 @@ namespace :import do
       puts '== Importing music data'
       start_time = Time.now
       music = Import::Music.new(ENV['LASTFM_USERNAME'], ENV['LASTFM_API_KEY'], ENV['LASTFM_COUNT'])
-      music.get_latest_artists
+      music.get_latest_albums
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
       abort "Failed to import Music data: #{e}"
