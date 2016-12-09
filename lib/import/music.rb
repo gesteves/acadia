@@ -12,7 +12,7 @@ module Import
     def spotify
       items = []
       ['short_term', 'medium_term', 'long_term'].each do |r|
-        items = get_top_artists(r)
+        items = get_top_tracks(r)
         break unless items.empty?
       end
       items.each do |i|
@@ -21,7 +21,7 @@ module Import
       File.open('data/music.json','w'){ |f| f << items.to_json }
     end
 
-    def get_top_artists(time_range)
+    def get_top_tracks(time_range)
       url = "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=#{time_range}"
       response = HTTParty.get(url, headers: { 'Authorization': "Bearer #{@access_token}" })
       items = []

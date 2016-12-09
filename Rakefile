@@ -101,7 +101,7 @@ namespace :import do
   desc 'Import data from Spotify'
   task :music => [:dotenv, :set_up_directories] do
     begin
-      puts '== Importing music data'
+      puts '== Importing Spotify data'
       start_time = Time.now
       music = Import::Music.new(ENV['SPOTIFY_REFRESH_TOKEN'])
       music.spotify
