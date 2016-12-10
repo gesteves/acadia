@@ -1,6 +1,7 @@
 //= require_tree .
 
-document.addEventListener('DOMContentLoaded', function() {
-  'use strict';
+if (document.readyState !== 'loading') {
   Acadia.LazyLoad.init();
-});
+} else {
+  document.addEventListener('DOMContentLoaded', Acadia.LazyLoad.init);
+}
