@@ -30,7 +30,7 @@ module Import
       if active_test? && !test_complete?
         puts 'WPT request skipped; last test not complete'
       else
-        url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json&runs=3&fvonly=1&width=1280&height=800"
+        url = "http://www.webpagetest.org/runtest.php?url=#{@url}&k=#{@key}&f=json&runs=5&fvonly=1&width=1280&height=800"
         request = HTTParty.get(url)
         response = JSON.parse(request.body)
         if response['statusCode'] == 200
