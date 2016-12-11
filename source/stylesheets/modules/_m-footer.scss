@@ -11,18 +11,6 @@ $m : '.m-footer';
     line-height: 1.5;
   }
 
-  a:link,
-  a:visited {
-    color: $color-links;
-    text-decoration: none;
-  }
-
-  a:hover,
-  a:active {
-    color: $color-links;
-    text-decoration: underline;
-  }
-
   span {
     white-space: nowrap;
   }

@@ -23,7 +23,7 @@ $l : '.l-section';
     @media (min-width: $bp-xl) {
       padding: 4rem;
     }
-    
+
     @media (min-width: $bp-max) {
       padding: 8rem;
     }
@@ -38,10 +38,6 @@ $l : '.l-section';
   margin: 0 auto;
   max-width: $bp-xl;
   width: 100%;
-}
-
-#{$l}.narrow #{$l}__container {
-  max-width: $bp-l;
 }
 
 #{$l}.wide #{$l}__container {

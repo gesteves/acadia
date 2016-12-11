@@ -10,18 +10,6 @@ $p : '.p-list';
     font-size: 1.2rem;
     line-height: (2.1/1.2);
   }
-
-  a#{$p}__author {
-    &:link,
-    &:visited {
-      color: $color-alt-text;
-    }
-
-    &:hover,
-    &:active {
-      color: $color-links;
-    }
-  }
 }
 
 #{$p}__title {

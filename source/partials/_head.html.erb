@@ -6,6 +6,9 @@
 <link rel="icon" type="image/png" href="<%= image_url "favicon.png" %>">
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <title><%= data.content.meta.title %></title>
+<%= inline_stylesheet "atf" %>
+<%= stylesheet_link_tag "btf", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
+<noscript><%= stylesheet_link_tag "btf" %></noscript>
 <%= javascript_include_tag  "main", async: 'async' %>
 <%= javascript_include_tag  "loadcss", async: 'async' %>
 <script>
@@ -21,6 +24,3 @@
 <% unless data.content.meta.google_analytics_id.nil? %>
 <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','<%= data.content.meta.google_analytics_id %>','auto');ga('send','pageview');</script>
 <% end %>
-<%= inline_stylesheet "atf" %>
-<%= stylesheet_link_tag "btf", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
-<noscript><%= stylesheet_link_tag "btf" %></noscript>
