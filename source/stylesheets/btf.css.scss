@@ -1,25 +1,15 @@
-@import 'vendors/reset';
-
 @import 'utils/vars';
 @import 'utils/mixins';
-
-@import 'base/base';
-
-@import 'layout/l-section';
+@import 'utils/extends';
 
 @import 'patterns/p-eyebrow';
 @import 'patterns/p-list';
 @import 'patterns/p-svg';
 
-@import 'modules/m-card';
 @import 'modules/m-elsewhere';
 @import 'modules/m-error';
 @import 'modules/m-footer';
-@import 'modules/m-github';
-@import 'modules/m-header';
 @import 'modules/m-instagram';
-@import 'modules/m-intro';
 @import 'modules/m-photoblog';
 @import 'modules/m-stats';
 @import 'modules/m-twitter';
-@import 'modules/m-writing';

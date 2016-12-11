@@ -12,22 +12,6 @@ body {
   font-weight: 300;
 }
 
-%sans-serif {
-  font-family: 'Helvetica Neue', sans-serif;
-
-  .wf-active & {
-    font-family: $font-sans-serif;
-  }
-}
-
-%serif {
-  font-family: 'Georgia', serif;
-
-  .wf-active & {
-    font-family: $font-serif;
-  }
-}
-
 h1,
 h2,
 h3 {
