@@ -5,7 +5,7 @@
   <% data.photoblog.data.each do |entry| %>
     <li class="m-photoblog__photo-item">
       <a href="<%= entry.links.self %>">
-        <%= photoblog_image_tag(entry.relationships.photos.data.first, entry.attributes.plain_title) %>
+        <%= photoblog_image_tag(entry.relationships.photos.data.first) %>
       </a>
     </li>
   <% end %>
