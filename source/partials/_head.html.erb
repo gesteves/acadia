@@ -4,23 +4,17 @@
 <meta name="verify-v1" content="<%= data.content.meta.google_validation %>" />
 <meta name="viewport" content="width=device-width" />
 <meta property="fb:admins" content="<%= data.content.meta.fb_admin %>" />
-<meta property="og:title" content="<%= data.content.meta.title %>"/>
-<meta property="og:url" content="<%= data.content.meta.canonical_url %>"/>
-<meta property="og:image" content="<%= image_url "card.png" %>" />
 <meta property="og:site_name" content="<%= data.content.meta.title %>"/>
-<meta property="og:description" content="<%= data.content.meta.description %>"/>
+<meta name="twitter:title" property="og:title" content="<%= data.content.meta.title %>"/>
+<meta name="twitter:url"  property="og:url" content="<%= data.content.meta.canonical_url %>"/>
+<meta name="twitter:image:src" property="og:image" content="<%= image_url "card.png" %>" />
+<meta name="twitter:description" property="og:description" content="<%= data.content.meta.description %>"/>
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:description" content="<%= data.content.meta.description %>" />
-<meta name="twitter:title" content="<%= data.content.meta.title %>" />
-<meta name="twitter:image:src" content="<%= image_url "card.png" %>" />
-<meta name="twitter:url" content="<%= data.content.meta.canonical_url %>" />
 <meta name="twitter:site" content="<%= data.content.meta.twitter_username %>" />
 <meta name="twitter:creator" content="<%= data.content.meta.twitter_username %>" />
 <link rel="icon" type="image/png" href="<%= image_url "favicon.png" %>" />
 <title><%= data.content.meta.title %></title>
 <link rel="me" type="text/html" href="https://plus.google.com/114617182643828033131"/>
-<link rel="preconnect" href="https://acadia.imgix.com" crossorigin>
-<link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <%= javascript_include_tag  "main", async: 'async' %>
 <script src="https://use.typekit.net/<%= data.content.meta.typekit_id %>.js" onload="try{Typekit.load({async:true});}catch(e){}" async="async"></script>
 <% unless data.content.meta.google_analytics_id.nil? %>
