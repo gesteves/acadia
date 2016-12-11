@@ -1,11 +1,10 @@
-<meta charset="UTF-8" />
-<meta name="author" content="<%= data.content.meta.author %>" />
-<meta name="description" content="<%= data.content.meta.description %>" />
-<meta name="verify-v1" content="<%= data.content.meta.google_validation %>" />
-<meta name="viewport" content="width=device-width" />
-<link rel="icon" type="image/png" href="<%= image_url "favicon.png" %>" />
+<meta charset="UTF-8">
+<meta name="author" content="<%= data.content.meta.author %>">
+<meta name="description" content="<%= data.content.meta.description %>">
+<meta name="verify-v1" content="<%= data.content.meta.google_validation %>">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/png" href="<%= image_url "favicon.png" %>">
 <title><%= data.content.meta.title %></title>
-<link rel="me" type="text/html" href="https://plus.google.com/114617182643828033131"/>
 <%= javascript_include_tag  "main", async: 'async' %>
 <%= javascript_include_tag  "loadcss", async: 'async' %>
 <script src="https://use.typekit.net/<%= data.content.meta.typekit_id %>.js" onload="try{Typekit.load({async:true});}catch(e){}" async="async"></script>
