@@ -6,11 +6,7 @@
 <link rel="icon" type="image/png" href="<%= image_url "favicon.png" %>">
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <title><%= data.content.meta.title %></title>
-<%= inline_stylesheet "atf" %>
-<%= stylesheet_link_tag "btf", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
-<noscript><%= stylesheet_link_tag "btf" %></noscript>
 <%= javascript_include_tag  "main", async: 'async' %>
-<%= javascript_include_tag  "loadcss", async: 'async' %>
 <script>
   (function(d) {
     var config = {

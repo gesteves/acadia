@@ -1,49 +1,54 @@
+<%= inline_stylesheet "base" %>
+
 <%= partial "partials/_header" %>
 
-  <div class="l-section wide alt">
-    <div class="l-section__container">
-      <%= partial "partials/_intro" %>
-    </div>
-  </div>
+<%= inline_stylesheet "layout" %>
 
-  <div class="l-section">
-    <div class="l-section__container">
-      <%= partial "partials/_writing" %>
-      <%= partial "partials/_github" %>
-    </div>
+<div class="l-section wide alt">
+  <div class="l-section__container">
+    <%= partial "partials/_intro" %>
   </div>
+</div>
 
-  <div class="l-section full-width alt single">
-    <div class="l-section__container">
-      <%= partial "partials/_stats" %>
-    </div>
+<div class="l-section">
+  <div class="l-section__container">
+    <%= partial "partials/_writing" %>
+    <%= partial "partials/_github" %>
   </div>
+</div>
 
-  <div class="l-section">
-    <div class="l-section__container">
-      <%= partial "partials/_photoblog" %>
-    </div>
+<div class="l-section full-width alt single">
+  <div class="l-section__container">
+    <%= partial "partials/_stats" %>
   </div>
+</div>
 
-  <div class="l-section alt">
-    <div class="l-section__container">
-      <%= partial "partials/_twitter" %>
-    </div>
+<div class="l-section">
+  <div class="l-section__container">
+    <%= partial "partials/_photoblog" %>
   </div>
+</div>
 
-  <div class="l-section wide multiple">
-    <div class="l-section__container">
-      <%= partial "partials/_instagram" %>
-      <%= partial "partials/_music" %>
-      <%= partial "partials/_goodreads" %>
-      <%= partial "partials/_untappd" %>
-    </div>
+<div class="l-section alt">
+  <div class="l-section__container">
+    <%= partial "partials/_twitter" %>
   </div>
+</div>
 
-  <div class="l-section wide alt">
-    <div class="l-section__container">
-      <%= partial "partials/_elsewhere" %>
-    </div>
+<div class="l-section wide multiple">
+  <div class="l-section__container">
+    <%= stylesheet_link_tag "list" %>
+    <%= partial "partials/_instagram" %>
+    <%= partial "partials/_music" %>
+    <%= partial "partials/_goodreads" %>
+    <%= partial "partials/_untappd" %>
   </div>
+</div>
+
+<div class="l-section wide alt">
+  <div class="l-section__container">
+    <%= partial "partials/_elsewhere" %>
+  </div>
+</div>
 
 <%= partial "partials/_footer" %>
