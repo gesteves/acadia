@@ -1,12 +1,21 @@
 <meta charset="UTF-8">
+<%= inline_stylesheet "atf" %>
 <meta name="author" content="<%= data.content.meta.author %>">
 <meta name="description" content="<%= data.content.meta.description %>">
 <meta name="verify-v1" content="<%= data.content.meta.google_validation %>">
 <meta name="viewport" content="width=device-width">
+<%= stylesheet_link_tag "stats", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
+<%= stylesheet_link_tag "photoblog", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
+<%= stylesheet_link_tag "twitter", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
+<%= stylesheet_link_tag "instagram", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
+<%= stylesheet_link_tag "list", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
+<%= stylesheet_link_tag "elsewhere", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
+<%= stylesheet_link_tag "footer", rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
 <link rel="icon" type="image/png" href="<%= image_url "favicon.png" %>">
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <title><%= data.content.meta.title %></title>
 <%= javascript_include_tag  "main", async: 'async' %>
+<%= javascript_include_tag  "loadcss", async: 'async' %>
 <script>
   (function(d) {
     var config = {
