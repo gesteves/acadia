@@ -1,13 +1,3 @@
-@mixin kerning {
-  // scss-lint:disable VendorPrefixes
-  -webkit-font-feature-settings: 'kern';
-  -moz-font-feature-settings: 'kern';
-  -moz-font-feature-settings: 'kern=1';
-  font-feature-settings: 'kern' 1;
-  font-kerning: normal;
-  text-rendering: optimizeLegibility;
-}
-
 @mixin svg-icon($width: 1rem, $height: $width, $fill: currentColor) {
   fill: $fill;
   height: $height;

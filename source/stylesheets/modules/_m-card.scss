@@ -23,7 +23,6 @@ $m : '.m-card';
   }
 
   h1 {
-    @include kerning;
     color: $color-heading;
     font-size: 2rem;
     font-weight: bold;
@@ -34,7 +33,6 @@ $m : '.m-card';
 
   h2 {
     @extend %serif;
-    @include kerning;
     font-size: 1.8rem;
     font-weight: normal;
     line-height: (2.1/1.8);
