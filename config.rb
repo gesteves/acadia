@@ -43,7 +43,7 @@ configure :production do
     s3.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY_ID']
   end
   activate :minify_css, :inline => true
-  activate :minify_javascript
+  activate :minify_javascript, :inline => true
   activate :minify_html
   activate :asset_hash
   activate :relative_assets
