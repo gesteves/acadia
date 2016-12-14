@@ -23,9 +23,9 @@
           <%= formatted_date_in_eastern(t.created_at, "%-d %B %Y") %>
         </a>
         </span>
-        <a class="m-twitter__action" href="https://twitter.com/intent/tweet?in_reply_to=<%= t.id_str %>" title="Reply"><%= inline_svg "reply" %></a>
-        <a class="m-twitter__action" href="https://twitter.com/intent/retweet?tweet_id=<%= t.id_str %>" title="Retweet"><%= inline_svg "retweet" %></a>
-        <a class="m-twitter__action" href="https://twitter.com/intent/favorite?tweet_id=<%= t.id_str %>" title="Favorite"><%= inline_svg "star" %></a>
+        <a class="m-twitter__action" href="https://twitter.com/intent/tweet?in_reply_to=<%= t.id_str %>" title="Reply"><%= image_tag "svg/reply.svg", class: 'p-svg' %></a>
+        <a class="m-twitter__action" href="https://twitter.com/intent/retweet?tweet_id=<%= t.id_str %>" title="Retweet"><%= image_tag "svg/retweet.svg", class: 'p-svg' %></a>
+        <a class="m-twitter__action" href="https://twitter.com/intent/favorite?tweet_id=<%= t.id_str %>" title="Favorite"><%= image_tag "svg/star.svg", class: 'p-svg' %></a>
       </div>
     </div>
 </section>

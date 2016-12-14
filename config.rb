@@ -18,7 +18,6 @@ configure :development do
 end
 
 configure :production do
-  ignore 'svg/*'
 
   config[:protocol]      = 'https://'
   config[:host]          = 'www.gesteves.com/'
