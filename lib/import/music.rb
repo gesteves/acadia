@@ -28,9 +28,9 @@ module Import
       if response.code == 200
         items = JSON.parse(response.body)['items']
         items = items.group_by { |i| i['album']['name'] }
-                     .sort { |k,v| v.size }
+                     .values
                      .slice(0, ENV['SPOTIFY_COUNT'].to_i)
-                     .map { |k, v| get_spotify_data(v[0]['album']['href']) }
+                     .map { |i| get_spotify_data(i[0]['album']['href']) }
                      .reject { |i| i.nil? } unless items.empty?
       end
       items
