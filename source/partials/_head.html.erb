@@ -5,6 +5,7 @@
 <meta name="verify-v1" content="<%= data.content.meta.google_validation %>">
 <meta name="viewport" content="width=device-width">
 <link rel="icon" type="image/png" href="<%= image_url "favicon.png" %>">
+<link rel="preload" href="https://use.typekit.net/<%= data.content.meta.typekit_id %>.js" as="script">
 <title><%= data.content.meta.title %></title>
 <%= javascript_include_tag  "main", async: 'async' %>
 <%= javascript_include_tag  "loadcss", async: 'async' %>
