@@ -43,9 +43,6 @@ repos:
   - voxmedia/verge-50
   - gesteves/slackbots
 reading:
-  - title: "Verge Favorites: Guillermo Esteves"
-    description: A few of my favorite things, on The Verge.
-    url: http://www.theverge.com/2013/11/15/4508412/verge-favorites-guillermo-esteves
   - title: Take a peek at the code that powered The Verge 50
     description: We’ve made the source code to&nbsp;<a href="http://www.theverge.com/a/the-verge-50">The Verge 50</a>&nbsp;public so people can hopefully learn from it and use it to tell their own stories.
     url: http://product.voxmedia.com/2014/7/29/5863004/take-a-peek-at-the-code-that-powered-the-verge-50
@@ -58,3 +55,6 @@ reading:
   - title: "Intrinsic ratio elements with a max height"
     description: A little CSS technique I wrote for making elements with a fixed ratio that can also be constrained to a maximum height.
     url: http://product.voxmedia.com/2016/8/10/12426844/making-intrinsic-ratio-elements-with-a-max-height
+  - title: "Performance Update #4: So much to do, so much to see"
+    description: A recap of the performance work my team at Vox has done in the past year.
+    url: https://product.voxmedia.com/2017/2/13/14477286/performance-update-4
