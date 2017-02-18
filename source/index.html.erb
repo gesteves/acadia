@@ -1,38 +1,49 @@
+<%= stylesheet_link_tag "header" %>
 <%= partial "partials/_header" %>
 
+<%= stylesheet_link_tag "layout" %>
 <div class="l-section wide alt">
   <div class="l-section__container">
+    <%= stylesheet_link_tag "card" %>
+    <%= stylesheet_link_tag "intro" %>
     <%= partial "partials/_intro" %>
   </div>
 </div>
 
 <div class="l-section">
   <div class="l-section__container">
+    <%= stylesheet_link_tag "writing" %>
     <%= partial "partials/_writing" %>
+    <%= stylesheet_link_tag "github" %>
     <%= partial "partials/_github" %>
   </div>
 </div>
 
 <div class="l-section full-width alt single">
   <div class="l-section__container">
+    <%= stylesheet_link_tag "stats" %>
     <%= partial "partials/_stats" %>
   </div>
 </div>
 
 <div class="l-section">
   <div class="l-section__container">
+    <%= stylesheet_link_tag "photoblog" %>
     <%= partial "partials/_photoblog" %>
   </div>
 </div>
 
 <div class="l-section alt">
   <div class="l-section__container">
+    <%= stylesheet_link_tag "twitter" %>
     <%= partial "partials/_twitter" %>
   </div>
 </div>
 
 <div class="l-section wide multiple">
   <div class="l-section__container">
+    <%= stylesheet_link_tag "list" %>
+    <%= stylesheet_link_tag "instagram" %>
     <%= partial "partials/_instagram" %>
     <%= partial "partials/_music" %>
     <%= partial "partials/_goodreads" %>
@@ -42,8 +53,10 @@
 
 <div class="l-section wide alt">
   <div class="l-section__container">
+    <%= stylesheet_link_tag "elsewhere" %>
     <%= partial "partials/_elsewhere" %>
   </div>
 </div>
 
+<%= stylesheet_link_tag "footer" %>
 <%= partial "partials/_footer" %>
