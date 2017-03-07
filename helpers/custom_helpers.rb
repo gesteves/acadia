@@ -24,11 +24,10 @@ module CustomHelpers
     end
   end
 
-  def build_srcset(url, sizes, square = false)
+  def build_srcset(url, sizes, opts = {})
     srcset = []
     sizes.each do |size|
-      opts = { w: size }
-      opts[:square] = true if square
+      opts[:w] = size
       srcset << "#{imgix_url(url, opts)} #{size}w"
     end
     srcset.join(', ')
@@ -38,7 +37,7 @@ module CustomHelpers
     caption = photo.attributes.caption.nil? ? "Latest from my photoblog" : photo.attributes.caption
     photo_url = image_path "photoblog/#{photo.id}.jpg"
     sizes_array = [558, 498, 249]
-    srcset = build_srcset(photo_url, sizes_array)
+    srcset = build_srcset(photo_url, sizes_array, { square: true })
     src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" />"
@@ -48,8 +47,8 @@ module CustomHelpers
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
     photo_url = image_path "instagram/#{photo.id}.jpg"
     sizes_array = [347, 172, 86]
-    srcset = build_srcset(photo_url, sizes_array, true)
-    src = imgix_url(photo_url, { w: sizes_array.first, square: true })
+    srcset = build_srcset(photo_url, sizes_array, { square: true, rect: 'center,middle,700,700' })
+    src = imgix_url(photo_url, { w: sizes_array.first, square: true, rect: 'center,middle,700,700' })
     sizes = "(min-width: 1360px) 92px, (min-width: 1000px) calc(((100vw - 8rem)/4 - 4rem)/3 - 1px), (min-width: 600px) calc(((100vw - 4rem)/2 - 2rem)/3 - 1px), calc((100vw - 4rem)/3 - 1px)"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" />"
   end
@@ -58,7 +57,7 @@ module CustomHelpers
     alt = album.name
     photo_url = image_path "music/#{album.id}.jpg"
     sizes_array = [150, 100, 50]
-    srcset = build_srcset(photo_url, sizes_array, true)
+    srcset = build_srcset(photo_url, sizes_array, { square: true })
     src = imgix_url(photo_url, { w: sizes_array.first, square: true })
     sizes = "50px"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
