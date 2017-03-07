@@ -47,8 +47,8 @@ module CustomHelpers
     caption = photo.caption.nil? ? "Instagram photo" : photo.caption.text
     photo_url = image_path "instagram/#{photo.id}.jpg"
     sizes_array = [347, 172, 86]
-    srcset = build_srcset(photo_url, sizes_array, { square: true, rect: 'center,middle,700,700' })
-    src = imgix_url(photo_url, { w: sizes_array.first, square: true, rect: 'center,middle,700,700' })
+    srcset = build_srcset(photo_url, sizes_array, { square: true, rect: 'center,middle,400,400' })
+    src = imgix_url(photo_url, { w: sizes_array.first, square: true, rect: 'center,middle,400,400' })
     sizes = "(min-width: 1360px) 92px, (min-width: 1000px) calc(((100vw - 8rem)/4 - 4rem)/3 - 1px), (min-width: 600px) calc(((100vw - 4rem)/2 - 2rem)/3 - 1px), calc((100vw - 4rem)/3 - 1px)"
     "<img class=\"js-lazy-load\" data-src=\"#{src}\" data-srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" />"
   end
