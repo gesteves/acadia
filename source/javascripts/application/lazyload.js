@@ -14,11 +14,6 @@ Acadia.LazyLoad = (function () {
     var image, i;
     var images = document.querySelectorAll('.' + opts.load_class);
     if (typeof IntersectionObserver === 'undefined') {
-      for (i = 0; i < images.length; i++) {
-        image = images[i];
-        image.style.opacity = 0;
-        image.addEventListener('load', showImage);
-      }
       document.addEventListener('scroll', handleScroll);
       loadImages();
     } else {
@@ -27,8 +22,6 @@ Acadia.LazyLoad = (function () {
       }
       for (i = 0; i < images.length; i++) {
         image = images[i];
-        image.style.opacity = 0;
-        image.addEventListener('load', showImage);
         observer.observe(image);
       }
     }
@@ -36,8 +29,10 @@ Acadia.LazyLoad = (function () {
 
   var handleIntersection = function (entries) {
     entries.forEach(function (entry) {
-      loadImage(entry.target);
-      observer.unobserve(entry.target);
+      if (entry.intersectionRatio === 1) {
+        loadImage(entry.target);
+        observer.unobserve(entry.target);
+      }
     });
   };
 
@@ -84,10 +79,6 @@ Acadia.LazyLoad = (function () {
       image.removeAttribute('data-src');
     }
     image.classList.remove(opts.load_class);
-  };
-
-  var showImage = function (event) {
-    event.target.style.opacity = 1;
   };
 
   return {
