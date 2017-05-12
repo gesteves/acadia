@@ -18,7 +18,7 @@ Acadia.LazyLoad = (function () {
       loadImages();
     } else {
       if (typeof observer === 'undefined') {
-        observer = new IntersectionObserver(handleIntersection);
+        observer = new IntersectionObserver(handleIntersection, { rootMargin: '150px' });
       }
       for (i = 0; i < images.length; i++) {
         image = images[i];
