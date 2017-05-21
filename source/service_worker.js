@@ -13,7 +13,7 @@ https://www.filamentgroup.com/
 (function() {
   'use strict';
 
-  const version = '<%= ENV['HEROKU_RELEASE_VERSION'] || 'v1' %>';
+  const version = 'v1';
   const cacheName = version + '/acadia/sw/';
 
   const staticCacheName = cacheName + 'static';
