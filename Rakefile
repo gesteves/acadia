@@ -169,7 +169,7 @@ task :import => %w{
 desc 'Import content and build the site'
 task :build => [:dotenv, :import] do
   puts '== Building the site'
-  system('middleman build')
+  system('middleman build --verbose')
 end
 
 desc 'Sync the site to S3'
