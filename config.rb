@@ -45,7 +45,7 @@ configure :production do
   activate :minify_css, :inline => true
   activate :minify_javascript, :inline => true
   activate :minify_html
-  activate :asset_hash
+  activate :asset_hash, :exclude => /service_worker/
   activate :relative_assets
 
   caching_policy 'text/html',    :max_age => ENV['MAX_AGE'] || 300, :must_revalidate => true
