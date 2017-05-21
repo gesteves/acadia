@@ -2,7 +2,21 @@ $p : '.p-svg';
 
 #{$p} {
   display: inline-block;
-  height: 1.2rem;
+  height: 1rem;
   vertical-align: middle;
-  width: 1.2rem;
+  width: 1rem;
+}
+
+a:link,
+a:visited {
+  #{$p} {
+    fill: $color-very-light-gray;
+  }
+}
+
+a:hover,
+a:active {
+  #{$p} {
+    fill: $color-links;
+  }
 }

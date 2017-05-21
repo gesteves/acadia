@@ -6,8 +6,8 @@
           <h2 class="m-github__name"><a href="<%= r.html_url %>"><%= r.name %></a></h2>
 
           <div class="m-github__meta">
-            <a href="<%= r.html_url %>/stargazers" title="Stars"><%= image_tag "svg/star.svg", class: 'p-svg' %><%= r.stargazers_count %></a>
-            <a href="<%= r.html_url %>/network" title="Forks"><%= image_tag "svg/fork.svg", class: 'p-svg' %><%= r.forks %></a>
+            <a href="<%= r.html_url %>/stargazers" title="Stars"><%= inline_svg "star" %><%= r.stargazers_count %></a>
+            <a href="<%= r.html_url %>/network" title="Forks"><%= inline_svg "fork" %><%= r.forks %></a>
           </div>
 
         <% unless r.description == "" %>
