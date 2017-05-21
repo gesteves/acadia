@@ -13,8 +13,8 @@ https://www.filamentgroup.com/
 (function() {
   'use strict';
 
-  const version = '<= Time.now.to_i %>';
-  const cacheName = version + '::acadia::';
+  const version = '<%= ENV['HEROKU_RELEASE_VERSION'] %>';
+  const cacheName = version + '/acadia/sw/';
 
   const staticCacheName = cacheName + 'static';
   const pagesCacheName = cacheName + 'pages';
@@ -109,7 +109,6 @@ https://www.filamentgroup.com/
 
     // For HTML requests, try the network first, or go straight to the offline page
     if (request.headers.get('Accept').indexOf('text/html') !== -1) {
-
       event.respondWith(
         fetch(request)
         .then(response => {
@@ -122,7 +121,6 @@ https://www.filamentgroup.com/
         })
       );
       return;
-
     }
 
     // For non-HTML requests, look in the cache first, fall back to the network
