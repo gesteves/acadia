@@ -7,6 +7,7 @@ configure :development do
   config[:images_dir]    = 'images'
   config[:imgix_token]   = ENV['IMGIX_TOKEN']
   config[:imgix_domains] = ENV['IMGIX_DOMAIN']
+  config[:app_version]   = 'v1'
 
   activate :sprockets
   activate :gzip
@@ -28,6 +29,7 @@ configure :production do
   config[:images_dir]    = 'images'
   config[:imgix_token]   = ENV['IMGIX_TOKEN']
   config[:imgix_domain]  = ENV['IMGIX_DOMAIN']
+  config[:app_version]   = ENV['HEROKU_RELEASE_VERSION'] || 'v1'
 
   activate :sprockets
   activate :gzip
