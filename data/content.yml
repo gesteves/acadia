@@ -37,7 +37,7 @@ links:
 repos:
   - gesteves/snarkov
   - gesteves/acadia
-  - gesteves/alexa-dark-sky-node
+  - gesteves/alexa-dark-sky
   - gesteves/denali
   - gesteves/trebekbot
   - voxmedia/verge-50
