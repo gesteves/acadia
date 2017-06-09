@@ -6,7 +6,7 @@
     </div>
   <% end %>
   <div class="m-stats__stat">
-    <div class="m-stats__number"><%= format_number data.commits.total_commits %></div>
+    <div class="m-stats__number"><a href="<%= data.content.links.select { |l| l.name == 'github' }.first.url %>"><%= format_number data.commits.total_commits %></a></div>
     <div class="m-stats__meta">Commits in the past month</div>
   </div>
   <div class="m-stats__stat">
