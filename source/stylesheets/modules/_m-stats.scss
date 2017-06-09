@@ -19,10 +19,6 @@ $m : '.m-stats';
     flex-basis: 50%;
   }
 
-  @media (min-width: $bp-l) {
-    flex-basis: calc(100%/3);
-  }
-
   @media (min-width: $bp-xxxl) {
     flex-basis: auto;
   }

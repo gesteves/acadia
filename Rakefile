@@ -111,19 +111,6 @@ namespace :import do
     end
   end
 
-  desc 'Import activity from Fitbit'
-  task :fitbit => [:dotenv, :set_up_directories] do
-    begin
-      puts '== Importing Fitbit data'
-      start_time = Time.now
-      fitbit = Import::Fitbit.new(ENV['FITBIT_ACCESS_TOKEN'])
-      fitbit.get_steps
-      puts "Completed in #{Time.now - start_time} seconds"
-    rescue => e
-      abort "Failed to import Fitbit data: #{e}"
-    end
-  end
-
   desc 'Import score from WPT'
   task :wpt => [:dotenv, :set_up_directories] do
     begin
@@ -163,7 +150,6 @@ task :import => %w{
   import:goodreads
   import:untappd
   import:music
-  import:fitbit
 }
 
 desc 'Import content and build the site'

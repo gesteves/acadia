@@ -1,4 +1,3 @@
-require_relative 'import/fitbit'
 require_relative 'import/github'
 require_relative 'import/goodreads'
 require_relative 'import/instagram'
