@@ -35,11 +35,22 @@ repos:
   - gesteves/snarkov
   - gesteves/acadia
   - gesteves/alexa-dark-sky
+  - gesteves/alexa-slack
+  - gesteves/wptester
   - gesteves/denali
   - gesteves/trebekbot
   - voxmedia/verge-50
   - gesteves/slackbots
 reading:
+  - title: "Introducing CampfireBot: how our robotic assistant fosters productivity and team-building"
+    description: How we use our homebrew chat bot at Vox Media for fun and profit. (But mostly for fun.)
+    url: http://product.voxmedia.com/2013/8/22/5426860/introducing-campfirebot-how-our-robotic-assistant-fosters
+  - title: "Bigger, faster, leaner: The Verge 1.8 brings many improvements to its front page"
+    description: A quick summary of the improvements we made to The Verge with the release of version 1.8.
+    url: http://product.voxmedia.com/2013/9/12/5426866/bigger-faster-leaner-the-verge-1-8-brings-many-improvements-to-its
+  - title: "Verge Favorites: Guillermo Esteves"
+    description: A few of my favorite things, on The Verge.
+    url: http://www.theverge.com/2013/11/15/4508412/verge-favorites-guillermo-esteves
   - title: Take a peek at the code that powered The Verge 50
     description: We’ve made the source code to&nbsp;<a href="http://www.theverge.com/a/the-verge-50">The Verge 50</a>&nbsp;public so people can hopefully learn from it and use it to tell their own stories.
     url: http://product.voxmedia.com/2014/7/29/5863004/take-a-peek-at-the-code-that-powered-the-verge-50
