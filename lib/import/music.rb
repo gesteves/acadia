@@ -37,8 +37,7 @@ module Import
     end
 
     def get_spotify_data(album_url)
-      response = HTTParty.get(album_url)
-
+      response = HTTParty.get(album_url, headers: { 'Authorization': "Bearer #{@access_token}" })
       if response.code == 200
         data = JSON.parse(response.body)
         {
