@@ -49,7 +49,7 @@ namespace :import do
     begin
       puts '== Importing photoblog photos'
       start_time = Time.now
-      photoblog = Import::Photoblog.new(ENV['PHOTOBLOG_URL'], ENV['PHOTOBLOG_COUNT'].to_i, ENV['PHOTOBLOG_TAG'])
+      photoblog = Import::Photoblog.new(ENV['PHOTOBLOG_URL'], ENV['PHOTOBLOG_TAG'])
       photoblog.get_photos
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e

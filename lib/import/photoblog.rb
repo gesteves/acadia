@@ -2,14 +2,13 @@ require 'httparty'
 
 module Import
   class Photoblog
-    def initialize(photo_url, photo_count, photo_tag = nil)
+    def initialize(photo_url, photo_tag = nil)
       @photo_url    = photo_url
       @photo_tag    = photo_tag
-      @photo_count  = photo_count
     end
 
     def get_photos
-      url = @photo_tag.nil? ? "#{@photo_url}/count/#{@photo_count}.json" : "#{@photo_url}/tagged/#{@photo_tag}/count/#{@photo_count}.json"
+      url = @photo_tag.nil? ? "#{@photo_url}/page/1.json" : "#{@photo_url}/tagged/#{@photo_tag}/page/1.json"
       response = HTTParty.get(url, headers: { 'Content-Type' => 'application/vnd.api+json' })
       data = JSON.parse(response.body)
       data['data'].each do |e|
