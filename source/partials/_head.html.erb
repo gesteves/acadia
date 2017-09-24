@@ -17,12 +17,11 @@ if (navigator.serviceWorker) {
 }
 </script>
 <% unless data.content.meta.google_analytics_id.nil? %>
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%= data.content.meta.google_analytics_id %>"></script>
 <script>
-  !function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
-  arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
-  d.src='//d1l6p2sc9645hc.cloudfront.net/tracker.js';q.parentNode.
-  insertBefore(d,q)}(window,document,'script','_gs');
-
-  _gs('<%= data.content.meta.gosquared_id %>');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+  gtag('config', '<%= data.content.meta.google_analytics_id %>');
 </script>
 <% end %>
