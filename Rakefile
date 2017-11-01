@@ -142,8 +142,6 @@ end
 
 task :import => %w{
   clobber
-  import:wpt
-  import:twitter
   import:instagram
   import:photoblog
   import:github
