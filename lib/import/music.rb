@@ -1,4 +1,5 @@
 require 'text'
+require 'redis'
 
 module Import
   class Music
