@@ -5,7 +5,6 @@ require_relative 'import/photoblog'
 require_relative 'import/music'
 require_relative 'import/twitter'
 require_relative 'import/untappd'
-require_relative 'import/wpt'
 
 module Import
 end

@@ -63,9 +63,8 @@ namespace :import do
       puts '== Importing Github data'
       start_time = Time.now
       repos = YAML.load_file('data/content.yml')['repos']
-      github = Import::Github.new(ENV['GITHUB_ACCESS_TOKEN'], repos, ENV['GITHUB_STATS_DAYS'].to_i)
+      github = Import::Github.new(ENV['GITHUB_ACCESS_TOKEN'], repos)
       github.get_repos
-      github.get_stats
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
      abort "Failed to import Github data: #{e}"
@@ -108,19 +107,6 @@ namespace :import do
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
       abort "Failed to import Music data: #{e}"
-    end
-  end
-
-  desc 'Import score from WPT'
-  task :wpt => [:dotenv, :set_up_directories] do
-    begin
-      puts '== Importing WPT test results'
-      start_time = Time.now
-      wpt = Import::WPT.new(ENV['SITE_URL'], ENV['WPT_API_KEY'])
-      wpt.save_results
-      puts "Completed in #{Time.now - start_time} seconds"
-    rescue => e
-      abort "Failed to import WPT results: #{e}"
     end
   end
 end
