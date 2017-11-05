@@ -5,9 +5,8 @@
 <meta name="verify-v1" content="<%= data.content.meta.google_validation %>">
 <meta name="viewport" content="width=device-width">
 <link rel="icon" type="image/png" href="<%= image_url "favicon.png" %>">
-<link rel="preload" href="https://use.typekit.net/<%= data.content.meta.typekit_id %>.js" as="script">
 <title><%= data.content.meta.title %></title>
-<%= javascript_include_tag "https://use.typekit.net/#{data.content.meta.typekit_id}.js", async: 'async', onload: 'try{Typekit.load({async:true})}catch(e){}' %>
+<%= stylesheet_link_tag "https://use.typekit.net/#{data.content.meta.typekit_id}.css" %>
 <script>
 if (navigator.serviceWorker) {
   navigator.serviceWorker.register('/service_worker.js', {
