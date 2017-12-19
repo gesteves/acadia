@@ -151,6 +151,11 @@ end
 desc 'Publishes the site'
 task :publish => [:dotenv, :build, :sync]
 
+namespace :publish do
+  desc 'Publishes the site and invalidates in CloudFront'
+  task :hard => [:dotenv, :publish, :invalidate]
+end
+
 desc 'Send CloudFront invalidation request'
 task :invalidate => [:dotenv] do
   unless ENV['AWS_CLOUDFRONT_DISTRIBUTION_ID'].nil?
