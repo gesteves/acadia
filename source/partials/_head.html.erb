@@ -23,3 +23,16 @@ if (navigator.serviceWorker) {
   gtag('config', '<%= data.content.meta.google_analytics_id %>');
 </script>
 <% end %>
+<% unless data.content.meta.clicky_site_id.nil? %>
+<script>
+var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(<%= data.content.meta.clicky_site_id %>);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = 'https://static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+</script>
+<% end %>
