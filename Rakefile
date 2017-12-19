@@ -149,11 +149,11 @@ task :sync do
 end
 
 desc 'Publishes the site'
-task :publish => [:dotenv, :build, :sync]
+task :publish => [:build, :sync]
 
 namespace :publish do
   desc 'Publishes the site and invalidates in CloudFront'
-  task :hard => [:dotenv, :publish, :invalidate]
+  task :hard => [:publish, :invalidate]
 end
 
 desc 'Send CloudFront invalidation request'
