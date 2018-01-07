@@ -13,7 +13,7 @@ module Import
       data = JSON.parse(response.body)
       data['data'].each do |e|
         photo = e['relationships']['photos']['data'][0]
-        File.open("source/images/photoblog/#{photo['id']}.jpg",'w'){ |f| f << HTTParty.get(photo['links']['square_840']).body }
+        File.open("source/images/photoblog/#{photo['id']}.jpg",'w'){ |f| f << HTTParty.get(photo['links']['square_824']).body }
       end
       File.open('data/photoblog.json','w'){ |f| f << data.to_json }
     end
