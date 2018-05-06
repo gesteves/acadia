@@ -44,12 +44,12 @@ namespace :import do
     end
   end
 
-  desc 'Import latest photoblog photos from Tumblr'
+  desc 'Import latest photoblog photos'
   task :photoblog => [:dotenv, :set_up_directories] do
     begin
       puts '== Importing photoblog photos'
       start_time = Time.now
-      photoblog = Import::Photoblog.new(ENV['PHOTOBLOG_URL'], ENV['PHOTOBLOG_TAG'])
+      photoblog = Import::Photoblog.new(ENV['PHOTOBLOG_URL'], ENV['PHOTOBLOG_COUNT'])
       photoblog.get_photos
       puts "Completed in #{Time.now - start_time} seconds"
     rescue => e
