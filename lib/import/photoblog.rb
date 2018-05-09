@@ -4,7 +4,7 @@ module Import
   class Photoblog
     def initialize(url, count = 12)
       @url = url
-      @count = count.to_i
+      @count = count
     end
 
     def get_photos
