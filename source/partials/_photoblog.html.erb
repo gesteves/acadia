@@ -2,7 +2,7 @@
 <h1>Latest Photos</h1>
 
 <ol class="m-photoblog__photos">
-  <% data.photoblog.data.each do |entry| %>
+  <% data.photoblog.data[0, ENV['PHOTOBLOG_COUNT'] || 12].each do |entry| %>
     <li class="m-photoblog__photo-item">
       <a href="<%= entry.links.self %>">
         <%= photoblog_image_tag(entry.relationships.photos.data.first) %>
