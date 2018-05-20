@@ -38,7 +38,7 @@ module CustomHelpers
     photo_url = image_path "photoblog/#{photo.id}.jpg"
     sizes_array = [558, 498, 249]
     srcset = build_srcset(photo_url, sizes_array, { square: true })
-    src = imgix_url(photo_url, { w: sizes_array.first })
+    src = imgix_url(photo_url, { w: sizes_array.first, square: true })
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
     content_tag 'amp-img', nil, layout: 'responsive', width: sizes_array.first, height: sizes_array.first, src: src, srcset: srcset, sizes: sizes, alt: caption
   end
@@ -66,8 +66,8 @@ module CustomHelpers
   def twitter_avatar_image_tag(username, name)
     photo_url = image_path "twitter/#{username.screen_name}.jpg"
     sizes_array = [150, 100, 50]
-    srcset = build_srcset(photo_url, sizes_array)
-    src = imgix_url(photo_url, { w: sizes_array.first })
+    srcset = build_srcset(photo_url, sizes_array, { square: true })
+    src = imgix_url(photo_url, { w: sizes_array.first, square: true })
     sizes = "50px"
     content_tag 'amp-img', nil, layout: 'responsive', width: sizes_array.first, height: sizes_array.first, src: src, srcset: srcset, sizes: sizes, alt: name
   end
@@ -76,8 +76,8 @@ module CustomHelpers
     alt = beer.beer_name
     photo_url = image_path "untappd/#{beer.bid}.jpg"
     sizes_array = [100, 50]
-    srcset = build_srcset(photo_url, sizes_array)
-    src = imgix_url(photo_url, { w: sizes_array.first })
+    srcset = build_srcset(photo_url, sizes_array, { square: true })
+    src = imgix_url(photo_url, { w: sizes_array.first, square: true })
     sizes = "50px"
     content_tag 'amp-img', nil, layout: 'responsive', width: sizes_array.first, height: sizes_array.first, src: src, srcset: srcset, sizes: sizes, alt: alt
   end
@@ -86,8 +86,8 @@ module CustomHelpers
     alt = book.title
     photo_url = image_path "goodreads/#{book.id}.jpg"
     sizes_array = [150, 100, 50]
-    srcset = build_srcset(photo_url, sizes_array)
-    src = imgix_url(photo_url, { w: sizes_array.first })
+    srcset = build_srcset(photo_url, sizes_array, { square: true })
+    src = imgix_url(photo_url, { w: sizes_array.first, square: true })
     sizes = "50px"
     content_tag 'amp-img', nil, layout: 'responsive', width: sizes_array.first, height: sizes_array.first, src: src, srcset: srcset, sizes: sizes, alt: alt
   end
