@@ -35,7 +35,7 @@ configure :production do
   activate :gzip
   activate :autoprefixer do |config|
     config.browsers = ['last 1 version']
-    config.inline   = true
+    config.inline   = false
   end
   activate :s3_sync do |s3|
     s3.prefer_gzip           = true
