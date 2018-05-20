@@ -13,8 +13,7 @@ configure :development do
   activate :gzip
   activate :dotenv
   activate :autoprefixer do |config|
-    config.browsers = ['last 1 version', 'Safari >= 8', 'iOS >= 8']
-    config.inline   = false
+    config.browsers = ['last 1 version', 'last 3 safari versions', 'last 3 ios versions']
   end
 end
 
@@ -34,8 +33,7 @@ configure :production do
   activate :sprockets
   activate :gzip
   activate :autoprefixer do |config|
-    config.browsers = ['last 1 version']
-    config.inline   = false
+    config.browsers = ['last 1 version', 'last 3 safari versions', 'last 3 ios versions']
   end
   activate :s3_sync do |s3|
     s3.prefer_gzip           = true
@@ -44,10 +42,8 @@ configure :production do
     s3.aws_access_key_id     = ENV['AWS_ACCESS_KEY_ID']
     s3.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY_ID']
   end
-  activate :minify_css, :inline => false
-  activate :minify_javascript, :inline => false, :ignore => /service_worker/
-  activate :minify_html
-  activate :asset_hash, :ignore => /service_worker/
+  activate :minify_css
+  activate :asset_hash
   activate :relative_assets
 
   caching_policy 'text/html',    :max_age => ENV['MAX_AGE'] || 300, :must_revalidate => true
