@@ -14,7 +14,7 @@ configure :development do
   activate :dotenv
   activate :autoprefixer do |config|
     config.browsers = ['last 1 version', 'Safari >= 8', 'iOS >= 8']
-    config.inline   = true
+    config.inline   = false
   end
 end
 

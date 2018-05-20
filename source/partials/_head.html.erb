@@ -1,38 +1,13 @@
-<meta charset="UTF-8">
-<%= inline_stylesheet "all" %>
+<meta charset="utf-8">
+<script async src="https://cdn.ampproject.org/v0.js"></script>
+<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+<title><%= data.content.meta.title %></title>
 <meta name="author" content="<%= data.content.meta.author %>">
 <meta name="description" content="<%= data.content.meta.description %>">
 <meta name="verify-v1" content="<%= data.content.meta.google_validation %>">
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
 <link rel="icon" type="image/png" href="<%= image_url "favicon.png" %>">
-<title><%= data.content.meta.title %></title>
+<link rel="canonical" href="<%= data.content.meta.canonical_url %>">
+<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+<style amp-custom><%= inline_css "all" %></style>
 <%= stylesheet_link_tag "https://use.typekit.net/#{data.content.meta.typekit_id}.css" %>
-<script>
-if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('/service_worker.js', {
-    scope: '/'
-  });
-}
-</script>
-<% unless data.content.meta.google_analytics_id.nil? %>
-<script async src="https://www.googletagmanager.com/gtag/js?id=<%= data.content.meta.google_analytics_id %>"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)};
-  gtag('js', new Date());
-  gtag('config', '<%= data.content.meta.google_analytics_id %>');
-</script>
-<% end %>
-<% unless data.content.meta.clicky_site_id.nil? %>
-<script>
-var clicky_site_ids = clicky_site_ids || [];
-clicky_site_ids.push(<%= data.content.meta.clicky_site_id %>);
-(function() {
-  var s = document.createElement('script');
-  s.type = 'text/javascript';
-  s.async = true;
-  s.src = 'https://static.getclicky.com/js';
-  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
-})();
-</script>
-<% end %>

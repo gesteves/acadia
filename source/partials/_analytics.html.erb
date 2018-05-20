@@ -1,0 +1,28 @@
+<% unless data.content.meta.google_analytics_id.nil? %>
+  <amp-analytics type="googleanalytics">
+    <script type="application/json">
+    {
+      "vars": {
+        "account": "<%= data.content.meta.google_analytics_id %>"
+      },
+      "triggers": {
+        "trackPageview": {
+          "on": "visible",
+          "request": "pageview"
+        }
+      }
+    }
+    </script>
+  </amp-analytics>
+<% end %>
+<% unless data.content.meta.clicky_site_id.nil? %>
+  <amp-analytics type="clicky">
+    <script type="application/json">
+    {
+      "vars": {
+    	"site_id": "<%= data.content.meta.clicky_site_id %>"
+      }
+    }
+    </script>
+  </amp-analytics>
+<% end %>

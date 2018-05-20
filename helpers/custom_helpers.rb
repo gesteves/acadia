@@ -40,7 +40,8 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array, { square: true })
     src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "(min-width: 1090px) 249px, (min-width: 1000px) calc((100vw - 8rem)/4 - 1px), (min-width: 600px) calc((100vw - 4rem)/3 - 1px), calc((100vw - 4rem)/2 - 1px)"
-    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" />"
+    dims = "width=\"#{sizes_array.first}\" height=\"#{sizes_array.first}\""
+    "<amp-img #{dims} src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" />"
   end
 
   def instagram_image_tag(photo)
@@ -50,7 +51,8 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array, { square: true, rect: 'center,middle,400,400' })
     src = imgix_url(photo_url, { w: sizes_array.first, square: true, rect: 'center,middle,400,400' })
     sizes = "(min-width: 1360px) 92px, (min-width: 1000px) calc(((100vw - 8rem)/4 - 4rem)/3 - 1px), (min-width: 600px) calc(((100vw - 4rem)/2 - 2rem)/3 - 1px), calc((100vw - 4rem)/3 - 1px)"
-    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" />"
+    dims = "width=\"#{sizes_array.first}\" height=\"#{sizes_array.first}\""
+    "<amp-img #{dims} layout=\"responsive\" src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{caption}\" />"
   end
 
   def music_image_tag(album)
@@ -60,7 +62,8 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array, { square: true })
     src = imgix_url(photo_url, { w: sizes_array.first, square: true })
     sizes = "50px"
-    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+    dims = "width=\"#{sizes_array.first}\" height=\"#{sizes_array.first}\""
+    "<amp-img #{dims} layout=\"responsive\" src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
   def twitter_avatar_image_tag(username, name)
@@ -69,7 +72,8 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "50px"
-    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{name}\" />"
+    dims = "width=\"#{sizes_array.first}\" height=\"#{sizes_array.first}\""
+    "<amp-img #{dims} layout=\"responsive\" src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{name}\" />"
   end
 
   def untappd_image_tag(beer)
@@ -79,7 +83,8 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "50px"
-    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+    dims = "width=\"#{sizes_array.first}\" height=\"#{sizes_array.first}\""
+    "<amp-img #{dims} layout=\"responsive\" src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
   def goodreads_image_tag(book)
@@ -89,7 +94,8 @@ module CustomHelpers
     srcset = build_srcset(photo_url, sizes_array)
     src = imgix_url(photo_url, { w: sizes_array.first })
     sizes = "50px"
-    "<img src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
+    dims = "width=\"#{sizes_array.first}\" height=\"#{sizes_array.first}\""
+    "<amp-img #{dims} layout=\"responsive\" src=\"#{src}\" srcset=\"#{srcset}\" sizes=\"#{sizes}\" alt=\"#{alt}\" />"
   end
 
   def photo_exif(photo)
@@ -126,10 +132,8 @@ module CustomHelpers
 
   # Render inline css
   # Source: http://blog.ruppel.io/post/52645746944/inline-assets-in-middleman
-  def inline_stylesheet(name)
-    content_tag :style do
-      sprockets["#{name}.css"].to_s
-    end
+  def inline_css(name)
+    sprockets["#{name}.css"].to_s
   end
 
   def inline_javascript(name)
